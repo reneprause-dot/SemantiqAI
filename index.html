@@ -25,10 +25,11 @@
   --it: #43e97b;
   --es: #f7971e;
   --en: #6c63ff;
+  --tr: #e63946;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { height:100%; }
-body { min-height:100%; background:var(--bg); color:var(--text); font-family:'DM Mono', monospace; overflow-x:hidden; overflow-y:auto; -webkit-text-size-adjust:100%; }
+body { min-height:100%; background:var(--bg); color:var(--text); font-family:'DM Mono', monospace; overflow-x:hidden; overflow-y:scroll; -webkit-text-size-adjust:100%; -webkit-overflow-scrolling:touch; }
 
 /* SCROLLBAR */
 ::-webkit-scrollbar { width:4px; }
@@ -71,6 +72,7 @@ header {
 .lang-pill[data-lang="it"] { --pill-color:var(--it); }
 .lang-pill[data-lang="es"] { --pill-color:var(--es); }
 .lang-pill[data-lang="en"] { --pill-color:var(--en); }
+.lang-pill[data-lang="tr"] { --pill-color:var(--tr); }
 .settings-btn {
   background:var(--surface2); border:1px solid var(--border); border-radius:8px;
   padding:.35rem .6rem; cursor:pointer; font-size:1rem; color:var(--muted);
@@ -198,14 +200,14 @@ main { padding:1.25rem; max-width:900px; width:100%; margin:0 auto; flex:1; }
 .vi-speak:hover { color:var(--accent); }
 
 /* TRANSLATOR */
-.translate-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:1rem; align-items:start; }
+.translate-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:.85rem; align-items:start; }
 .translate-box { background:var(--surface2); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
-.translate-label { padding:.6rem 1rem; font-size:.7rem; font-family:'Syne',sans-serif; font-weight:700; letter-spacing:.08em; color:var(--muted); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
-.translate-textarea { width:100%; background:transparent; border:none; color:var(--text); font-family:'DM Mono',monospace; font-size:.95rem; padding:1rem; min-height:130px; resize:none; outline:none; }
-.translate-arrow { display:flex; flex-direction:column; align-items:center; gap:.5rem; padding-top:2.5rem; }
-.translate-arrow button { background:var(--surface); border:1px solid var(--border); color:var(--accent); border-radius:8px; padding:.5rem .7rem; cursor:pointer; font-size:1.1rem; transition:all .2s; }
+.translate-label { padding:.6rem 1rem; font-size:.7rem; font-family:'Syne',sans-serif; font-weight:700; letter-spacing:.08em; color:var(--muted); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; gap:.5rem; }
+.translate-textarea { width:100%; background:transparent; border:none; color:var(--text); font-family:'DM Mono',monospace; font-size:.9rem; padding:1rem; min-height:120px; resize:vertical; outline:none; }
+.translate-arrow { display:flex; flex-direction:column; align-items:center; gap:.5rem; padding-top:2.4rem; }
+.translate-arrow button { background:var(--surface); border:1px solid var(--border); color:var(--accent); border-radius:8px; padding:.45rem .6rem; cursor:pointer; font-size:1rem; transition:all .2s; line-height:1; }
 .translate-arrow button:hover { background:var(--accent); color:#fff; }
-.lang-select { background:var(--bg); border:1px solid var(--border); color:var(--text); border-radius:6px; padding:.2rem .5rem; font-family:'DM Mono',monospace; font-size:.75rem; }
+.lang-select { background:var(--bg); border:1px solid var(--border); color:var(--text); border-radius:6px; padding:.2rem .4rem; font-family:'DM Mono',monospace; font-size:.7rem; max-width:140px; cursor:pointer; }
 
 /* AI ASSISTANT */
 .chat-window {
@@ -308,7 +310,10 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 
 /* LANGUAGE SELECTION CARDS */
 .lang-select-grid {
-  display:grid; grid-template-columns:1fr 1fr; gap:1rem; max-width:500px; margin:0 auto;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; max-width:620px; margin:0 auto;
+}
+@media(max-width:480px) {
+  .lang-select-grid { grid-template-columns:1fr 1fr; }
 }
 .lang-select-card {
   background:var(--surface); border:2px solid var(--border); border-radius:20px;
@@ -348,29 +353,129 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 .hc-title { font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; margin-bottom:.3rem; }
 .hc-desc { font-size:.75rem; color:var(--muted); line-height:1.5; }
 
-/* RESPONSIVE */
-@media(max-width:600px) {
-  header { padding:.75rem 1rem; }
-  main { padding:.9rem; }
-  .translate-grid { grid-template-columns:1fr; }
-  .translate-arrow { flex-direction:row; padding:0; justify-content:center; }
-  .quiz-options { grid-template-columns:1fr; }
-  nav { padding:.5rem .75rem; }
-  .vocab-card .word-main { font-size:1.8rem; }
-  .home-grid { grid-template-columns:1fr 1fr; }
-  .stats-row { gap:.5rem; }
-  .stat-box { padding:.75rem .5rem; }
-  .stat-num { font-size:1.3rem; }
-  #myvocab .card > div { grid-template-columns:1fr !important; }
-  .vocab-controls { gap:.5rem; }
-  .btn { padding:.6rem .9rem; font-size:.75rem; }
-  .chat-window { height:300px; }
-  .modal-box { padding:1.25rem; }
+/* ============================================================
+   RESPONSIVE & MOBILE
+   ============================================================ */
+
+/* Translator: stack on mobile, side-by-side on desktop */
+.translate-grid {
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:.75rem;
+  align-items:start;
 }
-@media(max-width:380px) {
-  .logo { font-size:1.1rem; }
+.translate-arrow {
+  display:flex; flex-direction:column; align-items:center;
+  gap:.5rem; padding-top:2.5rem;
+}
+.translate-arrow button {
+  background:var(--surface); border:1px solid var(--border); color:var(--accent);
+  border-radius:8px; padding:.5rem .65rem; cursor:pointer; font-size:1rem;
+  transition:all .2s; line-height:1;
+}
+.translate-arrow button:hover { background:var(--accent); color:#fff; }
+
+@media(max-width:650px) {
+  /* TRANSLATOR: stack vertically */
+  .translate-grid {
+    grid-template-columns:1fr;
+    gap:.75rem;
+  }
+  .translate-arrow {
+    flex-direction:row;
+    justify-content:center;
+    padding-top:0;
+    gap:.75rem;
+  }
+
+  /* HEADER: tighter */
+  header { padding:.7rem .9rem; gap:.4rem; }
+  .logo { font-size:1.2rem; }
   .lang-pill { padding:.22rem .45rem; font-size:.62rem; }
+  .settings-btn { padding:.3rem .5rem; font-size:.9rem; }
+
+  /* NAV: smaller */
+  nav { padding:.4rem .75rem; gap:.15rem; }
+  .nav-btn { padding:.45rem .7rem; font-size:.7rem; }
+
+  /* MAIN */
+  main { padding:.85rem; }
+
+  /* VOCAB CARD */
+  .vocab-card { padding:2rem 1rem; min-height:180px; }
+  .vocab-card .word-main { font-size:1.7rem; }
+  .vocab-controls { gap:.4rem; }
+  .vocab-controls .btn { padding:.55rem .7rem; font-size:.72rem; }
+
+  /* QUIZ */
+  .quiz-options { grid-template-columns:1fr; gap:.5rem; }
+  .quiz-question { font-size:1.5rem; }
+
+  /* HOME GRID */
+  .home-grid { grid-template-columns:1fr 1fr; gap:.75rem; }
+  .home-card { padding:1.1rem .9rem; }
+  .hc-icon { font-size:1.5rem; margin-bottom:.4rem; }
+  .hc-title { font-size:.85rem; }
+  .hc-desc { font-size:.7rem; }
+
+  /* STATS */
+  .stats-row { gap:.4rem; }
+  .stat-box { padding:.6rem .4rem; min-width:60px; }
+  .stat-num { font-size:1.2rem; }
+  .stat-lbl { font-size:.62rem; }
+
+  /* CHAT */
+  .chat-window { height:260px; }
+  .msg-bubble { font-size:.8rem; padding:.6rem .8rem; max-width:88%; }
+  .chat-input-row { gap:.5rem; }
+  .mic-btn { width:38px; height:38px; font-size:1rem; flex-shrink:0; }
+
+  /* CARDS */
+  .card { padding:1rem; }
+  .card-title { font-size:.9rem; }
+
+  /* MY VOCAB ADD FORM */
+  #myvocab .card > div[style*="grid"] {
+    grid-template-columns:1fr !important;
+  }
+
+  /* MODAL */
+  .modal-box { padding:1.1rem; margin:.5rem; }
+  .modal-title { font-size:1rem; }
+
+  /* LANG PICKER */
+  .lang-select-grid { grid-template-columns:1fr 1fr; gap:.75rem; }
+  .lang-select-card { padding:1.4rem .6rem; border-radius:14px; }
+  .lsc-flag { font-size:2.6rem; }
+  .lsc-name { font-size:.95rem; }
+  .lsc-sub { font-size:.62rem; }
+
+  /* BUTTONS */
+  .btn { padding:.55rem .85rem; font-size:.75rem; }
+  .btn.primary { padding:.6rem 1rem; }
+
+  /* GENERATOR quick topics */
+  .ai-chip { font-size:.68rem; padding:.25rem .6rem; }
+
+  /* FOOTER */
+  footer { font-size:.65rem; padding:.75rem 1rem; }
+}
+
+@media(max-width:380px) {
+  .logo { font-size:1rem; }
+  .lang-pill { padding:.2rem .38rem; font-size:.58rem; }
   .home-grid { grid-template-columns:1fr; }
+  .vocab-card .word-main { font-size:1.4rem; }
+  .quiz-question { font-size:1.2rem; }
+  main { padding:.65rem; }
+  .lsc-flag { font-size:2.2rem; }
+  .lang-select-grid { gap:.5rem; }
+}
+
+/* Tall phones — give chat more room */
+@media(min-height:750px) and (max-width:650px) {
+  .chat-window { height:320px; }
+  .vocab-card { min-height:200px; }
 }
 </style>
 </head>
@@ -384,6 +489,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
         <button class="lang-pill" data-lang="it">🇮🇹 IT</button>
         <button class="lang-pill" data-lang="es">🇪🇸 ES</button>
         <button class="lang-pill" data-lang="en">🇬🇧 EN</button>
+        <button class="lang-pill" data-lang="tr">🇹🇷 TR</button>
       </div>
       <button class="settings-btn" onclick="openSettings()" title="Einstellungen">
         <span class="api-dot-inline" id="api-dot"></span>⚙
@@ -435,6 +541,11 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
             <div class="lsc-flag">🇬🇧</div>
             <div class="lsc-name">Englisch</div>
             <div class="lsc-sub">English · Germanisch</div>
+          </button>
+          <button class="lang-select-card" onclick="selectLanguage('tr')">
+            <div class="lsc-flag">🇹🇷</div>
+            <div class="lsc-name">Türkisch</div>
+            <div class="lsc-sub">Türkçe · Altaisch</div>
           </button>
         </div>
       </div>
@@ -621,45 +732,52 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 
     <!-- ÜBERSETZER -->
     <div class="section" id="translate">
-      <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:1.5rem;">Übersetzer</div>
+      <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:1.25rem;">Übersetzer</div>
+
+      <!-- Mobile: gestapelt, Desktop: nebeneinander -->
       <div class="translate-grid">
         <div class="translate-box">
           <div class="translate-label">
             <span>EINGABE</span>
             <select class="lang-select" id="trans-from">
-              <option value="de">Deutsch</option>
-              <option value="ru">Russisch</option>
-              <option value="it">Italienisch</option>
-              <option value="es">Spanisch</option>
-              <option value="en">Englisch</option>
+              <option value="de">🇩🇪 Deutsch</option>
+              <option value="ru">🇷🇺 Russisch</option>
+              <option value="it">🇮🇹 Italienisch</option>
+              <option value="es">🇪🇸 Spanisch</option>
+              <option value="en">🇬🇧 Englisch</option>
+              <option value="tr">🇹🇷 Türkisch</option>
             </select>
           </div>
           <textarea class="translate-textarea" id="trans-input" placeholder="Text eingeben..."></textarea>
         </div>
+
         <div class="translate-arrow">
           <button onclick="doTranslate()" title="Übersetzen">⇄</button>
-          <button onclick="swapLangs()" title="Sprachen tauschen" style="font-size:.8rem;">↕</button>
+          <button onclick="swapLangs()" title="Sprachen tauschen">↕</button>
         </div>
+
         <div class="translate-box">
           <div class="translate-label">
             <span>AUSGABE</span>
             <select class="lang-select" id="trans-to">
-              <option value="de">Deutsch</option>
-              <option value="ru" selected>Russisch</option>
-              <option value="it">Italienisch</option>
-              <option value="es">Spanisch</option>
-              <option value="en">Englisch</option>
+              <option value="de">🇩🇪 Deutsch</option>
+              <option value="ru" selected>🇷🇺 Russisch</option>
+              <option value="it">🇮🇹 Italienisch</option>
+              <option value="es">🇪🇸 Spanisch</option>
+              <option value="en">🇬🇧 Englisch</option>
+              <option value="tr">🇹🇷 Türkisch</option>
             </select>
           </div>
           <textarea class="translate-textarea" id="trans-output" placeholder="Übersetzung erscheint hier..." readonly></textarea>
         </div>
       </div>
+
       <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem;">
-        <button class="btn primary" onclick="doTranslate()">Übersetzen</button>
-        <button class="btn" onclick="speakTranslation()">🔊 Ausgabe vorlesen</button>
-        <button class="btn" onclick="copyTranslation()">⧉ Kopieren</button>
+        <button class="btn primary" onclick="doTranslate()" style="flex:1;min-width:120px;">Übersetzen</button>
+        <button class="btn" onclick="speakTranslation()" style="flex:1;min-width:120px;">🔊 Vorlesen</button>
+        <button class="btn" onclick="copyTranslation()" style="flex:1;min-width:100px;">⧉ Kopieren</button>
       </div>
-      <div id="trans-loading" style="display:none;margin-top:1rem;"><span class="spinner"></span> Übersetze...</div>
+      <div id="trans-loading" style="display:none;margin-top:1rem;text-align:center;"><span class="spinner"></span> Übersetze...</div>
     </div>
 
     <!-- KI ASSISTENT -->
@@ -728,6 +846,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
         <button class="lang-pill" data-settings-lang="it" onclick="setLangFromSettings('it')">🇮🇹 Italienisch</button>
         <button class="lang-pill" data-settings-lang="es" onclick="setLangFromSettings('es')">🇪🇸 Spanisch</button>
         <button class="lang-pill" data-settings-lang="en" onclick="setLangFromSettings('en')">🇬🇧 Englisch</button>
+        <button class="lang-pill" data-settings-lang="tr" onclick="setLangFromSettings('tr')">🇹🇷 Türkisch</button>
       </div>
     </div>
 
@@ -1374,12 +1493,184 @@ const VOCAB = {
       {f:"cooking",t:"Kochen",p:"ˈkʊkɪŋ"},{f:"yoga",t:"Yoga",p:"ˈjoʊɡə"},
       {f:"cycling",t:"Radfahren",p:"ˈsaɪklɪŋ"},{f:"hiking",t:"Wandern",p:"ˈhaɪkɪŋ"},
     ],
+  },
+  tr: {
+    "Grundlagen": [
+      {f:"merhaba",t:"Hallo",p:"mer-ha-ba"},{f:"teşekkür ederim",t:"Danke",p:"te-shek-kür"},{f:"lütfen",t:"Bitte",p:"lüt-fen"},
+      {f:"evet",t:"Ja",p:"e-vet"},{f:"hayır",t:"Nein",p:"ha-yır"},{f:"özür dilerim",t:"Entschuldigung",p:"ö-zür di-le-rim"},
+      {f:"günaydın",t:"Guten Morgen",p:"gün-ay-dın"},{f:"iyi günler",t:"Guten Tag",p:"i-yi gün-ler"},
+      {f:"iyi akşamlar",t:"Guten Abend",p:"i-yi ak-şam-lar"},{f:"hoşça kalın",t:"Auf Wiedersehen",p:"hoş-ça ka-lın"},
+      {f:"nasılsınız",t:"Wie geht es Ihnen",p:"na-sıl-sı-nız"},{f:"iyiyim",t:"Gut / Mir geht es gut",p:"i-yi-yim"},
+      {f:"anlamıyorum",t:"Ich verstehe nicht",p:"an-la-mı-yo-rum"},{f:"nerede",t:"Wo",p:"ne-re-de"},
+      {f:"ne zaman",t:"Wann",p:"ne za-man"},{f:"neden",t:"Warum",p:"ne-den"},
+      {f:"ne kadar",t:"Wie viel",p:"ne ka-dar"},{f:"yardım edin",t:"Hilfe",p:"yar-dım e-din"},
+      {f:"bilmiyorum",t:"Ich weiß nicht",p:"bil-mi-yo-rum"},{f:"anlıyorum",t:"Ich verstehe",p:"an-lı-yo-rum"},
+      {f:"tekrar eder misiniz",t:"Bitte wiederholen",p:"tek-rar e-der mi-si-niz"},
+    ],
+    "Zahlen": [
+      {f:"bir",t:"Eins",p:"bir"},{f:"iki",t:"Zwei",p:"i-ki"},{f:"üç",t:"Drei",p:"üç"},
+      {f:"dört",t:"Vier",p:"dört"},{f:"beş",t:"Fünf",p:"beş"},{f:"altı",t:"Sechs",p:"al-tı"},
+      {f:"yedi",t:"Sieben",p:"ye-di"},{f:"sekiz",t:"Acht",p:"se-kiz"},{f:"dokuz",t:"Neun",p:"do-kuz"},
+      {f:"on",t:"Zehn",p:"on"},{f:"on bir",t:"Elf",p:"on bir"},{f:"on iki",t:"Zwölf",p:"on i-ki"},
+      {f:"yirmi",t:"Zwanzig",p:"yir-mi"},{f:"otuz",t:"Dreißig",p:"o-tuz"},{f:"kırk",t:"Vierzig",p:"kırk"},
+      {f:"elli",t:"Fünfzig",p:"el-li"},{f:"yüz",t:"Hundert",p:"yüz"},{f:"bin",t:"Tausend",p:"bin"},
+      {f:"birinci",t:"Erste/r",p:"bi-rin-ci"},{f:"ikinci",t:"Zweite/r",p:"i-kin-ci"},
+    ],
+    "Farben": [
+      {f:"kırmızı",t:"Rot",p:"kır-mı-zı"},{f:"mavi",t:"Blau",p:"ma-vi"},{f:"yeşil",t:"Grün",p:"ye-şil"},
+      {f:"sarı",t:"Gelb",p:"sa-rı"},{f:"beyaz",t:"Weiß",p:"be-yaz"},{f:"siyah",t:"Schwarz",p:"si-yah"},
+      {f:"turuncu",t:"Orange",p:"tu-run-cu"},{f:"mor",t:"Violett / Lila",p:"mor"},{f:"pembe",t:"Rosa",p:"pem-be"},
+      {f:"gri",t:"Grau",p:"gri"},{f:"kahverengi",t:"Braun",p:"kah-ve-ren-gi"},{f:"lacivert",t:"Dunkelblau",p:"la-ci-vert"},
+    ],
+    "Essen & Trinken": [
+      {f:"ekmek",t:"Brot",p:"ek-mek"},{f:"su",t:"Wasser",p:"su"},{f:"süt",t:"Milch",p:"süt"},
+      {f:"et",t:"Fleisch",p:"et"},{f:"balık",t:"Fisch",p:"ba-lık"},{f:"sebze",t:"Gemüse",p:"seb-ze"},
+      {f:"meyve",t:"Obst",p:"mey-ve"},{f:"çorba",t:"Suppe",p:"çor-ba"},{f:"çay",t:"Tee",p:"çay"},
+      {f:"kahve",t:"Kaffee",p:"kah-ve"},{f:"bira",t:"Bier",p:"bi-ra"},{f:"şarap",t:"Wein",p:"şa-rap"},
+      {f:"elma",t:"Apfel",p:"el-ma"},{f:"patates",t:"Kartoffel",p:"pa-ta-tes"},
+      {f:"tavuk",t:"Hühnchen",p:"ta-vuk"},{f:"yumurta",t:"Ei",p:"yu-mur-ta"},{f:"peynir",t:"Käse",p:"pey-nir"},
+      {f:"şeker",t:"Zucker",p:"şe-ker"},{f:"tuz",t:"Salz",p:"tuz"},{f:"pirinç",t:"Reis",p:"pi-rinç"},
+      {f:"domates",t:"Tomate",p:"do-ma-tes"},{f:"soğan",t:"Zwiebel",p:"so-ğan"},{f:"sarımsak",t:"Knoblauch",p:"sa-rım-sak"},
+      {f:"portakal",t:"Orange (Frucht)",p:"por-ta-kal"},{f:"çilek",t:"Erdbeere",p:"çi-lek"},
+      {f:"dondurma",t:"Eis",p:"don-dur-ma"},{f:"pasta",t:"Kuchen / Torte",p:"pas-ta"},
+      {f:"meyve suyu",t:"Saft",p:"mey-ve su-yu"},{f:"kebap",t:"Kebab",p:"ke-bap"},
+      {f:"börek",t:"Börek",p:"bö-rek"},{f:"baklava",t:"Baklava",p:"bak-la-va"},
+      {f:"ayran",t:"Ayran",p:"ay-ran"},{f:"simit",t:"Sesamkringel",p:"si-mit"},
+    ],
+    "Familie": [
+      {f:"anne",t:"Mutter",p:"an-ne"},{f:"baba",t:"Vater",p:"ba-ba"},
+      {f:"erkek kardeş",t:"Bruder",p:"er-kek kar-deş"},{f:"kız kardeş",t:"Schwester",p:"kız kar-deş"},
+      {f:"büyükanne",t:"Großmutter",p:"bü-yük-an-ne"},{f:"büyükbaba",t:"Großvater",p:"bü-yük-ba-ba"},
+      {f:"oğul",t:"Sohn",p:"o-ğul"},{f:"kız",t:"Tochter",p:"kız"},
+      {f:"koca",t:"Ehemann",p:"ko-ca"},{f:"karı",t:"Ehefrau",p:"ka-rı"},
+      {f:"amca",t:"Onkel (väterlich)",p:"am-ca"},{f:"dayı",t:"Onkel (mütterlich)",p:"da-yı"},
+      {f:"hala",t:"Tante (väterlich)",p:"ha-la"},{f:"teyze",t:"Tante (mütterlich)",p:"tey-ze"},
+      {f:"yeğen",t:"Neffe / Nichte",p:"ye-ğen"},{f:"çocuk",t:"Kind",p:"ço-cuk"},{f:"bebek",t:"Baby",p:"be-bek"},
+    ],
+    "Reisen": [
+      {f:"havalimanı",t:"Flughafen",p:"ha-va-li-ma-nı"},{f:"tren istasyonu",t:"Bahnhof",p:"tren is-tas-yo-nu"},
+      {f:"otel",t:"Hotel",p:"o-tel"},{f:"sokak",t:"Straße",p:"so-kak"},{f:"şehir",t:"Stadt",p:"şe-hir"},
+      {f:"bilet",t:"Ticket",p:"bi-let"},{f:"pasaport",t:"Reisepass",p:"pa-sa-port"},
+      {f:"taksi",t:"Taxi",p:"tak-si"},{f:"tren",t:"Zug",p:"tren"},{f:"uçak",t:"Flugzeug",p:"u-çak"},
+      {f:"otobüs",t:"Bus",p:"o-to-büs"},{f:"araba",t:"Auto",p:"a-ra-ba"},{f:"gemi",t:"Schiff",p:"ge-mi"},
+      {f:"harita",t:"Landkarte",p:"ha-ri-ta"},{f:"vize",t:"Visum",p:"vi-ze"},
+      {f:"bagaj",t:"Gepäck",p:"ba-gaj"},{f:"oda",t:"Zimmer",p:"o-da"},
+      {f:"müze",t:"Museum",p:"mü-ze"},{f:"plaj",t:"Strand",p:"plaj"},{f:"dağ",t:"Berg",p:"dağ"},
+    ],
+    "Körper": [
+      {f:"baş",t:"Kopf",p:"baş"},{f:"el",t:"Hand",p:"el"},{f:"ayak",t:"Fuß",p:"a-yak"},
+      {f:"göz",t:"Auge",p:"göz"},{f:"kulak",t:"Ohr",p:"ku-lak"},{f:"ağız",t:"Mund",p:"a-ğız"},
+      {f:"burun",t:"Nase",p:"bu-run"},{f:"kalp",t:"Herz",p:"kalp"},{f:"karın",t:"Bauch",p:"ka-rın"},
+      {f:"sırt",t:"Rücken",p:"sırt"},{f:"omuz",t:"Schulter",p:"o-muz"},{f:"diz",t:"Knie",p:"diz"},
+      {f:"parmak",t:"Finger",p:"par-mak"},{f:"diş",t:"Zahn",p:"diş"},{f:"saç",t:"Haare",p:"saç"},
+      {f:"deri",t:"Haut",p:"de-ri"},{f:"kan",t:"Blut",p:"kan"},{f:"kol",t:"Arm",p:"kol"},
+      {f:"bacak",t:"Bein",p:"ba-cak"},{f:"boyun",t:"Hals / Nacken",p:"bo-yun"},
+    ],
+    "Zeit": [
+      {f:"bugün",t:"Heute",p:"bu-gün"},{f:"yarın",t:"Morgen",p:"ya-rın"},{f:"dün",t:"Gestern",p:"dün"},
+      {f:"sabah",t:"Morgen (Tageszeit)",p:"sa-bah"},{f:"akşam",t:"Abend",p:"ak-şam"},
+      {f:"gece",t:"Nacht",p:"ge-ce"},{f:"hafta",t:"Woche",p:"haf-ta"},
+      {f:"ay",t:"Monat",p:"ay"},{f:"yıl",t:"Jahr",p:"yıl"},{f:"saat",t:"Stunde / Uhr",p:"sa-at"},
+      {f:"dakika",t:"Minute",p:"da-ki-ka"},{f:"Pazartesi",t:"Montag",p:"Pa-zar-te-si"},
+      {f:"Salı",t:"Dienstag",p:"Sa-lı"},{f:"Çarşamba",t:"Mittwoch",p:"Çar-şam-ba"},
+      {f:"Perşembe",t:"Donnerstag",p:"Per-şem-be"},{f:"Cuma",t:"Freitag",p:"Cu-ma"},
+      {f:"Cumartesi",t:"Samstag",p:"Cu-mar-te-si"},{f:"Pazar",t:"Sonntag",p:"Pa-zar"},
+      {f:"Ocak",t:"Januar",p:"O-cak"},{f:"Şubat",t:"Februar",p:"Şu-bat"},{f:"Mart",t:"März",p:"Mart"},
+      {f:"Nisan",t:"April",p:"Ni-san"},{f:"Mayıs",t:"Mai",p:"Ma-yıs"},{f:"Haziran",t:"Juni",p:"Ha-zi-ran"},
+      {f:"Temmuz",t:"Juli",p:"Tem-muz"},{f:"Ağustos",t:"August",p:"A-ğus-tos"},
+      {f:"Eylül",t:"September",p:"Ey-lül"},{f:"Ekim",t:"Oktober",p:"E-kim"},
+      {f:"Kasım",t:"November",p:"Ka-sım"},{f:"Aralık",t:"Dezember",p:"A-ra-lık"},
+    ],
+    "Berufe": [
+      {f:"doktor",t:"Arzt",p:"dok-tor"},{f:"öğretmen",t:"Lehrer",p:"öğ-ret-men"},
+      {f:"mühendis",t:"Ingenieur",p:"mü-hen-dis"},{f:"avukat",t:"Anwalt",p:"a-vu-kat"},
+      {f:"aşçı",t:"Koch",p:"aş-çı"},{f:"öğrenci",t:"Student",p:"öğ-ren-ci"},
+      {f:"hemşire",t:"Krankenschwester",p:"hem-şi-re"},{f:"itfaiyeci",t:"Feuerwehrmann",p:"it-fa-i-ye-ci"},
+      {f:"polis",t:"Polizist",p:"po-lis"},{f:"mimar",t:"Architekt",p:"mi-mar"},
+      {f:"gazeteci",t:"Journalist",p:"ga-ze-te-ci"},{f:"şarkıcı",t:"Sänger",p:"şar-kı-cı"},
+      {f:"pilot",t:"Pilot",p:"pi-lot"},{f:"eczacı",t:"Apotheker",p:"ec-za-cı"},
+    ],
+    "Wohnen": [
+      {f:"ev",t:"Haus",p:"ev"},{f:"daire",t:"Wohnung",p:"da-i-re"},{f:"oda",t:"Zimmer",p:"o-da"},
+      {f:"mutfak",t:"Küche",p:"mut-fak"},{f:"banyo",t:"Badezimmer",p:"ban-yo"},
+      {f:"yatak odası",t:"Schlafzimmer",p:"ya-tak o-da-sı"},{f:"oturma odası",t:"Wohnzimmer",p:"o-tur-ma o-da-sı"},
+      {f:"kapı",t:"Tür",p:"ka-pı"},{f:"pencere",t:"Fenster",p:"pen-ce-re"},
+      {f:"masa",t:"Tisch",p:"ma-sa"},{f:"sandalye",t:"Stuhl",p:"san-dal-ye"},
+      {f:"yatak",t:"Bett",p:"ya-tak"},{f:"dolap",t:"Schrank",p:"do-lap"},
+      {f:"kanepe",t:"Sofa",p:"ka-ne-pe"},{f:"buzdolabı",t:"Kühlschrank",p:"buz-do-la-bı"},
+      {f:"asansör",t:"Aufzug",p:"a-san-sör"},{f:"balkon",t:"Balkon",p:"bal-kon"},
+    ],
+    "Natur & Wetter": [
+      {f:"güneş",t:"Sonne",p:"gü-neş"},{f:"ay",t:"Mond",p:"ay"},{f:"yıldız",t:"Stern",p:"yıl-dız"},
+      {f:"gökyüzü",t:"Himmel",p:"gök-yü-zü"},{f:"bulut",t:"Wolke",p:"bu-lut"},
+      {f:"yağmur",t:"Regen",p:"yağ-mur"},{f:"kar",t:"Schnee",p:"kar"},{f:"rüzgar",t:"Wind",p:"rüz-gar"},
+      {f:"fırtına",t:"Gewitter / Sturm",p:"fır-tı-na"},{f:"sıcak",t:"Heiß / Warm",p:"sı-cak"},
+      {f:"soğuk",t:"Kalt",p:"so-ğuk"},{f:"orman",t:"Wald",p:"or-man"},
+      {f:"deniz",t:"Meer",p:"de-niz"},{f:"göl",t:"See",p:"göl"},{f:"nehir",t:"Fluss",p:"ne-hir"},
+      {f:"çiçek",t:"Blume",p:"çi-çek"},{f:"ağaç",t:"Baum",p:"a-ğaç"},{f:"dağ",t:"Berg",p:"dağ"},
+    ],
+    "Tiere": [
+      {f:"köpek",t:"Hund",p:"kö-pek"},{f:"kedi",t:"Katze",p:"ke-di"},{f:"at",t:"Pferd",p:"at"},
+      {f:"inek",t:"Kuh",p:"i-nek"},{f:"domuz",t:"Schwein",p:"do-muz"},{f:"koyun",t:"Schaf",p:"ko-yun"},
+      {f:"kuş",t:"Vogel",p:"kuş"},{f:"balık",t:"Fisch",p:"ba-lık"},{f:"aslan",t:"Löwe",p:"as-lan"},
+      {f:"kaplan",t:"Tiger",p:"kap-lan"},{f:"fil",t:"Elefant",p:"fil"},{f:"ayı",t:"Bär",p:"a-yı"},
+      {f:"kurt",t:"Wolf",p:"kurt"},{f:"tilki",t:"Fuchs",p:"til-ki"},{f:"tavşan",t:"Hase",p:"tav-şan"},
+      {f:"yılan",t:"Schlange",p:"yı-lan"},{f:"kelebek",t:"Schmetterling",p:"ke-le-bek"},
+      {f:"kartal",t:"Adler",p:"kar-tal"},{f:"maymun",t:"Affe",p:"may-mun"},
+    ],
+    "Adjektive": [
+      {f:"büyük",t:"Groß",p:"bü-yük"},{f:"küçük",t:"Klein",p:"kü-çük"},
+      {f:"yeni",t:"Neu",p:"ye-ni"},{f:"eski",t:"Alt",p:"es-ki"},{f:"güzel",t:"Schön",p:"gü-zel"},
+      {f:"akıllı",t:"Klug",p:"a-kıl-lı"},{f:"hızlı",t:"Schnell",p:"hız-lı"},
+      {f:"yavaş",t:"Langsam",p:"ya-vaş"},{f:"pahalı",t:"Teuer",p:"pa-ha-lı"},
+      {f:"ucuz",t:"Günstig",p:"u-cuz"},{f:"sıcak",t:"Heiß / Warm",p:"sı-cak"},
+      {f:"soğuk",t:"Kalt",p:"so-ğuk"},{f:"lezzetli",t:"Lecker",p:"lez-zet-li"},
+      {f:"yorgun",t:"Müde",p:"yor-gun"},{f:"mutlu",t:"Glücklich",p:"mut-lu"},
+      {f:"üzgün",t:"Traurig",p:"üz-gün"},{f:"boş",t:"Leer / Frei",p:"boş"},
+    ],
+    "Verben": [
+      {f:"gitmek",t:"Gehen",p:"git-mek"},{f:"koşmak",t:"Rennen",p:"koş-mak"},
+      {f:"yemek yemek",t:"Essen",p:"ye-mek ye-mek"},{f:"içmek",t:"Trinken",p:"iç-mek"},
+      {f:"uyumak",t:"Schlafen",p:"u-yu-mak"},{f:"çalışmak",t:"Arbeiten",p:"ça-lış-mak"},
+      {f:"konuşmak",t:"Sprechen",p:"ko-nuş-mak"},{f:"dinlemek",t:"Zuhören",p:"din-le-mek"},
+      {f:"görmek",t:"Sehen",p:"gör-mek"},{f:"okumak",t:"Lesen",p:"o-ku-mak"},
+      {f:"yazmak",t:"Schreiben",p:"yaz-mak"},{f:"sevmek",t:"Lieben",p:"sev-mek"},
+      {f:"bilmek",t:"Wissen",p:"bil-mek"},{f:"düşünmek",t:"Denken",p:"dü-şün-mek"},
+      {f:"yardım etmek",t:"Helfen",p:"yar-dım et-mek"},{f:"satın almak",t:"Kaufen",p:"sa-tın al-mak"},
+      {f:"açmak",t:"Öffnen",p:"aç-mak"},{f:"kapatmak",t:"Schließen",p:"ka-pat-mak"},
+      {f:"gelmek",t:"Kommen",p:"gel-mek"},{f:"beklemek",t:"Warten",p:"bek-le-mek"},
+      {f:"vermek",t:"Geben",p:"ver-mek"},{f:"almak",t:"Nehmen / Kaufen",p:"al-mak"},
+    ],
+    "Sport & Freizeit": [
+      {f:"futbol",t:"Fußball",p:"fut-bol"},{f:"basketbol",t:"Basketball",p:"bas-ket-bol"},
+      {f:"yüzme",t:"Schwimmen",p:"yüz-me"},{f:"koşu",t:"Laufen / Joggen",p:"ko-şu"},
+      {f:"tenis",t:"Tennis",p:"te-nis"},{f:"sinema",t:"Kino",p:"si-ne-ma"},
+      {f:"tiyatro",t:"Theater",p:"ti-yat-ro"},{f:"müzik",t:"Musik",p:"mü-zik"},
+      {f:"dans",t:"Tanz",p:"dans"},{f:"seyahat",t:"Reisen",p:"se-ya-hat"},
+      {f:"bisiklet",t:"Fahrrad",p:"bi-sik-let"},{f:"yürüyüş",t:"Wandern",p:"yü-rü-yüş"},
+      {f:"yoga",t:"Yoga",p:"yo-ga"},{f:"yemek pişirme",t:"Kochen",p:"ye-mek pi-şir-me"},
+    ],
+    "Technologie": [
+      {f:"telefon",t:"Telefon",p:"te-le-fon"},{f:"bilgisayar",t:"Computer",p:"bil-gi-sa-yar"},
+      {f:"internet",t:"Internet",p:"in-ter-net"},{f:"uygulama",t:"App",p:"uy-gu-la-ma"},
+      {f:"şifre",t:"Passwort",p:"şif-re"},{f:"ekran",t:"Bildschirm",p:"ek-ran"},
+      {f:"klavye",t:"Tastatur",p:"klav-ye"},{f:"kamera",t:"Kamera",p:"ka-me-ra"},
+      {f:"pil",t:"Akku / Batterie",p:"pil"},{f:"Wi-Fi",t:"WLAN",p:"vay-fay"},
+      {f:"e-posta",t:"E-Mail",p:"e-pos-ta"},{f:"mesaj",t:"Nachricht",p:"me-saj"},
+    ],
+    "Türkische Kultur": [
+      {f:"hamam",t:"Türkisches Dampfbad",p:"ha-mam"},{f:"cami",t:"Moschee",p:"ca-mi"},
+      {f:"pazar yeri",t:"Basar / Marktplatz",p:"pa-zar ye-ri"},{f:"nazar boncuğu",t:"Böser-Blick-Amulett",p:"na-zar bon-cu-ğu"},
+      {f:"Boğaz",t:"Bosporus",p:"Bo-ğaz"},{f:"Türk kahvesi",t:"Türkischer Kaffee",p:"Türk kah-ve-si"},
+      {f:"kahvehane",t:"Kaffeehaus",p:"kah-ve-ha-ne"},{f:"çarşı",t:"Großer Basar",p:"çar-şı"},
+      {f:"ramazan",t:"Ramadan",p:"ra-ma-zan"},{f:"bayram",t:"Fest / Feiertag",p:"bay-ram"},
+    ],
   }
 };
 
-const LANG_NAMES = { ru:"Russisch", it:"Italienisch", es:"Spanisch", en:"Englisch" };
-const LANG_VOICE = { ru:"ru-RU", it:"it-IT", es:"es-ES", en:"en-GB" };
-const LANG_EMOJI = { ru:"🇷🇺", it:"🇮🇹", es:"🇪🇸", en:"🇬🇧" };
+const LANG_NAMES = { ru:"Russisch", it:"Italienisch", es:"Spanisch", en:"Englisch", tr:"Türkisch" };
+const LANG_VOICE = { ru:"ru-RU", it:"it-IT", es:"es-ES", en:"en-GB", tr:"tr-TR" };
+const LANG_EMOJI = { ru:"🇷🇺", it:"🇮🇹", es:"🇪🇸", en:"🇬🇧", tr:"🇹🇷" };
 
 // ============================================================
 // SETTINGS & API KEY MANAGEMENT
@@ -2082,8 +2373,8 @@ async function doTranslate() {
   if (!text) return;
   const from = document.getElementById('trans-from').value;
   const to = document.getElementById('trans-to').value;
-  const fromName = { de:'Deutsch', ru:'Russisch', it:'Italienisch', es:'Spanisch', en:'Englisch' }[from];
-  const toName = { de:'Deutsch', ru:'Russisch', it:'Italienisch', es:'Spanisch', en:'Englisch' }[to];
+  const fromName = { de:'Deutsch', ru:'Russisch', it:'Italienisch', es:'Spanisch', en:'Englisch', tr:'Türkisch' }[from];
+  const toName   = { de:'Deutsch', ru:'Russisch', it:'Italienisch', es:'Spanisch', en:'Englisch', tr:'Türkisch' }[to];
 
   document.getElementById('trans-loading').style.display = 'block';
   document.getElementById('trans-output').value = '';
@@ -2194,11 +2485,52 @@ function addMsg(role, html) {
 // ============================================================
 // SPEECH: TTS
 // ============================================================
+
+// Removes markdown, emojis and special characters before speaking
+function cleanForSpeech(text) {
+  return text
+    // Remove bold/italic markers: **text** → text, *text* → text, __text__ → text, _text_ → text
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
+    .replace(/__(.+?)__/g, '$1')
+    .replace(/_(.+?)_/g, '$1')
+    // Remove markdown headers: ## Heading → Heading
+    .replace(/^#{1,6}\s+/gm, '')
+    // Remove markdown links: [text](url) → text
+    .replace(/\[(.+?)\]\(.+?\)/g, '$1')
+    // Remove inline code: `code` → code
+    .replace(/`(.+?)`/g, '$1')
+    // Remove code blocks
+    .replace(/```[\s\S]*?```/g, '')
+    // Remove horizontal rules
+    .replace(/^[-*_]{3,}\s*$/gm, '')
+    // Remove bullet/list markers
+    .replace(/^[\s]*[-*+]\s+/gm, '')
+    .replace(/^[\s]*\d+\.\s+/gm, '')
+    // Remove emojis (Unicode emoji ranges)
+    .replace(/[\u{1F000}-\u{1FFFF}]/gu, '')
+    .replace(/[\u{2600}-\u{27BF}]/gu, '')
+    .replace(/[\u{FE00}-\u{FE0F}]/gu, '')
+    .replace(/[\u{1F900}-\u{1F9FF}]/gu, '')
+    .replace(/[\u{1FA00}-\u{1FA9F}]/gu, '')
+    .replace(/[\u2702-\u27B0]/g, '')
+    .replace(/\p{Emoji}/gu, '')
+    // Remove leftover special chars: ~, |, >, #, *
+    .replace(/[~|>#*\\]/g, '')
+    // Collapse multiple spaces/newlines
+    .replace(/\n{2,}/g, '. ')
+    .replace(/\n/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
 function speak(text, lang, force) {
   if (!('speechSynthesis' in window)) return;
   if (!force && !autoSpeak) return;
   window.speechSynthesis.cancel();
-  const utt = new SpeechSynthesisUtterance(text);
+  const clean = cleanForSpeech(text);
+  if (!clean) return;
+  const utt = new SpeechSynthesisUtterance(clean);
   utt.lang = LANG_VOICE[lang] || 'de-DE';
   utt.rate = speechRate || 0.9;
   window.speechSynthesis.speak(utt);
