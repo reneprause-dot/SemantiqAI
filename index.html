@@ -27,7 +27,8 @@
   --en: #6c63ff;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
-html, body { height:100%; background:var(--bg); color:var(--text); font-family:'DM Mono', monospace; overflow-x:hidden; }
+html { height:100%; }
+body { min-height:100%; background:var(--bg); color:var(--text); font-family:'DM Mono', monospace; overflow-x:hidden; overflow-y:auto; -webkit-text-size-adjust:100%; }
 
 /* SCROLLBAR */
 ::-webkit-scrollbar { width:4px; }
@@ -43,55 +44,68 @@ body::before {
 }
 
 /* LAYOUT */
-#app { position:relative; z-index:1; display:grid; grid-template-rows:auto 1fr auto; min-height:100vh; }
+#app { position:relative; z-index:1; display:flex; flex-direction:column; min-height:100vh; }
 
 /* HEADER */
 header {
   display:flex; align-items:center; justify-content:space-between;
-  padding:1.2rem 2rem; border-bottom:1px solid var(--border);
-  background:rgba(7,7,13,.8); backdrop-filter:blur(20px); position:sticky; top:0; z-index:100;
+  padding:.9rem 1.25rem; border-bottom:1px solid var(--border);
+  background:rgba(7,7,13,.92); backdrop-filter:blur(20px);
+  position:sticky; top:0; z-index:100; flex-wrap:wrap; gap:.5rem;
 }
 .logo {
-  font-family:'Syne', sans-serif; font-weight:800; font-size:1.6rem;
-  letter-spacing:-.02em; color:var(--text);
+  font-family:'Syne', sans-serif; font-weight:800; font-size:1.4rem;
+  letter-spacing:-.02em; color:var(--text); flex-shrink:0;
 }
 .logo span { color:var(--accent); }
-.lang-pills { display:flex; gap:.5rem; }
+.header-right { display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; }
+.lang-pills { display:flex; gap:.35rem; flex-wrap:wrap; }
 .lang-pill {
-  padding:.3rem .7rem; border-radius:100px; border:1px solid var(--border);
-  font-size:.7rem; font-family:'Syne',sans-serif; font-weight:600; letter-spacing:.05em;
+  padding:.28rem .6rem; border-radius:100px; border:1px solid var(--border);
+  font-size:.68rem; font-family:'Syne',sans-serif; font-weight:600; letter-spacing:.04em;
   cursor:pointer; transition:all .2s; background:transparent; color:var(--muted);
+  -webkit-tap-highlight-color:transparent;
 }
 .lang-pill.active { border-color:var(--pill-color,var(--accent)); color:var(--pill-color,var(--accent)); background:rgba(108,99,255,.1); }
 .lang-pill[data-lang="ru"] { --pill-color:var(--ru); }
 .lang-pill[data-lang="it"] { --pill-color:var(--it); }
 .lang-pill[data-lang="es"] { --pill-color:var(--es); }
 .lang-pill[data-lang="en"] { --pill-color:var(--en); }
+.settings-btn {
+  background:var(--surface2); border:1px solid var(--border); border-radius:8px;
+  padding:.35rem .6rem; cursor:pointer; font-size:1rem; color:var(--muted);
+  transition:all .2s; display:flex; align-items:center; gap:.3rem;
+  -webkit-tap-highlight-color:transparent;
+}
+.settings-btn:hover { border-color:var(--accent); color:var(--accent); }
+.api-dot-inline { width:7px; height:7px; border-radius:50%; background:var(--accent2); display:inline-block; }
+.api-dot-inline.ok { background:var(--accent3); }
 
 /* NAV */
 nav {
-  display:flex; gap:.25rem; overflow-x:auto; padding:1rem 2rem;
-  background:rgba(7,7,13,.5); border-bottom:1px solid var(--border);
-  scrollbar-width:none;
+  display:flex; gap:.2rem; overflow-x:auto; padding:.6rem 1rem;
+  background:rgba(7,7,13,.6); border-bottom:1px solid var(--border);
+  scrollbar-width:none; -webkit-overflow-scrolling:touch; flex-shrink:0;
 }
 nav::-webkit-scrollbar { display:none; }
 .nav-btn {
-  display:flex; align-items:center; gap:.5rem; padding:.6rem 1.1rem;
+  display:flex; align-items:center; gap:.4rem; padding:.5rem .9rem;
   border-radius:8px; border:1px solid transparent; background:transparent;
-  color:var(--muted); font-family:'Syne',sans-serif; font-size:.8rem; font-weight:600;
+  color:var(--muted); font-family:'Syne',sans-serif; font-size:.75rem; font-weight:600;
   cursor:pointer; transition:all .2s; white-space:nowrap; letter-spacing:.02em;
+  -webkit-tap-highlight-color:transparent; flex-shrink:0;
 }
 .nav-btn:hover { color:var(--text); border-color:var(--border); }
 .nav-btn.active { background:var(--surface); border-color:var(--border); color:var(--accent); }
-.nav-icon { font-size:1rem; }
+.nav-icon { font-size:.9rem; }
 
 /* MAIN */
-main { padding:2rem; max-width:900px; width:100%; margin:0 auto; }
+main { padding:1.25rem; max-width:900px; width:100%; margin:0 auto; flex:1; }
 
 /* SECTIONS */
 .section { display:none; animation:fadeIn .3s ease; }
 .section.active { display:block; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
 /* CARDS */
 .card {
@@ -235,6 +249,28 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 .badge { display:inline-block; padding:.15rem .5rem; border-radius:100px; font-size:.65rem; font-family:'Syne',sans-serif; font-weight:700; letter-spacing:.05em; }
 .badge-accent { background:rgba(108,99,255,.2); color:var(--accent); }
 
+/* MYVOCAB GRID FIX */
+@media(max-width:500px) {
+  #myvocab .card > div:first-of-type { grid-template-columns:1fr; }
+}
+.mv-item {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:.8rem 1rem; background:var(--surface2); border-radius:10px;
+  border:1px solid transparent; transition:border-color .2s; gap:.5rem;
+}
+.mv-item:hover { border-color:var(--border); }
+.mv-actions { display:flex; gap:.4rem; flex-shrink:0; }
+.mv-del { background:none; border:none; color:var(--muted); cursor:pointer; font-size:1rem; padding:.2rem; transition:color .2s; }
+.mv-del:hover { color:var(--accent2); }
+.gen-word-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:.8rem 1rem; background:var(--surface2); border-radius:10px;
+  border:1px solid var(--border); gap:.5rem; margin-bottom:.5rem;
+}
+.gen-save-btn { background:none; border:1px solid var(--border); color:var(--muted); cursor:pointer; font-size:.8rem; padding:.3rem .6rem; border-radius:6px; transition:all .2s; white-space:nowrap; }
+.gen-save-btn:hover { border-color:var(--accent3); color:var(--accent3); }
+.gen-save-btn.saved { border-color:var(--accent3); color:var(--accent3); background:rgba(67,233,123,.1); }
+
 /* API KEY MODAL */
 .modal-overlay {
   position:fixed; inset:0; background:rgba(0,0,0,.75); z-index:500;
@@ -270,6 +306,35 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 }
 #toast.show { transform:translateX(-50%) translateY(0); }
 
+/* LANGUAGE SELECTION CARDS */
+.lang-select-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:1rem; max-width:500px; margin:0 auto;
+}
+.lang-select-card {
+  background:var(--surface); border:2px solid var(--border); border-radius:20px;
+  padding:2rem 1rem; text-align:center; cursor:pointer;
+  transition:all .25s cubic-bezier(.34,1.56,.64,1);
+  display:flex; flex-direction:column; align-items:center; gap:.6rem;
+  -webkit-tap-highlight-color:transparent; position:relative; overflow:hidden;
+}
+.lang-select-card::before {
+  content:''; position:absolute; inset:0; opacity:0; transition:opacity .3s;
+  background:radial-gradient(circle at 50% 30%, rgba(108,99,255,.15), transparent 70%);
+}
+.lang-select-card:hover { transform:translateY(-4px) scale(1.02); border-color:var(--accent); }
+.lang-select-card:hover::before { opacity:1; }
+.lang-select-card:active { transform:scale(.97); }
+.lsc-flag { font-size:3.5rem; line-height:1; filter:drop-shadow(0 4px 12px rgba(0,0,0,.4)); }
+.lsc-name { font-family:'Syne',sans-serif; font-weight:800; font-size:1.15rem; color:var(--text); }
+.lsc-sub { font-size:.7rem; color:var(--muted); letter-spacing:.03em; }
+
+@media(max-width:400px) {
+  .lang-select-grid { grid-template-columns:1fr 1fr; gap:.75rem; }
+  .lang-select-card { padding:1.5rem .75rem; }
+  .lsc-flag { font-size:2.8rem; }
+  .lsc-name { font-size:1rem; }
+}
+
 /* HOME DASHBOARD */
 .home-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem; }
 .home-card {
@@ -285,13 +350,27 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 
 /* RESPONSIVE */
 @media(max-width:600px) {
-  header { padding:1rem; }
-  main { padding:1rem; }
+  header { padding:.75rem 1rem; }
+  main { padding:.9rem; }
   .translate-grid { grid-template-columns:1fr; }
   .translate-arrow { flex-direction:row; padding:0; justify-content:center; }
   .quiz-options { grid-template-columns:1fr; }
-  nav { padding:.75rem 1rem; }
-  .vocab-card .word-main { font-size:2rem; }
+  nav { padding:.5rem .75rem; }
+  .vocab-card .word-main { font-size:1.8rem; }
+  .home-grid { grid-template-columns:1fr 1fr; }
+  .stats-row { gap:.5rem; }
+  .stat-box { padding:.75rem .5rem; }
+  .stat-num { font-size:1.3rem; }
+  #myvocab .card > div { grid-template-columns:1fr !important; }
+  .vocab-controls { gap:.5rem; }
+  .btn { padding:.6rem .9rem; font-size:.75rem; }
+  .chat-window { height:300px; }
+  .modal-box { padding:1.25rem; }
+}
+@media(max-width:380px) {
+  .logo { font-size:1.1rem; }
+  .lang-pill { padding:.22rem .45rem; font-size:.62rem; }
+  .home-grid { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -299,16 +378,16 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 <div id="app">
   <header>
     <div class="logo">LIN<span>GUA</span></div>
-    <div style="display:flex;align-items:center;gap:.75rem;">
-      <button onclick="openApiModal()" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.35rem .7rem;cursor:pointer;font-size:.72rem;font-family:'Syne',sans-serif;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:.3rem;transition:all .2s;" id="api-key-btn">
-        <span class="api-key-indicator" id="api-dot"></span>API-Key
-      </button>
+    <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill active" data-lang="ru">🇷🇺 RU</button>
         <button class="lang-pill" data-lang="it">🇮🇹 IT</button>
         <button class="lang-pill" data-lang="es">🇪🇸 ES</button>
         <button class="lang-pill" data-lang="en">🇬🇧 EN</button>
       </div>
+      <button class="settings-btn" onclick="openSettings()" title="Einstellungen">
+        <span class="api-dot-inline" id="api-dot"></span>⚙
+      </button>
     </div>
   </header>
 
@@ -317,6 +396,8 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     <button class="nav-btn" data-section="vocab"><span class="nav-icon">📚</span> Vokabeln</button>
     <button class="nav-btn" data-section="quiz"><span class="nav-icon">❓</span> Quiz</button>
     <button class="nav-btn" data-section="free"><span class="nav-icon">🗂</span> Freies Lernen</button>
+    <button class="nav-btn" data-section="generator"><span class="nav-icon">✨</span> KI-Generator</button>
+    <button class="nav-btn" data-section="myvocab"><span class="nav-icon">⭐</span> Meine Vokabeln</button>
     <button class="nav-btn" data-section="translate"><span class="nav-icon">⇄</span> Übersetzer</button>
     <button class="nav-btn" data-section="ai"><span class="nav-icon">✦</span> KI-Assistent</button>
   </nav>
@@ -324,43 +405,97 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   <main>
     <!-- HOME -->
     <div class="section active" id="home">
-      <div style="margin-bottom:2rem;">
-        <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;margin-bottom:.5rem;">
-          Willkommen zurück <span id="home-lang-emoji">🇷🇺</span>
+
+      <!-- VIEW 1: SPRACHAUSWAHL -->
+      <div id="lang-picker">
+        <div style="text-align:center;padding:1.5rem 0 2rem;">
+          <div style="font-family:'Instrument Serif',serif;font-size:2.6rem;margin-bottom:.4rem;line-height:1.1;">
+            Welche Sprache<br>möchtest du lernen?
+          </div>
+          <div style="font-size:.85rem;color:var(--muted);">Wähle deine Lernsprache</div>
         </div>
-        <div style="color:var(--muted);font-size:.85rem;">Wähle eine Aktivität und starte deine Lernsession.</div>
+
+        <div class="lang-select-grid">
+          <button class="lang-select-card" onclick="selectLanguage('ru')">
+            <div class="lsc-flag">🇷🇺</div>
+            <div class="lsc-name">Russisch</div>
+            <div class="lsc-sub">Русский · Kyrillisch</div>
+          </button>
+          <button class="lang-select-card" onclick="selectLanguage('it')">
+            <div class="lsc-flag">🇮🇹</div>
+            <div class="lsc-name">Italienisch</div>
+            <div class="lsc-sub">Italiano · Romanisch</div>
+          </button>
+          <button class="lang-select-card" onclick="selectLanguage('es')">
+            <div class="lsc-flag">🇪🇸</div>
+            <div class="lsc-name">Spanisch</div>
+            <div class="lsc-sub">Español · Romanisch</div>
+          </button>
+          <button class="lang-select-card" onclick="selectLanguage('en')">
+            <div class="lsc-flag">🇬🇧</div>
+            <div class="lsc-name">Englisch</div>
+            <div class="lsc-sub">English · Germanisch</div>
+          </button>
+        </div>
       </div>
-      <div class="stats-row" id="home-stats">
-        <div class="stat-box"><div class="stat-num" id="stat-learned">0</div><div class="stat-lbl">Gelernt</div></div>
-        <div class="stat-box"><div class="stat-num" id="stat-streak">0</div><div class="stat-lbl">Streak</div></div>
-        <div class="stat-box"><div class="stat-num" id="stat-correct">0</div><div class="stat-lbl">% Korrekt</div></div>
-        <div class="stat-box"><div class="stat-num" id="stat-total">0</div><div class="stat-lbl">Quiz Total</div></div>
-      </div>
-      <div class="home-grid">
-        <div class="home-card" style="--hc-color:var(--accent)" onclick="switchSection('vocab')">
-          <div class="hc-icon">📚</div>
-          <div class="hc-title">Vokabeltraining</div>
-          <div class="hc-desc">Lerne neue Wörter mit Karteikarten und Sprachausgabe</div>
+
+      <!-- VIEW 2: DASHBOARD -->
+      <div id="dashboard" style="display:none;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.75rem;flex-wrap:wrap;gap:.75rem;">
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;line-height:1.15;">
+              Willkommen zurück <span id="home-lang-emoji">🇷🇺</span>
+            </div>
+            <div style="color:var(--muted);font-size:.82rem;margin-top:.2rem;" id="dash-lang-subtitle">Du lernst Russisch</div>
+          </div>
+          <button onclick="showLangPicker()" style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:.5rem 1rem;cursor:pointer;font-size:.75rem;font-family:'Syne',sans-serif;font-weight:600;color:var(--muted);transition:all .2s;white-space:nowrap;">
+            🌍 Sprache wechseln
+          </button>
         </div>
-        <div class="home-card" style="--hc-color:var(--accent2)" onclick="switchSection('quiz')">
-          <div class="hc-icon">❓</div>
-          <div class="hc-title">Quiz</div>
-          <div class="hc-desc">Teste dein Wissen mit Multiple-Choice-Fragen</div>
+
+        <div class="stats-row" id="home-stats">
+          <div class="stat-box"><div class="stat-num" id="stat-learned">0</div><div class="stat-lbl">Gelernt</div></div>
+          <div class="stat-box"><div class="stat-num" id="stat-streak">0</div><div class="stat-lbl">Streak</div></div>
+          <div class="stat-box"><div class="stat-num" id="stat-correct">0</div><div class="stat-lbl">% Korrekt</div></div>
+          <div class="stat-box"><div class="stat-num" id="stat-total">0</div><div class="stat-lbl">Quiz Total</div></div>
         </div>
-        <div class="home-card" style="--hc-color:var(--accent3)" onclick="switchSection('free')">
-          <div class="hc-icon">🗂</div>
-          <div class="hc-title">Freies Lernen</div>
-          <div class="hc-desc">Wähle ein Thema und stöbere durch Vokabeln</div>
-        </div>
-        <div class="home-card" style="--hc-color:var(--accent4)" onclick="switchSection('translate')">
-          <div class="hc-icon">⇄</div>
-          <div class="hc-title">Übersetzer</div>
-          <div class="hc-desc">Übersetze Begriffe und Sätze sofort</div>
-        </div>
-        <div class="home-card" style="--hc-color:#c77dff" onclick="switchSection('ai')">
-          <div class="hc-icon">✦</div>
-          <div class="hc-title">KI-Sprachassistent</div>
-          <div class="hc-desc">Übe Gespräche mit KI, Mikrofon & Sprachausgabe</div>
+
+        <div class="home-grid">
+          <div class="home-card" style="--hc-color:var(--accent)" onclick="switchSection('vocab')">
+            <div class="hc-icon">📚</div>
+            <div class="hc-title">Vokabeltraining</div>
+            <div class="hc-desc">Lerne neue Wörter mit Karteikarten und Sprachausgabe</div>
+          </div>
+          <div class="home-card" style="--hc-color:var(--accent2)" onclick="switchSection('quiz')">
+            <div class="hc-icon">❓</div>
+            <div class="hc-title">Quiz</div>
+            <div class="hc-desc">Teste dein Wissen mit Multiple-Choice-Fragen</div>
+          </div>
+          <div class="home-card" style="--hc-color:var(--accent3)" onclick="switchSection('free')">
+            <div class="hc-icon">🗂</div>
+            <div class="hc-title">Freies Lernen</div>
+            <div class="hc-desc">Wähle ein Thema und stöbere durch Vokabeln</div>
+          </div>
+          <div class="home-card" style="--hc-color:var(--accent4)" onclick="switchSection('translate')">
+            <div class="hc-icon">⇄</div>
+            <div class="hc-title">Übersetzer</div>
+            <div class="hc-desc">Übersetze Begriffe und Sätze sofort</div>
+          </div>
+          <div class="home-card" style="--hc-color:#c77dff" onclick="switchSection('ai')">
+            <div class="hc-icon">✦</div>
+            <div class="hc-title">KI-Sprachassistent</div>
+            <div class="hc-desc">Übe Gespräche mit KI, Mikrofon & Sprachausgabe</div>
+          </div>
+          <div class="home-card" style="--hc-color:#f9c74f" onclick="switchSection('generator')">
+            <div class="hc-icon">✨</div>
+            <div class="hc-title">KI-Vokabel-Generator</div>
+            <div class="hc-desc">Thema eingeben – KI generiert sofort 20 Vokabeln</div>
+          </div>
+          <div class="home-card" style="--hc-color:#90e0ef" onclick="switchSection('myvocab')">
+            <div class="hc-icon">⭐</div>
+            <div class="hc-title">Meine Vokabeln</div>
+            <div class="hc-desc">Eigene Wörter speichern und gezielt trainieren</div>
+          </div>
         </div>
       </div>
     </div>
@@ -413,6 +548,75 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
       <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:1.5rem;">Freies Lernen</div>
       <div class="topic-grid" id="topic-grid"></div>
       <div class="vocab-list" id="free-vocab-list"></div>
+    </div>
+
+    <!-- KI VOKABEL-GENERATOR -->
+    <div class="section" id="generator">
+      <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:.5rem;">✨ KI-Vokabel-Generator</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:1.5rem;">Gib ein Thema ein – die KI generiert passende Vokabeln für deine Lernsprache</div>
+
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="card-title">Thema eingeben</div>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem;">
+          <input id="gen-topic" class="chat-input" style="flex:1;min-width:180px;" placeholder="z.B. Restaurant, Arztbesuch, Emotionen..." onkeydown="if(event.key==='Enter')generateVocab()">
+          <button class="btn primary" onclick="generateVocab()" id="gen-btn">✨ Generieren</button>
+        </div>
+        <div style="font-size:.75rem;color:var(--muted);margin-bottom:.75rem;">Schnellauswahl:</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;" id="gen-quick-topics"></div>
+      </div>
+
+      <div id="gen-loading" style="display:none;text-align:center;padding:2rem;color:var(--muted);">
+        <span class="spinner"></span><span style="margin-left:.75rem;">KI generiert Vokabeln...</span>
+      </div>
+
+      <div id="gen-result" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;" id="gen-result-title">Ergebnis</div>
+          <div style="display:flex;gap:.5rem;">
+            <button class="btn success" onclick="saveGeneratedVocab()">⭐ Alle speichern</button>
+            <button class="btn" onclick="addGeneratedToTraining()">📚 Zum Training</button>
+          </div>
+        </div>
+        <div id="gen-vocab-list" class="vocab-list"></div>
+      </div>
+    </div>
+
+    <!-- MEINE VOKABELN -->
+    <div class="section" id="myvocab">
+      <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:.5rem;">⭐ Meine Vokabeln</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:1.5rem;">Eigene Wörter hinzufügen, gespeicherte KI-Vokabeln verwalten und trainieren</div>
+
+      <!-- Manuell hinzufügen -->
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="card-title">➕ Eigenes Wort hinzufügen</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:.75rem;align-items:end;flex-wrap:wrap;">
+          <div>
+            <div style="font-size:.7rem;color:var(--muted);margin-bottom:.3rem;">FREMDWORT</div>
+            <input class="modal-input" id="mv-foreign" placeholder="z.B. привет" style="margin:0;">
+          </div>
+          <div>
+            <div style="font-size:.7rem;color:var(--muted);margin-bottom:.3rem;">DEUTSCH</div>
+            <input class="modal-input" id="mv-translation" placeholder="z.B. Hallo" style="margin:0;">
+          </div>
+          <button class="btn primary" onclick="addCustomVocab()" style="height:42px;white-space:nowrap;">+ Hinzufügen</button>
+        </div>
+        <div style="margin-top:.75rem;">
+          <div style="font-size:.7rem;color:var(--muted);margin-bottom:.3rem;">AUSSPRACHE (optional)</div>
+          <input class="modal-input" id="mv-phonetic" placeholder="z.B. privet" style="margin:0;width:100%;">
+        </div>
+      </div>
+
+      <!-- Filter & Aktionen -->
+      <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;">
+        <div style="font-size:.8rem;color:var(--muted);flex:1;" id="mv-count">0 gespeicherte Vokabeln</div>
+        <button class="btn" onclick="trainMyVocab()">📚 Meine Vokabeln trainieren</button>
+        <button class="btn danger" onclick="clearAllMyVocab()">🗑 Alle löschen</button>
+      </div>
+
+      <div id="mv-list" class="vocab-list"></div>
+      <div id="mv-empty" style="text-align:center;padding:3rem;color:var(--muted);font-size:.85rem;">
+        Noch keine eigenen Vokabeln.<br>Füge Wörter hinzu oder generiere sie mit dem KI-Generator.
+      </div>
     </div>
 
     <!-- ÜBERSETZER -->
@@ -489,22 +693,71 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   <footer>LINGUA · KI-Sprachlern-App · Dein Fortschritt wird lokal gespeichert</footer>
 </div>
 
-<!-- API KEY MODAL -->
-<div class="modal-overlay hidden" id="api-modal">
-  <div class="modal-box">
-    <div class="modal-title">🔑 Anthropic API-Key</div>
-    <div class="modal-desc">
-      Für Übersetzer und KI-Assistent wird ein Anthropic API-Key benötigt. Der Key wird nur lokal auf deinem Gerät gespeichert und nie weitergegeben.
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay hidden" id="settings-modal">
+  <div class="modal-box" style="max-width:460px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+      <div class="modal-title" style="margin:0;">⚙ Einstellungen</div>
+      <button onclick="closeSettings()" style="background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;">✕</button>
     </div>
-    <a class="modal-link" href="https://console.anthropic.com" target="_blank">→ API-Key erstellen: console.anthropic.com → Settings → API Keys</a>
-    <input class="modal-input" id="api-key-input" type="password" placeholder="sk-ant-api03-...">
-    <div style="display:flex;gap:.75rem;">
-      <button class="btn primary" onclick="saveApiKey()" style="flex:1;">Speichern</button>
-      <button class="btn" onclick="closeApiModal()">Abbrechen</button>
+
+    <!-- API KEY -->
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;">
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;">
+        <span class="api-dot-inline" id="settings-api-dot"></span> Anthropic API-Key
+      </div>
+      <div style="font-size:.75rem;color:var(--muted);margin-bottom:.75rem;line-height:1.5;">
+        Wird lokal gespeichert. Nie öffentlich teilen.<br>
+        <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent);text-decoration:none;">→ console.anthropic.com → Settings → API Keys</a>
+      </div>
+      <div style="position:relative;">
+        <input class="modal-input" id="api-key-input" type="password" placeholder="sk-ant-api03-..." style="padding-right:3rem;">
+        <button onclick="toggleKeyVisibility()" style="position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:.9rem;" id="eye-btn">👁</button>
+      </div>
+      <div style="display:flex;gap:.5rem;">
+        <button class="btn primary" onclick="saveApiKey()" style="flex:1;">Speichern</button>
+        <button class="btn danger" onclick="clearApiKey()">Löschen</button>
+      </div>
     </div>
-    <div class="modal-note">
-      💡 Der Key wird nur in deinem Browser-Speicher (localStorage) gesichert und verlässt dein Gerät nur für direkte API-Anfragen an Anthropic.
+
+    <!-- LERNSPRACHE -->
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;">
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;margin-bottom:.75rem;">🌍 Aktive Lernsprache</div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+        <button class="lang-pill" data-settings-lang="ru" onclick="setLangFromSettings('ru')">🇷🇺 Russisch</button>
+        <button class="lang-pill" data-settings-lang="it" onclick="setLangFromSettings('it')">🇮🇹 Italienisch</button>
+        <button class="lang-pill" data-settings-lang="es" onclick="setLangFromSettings('es')">🇪🇸 Spanisch</button>
+        <button class="lang-pill" data-settings-lang="en" onclick="setLangFromSettings('en')">🇬🇧 Englisch</button>
+      </div>
     </div>
+
+    <!-- SPRACHAUSGABE -->
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;">
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;margin-bottom:.75rem;">🔊 Sprachausgabe</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;">
+        <span style="font-size:.8rem;">Auto-Vorlesen (KI-Assistent)</span>
+        <button onclick="toggleAutoSpeak()" id="autospeak-btn" style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:.3rem .8rem;cursor:pointer;font-size:.75rem;font-family:'Syne',sans-serif;font-weight:600;color:var(--muted);transition:all .2s;">AN</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:.8rem;">Geschwindigkeit</span>
+        <div style="display:flex;align-items:center;gap:.5rem;">
+          <span style="font-size:.7rem;color:var(--muted);" id="speed-label">0.9×</span>
+          <input type="range" id="speed-slider" min="0.5" max="1.5" step="0.1" value="0.9"
+            style="width:80px;accent-color:var(--accent);" oninput="updateSpeed(this.value)">
+        </div>
+      </div>
+    </div>
+
+    <!-- FORTSCHRITT -->
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;">
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;margin-bottom:.75rem;">📊 Fortschritt</div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+        <button class="btn" onclick="exportProgress()">⬇ Exportieren</button>
+        <button class="btn danger" onclick="resetProgress()">🗑 Zurücksetzen</button>
+      </div>
+    </div>
+
+    <div style="font-size:.7rem;color:var(--muted);text-align:center;">LINGUA · Alle Daten werden lokal gespeichert</div>
   </div>
 </div>
 
@@ -512,7 +765,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 
 <script>
 // ============================================================
-// VOCABULARY DATABASE
+// VOCABULARY DATABASE – ERWEITERT (~400 Wörter pro Sprache)
 // ============================================================
 const VOCAB = {
   ru: {
@@ -523,18 +776,26 @@ const VOCAB = {
       {f:"добрый вечер",t:"Guten Abend",p:"dobryy vecher"},{f:"до свидания",t:"Auf Wiedersehen",p:"do svidaniya"},
       {f:"как дела",t:"Wie geht es dir",p:"kak dela"},{f:"хорошо",t:"Gut",p:"khorosho"},
       {f:"плохо",t:"Schlecht",p:"plokho"},{f:"я не понимаю",t:"Ich verstehe nicht",p:"ya ne ponimayu"},
+      {f:"меня зовут",t:"Ich heiße",p:"menya zovut"},{f:"приятно познакомиться",t:"Schön dich kennenzulernen",p:"priyatno poznakomitsya"},
+      {f:"говорите медленнее",t:"Sprechen Sie langsamer",p:"govorite medlenneye"},{f:"повторите пожалуйста",t:"Bitte wiederholen",p:"povtorite pozhaluysta"},
+      {f:"где",t:"Wo",p:"gde"},{f:"когда",t:"Wann",p:"kogda"},{f:"почему",t:"Warum",p:"pochemu"},{f:"как",t:"Wie",p:"kak"},
+      {f:"сколько стоит",t:"Wie viel kostet es",p:"skol'ko stoit"},{f:"помогите",t:"Hilfe",p:"pomogite"},
     ],
     "Zahlen": [
       {f:"один",t:"Eins",p:"odin"},{f:"два",t:"Zwei",p:"dva"},{f:"три",t:"Drei",p:"tri"},
       {f:"четыре",t:"Vier",p:"chetyre"},{f:"пять",t:"Fünf",p:"pyat'"},{f:"шесть",t:"Sechs",p:"shest'"},
       {f:"семь",t:"Sieben",p:"sem'"},{f:"восемь",t:"Acht",p:"vosem'"},{f:"девять",t:"Neun",p:"devyat'"},
-      {f:"десять",t:"Zehn",p:"desyat'"},{f:"сто",t:"Hundert",p:"sto"},{f:"тысяча",t:"Tausend",p:"tysyacha"},
+      {f:"десять",t:"Zehn",p:"desyat'"},{f:"одиннадцать",t:"Elf",p:"odinnadtsat'"},{f:"двенадцать",t:"Zwölf",p:"dvenadtsat'"},
+      {f:"двадцать",t:"Zwanzig",p:"dvadtsat'"},{f:"тридцать",t:"Dreißig",p:"tridtsat'"},{f:"пятьдесят",t:"Fünfzig",p:"pyat'desyat"},
+      {f:"сто",t:"Hundert",p:"sto"},{f:"тысяча",t:"Tausend",p:"tysyacha"},{f:"миллион",t:"Million",p:"million"},
+      {f:"первый",t:"Erste/r",p:"pervyy"},{f:"второй",t:"Zweite/r",p:"vtoroy"},{f:"третий",t:"Dritte/r",p:"tretiy"},
     ],
     "Farben": [
       {f:"красный",t:"Rot",p:"krasnyy"},{f:"синий",t:"Blau",p:"siniy"},{f:"зелёный",t:"Grün",p:"zelyonyy"},
       {f:"жёлтый",t:"Gelb",p:"zheltyy"},{f:"белый",t:"Weiß",p:"belyy"},{f:"чёрный",t:"Schwarz",p:"chornyy"},
       {f:"оранжевый",t:"Orange",p:"oranzhevyy"},{f:"фиолетовый",t:"Violett",p:"fioletovyy"},
       {f:"розовый",t:"Rosa",p:"rozovyy"},{f:"коричневый",t:"Braun",p:"korichnevyy"},
+      {f:"серый",t:"Grau",p:"seryy"},{f:"золотой",t:"Golden",p:"zolotoy"},{f:"серебряный",t:"Silber",p:"serebryanyy"},
     ],
     "Essen & Trinken": [
       {f:"хлеб",t:"Brot",p:"khleb"},{f:"вода",t:"Wasser",p:"voda"},{f:"молоко",t:"Milch",p:"moloko"},
@@ -542,12 +803,22 @@ const VOCAB = {
       {f:"фрукты",t:"Obst",p:"frukty"},{f:"суп",t:"Suppe",p:"sup"},{f:"чай",t:"Tee",p:"chay"},
       {f:"кофе",t:"Kaffee",p:"kofe"},{f:"пиво",t:"Bier",p:"pivo"},{f:"вино",t:"Wein",p:"vino"},
       {f:"яблоко",t:"Apfel",p:"yabloko"},{f:"картофель",t:"Kartoffel",p:"kartofel'"},
+      {f:"курица",t:"Hühnchen",p:"kuritsa"},{f:"яйцо",t:"Ei",p:"yaytso"},{f:"сыр",t:"Käse",p:"syr"},
+      {f:"масло",t:"Butter / Öl",p:"maslo"},{f:"сахар",t:"Zucker",p:"sakhar"},{f:"соль",t:"Salz",p:"sol'"},
+      {f:"перец",t:"Pfeffer",p:"perets"},{f:"рис",t:"Reis",p:"ris"},{f:"макароны",t:"Nudeln",p:"makarony"},
+      {f:"помидор",t:"Tomate",p:"pomidor"},{f:"огурец",t:"Gurke",p:"oguretz"},{f:"морковь",t:"Möhre",p:"morkov'"},
+      {f:"лук",t:"Zwiebel",p:"luk"},{f:"чеснок",t:"Knoblauch",p:"chesnok"},{f:"апельсин",t:"Orange",p:"apel'sin"},
+      {f:"банан",t:"Banane",p:"banan"},{f:"клубника",t:"Erdbeere",p:"klubnika"},{f:"десерт",t:"Dessert",p:"desert"},
+      {f:"мороженое",t:"Eis",p:"morozhenoye"},{f:"торт",t:"Torte",p:"tort"},{f:"сок",t:"Saft",p:"sok"},
     ],
     "Familie": [
       {f:"мама",t:"Mutter",p:"mama"},{f:"папа",t:"Vater",p:"papa"},{f:"брат",t:"Bruder",p:"brat"},
       {f:"сестра",t:"Schwester",p:"sestra"},{f:"бабушка",t:"Großmutter",p:"babushka"},
       {f:"дедушка",t:"Großvater",p:"dedushka"},{f:"сын",t:"Sohn",p:"syn"},
       {f:"дочь",t:"Tochter",p:"doch'"},{f:"муж",t:"Ehemann",p:"muzh"},{f:"жена",t:"Ehefrau",p:"zhena"},
+      {f:"дядя",t:"Onkel",p:"dyadya"},{f:"тётя",t:"Tante",p:"tyotya"},{f:"племянник",t:"Neffe",p:"plemyannik"},
+      {f:"племянница",t:"Nichte",p:"plemyannitsa"},{f:"двоюродный брат",t:"Cousin",p:"dvoyurodnyy brat"},
+      {f:"родители",t:"Eltern",p:"roditeli"},{f:"ребёнок",t:"Kind",p:"rebyonok"},{f:"младенец",t:"Baby",p:"mladenets"},
     ],
     "Reisen": [
       {f:"аэропорт",t:"Flughafen",p:"aeroport"},{f:"вокзал",t:"Bahnhof",p:"vokzal"},
@@ -555,70 +826,264 @@ const VOCAB = {
       {f:"город",t:"Stadt",p:"gorod"},{f:"страна",t:"Land",p:"strana"},
       {f:"билет",t:"Ticket",p:"bilet"},{f:"паспорт",t:"Reisepass",p:"pasport"},
       {f:"такси",t:"Taxi",p:"taksi"},{f:"метро",t:"U-Bahn",p:"metro"},
+      {f:"самолёт",t:"Flugzeug",p:"samolyot"},{f:"поезд",t:"Zug",p:"poyezd"},{f:"автобус",t:"Bus",p:"avtobus"},
+      {f:"машина",t:"Auto",p:"mashina"},{f:"корабль",t:"Schiff",p:"korabl'"},{f:"велосипед",t:"Fahrrad",p:"velosiped"},
+      {f:"карта",t:"Karte / Landkarte",p:"karta"},{f:"маршрут",t:"Route",p:"marshrut"},
+      {f:"граница",t:"Grenze",p:"granitsa"},{f:"виза",t:"Visum",p:"viza"},{f:"багаж",t:"Gepäck",p:"bagazh"},
+      {f:"номер",t:"Zimmer",p:"nomer"},{f:"бронирование",t:"Buchung / Reservierung",p:"bronirovaniye"},
+      {f:"достопримечательность",t:"Sehenswürdigkeit",p:"dostoprimechatel'nost'"},{f:"музей",t:"Museum",p:"muzey"},
+      {f:"пляж",t:"Strand",p:"plyazh"},{f:"гора",t:"Berg",p:"gora"},{f:"река",t:"Fluss",p:"reka"},
     ],
     "Körper": [
       {f:"голова",t:"Kopf",p:"golova"},{f:"рука",t:"Hand / Arm",p:"ruka"},{f:"нога",t:"Bein / Fuß",p:"noga"},
       {f:"глаз",t:"Auge",p:"glaz"},{f:"ухо",t:"Ohr",p:"ukho"},{f:"рот",t:"Mund",p:"rot"},
       {f:"нос",t:"Nase",p:"nos"},{f:"сердце",t:"Herz",p:"serdtse"},{f:"живот",t:"Bauch",p:"zhivot"},
+      {f:"спина",t:"Rücken",p:"spina"},{f:"плечо",t:"Schulter",p:"plecho"},{f:"колено",t:"Knie",p:"koleno"},
+      {f:"палец",t:"Finger",p:"palets"},{f:"зуб",t:"Zahn",p:"zub"},{f:"волосы",t:"Haare",p:"volosy"},
+      {f:"кожа",t:"Haut",p:"kozha"},{f:"кровь",t:"Blut",p:"krov'"},{f:"лёгкие",t:"Lunge",p:"lyogkiye"},
+      {f:"мозг",t:"Gehirn",p:"mozg"},{f:"желудок",t:"Magen",p:"zheludok"},
     ],
     "Zeit": [
       {f:"сегодня",t:"Heute",p:"segodnya"},{f:"завтра",t:"Morgen",p:"zavtra"},{f:"вчера",t:"Gestern",p:"vchera"},
       {f:"утро",t:"Morgen (Tageszeit)",p:"utro"},{f:"день",t:"Tag",p:"den'"},{f:"вечер",t:"Abend",p:"vecher"},
       {f:"ночь",t:"Nacht",p:"noch'"},{f:"неделя",t:"Woche",p:"nedelya"},{f:"месяц",t:"Monat",p:"mesyats"},
       {f:"год",t:"Jahr",p:"god"},{f:"час",t:"Stunde",p:"chas"},{f:"минута",t:"Minute",p:"minuta"},
+      {f:"понедельник",t:"Montag",p:"ponedel'nik"},{f:"вторник",t:"Dienstag",p:"vtornik"},
+      {f:"среда",t:"Mittwoch",p:"sreda"},{f:"четверг",t:"Donnerstag",p:"chetverg"},
+      {f:"пятница",t:"Freitag",p:"pyatnitsa"},{f:"суббота",t:"Samstag",p:"subbota"},{f:"воскресенье",t:"Sonntag",p:"voskresen'ye"},
+      {f:"январь",t:"Januar",p:"yanvar'"},{f:"февраль",t:"Februar",p:"fevral'"},{f:"март",t:"März",p:"mart"},
+      {f:"апрель",t:"April",p:"aprel'"},{f:"май",t:"Mai",p:"may"},{f:"июнь",t:"Juni",p:"iyun'"},
+      {f:"июль",t:"Juli",p:"iyul'"},{f:"август",t:"August",p:"avgust"},{f:"сентябрь",t:"September",p:"sentyabr'"},
+      {f:"октябрь",t:"Oktober",p:"oktyabr'"},{f:"ноябрь",t:"November",p:"noyabr'"},{f:"декабрь",t:"Dezember",p:"dekabr'"},
     ],
     "Berufe": [
       {f:"врач",t:"Arzt",p:"vrach"},{f:"учитель",t:"Lehrer",p:"uchitel'"},{f:"инженер",t:"Ingenieur",p:"inzhener"},
       {f:"юрист",t:"Anwalt",p:"yurist"},{f:"повар",t:"Koch",p:"povar"},{f:"водитель",t:"Fahrer",p:"voditel'"},
       {f:"студент",t:"Student",p:"student"},{f:"полицейский",t:"Polizist",p:"politseyskiy"},
+      {f:"пожарный",t:"Feuerwehrmann",p:"pozharnyy"},{f:"медсестра",t:"Krankenschwester",p:"medsestra"},
+      {f:"программист",t:"Programmierer",p:"programmist"},{f:"архитектор",t:"Architekt",p:"arkhitektor"},
+      {f:"журналист",t:"Journalist",p:"zhurnalist"},{f:"художник",t:"Künstler / Maler",p:"khudozhnik"},
+      {f:"певец",t:"Sänger",p:"pevets"},{f:"актёр",t:"Schauspieler",p:"aktyor"},
+      {f:"фермер",t:"Bauer / Landwirt",p:"fermer"},{f:"продавец",t:"Verkäufer",p:"prodavets"},
+    ],
+    "Wohnen": [
+      {f:"дом",t:"Haus",p:"dom"},{f:"квартира",t:"Wohnung",p:"kvartira"},{f:"комната",t:"Zimmer",p:"komnata"},
+      {f:"кухня",t:"Küche",p:"kukhnya"},{f:"ванная",t:"Bad / Badezimmer",p:"vannaya"},{f:"спальня",t:"Schlafzimmer",p:"spal'nya"},
+      {f:"гостиная",t:"Wohnzimmer",p:"gostinaya"},{f:"дверь",t:"Tür",p:"dver'"},{f:"окно",t:"Fenster",p:"okno"},
+      {f:"пол",t:"Boden",p:"pol"},{f:"потолок",t:"Decke",p:"potolok"},{f:"стена",t:"Wand",p:"stena"},
+      {f:"стол",t:"Tisch",p:"stol"},{f:"стул",t:"Stuhl",p:"stul"},{f:"кровать",t:"Bett",p:"krovat'"},
+      {f:"шкаф",t:"Schrank",p:"shkaf"},{f:"диван",t:"Sofa",p:"divan"},{f:"лампа",t:"Lampe",p:"lampa"},
+      {f:"холодильник",t:"Kühlschrank",p:"kholodil'nik"},{f:"плита",t:"Herd",p:"plita"},{f:"лифт",t:"Aufzug",p:"lift"},
+    ],
+    "Natur & Wetter": [
+      {f:"солнце",t:"Sonne",p:"solntse"},{f:"луна",t:"Mond",p:"luna"},{f:"звезда",t:"Stern",p:"zvezda"},
+      {f:"небо",t:"Himmel",p:"nebo"},{f:"облако",t:"Wolke",p:"oblako"},{f:"дождь",t:"Regen",p:"dozhd'"},
+      {f:"снег",t:"Schnee",p:"sneg"},{f:"ветер",t:"Wind",p:"veter"},{f:"гроза",t:"Gewitter",p:"groza"},
+      {f:"жара",t:"Hitze",p:"zhara"},{f:"холод",t:"Kälte",p:"kholod"},{f:"туман",t:"Nebel",p:"tuman"},
+      {f:"лес",t:"Wald",p:"les"},{f:"море",t:"Meer",p:"more"},{f:"озеро",t:"See",p:"ozero"},
+      {f:"поле",t:"Feld",p:"pole"},{f:"цветок",t:"Blume",p:"tsvetok"},{f:"дерево",t:"Baum",p:"derevo"},
+      {f:"трава",t:"Gras",p:"trava"},{f:"земля",t:"Erde / Land",p:"zemlya"},
+    ],
+    "Tiere": [
+      {f:"собака",t:"Hund",p:"sobaka"},{f:"кошка",t:"Katze",p:"koshka"},{f:"лошадь",t:"Pferd",p:"loshad'"},
+      {f:"корова",t:"Kuh",p:"korova"},{f:"свинья",t:"Schwein",p:"svin'ya"},{f:"овца",t:"Schaf",p:"ovtsa"},
+      {f:"курица",t:"Huhn",p:"kuritsa"},{f:"рыба",t:"Fisch",p:"ryba"},{f:"птица",t:"Vogel",p:"ptitsa"},
+      {f:"лев",t:"Löwe",p:"lev"},{f:"тигр",t:"Tiger",p:"tigr"},{f:"слон",t:"Elefant",p:"slon"},
+      {f:"медведь",t:"Bär",p:"medved'"},{f:"волк",t:"Wolf",p:"volk"},{f:"лиса",t:"Fuchs",p:"lisa"},
+      {f:"заяц",t:"Hase",p:"zayats"},{f:"змея",t:"Schlange",p:"zmeya"},{f:"бабочка",t:"Schmetterling",p:"babochka"},
+    ],
+    "Gesundheit": [
+      {f:"больница",t:"Krankenhaus",p:"bol'nitsa"},{f:"аптека",t:"Apotheke",p:"apteka"},
+      {f:"лекарство",t:"Medikament",p:"lekarstvo"},{f:"боль",t:"Schmerz",p:"bol'"},
+      {f:"температура",t:"Fieber / Temperatur",p:"temperatura"},{f:"кашель",t:"Husten",p:"kashel'"},
+      {f:"насморк",t:"Schnupfen",p:"nasmork"},{f:"аллергия",t:"Allergie",p:"allergiya"},
+      {f:"операция",t:"Operation",p:"operatsiya"},{f:"рецепт",t:"Rezept",p:"retsept"},
+      {f:"страховка",t:"Versicherung",p:"strakhovka"},{f:"скорая помощь",t:"Notaufnahme / Rettung",p:"skoraya pomoshch'"},
+    ],
+    "Einkaufen": [
+      {f:"магазин",t:"Geschäft / Laden",p:"magazin"},{f:"рынок",t:"Markt",p:"rynok"},
+      {f:"цена",t:"Preis",p:"tsena"},{f:"скидка",t:"Rabatt",p:"skidka"},{f:"касса",t:"Kasse",p:"kassa"},
+      {f:"деньги",t:"Geld",p:"den'gi"},{f:"рубль",t:"Rubel",p:"rubl'"},{f:"монета",t:"Münze",p:"moneta"},
+      {f:"кошелёк",t:"Geldbeutel",p:"koshelyok"},{f:"кредитная карта",t:"Kreditkarte",p:"kreditnaya karta"},
+      {f:"чек",t:"Quittung",p:"chek"},{f:"одежда",t:"Kleidung",p:"odezhda"},{f:"обувь",t:"Schuhe",p:"obuv'"},
+    ],
+    "Schule & Bildung": [
+      {f:"школа",t:"Schule",p:"shkola"},{f:"университет",t:"Universität",p:"universitet"},
+      {f:"класс",t:"Klasse / Unterrichtsraum",p:"klass"},{f:"урок",t:"Unterrichtsstunde",p:"urok"},
+      {f:"домашнее задание",t:"Hausaufgaben",p:"domashneye zadaniye"},{f:"книга",t:"Buch",p:"kniga"},
+      {f:"тетрадь",t:"Heft",p:"tetrad'"},{f:"ручка",t:"Stift / Kugelschreiber",p:"ruchka"},
+      {f:"доска",t:"Tafel",p:"doska"},{f:"экзамен",t:"Prüfung",p:"ekzamen"},
+      {f:"оценка",t:"Note",p:"otsenka"},{f:"библиотека",t:"Bibliothek",p:"biblioteka"},
+      {f:"математика",t:"Mathematik",p:"matematika"},{f:"история",t:"Geschichte",p:"istoriya"},
+      {f:"география",t:"Geographie",p:"geografiya"},{f:"химия",t:"Chemie",p:"khimiya"},
+    ],
+    "Technologie": [
+      {f:"телефон",t:"Telefon",p:"telefon"},{f:"компьютер",t:"Computer",p:"komp'yuter"},
+      {f:"интернет",t:"Internet",p:"internet"},{f:"приложение",t:"App",p:"prilozheniye"},
+      {f:"сайт",t:"Website",p:"sayt"},{f:"пароль",t:"Passwort",p:"parol'"},
+      {f:"экран",t:"Bildschirm",p:"ekran"},{f:"клавиатура",t:"Tastatur",p:"klaviatura"},
+      {f:"мышь",t:"Maus (Computer)",p:"mysh'"},{f:"принтер",t:"Drucker",p:"printer"},
+      {f:"камера",t:"Kamera",p:"kamera"},{f:"зарядка",t:"Ladegerät",p:"zaryadka"},
+      {f:"батарея",t:"Akku / Batterie",p:"batareya"},{f:"Wi-Fi",t:"WLAN",p:"vay-fay"},
+    ],
+    "Adjektive": [
+      {f:"большой",t:"Groß",p:"bol'shoy"},{f:"маленький",t:"Klein",p:"malen'kiy"},
+      {f:"новый",t:"Neu",p:"novyy"},{f:"старый",t:"Alt",p:"staryy"},{f:"красивый",t:"Schön",p:"krasivyy"},
+      {f:"умный",t:"Klug",p:"umnyy"},{f:"быстрый",t:"Schnell",p:"bystryy"},{f:"медленный",t:"Langsam",p:"medlennyy"},
+      {f:"дорогой",t:"Teuer",p:"dorogoy"},{f:"дешёвый",t:"Günstig / Billig",p:"deshyovyy"},
+      {f:"тяжёлый",t:"Schwer",p:"tyazhyolyy"},{f:"лёгкий",t:"Leicht",p:"lyogkiy"},
+      {f:"горячий",t:"Heiß",p:"goryachiy"},{f:"холодный",t:"Kalt",p:"kholodnyy"},
+      {f:"вкусный",t:"Lecker",p:"vkusnyy"},{f:"усталый",t:"Müde",p:"ustalyy"},
+    ],
+    "Verben": [
+      {f:"идти",t:"Gehen",p:"idti"},{f:"бежать",t:"Rennen / Laufen",p:"bezhat'"},
+      {f:"есть",t:"Essen",p:"yest'"},{f:"пить",t:"Trinken",p:"pit'"},
+      {f:"спать",t:"Schlafen",p:"spat'"},{f:"работать",t:"Arbeiten",p:"rabotat'"},
+      {f:"говорить",t:"Sprechen / Sagen",p:"govorit'"},{f:"слушать",t:"Hören / Zuhören",p:"slushat'"},
+      {f:"смотреть",t:"Schauen / Sehen",p:"smotret'"},{f:"читать",t:"Lesen",p:"chitat'"},
+      {f:"писать",t:"Schreiben",p:"pisat'"},{f:"любить",t:"Lieben / Mögen",p:"lyubit'"},
+      {f:"знать",t:"Wissen / Kennen",p:"znat'"},{f:"думать",t:"Denken",p:"dumat'"},
+      {f:"помогать",t:"Helfen",p:"pomogat'"},{f:"покупать",t:"Kaufen",p:"pokupat'"},
+      {f:"открывать",t:"Öffnen",p:"otkryvat'"},{f:"закрывать",t:"Schließen",p:"zakryvat'"},
+      {f:"начинать",t:"Beginnen",p:"nachinnat'"},{f:"заканчивать",t:"Beenden",p:"zakanchivat'"},
+    ],
+    "Sport & Freizeit": [
+      {f:"футбол",t:"Fußball",p:"futbol"},{f:"баскетбол",t:"Basketball",p:"basketbol"},
+      {f:"плавание",t:"Schwimmen",p:"plavaniye"},{f:"бег",t:"Laufen / Joggen",p:"beg"},
+      {f:"теннис",t:"Tennis",p:"tennis"},{f:"лыжи",t:"Ski",p:"lyzhi"},
+      {f:"кино",t:"Kino",p:"kino"},{f:"театр",t:"Theater",p:"teatr"},
+      {f:"музыка",t:"Musik",p:"muzyka"},{f:"танцы",t:"Tanzen",p:"tantsy"},
+      {f:"рисование",t:"Zeichnen / Malen",p:"risovaniye"},{f:"чтение",t:"Lesen (Hobby)",p:"chteniye"},
+      {f:"путешествие",t:"Reisen",p:"puteshestviye"},{f:"фотография",t:"Fotografie",p:"fotografiya"},
+      {f:"йога",t:"Yoga",p:"yoga"},{f:"велопрогулка",t:"Radfahren",p:"veloprogulka"},
     ],
   },
   it: {
     "Grundlagen": [
-      {f:"ciao",t:"Hallo / Tschüss",p:"chao"},{f:"grazie",t:"Danke",p:"gratsie"},{f:"prego",t:"Bitte",p:"preɡo"},
+      {f:"ciao",t:"Hallo / Tschüss",p:"tʃao"},{f:"grazie",t:"Danke",p:"gratsje"},{f:"prego",t:"Bitte",p:"prɛɡo"},
       {f:"sì",t:"Ja",p:"si"},{f:"no",t:"Nein",p:"no"},{f:"scusi",t:"Entschuldigung",p:"skuzi"},
       {f:"buongiorno",t:"Guten Morgen / Tag",p:"bwondʒorno"},{f:"buonasera",t:"Guten Abend",p:"bwonasera"},
       {f:"arrivederci",t:"Auf Wiedersehen",p:"arrivedertʃi"},{f:"come stai",t:"Wie geht es dir",p:"kome stai"},
-      {f:"bene",t:"Gut",p:"bene"},{f:"non capisco",t:"Ich verstehe nicht",p:"non kapisko"},
+      {f:"bene",t:"Gut",p:"bɛne"},{f:"non capisco",t:"Ich verstehe nicht",p:"non kapisko"},
+      {f:"mi chiamo",t:"Ich heiße",p:"mi kjamo"},{f:"dove",t:"Wo",p:"dove"},{f:"quando",t:"Wann",p:"kwando"},
+      {f:"quanto costa",t:"Wie viel kostet es",p:"kwanto kosta"},{f:"aiuto",t:"Hilfe",p:"ajuto"},
+      {f:"per favore parli più lentamente",t:"Bitte sprechen Sie langsamer",p:"per favore parli pju lentamente"},
     ],
     "Zahlen": [
       {f:"uno",t:"Eins",p:"uno"},{f:"due",t:"Zwei",p:"due"},{f:"tre",t:"Drei",p:"tre"},
-      {f:"quattro",t:"Vier",p:"kwattro"},{f:"cinque",t:"Fünf",p:"tʃinkwe"},{f:"sei",t:"Sechs",p:"sei"},
-      {f:"sette",t:"Sieben",p:"sette"},{f:"otto",t:"Acht",p:"otto"},{f:"nove",t:"Neun",p:"nove"},
-      {f:"dieci",t:"Zehn",p:"dietʃi"},{f:"cento",t:"Hundert",p:"tʃento"},{f:"mille",t:"Tausend",p:"mille"},
+      {f:"quattro",t:"Vier",p:"kwattro"},{f:"cinque",t:"Fünf",p:"tʃiŋkwe"},{f:"sei",t:"Sechs",p:"sɛi"},
+      {f:"sette",t:"Sieben",p:"sɛtte"},{f:"otto",t:"Acht",p:"ɔtto"},{f:"nove",t:"Neun",p:"nɔve"},
+      {f:"dieci",t:"Zehn",p:"djɛtʃi"},{f:"undici",t:"Elf",p:"unditʃi"},{f:"dodici",t:"Zwölf",p:"doditʃi"},
+      {f:"venti",t:"Zwanzig",p:"vɛnti"},{f:"trenta",t:"Dreißig",p:"trenta"},{f:"cento",t:"Hundert",p:"tʃɛnto"},
+      {f:"mille",t:"Tausend",p:"mille"},{f:"primo",t:"Erste/r",p:"primo"},{f:"secondo",t:"Zweite/r",p:"sekondo"},
     ],
     "Farben": [
-      {f:"rosso",t:"Rot",p:"rosso"},{f:"blu",t:"Blau",p:"blu"},{f:"verde",t:"Grün",p:"verde"},
+      {f:"rosso",t:"Rot",p:"rosso"},{f:"blu",t:"Blau",p:"blu"},{f:"verde",t:"Grün",p:"vɛrde"},
       {f:"giallo",t:"Gelb",p:"dʒallo"},{f:"bianco",t:"Weiß",p:"bjanko"},{f:"nero",t:"Schwarz",p:"nero"},
       {f:"arancione",t:"Orange",p:"arantʃone"},{f:"viola",t:"Violett",p:"vjola"},{f:"rosa",t:"Rosa",p:"roza"},
+      {f:"grigio",t:"Grau",p:"gridʒo"},{f:"marrone",t:"Braun",p:"marrone"},{f:"dorato",t:"Golden",p:"dorato"},
     ],
     "Essen & Trinken": [
       {f:"pane",t:"Brot",p:"pane"},{f:"acqua",t:"Wasser",p:"akkwa"},{f:"latte",t:"Milch",p:"latte"},
       {f:"carne",t:"Fleisch",p:"karne"},{f:"pesce",t:"Fisch",p:"peʃe"},{f:"verdura",t:"Gemüse",p:"verdura"},
       {f:"frutta",t:"Obst",p:"frutta"},{f:"pasta",t:"Pasta",p:"pasta"},{f:"pizza",t:"Pizza",p:"pittsa"},
       {f:"caffè",t:"Kaffee",p:"kaffe"},{f:"vino",t:"Wein",p:"vino"},{f:"birra",t:"Bier",p:"birra"},
+      {f:"pollo",t:"Hühnchen",p:"pollo"},{f:"uovo",t:"Ei",p:"wovo"},{f:"formaggio",t:"Käse",p:"formaddʒo"},
+      {f:"burro",t:"Butter",p:"burro"},{f:"zucchero",t:"Zucker",p:"tsukkero"},{f:"sale",t:"Salz",p:"sale"},
+      {f:"riso",t:"Reis",p:"rizo"},{f:"pomodoro",t:"Tomate",p:"pomodoro"},{f:"cipolla",t:"Zwiebel",p:"tʃipolla"},
+      {f:"aglio",t:"Knoblauch",p:"aʎʎo"},{f:"arancia",t:"Orange (Frucht)",p:"arantʃa"},
+      {f:"fragola",t:"Erdbeere",p:"fragola"},{f:"gelato",t:"Eis",p:"dʒelato"},{f:"torta",t:"Kuchen",p:"torta"},
+      {f:"succo",t:"Saft",p:"sukko"},{f:"olio",t:"Öl",p:"oljo"},{f:"aceto",t:"Essig",p:"atʃeto"},
     ],
     "Familie": [
       {f:"madre",t:"Mutter",p:"madre"},{f:"padre",t:"Vater",p:"padre"},{f:"fratello",t:"Bruder",p:"fratello"},
       {f:"sorella",t:"Schwester",p:"sorella"},{f:"nonna",t:"Großmutter",p:"nonna"},
       {f:"nonno",t:"Großvater",p:"nonno"},{f:"figlio",t:"Sohn",p:"fiʎʎo"},{f:"figlia",t:"Tochter",p:"fiʎʎa"},
+      {f:"zio",t:"Onkel",p:"tsjo"},{f:"zia",t:"Tante",p:"tsia"},{f:"nipote",t:"Neffe / Nichte",p:"nipote"},
+      {f:"cugino",t:"Cousin",p:"kudʒino"},{f:"genitori",t:"Eltern",p:"dʒenitori"},{f:"bambino",t:"Kind",p:"bambino"},
+      {f:"marito",t:"Ehemann",p:"marito"},{f:"moglie",t:"Ehefrau",p:"moʎʎe"},
     ],
     "Reisen": [
       {f:"aeroporto",t:"Flughafen",p:"aeroporto"},{f:"stazione",t:"Bahnhof",p:"stattsione"},
       {f:"albergo",t:"Hotel",p:"albergo"},{f:"via",t:"Straße",p:"via"},{f:"città",t:"Stadt",p:"tʃitta"},
       {f:"biglietto",t:"Ticket",p:"biʎʎetto"},{f:"passaporto",t:"Reisepass",p:"passaporto"},
-      {f:"taxi",t:"Taxi",p:"taksi"},{f:"treno",t:"Zug",p:"treno"},
+      {f:"taxi",t:"Taxi",p:"taksi"},{f:"treno",t:"Zug",p:"treno"},{f:"aereo",t:"Flugzeug",p:"aereo"},
+      {f:"autobus",t:"Bus",p:"autobus"},{f:"macchina",t:"Auto",p:"makkina"},{f:"nave",t:"Schiff",p:"nave"},
+      {f:"carta geografica",t:"Landkarte",p:"karta dʒeografika"},{f:"frontiera",t:"Grenze",p:"frontjera"},
+      {f:"visto",t:"Visum",p:"visto"},{f:"bagaglio",t:"Gepäck",p:"bagaʎʎo"},{f:"camera",t:"Zimmer",p:"kamera"},
+      {f:"museo",t:"Museum",p:"muzeo"},{f:"spiaggia",t:"Strand",p:"spjaddʒa"},{f:"montagna",t:"Berg",p:"montaɲɲa"},
+    ],
+    "Körper": [
+      {f:"testa",t:"Kopf",p:"testa"},{f:"mano",t:"Hand",p:"mano"},{f:"piede",t:"Fuß",p:"pjede"},
+      {f:"occhio",t:"Auge",p:"okkjo"},{f:"orecchio",t:"Ohr",p:"orekko"},{f:"bocca",t:"Mund",p:"bokka"},
+      {f:"naso",t:"Nase",p:"nazo"},{f:"cuore",t:"Herz",p:"kwore"},{f:"pancia",t:"Bauch",p:"pantʃa"},
+      {f:"schiena",t:"Rücken",p:"skjɛna"},{f:"spalla",t:"Schulter",p:"spalla"},{f:"ginocchio",t:"Knie",p:"dʒinokkjo"},
+      {f:"dito",t:"Finger",p:"dito"},{f:"dente",t:"Zahn",p:"dente"},{f:"capelli",t:"Haare",p:"kapelli"},
+      {f:"pelle",t:"Haut",p:"pelle"},{f:"sangue",t:"Blut",p:"saŋgwe"},{f:"braccio",t:"Arm",p:"brattʃo"},
     ],
     "Zeit": [
-      {f:"oggi",t:"Heute",p:"oddʒi"},{f:"domani",t:"Morgen",p:"domani"},{f:"ieri",p:"jeri",t:"Gestern"},
-      {f:"mattina",t:"Morgen (Tageszeit)",p:"mattina"},{f:"sera",t:"Abend",p:"sera"},
-      {f:"notte",t:"Nacht",p:"notte"},{f:"settimana",t:"Woche",p:"settimana"},
-      {f:"mese",t:"Monat",p:"mese"},{f:"anno",t:"Jahr",p:"anno"},{f:"ora",t:"Stunde",p:"ora"},
+      {f:"oggi",t:"Heute",p:"oddʒi"},{f:"domani",t:"Morgen",p:"domani"},{f:"ieri",t:"Gestern",p:"jeri"},
+      {f:"mattina",t:"Morgen (Tageszeit)",p:"mattina"},{f:"pomeriggio",t:"Nachmittag",p:"pomeridd͡ʒo"},
+      {f:"sera",t:"Abend",p:"sera"},{f:"notte",t:"Nacht",p:"notte"},{f:"settimana",t:"Woche",p:"settimana"},
+      {f:"mese",t:"Monat",p:"meze"},{f:"anno",t:"Jahr",p:"anno"},{f:"ora",t:"Stunde",p:"ora"},
+      {f:"lunedì",t:"Montag",p:"lunedi"},{f:"martedì",t:"Dienstag",p:"martedi"},{f:"mercoledì",t:"Mittwoch",p:"merkoledi"},
+      {f:"giovedì",t:"Donnerstag",p:"dʒovedi"},{f:"venerdì",t:"Freitag",p:"venerdi"},
+      {f:"sabato",t:"Samstag",p:"sabato"},{f:"domenica",t:"Sonntag",p:"domenika"},
+      {f:"gennaio",t:"Januar",p:"dʒennajo"},{f:"febbraio",t:"Februar",p:"febbrajo"},{f:"marzo",t:"März",p:"martso"},
+      {f:"aprile",t:"April",p:"aprile"},{f:"maggio",t:"Mai",p:"maddʒo"},{f:"giugno",t:"Juni",p:"dʒuɲɲo"},
+      {f:"luglio",t:"Juli",p:"luʎʎo"},{f:"agosto",t:"August",p:"agosto"},{f:"settembre",t:"September",p:"settembre"},
+      {f:"ottobre",t:"Oktober",p:"ottobre"},{f:"novembre",t:"November",p:"novembre"},{f:"dicembre",t:"Dezember",p:"ditʃembre"},
     ],
     "Berufe": [
       {f:"medico",t:"Arzt",p:"mediko"},{f:"insegnante",t:"Lehrer",p:"inseɲɲante"},
-      {f:"ingegnere",t:"Ingenieur",p:"indeɲɲere"},{f:"avvocato",t:"Anwalt",p:"avvokato"},
+      {f:"ingegnere",t:"Ingenieur",p:"indʒeɲɲere"},{f:"avvocato",t:"Anwalt",p:"avvokato"},
       {f:"cuoco",t:"Koch",p:"kwoko"},{f:"studente",t:"Student",p:"studente"},
+      {f:"infermiere",t:"Krankenpfleger",p:"infermjere"},{f:"pompiere",t:"Feuerwehrmann",p:"pompjere"},
+      {f:"poliziotto",t:"Polizist",p:"politsjotto"},{f:"architetto",t:"Architekt",p:"arkitetto"},
+      {f:"giornalista",t:"Journalist",p:"dʒornalista"},{f:"attore",t:"Schauspieler",p:"attore"},
+      {f:"cantante",t:"Sänger",p:"kantante"},{f:"pittore",t:"Maler",p:"pittore"},
+    ],
+    "Wohnen": [
+      {f:"casa",t:"Haus",p:"kaza"},{f:"appartamento",t:"Wohnung",p:"appartamento"},{f:"stanza",t:"Zimmer",p:"stantsa"},
+      {f:"cucina",t:"Küche",p:"kutʃina"},{f:"bagno",t:"Bad",p:"baɲɲo"},{f:"camera da letto",t:"Schlafzimmer",p:"kamera da letto"},
+      {f:"soggiorno",t:"Wohnzimmer",p:"soddʒorno"},{f:"porta",t:"Tür",p:"porta"},{f:"finestra",t:"Fenster",p:"finestra"},
+      {f:"tavolo",t:"Tisch",p:"tavolo"},{f:"sedia",t:"Stuhl",p:"sedja"},{f:"letto",t:"Bett",p:"letto"},
+      {f:"armadio",t:"Schrank",p:"armadjo"},{f:"divano",t:"Sofa",p:"divano"},{f:"frigorifero",t:"Kühlschrank",p:"frigoriferо"},
+    ],
+    "Natur & Wetter": [
+      {f:"sole",t:"Sonne",p:"sole"},{f:"luna",t:"Mond",p:"luna"},{f:"stella",t:"Stern",p:"stella"},
+      {f:"cielo",t:"Himmel",p:"tʃelo"},{f:"nuvola",t:"Wolke",p:"nuvola"},{f:"pioggia",t:"Regen",p:"pjɔddʒa"},
+      {f:"neve",t:"Schnee",p:"neve"},{f:"vento",t:"Wind",p:"vento"},{f:"temporale",t:"Gewitter",p:"temporale"},
+      {f:"caldo",t:"Hitze / Warm",p:"kaldo"},{f:"freddo",t:"Kälte / Kalt",p:"freddo"},
+      {f:"foresta",t:"Wald",p:"foresta"},{f:"mare",t:"Meer",p:"mare"},{f:"lago",t:"See",p:"lago"},
+      {f:"fiume",t:"Fluss",p:"fjume"},{f:"fiore",t:"Blume",p:"fjore"},{f:"albero",t:"Baum",p:"albero"},
+    ],
+    "Adjektive": [
+      {f:"grande",t:"Groß",p:"grande"},{f:"piccolo",t:"Klein",p:"pikkolo"},{f:"nuovo",t:"Neu",p:"nwovo"},
+      {f:"vecchio",t:"Alt",p:"vekkjo"},{f:"bello",t:"Schön",p:"bello"},{f:"brutto",t:"Hässlich",p:"brutto"},
+      {f:"intelligente",t:"Klug",p:"intellidʒente"},{f:"veloce",t:"Schnell",p:"velotʃe"},
+      {f:"lento",t:"Langsam",p:"lento"},{f:"caro",t:"Teuer",p:"karo"},{f:"economico",t:"Günstig",p:"ekonomiko"},
+      {f:"pesante",t:"Schwer",p:"pezante"},{f:"leggero",t:"Leicht",p:"leddʒero"},
+      {f:"caldo",t:"Heiß / Warm",p:"kaldo"},{f:"freddo",t:"Kalt",p:"freddo"},{f:"delizioso",t:"Lecker",p:"delitsjoso"},
+    ],
+    "Verben": [
+      {f:"andare",t:"Gehen",p:"andare"},{f:"correre",t:"Rennen",p:"korrere"},{f:"mangiare",t:"Essen",p:"mandʒare"},
+      {f:"bere",t:"Trinken",p:"bere"},{f:"dormire",t:"Schlafen",p:"dormire"},{f:"lavorare",t:"Arbeiten",p:"lavorare"},
+      {f:"parlare",t:"Sprechen",p:"parlare"},{f:"ascoltare",t:"Zuhören",p:"askoltare"},
+      {f:"guardare",t:"Schauen",p:"gwardare"},{f:"leggere",t:"Lesen",p:"leddʒere"},
+      {f:"scrivere",t:"Schreiben",p:"skrivere"},{f:"amare",t:"Lieben",p:"amare"},
+      {f:"sapere",t:"Wissen",p:"sapere"},{f:"pensare",t:"Denken",p:"pensare"},
+      {f:"comprare",t:"Kaufen",p:"komprare"},{f:"aprire",t:"Öffnen",p:"aprire"},
+      {f:"chiudere",t:"Schließen",p:"kjudere"},{f:"aiutare",t:"Helfen",p:"ajutare"},
+    ],
+    "Sport & Freizeit": [
+      {f:"calcio",t:"Fußball",p:"kaltʃo"},{f:"nuoto",t:"Schwimmen",p:"nwoto"},
+      {f:"corsa",t:"Laufen / Joggen",p:"korsa"},{f:"tennis",t:"Tennis",p:"tennis"},
+      {f:"sci",t:"Ski",p:"ʃi"},{f:"cinema",t:"Kino",p:"tʃinema"},{f:"teatro",t:"Theater",p:"teatro"},
+      {f:"musica",t:"Musik",p:"muzika"},{f:"danza",t:"Tanz",p:"dantsa"},
+      {f:"disegno",t:"Zeichnen",p:"dizeɲɲo"},{f:"lettura",t:"Lesen (Hobby)",p:"lettura"},
+      {f:"viaggiare",t:"Reisen",p:"vjaddʒare"},{f:"fotografia",t:"Fotografie",p:"fotografija"},
+      {f:"cucina",t:"Kochen (Hobby)",p:"kutʃina"},{f:"yoga",t:"Yoga",p:"joga"},
     ],
   },
   es: {
@@ -628,45 +1093,128 @@ const VOCAB = {
       {f:"buenos días",t:"Guten Morgen",p:"bwenos dias"},{f:"buenas tardes",t:"Guten Tag/Abend",p:"bwenas tardes"},
       {f:"adiós",t:"Auf Wiedersehen",p:"adjos"},{f:"¿cómo estás?",t:"Wie geht es dir?",p:"komo estas"},
       {f:"bien",t:"Gut",p:"bjen"},{f:"no entiendo",t:"Ich verstehe nicht",p:"no entjendo"},
+      {f:"me llamo",t:"Ich heiße",p:"me ʎamo"},{f:"¿dónde?",t:"Wo?",p:"donde"},
+      {f:"¿cuándo?",t:"Wann?",p:"kwando"},{f:"¿por qué?",t:"Warum?",p:"por ke"},
+      {f:"¿cuánto cuesta?",t:"Wie viel kostet es?",p:"kwanto kwesta"},{f:"¡ayuda!",t:"Hilfe!",p:"ajuda"},
+      {f:"hable más despacio",t:"Sprechen Sie langsamer",p:"able mas despaθjo"},
     ],
     "Zahlen": [
       {f:"uno",t:"Eins",p:"uno"},{f:"dos",t:"Zwei",p:"dos"},{f:"tres",t:"Drei",p:"tres"},
-      {f:"cuatro",t:"Vier",p:"kwatro"},{f:"cinco",t:"Fünf",p:"θinko"},{f:"seis",t:"Sechs",p:"seis"},
+      {f:"cuatro",t:"Vier",p:"kwatro"},{f:"cinco",t:"Fünf",p:"θiŋko"},{f:"seis",t:"Sechs",p:"seis"},
       {f:"siete",t:"Sieben",p:"sjete"},{f:"ocho",t:"Acht",p:"otʃo"},{f:"nueve",t:"Neun",p:"nwebe"},
-      {f:"diez",t:"Zehn",p:"djeθ"},{f:"cien",t:"Hundert",p:"θjen"},{f:"mil",t:"Tausend",p:"mil"},
+      {f:"diez",t:"Zehn",p:"djeθ"},{f:"once",t:"Elf",p:"onθe"},{f:"doce",t:"Zwölf",p:"doθe"},
+      {f:"veinte",t:"Zwanzig",p:"beinte"},{f:"treinta",t:"Dreißig",p:"treinta"},
+      {f:"cien",t:"Hundert",p:"θjen"},{f:"mil",t:"Tausend",p:"mil"},{f:"primero",t:"Erste/r",p:"primero"},
     ],
     "Farben": [
       {f:"rojo",t:"Rot",p:"roxo"},{f:"azul",t:"Blau",p:"aθul"},{f:"verde",t:"Grün",p:"berde"},
       {f:"amarillo",t:"Gelb",p:"amariʎo"},{f:"blanco",t:"Weiß",p:"blanko"},{f:"negro",t:"Schwarz",p:"neɣro"},
       {f:"naranja",t:"Orange",p:"naranxa"},{f:"morado",t:"Violett",p:"morado"},{f:"rosa",t:"Rosa",p:"rosa"},
+      {f:"gris",t:"Grau",p:"gris"},{f:"marrón",t:"Braun",p:"marron"},{f:"dorado",t:"Golden",p:"dorado"},
     ],
     "Essen & Trinken": [
       {f:"pan",t:"Brot",p:"pan"},{f:"agua",t:"Wasser",p:"aɣwa"},{f:"leche",t:"Milch",p:"letʃe"},
       {f:"carne",t:"Fleisch",p:"karne"},{f:"pescado",t:"Fisch",p:"peskado"},{f:"verduras",t:"Gemüse",p:"berduras"},
       {f:"fruta",t:"Obst",p:"fruta"},{f:"arroz",t:"Reis",p:"aroθ"},{f:"café",t:"Kaffee",p:"kafe"},
-      {f:"vino",t:"Wein",p:"bino"},{f:"cerveza",t:"Bier",p:"θerbeθa"},{f:"jugo",t:"Saft",p:"xuxo"},
+      {f:"vino",t:"Wein",p:"bino"},{f:"cerveza",t:"Bier",p:"θerbeθa"},{f:"jugo",t:"Saft",p:"xuɣo"},
+      {f:"pollo",t:"Hühnchen",p:"poʎo"},{f:"huevo",t:"Ei",p:"weβo"},{f:"queso",t:"Käse",p:"keso"},
+      {f:"mantequilla",t:"Butter",p:"mantekiʎa"},{f:"azúcar",t:"Zucker",p:"aθukar"},{f:"sal",t:"Salz",p:"sal"},
+      {f:"tomate",t:"Tomate",p:"tomate"},{f:"cebolla",t:"Zwiebel",p:"θeβoʎa"},{f:"ajo",t:"Knoblauch",p:"axo"},
+      {f:"naranja",t:"Orange (Frucht)",p:"naranxa"},{f:"fresa",t:"Erdbeere",p:"fresa"},
+      {f:"helado",t:"Eis",p:"elado"},{f:"pastel",t:"Kuchen",p:"pastel"},{f:"aceite",t:"Öl",p:"aθeite"},
     ],
     "Familie": [
       {f:"madre",t:"Mutter",p:"madre"},{f:"padre",t:"Vater",p:"padre"},{f:"hermano",t:"Bruder",p:"ermano"},
       {f:"hermana",t:"Schwester",p:"ermana"},{f:"abuela",t:"Großmutter",p:"abwela"},
       {f:"abuelo",t:"Großvater",p:"abwelo"},{f:"hijo",t:"Sohn",p:"ixo"},{f:"hija",t:"Tochter",p:"ixa"},
+      {f:"tío",t:"Onkel",p:"tio"},{f:"tía",t:"Tante",p:"tia"},{f:"sobrino",t:"Neffe",p:"sobrino"},
+      {f:"primo",t:"Cousin",p:"primo"},{f:"padres",t:"Eltern",p:"padres"},{f:"niño",t:"Kind",p:"niɲo"},
+      {f:"esposo",t:"Ehemann",p:"esposo"},{f:"esposa",t:"Ehefrau",p:"esposa"},{f:"bebé",t:"Baby",p:"bebe"},
     ],
     "Reisen": [
       {f:"aeropuerto",t:"Flughafen",p:"aeropwerto"},{f:"estación",t:"Bahnhof",p:"estaθjon"},
       {f:"hotel",t:"Hotel",p:"otel"},{f:"calle",t:"Straße",p:"kaʎe"},{f:"ciudad",t:"Stadt",p:"θjudad"},
       {f:"billete",t:"Ticket",p:"biʎete"},{f:"pasaporte",t:"Reisepass",p:"pasaporte"},
       {f:"taxi",t:"Taxi",p:"taksi"},{f:"tren",t:"Zug",p:"tren"},{f:"playa",t:"Strand",p:"plaʝa"},
+      {f:"avión",t:"Flugzeug",p:"aβjon"},{f:"autobús",t:"Bus",p:"autobus"},{f:"coche",t:"Auto",p:"kotʃe"},
+      {f:"barco",t:"Schiff",p:"barko"},{f:"mapa",t:"Karte / Landkarte",p:"mapa"},
+      {f:"frontera",t:"Grenze",p:"frontera"},{f:"visado",t:"Visum",p:"bisado"},
+      {f:"equipaje",t:"Gepäck",p:"ekipaxe"},{f:"habitación",t:"Zimmer",p:"abitaθjon"},
+      {f:"museo",t:"Museum",p:"museo"},{f:"montaña",t:"Berg",p:"montaɲa"},{f:"río",t:"Fluss",p:"rio"},
+    ],
+    "Körper": [
+      {f:"cabeza",t:"Kopf",p:"kabeθa"},{f:"mano",t:"Hand",p:"mano"},{f:"pie",t:"Fuß",p:"pje"},
+      {f:"ojo",t:"Auge",p:"oxo"},{f:"oreja",t:"Ohr",p:"orexa"},{f:"boca",t:"Mund",p:"boka"},
+      {f:"nariz",t:"Nase",p:"nariθ"},{f:"corazón",t:"Herz",p:"koraθon"},{f:"estómago",t:"Magen",p:"estomago"},
+      {f:"espalda",t:"Rücken",p:"espalda"},{f:"hombro",t:"Schulter",p:"ombro"},{f:"rodilla",t:"Knie",p:"rodiʎa"},
+      {f:"dedo",t:"Finger",p:"deɣo"},{f:"diente",t:"Zahn",p:"djente"},{f:"pelo",t:"Haare",p:"pelo"},
+      {f:"piel",t:"Haut",p:"pjel"},{f:"sangre",t:"Blut",p:"saŋgre"},{f:"brazo",t:"Arm",p:"braθo"},
     ],
     "Zeit": [
       {f:"hoy",t:"Heute",p:"oi"},{f:"mañana",t:"Morgen",p:"maɲana"},{f:"ayer",t:"Gestern",p:"ajer"},
-      {f:"mañana",t:"Morgen (Tageszeit)",p:"maɲana"},{f:"tarde",t:"Nachmittag",p:"tarde"},
-      {f:"noche",t:"Nacht",p:"notʃe"},{f:"semana",t:"Woche",p:"semana"},
+      {f:"por la mañana",t:"Morgens",p:"por la maɲana"},{f:"por la tarde",t:"Nachmittags",p:"por la tarde"},
+      {f:"por la noche",t:"Nachts / Abends",p:"por la notʃe"},{f:"semana",t:"Woche",p:"semana"},
       {f:"mes",t:"Monat",p:"mes"},{f:"año",t:"Jahr",p:"aɲo"},{f:"hora",t:"Stunde",p:"ora"},
+      {f:"lunes",t:"Montag",p:"lunes"},{f:"martes",t:"Dienstag",p:"martes"},{f:"miércoles",t:"Mittwoch",p:"mjerkoles"},
+      {f:"jueves",t:"Donnerstag",p:"xweβes"},{f:"viernes",t:"Freitag",p:"bjernes"},
+      {f:"sábado",t:"Samstag",p:"saβado"},{f:"domingo",t:"Sonntag",p:"domingo"},
+      {f:"enero",t:"Januar",p:"enero"},{f:"febrero",t:"Februar",p:"febrero"},{f:"marzo",t:"März",p:"marθo"},
+      {f:"abril",t:"April",p:"abril"},{f:"mayo",t:"Mai",p:"maio"},{f:"junio",t:"Juni",p:"xunjo"},
+      {f:"julio",t:"Juli",p:"xulio"},{f:"agosto",t:"August",p:"agosto"},{f:"septiembre",t:"September",p:"septjembre"},
+      {f:"octubre",t:"Oktober",p:"octubre"},{f:"noviembre",t:"November",p:"noβjembre"},{f:"diciembre",t:"Dezember",p:"diθjembre"},
     ],
     "Berufe": [
       {f:"médico",t:"Arzt",p:"mediko"},{f:"maestro",t:"Lehrer",p:"maestro"},
       {f:"ingeniero",t:"Ingenieur",p:"inxeniero"},{f:"abogado",t:"Anwalt",p:"aboɣado"},
       {f:"cocinero",t:"Koch",p:"koθinero"},{f:"estudiante",t:"Student",p:"estudjante"},
+      {f:"enfermero",t:"Krankenpfleger",p:"enfermero"},{f:"bombero",t:"Feuerwehrmann",p:"bombero"},
+      {f:"policía",t:"Polizist",p:"poliθia"},{f:"arquitecto",t:"Architekt",p:"arkitekto"},
+      {f:"periodista",t:"Journalist",p:"perjodista"},{f:"actor",t:"Schauspieler",p:"aktor"},
+      {f:"cantante",t:"Sänger",p:"kantante"},{f:"vendedor",t:"Verkäufer",p:"bendeδor"},
+    ],
+    "Wohnen": [
+      {f:"casa",t:"Haus",p:"kasa"},{f:"apartamento",t:"Wohnung",p:"apartamento"},{f:"habitación",t:"Zimmer",p:"abitaθjon"},
+      {f:"cocina",t:"Küche",p:"koθina"},{f:"baño",t:"Bad",p:"baɲo"},{f:"dormitorio",t:"Schlafzimmer",p:"dormitorjo"},
+      {f:"sala de estar",t:"Wohnzimmer",p:"sala de estar"},{f:"puerta",t:"Tür",p:"pwerta"},{f:"ventana",t:"Fenster",p:"bentana"},
+      {f:"mesa",t:"Tisch",p:"mesa"},{f:"silla",t:"Stuhl",p:"siʎa"},{f:"cama",t:"Bett",p:"kama"},
+      {f:"armario",t:"Schrank",p:"armarjo"},{f:"sofá",t:"Sofa",p:"sofa"},{f:"nevera",t:"Kühlschrank",p:"neβera"},
+    ],
+    "Natur & Wetter": [
+      {f:"sol",t:"Sonne",p:"sol"},{f:"luna",t:"Mond",p:"luna"},{f:"estrella",t:"Stern",p:"estreʎa"},
+      {f:"cielo",t:"Himmel",p:"θjelo"},{f:"nube",t:"Wolke",p:"nube"},{f:"lluvia",t:"Regen",p:"ʎuβja"},
+      {f:"nieve",t:"Schnee",p:"njeβe"},{f:"viento",t:"Wind",p:"bjento"},{f:"tormenta",t:"Gewitter",p:"tormenta"},
+      {f:"calor",t:"Hitze / Warm",p:"kalor"},{f:"frío",t:"Kälte / Kalt",p:"frio"},
+      {f:"bosque",t:"Wald",p:"boske"},{f:"mar",t:"Meer",p:"mar"},{f:"lago",t:"See",p:"laɣo"},
+      {f:"río",t:"Fluss",p:"rio"},{f:"flor",t:"Blume",p:"flor"},{f:"árbol",t:"Baum",p:"arbol"},
+    ],
+    "Adjektive": [
+      {f:"grande",t:"Groß",p:"grande"},{f:"pequeño",t:"Klein",p:"pekeɲo"},{f:"nuevo",t:"Neu",p:"nweβo"},
+      {f:"viejo",t:"Alt",p:"βjexo"},{f:"bonito",t:"Schön",p:"bonito"},{f:"feo",t:"Hässlich",p:"feo"},
+      {f:"inteligente",t:"Klug",p:"intelidʒente"},{f:"rápido",t:"Schnell",p:"rapido"},
+      {f:"lento",t:"Langsam",p:"lento"},{f:"caro",t:"Teuer",p:"karo"},{f:"barato",t:"Günstig",p:"barato"},
+      {f:"pesado",t:"Schwer",p:"pesado"},{f:"ligero",t:"Leicht",p:"lixero"},
+      {f:"caliente",t:"Heiß",p:"kaljente"},{f:"frío",t:"Kalt",p:"frio"},{f:"delicioso",t:"Lecker",p:"deliθjoso"},
+    ],
+    "Verben": [
+      {f:"ir",t:"Gehen",p:"ir"},{f:"correr",t:"Rennen",p:"korrer"},{f:"comer",t:"Essen",p:"komer"},
+      {f:"beber",t:"Trinken",p:"beβer"},{f:"dormir",t:"Schlafen",p:"dormir"},{f:"trabajar",t:"Arbeiten",p:"trabajar"},
+      {f:"hablar",t:"Sprechen",p:"ablar"},{f:"escuchar",t:"Zuhören",p:"eskutʃar"},
+      {f:"ver",t:"Sehen",p:"ber"},{f:"leer",t:"Lesen",p:"leer"},
+      {f:"escribir",t:"Schreiben",p:"eskriβir"},{f:"amar",t:"Lieben",p:"amar"},
+      {f:"saber",t:"Wissen",p:"saβer"},{f:"pensar",t:"Denken",p:"pensar"},
+      {f:"comprar",t:"Kaufen",p:"komprar"},{f:"abrir",t:"Öffnen",p:"abrir"},
+      {f:"cerrar",t:"Schließen",p:"θerrar"},{f:"ayudar",t:"Helfen",p:"ajudar"},
+      {f:"empezar",t:"Beginnen",p:"empeθar"},{f:"terminar",t:"Beenden",p:"terminar"},
+    ],
+    "Sport & Freizeit": [
+      {f:"fútbol",t:"Fußball",p:"futbol"},{f:"baloncesto",t:"Basketball",p:"balonθesto"},
+      {f:"natación",t:"Schwimmen",p:"nataθjon"},{f:"correr",t:"Joggen",p:"korrer"},
+      {f:"tenis",t:"Tennis",p:"tenis"},{f:"esquí",t:"Ski",p:"eski"},
+      {f:"cine",t:"Kino",p:"θine"},{f:"teatro",t:"Theater",p:"teatro"},
+      {f:"música",t:"Musik",p:"musika"},{f:"baile",t:"Tanz",p:"baile"},
+      {f:"dibujo",t:"Zeichnen",p:"diβuxo"},{f:"lectura",t:"Lesen (Hobby)",p:"lektura"},
+      {f:"viajar",t:"Reisen",p:"bjaxar"},{f:"fotografía",t:"Fotografie",p:"fotografja"},
+      {f:"cocinar",t:"Kochen",p:"koθinar"},{f:"yoga",t:"Yoga",p:"joɣa"},
     ],
   },
   en: {
@@ -676,45 +1224,155 @@ const VOCAB = {
       {f:"good morning",t:"Guten Morgen",p:"ɡʊd ˈmɔːrnɪŋ"},{f:"good evening",t:"Guten Abend",p:"ɡʊd ˈiːvnɪŋ"},
       {f:"goodbye",t:"Auf Wiedersehen",p:"ɡʊdˈbaɪ"},{f:"how are you",t:"Wie geht es dir",p:"haʊ ɑːr juː"},
       {f:"fine",t:"Gut",p:"faɪn"},{f:"I don't understand",t:"Ich verstehe nicht",p:"aɪ doʊnt ˌʌndərˈstænd"},
+      {f:"my name is",t:"Ich heiße",p:"maɪ neɪm ɪz"},{f:"where",t:"Wo",p:"wɛər"},
+      {f:"when",t:"Wann",p:"wɛn"},{f:"why",t:"Warum",p:"waɪ"},{f:"how much",t:"Wie viel",p:"haʊ mʌtʃ"},
+      {f:"help",t:"Hilfe",p:"hɛlp"},{f:"please speak slowly",t:"Bitte langsam sprechen",p:"pliːz spiːk ˈsloʊli"},
     ],
     "Zahlen": [
       {f:"one",t:"Eins",p:"wʌn"},{f:"two",t:"Zwei",p:"tuː"},{f:"three",t:"Drei",p:"θriː"},
       {f:"four",t:"Vier",p:"fɔːr"},{f:"five",t:"Fünf",p:"faɪv"},{f:"six",t:"Sechs",p:"sɪks"},
       {f:"seven",t:"Sieben",p:"ˈsɛvən"},{f:"eight",t:"Acht",p:"eɪt"},{f:"nine",t:"Neun",p:"naɪn"},
-      {f:"ten",t:"Zehn",p:"tɛn"},{f:"hundred",t:"Hundert",p:"ˈhʌndrəd"},{f:"thousand",t:"Tausend",p:"ˈθaʊzənd"},
+      {f:"ten",t:"Zehn",p:"tɛn"},{f:"eleven",t:"Elf",p:"ɪˈlɛvən"},{f:"twelve",t:"Zwölf",p:"twɛlv"},
+      {f:"twenty",t:"Zwanzig",p:"ˈtwɛnti"},{f:"thirty",t:"Dreißig",p:"ˈθɜːrti"},
+      {f:"hundred",t:"Hundert",p:"ˈhʌndrəd"},{f:"thousand",t:"Tausend",p:"ˈθaʊzənd"},
+      {f:"first",t:"Erste/r",p:"fɜːrst"},{f:"second",t:"Zweite/r",p:"ˈsɛkənd"},{f:"third",t:"Dritte/r",p:"θɜːrd"},
     ],
     "Farben": [
       {f:"red",t:"Rot",p:"rɛd"},{f:"blue",t:"Blau",p:"bluː"},{f:"green",t:"Grün",p:"ɡriːn"},
       {f:"yellow",t:"Gelb",p:"ˈjɛloʊ"},{f:"white",t:"Weiß",p:"waɪt"},{f:"black",t:"Schwarz",p:"blæk"},
       {f:"orange",t:"Orange",p:"ˈɒrɪndʒ"},{f:"purple",t:"Lila",p:"ˈpɜːrpl"},{f:"pink",t:"Rosa",p:"pɪŋk"},
+      {f:"grey",t:"Grau",p:"ɡreɪ"},{f:"brown",t:"Braun",p:"braʊn"},{f:"golden",t:"Golden",p:"ˈɡoʊldən"},
     ],
     "Essen & Trinken": [
       {f:"bread",t:"Brot",p:"brɛd"},{f:"water",t:"Wasser",p:"ˈwɔːtər"},{f:"milk",t:"Milch",p:"mɪlk"},
       {f:"meat",t:"Fleisch",p:"miːt"},{f:"fish",t:"Fisch",p:"fɪʃ"},{f:"vegetables",t:"Gemüse",p:"ˈvɛdʒtəbəlz"},
       {f:"fruit",t:"Obst",p:"fruːt"},{f:"coffee",t:"Kaffee",p:"ˈkɒfi"},{f:"tea",t:"Tee",p:"tiː"},
       {f:"wine",t:"Wein",p:"waɪn"},{f:"beer",t:"Bier",p:"bɪər"},{f:"juice",t:"Saft",p:"dʒuːs"},
+      {f:"chicken",t:"Hühnchen",p:"ˈtʃɪkɪn"},{f:"egg",t:"Ei",p:"ɛɡ"},{f:"cheese",t:"Käse",p:"tʃiːz"},
+      {f:"butter",t:"Butter",p:"ˈbʌtər"},{f:"sugar",t:"Zucker",p:"ˈʃʊɡər"},{f:"salt",t:"Salz",p:"sɔːlt"},
+      {f:"rice",t:"Reis",p:"raɪs"},{f:"pasta",t:"Nudeln",p:"ˈpæstə"},{f:"tomato",t:"Tomate",p:"təˈmeɪtoʊ"},
+      {f:"onion",t:"Zwiebel",p:"ˈʌnjən"},{f:"garlic",t:"Knoblauch",p:"ˈɡɑːrlɪk"},
+      {f:"strawberry",t:"Erdbeere",p:"ˈstrɔːbəri"},{f:"ice cream",t:"Eis",p:"aɪs kriːm"},
+      {f:"cake",t:"Kuchen",p:"keɪk"},{f:"oil",t:"Öl",p:"ɔɪl"},{f:"pepper",t:"Pfeffer",p:"ˈpɛpər"},
     ],
     "Familie": [
       {f:"mother",t:"Mutter",p:"ˈmʌðər"},{f:"father",t:"Vater",p:"ˈfɑːðər"},{f:"brother",t:"Bruder",p:"ˈbrʌðər"},
       {f:"sister",t:"Schwester",p:"ˈsɪstər"},{f:"grandmother",t:"Großmutter",p:"ˈɡrænˌmʌðər"},
       {f:"grandfather",t:"Großvater",p:"ˈɡrænˌfɑːðər"},{f:"son",t:"Sohn",p:"sʌn"},{f:"daughter",t:"Tochter",p:"ˈdɔːtər"},
+      {f:"uncle",t:"Onkel",p:"ˈʌŋkəl"},{f:"aunt",t:"Tante",p:"ænt"},{f:"nephew",t:"Neffe",p:"ˈnɛfjuː"},
+      {f:"niece",t:"Nichte",p:"niːs"},{f:"cousin",t:"Cousin",p:"ˈkʌzən"},{f:"parents",t:"Eltern",p:"ˈpɛərənts"},
+      {f:"child",t:"Kind",p:"tʃaɪld"},{f:"husband",t:"Ehemann",p:"ˈhʌzbənd"},{f:"wife",t:"Ehefrau",p:"waɪf"},
+      {f:"baby",t:"Baby",p:"ˈbeɪbi"},
     ],
     "Reisen": [
       {f:"airport",t:"Flughafen",p:"ˈɛərˌpɔːrt"},{f:"train station",t:"Bahnhof",p:"treɪn ˈsteɪʃən"},
       {f:"hotel",t:"Hotel",p:"hoʊˈtɛl"},{f:"street",t:"Straße",p:"striːt"},{f:"city",t:"Stadt",p:"ˈsɪti"},
       {f:"ticket",t:"Ticket",p:"ˈtɪkɪt"},{f:"passport",t:"Reisepass",p:"ˈpæspɔːrt"},
       {f:"taxi",t:"Taxi",p:"ˈtæksi"},{f:"train",t:"Zug",p:"treɪn"},{f:"beach",t:"Strand",p:"biːtʃ"},
+      {f:"airplane",t:"Flugzeug",p:"ˈɛərpleɪn"},{f:"bus",t:"Bus",p:"bʌs"},{f:"car",t:"Auto",p:"kɑːr"},
+      {f:"ship",t:"Schiff",p:"ʃɪp"},{f:"map",t:"Karte / Landkarte",p:"mæp"},
+      {f:"border",t:"Grenze",p:"ˈbɔːrdər"},{f:"visa",t:"Visum",p:"ˈviːzə"},{f:"luggage",t:"Gepäck",p:"ˈlʌɡɪdʒ"},
+      {f:"room",t:"Zimmer",p:"ruːm"},{f:"reservation",t:"Buchung",p:"ˌrɛzərˈveɪʃən"},
+      {f:"museum",t:"Museum",p:"mjuːˈziːəm"},{f:"mountain",t:"Berg",p:"ˈmaʊntɪn"},{f:"river",t:"Fluss",p:"ˈrɪvər"},
+    ],
+    "Körper": [
+      {f:"head",t:"Kopf",p:"hɛd"},{f:"hand",t:"Hand",p:"hænd"},{f:"foot",t:"Fuß",p:"fʊt"},
+      {f:"eye",t:"Auge",p:"aɪ"},{f:"ear",t:"Ohr",p:"ɪər"},{f:"mouth",t:"Mund",p:"maʊθ"},
+      {f:"nose",t:"Nase",p:"noʊz"},{f:"heart",t:"Herz",p:"hɑːrt"},{f:"stomach",t:"Magen",p:"ˈstʌmək"},
+      {f:"back",t:"Rücken",p:"bæk"},{f:"shoulder",t:"Schulter",p:"ˈʃoʊldər"},{f:"knee",t:"Knie",p:"niː"},
+      {f:"finger",t:"Finger",p:"ˈfɪŋɡər"},{f:"tooth",t:"Zahn",p:"tuːθ"},{f:"hair",t:"Haare",p:"hɛər"},
+      {f:"skin",t:"Haut",p:"skɪn"},{f:"blood",t:"Blut",p:"blʌd"},{f:"arm",t:"Arm",p:"ɑːrm"},
+      {f:"leg",t:"Bein",p:"lɛɡ"},{f:"neck",t:"Hals / Nacken",p:"nɛk"},
     ],
     "Zeit": [
       {f:"today",t:"Heute",p:"təˈdeɪ"},{f:"tomorrow",t:"Morgen",p:"təˈmɒroʊ"},{f:"yesterday",t:"Gestern",p:"ˈjɛstərdeɪ"},
-      {f:"morning",t:"Morgen (Tageszeit)",p:"ˈmɔːrnɪŋ"},{f:"evening",t:"Abend",p:"ˈiːvnɪŋ"},
-      {f:"night",t:"Nacht",p:"naɪt"},{f:"week",t:"Woche",p:"wiːk"},
+      {f:"morning",t:"Morgen (Tageszeit)",p:"ˈmɔːrnɪŋ"},{f:"afternoon",t:"Nachmittag",p:"ˌæftərˈnuːn"},
+      {f:"evening",t:"Abend",p:"ˈiːvnɪŋ"},{f:"night",t:"Nacht",p:"naɪt"},{f:"week",t:"Woche",p:"wiːk"},
       {f:"month",t:"Monat",p:"mʌnθ"},{f:"year",t:"Jahr",p:"jɪər"},{f:"hour",t:"Stunde",p:"ˈaʊər"},
+      {f:"Monday",t:"Montag",p:"ˈmʌndeɪ"},{f:"Tuesday",t:"Dienstag",p:"ˈtjuːzdeɪ"},{f:"Wednesday",t:"Mittwoch",p:"ˈwɛnzdeɪ"},
+      {f:"Thursday",t:"Donnerstag",p:"ˈθɜːrzdeɪ"},{f:"Friday",t:"Freitag",p:"ˈfraɪdeɪ"},
+      {f:"Saturday",t:"Samstag",p:"ˈsætərdeɪ"},{f:"Sunday",t:"Sonntag",p:"ˈsʌndeɪ"},
+      {f:"January",t:"Januar",p:"ˈdʒænjuəri"},{f:"February",t:"Februar",p:"ˈfɛbruəri"},{f:"March",t:"März",p:"mɑːrtʃ"},
+      {f:"April",t:"April",p:"ˈeɪprəl"},{f:"May",t:"Mai",p:"meɪ"},{f:"June",t:"Juni",p:"dʒuːn"},
+      {f:"July",t:"Juli",p:"dʒuˈlaɪ"},{f:"August",t:"August",p:"ˈɔːɡəst"},{f:"September",t:"September",p:"sɛpˈtɛmbər"},
+      {f:"October",t:"Oktober",p:"ɒkˈtoʊbər"},{f:"November",t:"November",p:"noʊˈvɛmbər"},{f:"December",t:"Dezember",p:"dɪˈsɛmbər"},
     ],
     "Berufe": [
       {f:"doctor",t:"Arzt",p:"ˈdɒktər"},{f:"teacher",t:"Lehrer",p:"ˈtiːtʃər"},
       {f:"engineer",t:"Ingenieur",p:"ˌɛndʒɪˈnɪər"},{f:"lawyer",t:"Anwalt",p:"ˈlɔɪər"},
       {f:"chef",t:"Koch",p:"ʃɛf"},{f:"student",t:"Student",p:"ˈstjuːdənt"},
+      {f:"nurse",t:"Krankenschwester",p:"nɜːrs"},{f:"firefighter",t:"Feuerwehrmann",p:"ˈfaɪərˌfaɪtər"},
+      {f:"police officer",t:"Polizist",p:"pəˈliːs ˈɒfɪsər"},{f:"architect",t:"Architekt",p:"ˈɑːrkɪtɛkt"},
+      {f:"journalist",t:"Journalist",p:"ˈdʒɜːrnəlɪst"},{f:"actor",t:"Schauspieler",p:"ˈæktər"},
+      {f:"singer",t:"Sänger",p:"ˈsɪŋər"},{f:"programmer",t:"Programmierer",p:"ˈproʊɡræmər"},
+      {f:"farmer",t:"Bauer",p:"ˈfɑːrmər"},{f:"pilot",t:"Pilot",p:"ˈpaɪlət"},
+    ],
+    "Wohnen": [
+      {f:"house",t:"Haus",p:"haʊs"},{f:"apartment",t:"Wohnung",p:"əˈpɑːrtmənt"},{f:"room",t:"Zimmer",p:"ruːm"},
+      {f:"kitchen",t:"Küche",p:"ˈkɪtʃɪn"},{f:"bathroom",t:"Badezimmer",p:"ˈbæθruːm"},{f:"bedroom",t:"Schlafzimmer",p:"ˈbɛdruːm"},
+      {f:"living room",t:"Wohnzimmer",p:"ˈlɪvɪŋ ruːm"},{f:"door",t:"Tür",p:"dɔːr"},{f:"window",t:"Fenster",p:"ˈwɪndoʊ"},
+      {f:"table",t:"Tisch",p:"ˈteɪbəl"},{f:"chair",t:"Stuhl",p:"tʃɛər"},{f:"bed",t:"Bett",p:"bɛd"},
+      {f:"wardrobe",t:"Kleiderschrank",p:"ˈwɔːrdroʊb"},{f:"sofa",t:"Sofa",p:"ˈsoʊfə"},{f:"fridge",t:"Kühlschrank",p:"frɪdʒ"},
+      {f:"stove",t:"Herd",p:"stoʊv"},{f:"elevator",t:"Aufzug",p:"ˈɛlɪveɪtər"},{f:"stairs",t:"Treppe",p:"stɛərz"},
+    ],
+    "Natur & Wetter": [
+      {f:"sun",t:"Sonne",p:"sʌn"},{f:"moon",t:"Mond",p:"muːn"},{f:"star",t:"Stern",p:"stɑːr"},
+      {f:"sky",t:"Himmel",p:"skaɪ"},{f:"cloud",t:"Wolke",p:"klaʊd"},{f:"rain",t:"Regen",p:"reɪn"},
+      {f:"snow",t:"Schnee",p:"snoʊ"},{f:"wind",t:"Wind",p:"wɪnd"},{f:"storm",t:"Sturm / Gewitter",p:"stɔːrm"},
+      {f:"heat",t:"Hitze",p:"hiːt"},{f:"cold",t:"Kälte",p:"koʊld"},{f:"fog",t:"Nebel",p:"fɒɡ"},
+      {f:"forest",t:"Wald",p:"ˈfɒrɪst"},{f:"sea",t:"Meer",p:"siː"},{f:"lake",t:"See",p:"leɪk"},
+      {f:"river",t:"Fluss",p:"ˈrɪvər"},{f:"flower",t:"Blume",p:"ˈflaʊər"},{f:"tree",t:"Baum",p:"triː"},
+      {f:"grass",t:"Gras",p:"ɡrɑːs"},{f:"earth",t:"Erde",p:"ɜːrθ"},
+    ],
+    "Tiere": [
+      {f:"dog",t:"Hund",p:"dɒɡ"},{f:"cat",t:"Katze",p:"kæt"},{f:"horse",t:"Pferd",p:"hɔːrs"},
+      {f:"cow",t:"Kuh",p:"kaʊ"},{f:"pig",t:"Schwein",p:"pɪɡ"},{f:"sheep",t:"Schaf",p:"ʃiːp"},
+      {f:"bird",t:"Vogel",p:"bɜːrd"},{f:"fish",t:"Fisch",p:"fɪʃ"},{f:"lion",t:"Löwe",p:"ˈlaɪən"},
+      {f:"tiger",t:"Tiger",p:"ˈtaɪɡər"},{f:"elephant",t:"Elefant",p:"ˈɛlɪfənt"},{f:"bear",t:"Bär",p:"bɛər"},
+      {f:"wolf",t:"Wolf",p:"wʊlf"},{f:"fox",t:"Fuchs",p:"fɒks"},{f:"rabbit",t:"Hase / Kaninchen",p:"ˈræbɪt"},
+      {f:"snake",t:"Schlange",p:"sneɪk"},{f:"butterfly",t:"Schmetterling",p:"ˈbʌtərflaɪ"},{f:"eagle",t:"Adler",p:"ˈiːɡəl"},
+    ],
+    "Adjektive": [
+      {f:"big",t:"Groß",p:"bɪɡ"},{f:"small",t:"Klein",p:"smɔːl"},{f:"new",t:"Neu",p:"njuː"},
+      {f:"old",t:"Alt",p:"oʊld"},{f:"beautiful",t:"Schön",p:"ˈbjuːtɪfəl"},{f:"ugly",t:"Hässlich",p:"ˈʌɡli"},
+      {f:"clever",t:"Klug",p:"ˈklɛvər"},{f:"fast",t:"Schnell",p:"fæst"},{f:"slow",t:"Langsam",p:"sloʊ"},
+      {f:"expensive",t:"Teuer",p:"ɪkˈspɛnsɪv"},{f:"cheap",t:"Günstig",p:"tʃiːp"},
+      {f:"heavy",t:"Schwer",p:"ˈhɛvi"},{f:"light",t:"Leicht",p:"laɪt"},
+      {f:"hot",t:"Heiß",p:"hɒt"},{f:"cold",t:"Kalt",p:"koʊld"},{f:"delicious",t:"Lecker",p:"dɪˈlɪʃəs"},
+      {f:"tired",t:"Müde",p:"ˈtaɪərd"},{f:"happy",t:"Glücklich",p:"ˈhæpi"},{f:"sad",t:"Traurig",p:"sæd"},
+    ],
+    "Verben": [
+      {f:"to go",t:"Gehen",p:"tə ɡoʊ"},{f:"to run",t:"Rennen",p:"tə rʌn"},
+      {f:"to eat",t:"Essen",p:"tə iːt"},{f:"to drink",t:"Trinken",p:"tə drɪŋk"},
+      {f:"to sleep",t:"Schlafen",p:"tə sliːp"},{f:"to work",t:"Arbeiten",p:"tə wɜːrk"},
+      {f:"to speak",t:"Sprechen",p:"tə spiːk"},{f:"to listen",t:"Zuhören",p:"tə ˈlɪsən"},
+      {f:"to see",t:"Sehen",p:"tə siː"},{f:"to read",t:"Lesen",p:"tə riːd"},
+      {f:"to write",t:"Schreiben",p:"tə raɪt"},{f:"to love",t:"Lieben",p:"tə lʌv"},
+      {f:"to know",t:"Wissen / Kennen",p:"tə noʊ"},{f:"to think",t:"Denken",p:"tə θɪŋk"},
+      {f:"to help",t:"Helfen",p:"tə hɛlp"},{f:"to buy",t:"Kaufen",p:"tə baɪ"},
+      {f:"to open",t:"Öffnen",p:"tə ˈoʊpən"},{f:"to close",t:"Schließen",p:"tə kloʊz"},
+      {f:"to start",t:"Beginnen",p:"tə stɑːrt"},{f:"to finish",t:"Beenden",p:"tə ˈfɪnɪʃ"},
+      {f:"to give",t:"Geben",p:"tə ɡɪv"},{f:"to take",t:"Nehmen",p:"tə teɪk"},
+    ],
+    "Technologie": [
+      {f:"phone",t:"Telefon",p:"foʊn"},{f:"computer",t:"Computer",p:"kəmˈpjuːtər"},
+      {f:"internet",t:"Internet",p:"ˈɪntərˌnɛt"},{f:"app",t:"App",p:"æp"},
+      {f:"website",t:"Website",p:"ˈwɛbˌsaɪt"},{f:"password",t:"Passwort",p:"ˈpæswɜːrd"},
+      {f:"screen",t:"Bildschirm",p:"skriːn"},{f:"keyboard",t:"Tastatur",p:"ˈkiːbɔːrd"},
+      {f:"camera",t:"Kamera",p:"ˈkæmərə"},{f:"charger",t:"Ladegerät",p:"ˈtʃɑːrdʒər"},
+      {f:"battery",t:"Akku / Batterie",p:"ˈbætəri"},{f:"Wi-Fi",t:"WLAN",p:"ˈwaɪfaɪ"},
+      {f:"email",t:"E-Mail",p:"ˈiːmeɪl"},{f:"message",t:"Nachricht",p:"ˈmɛsɪdʒ"},
+    ],
+    "Sport & Freizeit": [
+      {f:"football",t:"Fußball",p:"ˈfʊtbɔːl"},{f:"basketball",t:"Basketball",p:"ˈbæskɪtbɔːl"},
+      {f:"swimming",t:"Schwimmen",p:"ˈswɪmɪŋ"},{f:"running",t:"Laufen / Joggen",p:"ˈrʌnɪŋ"},
+      {f:"tennis",t:"Tennis",p:"ˈtɛnɪs"},{f:"skiing",t:"Ski fahren",p:"ˈskiːɪŋ"},
+      {f:"cinema",t:"Kino",p:"ˈsɪnəmə"},{f:"theatre",t:"Theater",p:"ˈθɪətər"},
+      {f:"music",t:"Musik",p:"ˈmjuːzɪk"},{f:"dancing",t:"Tanzen",p:"ˈdɑːnsɪŋ"},
+      {f:"drawing",t:"Zeichnen",p:"ˈdrɔːɪŋ"},{f:"reading",t:"Lesen (Hobby)",p:"ˈriːdɪŋ"},
+      {f:"travelling",t:"Reisen",p:"ˈtrævəlɪŋ"},{f:"photography",t:"Fotografie",p:"fəˈtɒɡrəfi"},
+      {f:"cooking",t:"Kochen",p:"ˈkʊkɪŋ"},{f:"yoga",t:"Yoga",p:"ˈjoʊɡə"},
+      {f:"cycling",t:"Radfahren",p:"ˈsaɪklɪŋ"},{f:"hiking",t:"Wandern",p:"ˈhaɪkɪŋ"},
     ],
   }
 };
@@ -724,22 +1382,38 @@ const LANG_VOICE = { ru:"ru-RU", it:"it-IT", es:"es-ES", en:"en-GB" };
 const LANG_EMOJI = { ru:"🇷🇺", it:"🇮🇹", es:"🇪🇸", en:"🇬🇧" };
 
 // ============================================================
-// API KEY MANAGEMENT
+// SETTINGS & API KEY MANAGEMENT
 // ============================================================
+let autoSpeak = true;
+let speechRate = 0.9;
+
 function getApiKey() { return localStorage.getItem('lingua_api_key') || ''; }
 
 function updateApiDot() {
-  const dot = document.getElementById('api-dot');
-  if (dot) dot.className = 'api-key-indicator' + (getApiKey() ? ' ok' : '');
+  const ok = !!getApiKey();
+  ['api-dot','settings-api-dot'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.className = 'api-dot-inline' + (ok ? ' ok' : '');
+  });
 }
 
-function openApiModal() {
+function openSettings() {
   document.getElementById('api-key-input').value = getApiKey();
-  document.getElementById('api-modal').classList.remove('hidden');
+  // Highlight active lang
+  document.querySelectorAll('[data-settings-lang]').forEach(b => {
+    b.classList.toggle('active', b.dataset.settingsLang === state.lang);
+  });
+  const savedRate = parseFloat(localStorage.getItem('lingua_speed') || '0.9');
+  speechRate = savedRate;
+  document.getElementById('speed-slider').value = savedRate;
+  document.getElementById('speed-label').textContent = savedRate.toFixed(1) + '×';
+  autoSpeak = localStorage.getItem('lingua_autospeak') !== 'off';
+  updateAutoSpeakBtn();
+  document.getElementById('settings-modal').classList.remove('hidden');
 }
 
-function closeApiModal() {
-  document.getElementById('api-modal').classList.add('hidden');
+function closeSettings() {
+  document.getElementById('settings-modal').classList.add('hidden');
 }
 
 function saveApiKey() {
@@ -752,15 +1426,75 @@ function saveApiKey() {
     showToast('API-Key entfernt.');
   }
   updateApiDot();
-  closeApiModal();
 }
 
-// Close modal on backdrop click
-document.getElementById('api-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeApiModal();
+function clearApiKey() {
+  localStorage.removeItem('lingua_api_key');
+  document.getElementById('api-key-input').value = '';
+  updateApiDot();
+  showToast('API-Key gelöscht.');
+}
+
+function toggleKeyVisibility() {
+  const inp = document.getElementById('api-key-input');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+function setLangFromSettings(lang) {
+  state.lang = lang;
+  saveState();
+  document.querySelectorAll('.lang-pill').forEach(p => p.classList.toggle('active', p.dataset.lang === lang));
+  document.querySelectorAll('[data-settings-lang]').forEach(b => b.classList.toggle('active', b.dataset.settingsLang === lang));
+  document.getElementById('home-lang-emoji').textContent = LANG_EMOJI[lang];
+  showToast('Sprache: ' + LANG_NAMES[lang]);
+}
+
+function toggleAutoSpeak() {
+  autoSpeak = !autoSpeak;
+  localStorage.setItem('lingua_autospeak', autoSpeak ? 'on' : 'off');
+  updateAutoSpeakBtn();
+}
+function updateAutoSpeakBtn() {
+  const btn = document.getElementById('autospeak-btn');
+  if (!btn) return;
+  btn.textContent = autoSpeak ? 'AN' : 'AUS';
+  btn.style.color = autoSpeak ? 'var(--accent3)' : 'var(--muted)';
+  btn.style.borderColor = autoSpeak ? 'var(--accent3)' : 'var(--border)';
+}
+
+function updateSpeed(val) {
+  speechRate = parseFloat(val);
+  localStorage.setItem('lingua_speed', speechRate);
+  document.getElementById('speed-label').textContent = speechRate.toFixed(1) + '×';
+}
+
+function exportProgress() {
+  const data = { state, myVocab: {} };
+  ['ru','it','es','en'].forEach(l => { data.myVocab[l] = getMyVocab(l); });
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'lingua_backup.json';
+  a.click();
+  showToast('Fortschritt exportiert!');
+}
+
+function resetProgress() {
+  if (!confirm('Gesamten Fortschritt zurücksetzen? (Eigene Vokabeln bleiben erhalten)')) return;
+  state.learned = {}; state.quizCorrect = 0; state.quizTotal = 0; state.streak = 0; state.lastDate = null;
+  saveState();
+  updateHomeStats();
+  showToast('Fortschritt zurückgesetzt.');
+}
+
+// Close settings on backdrop click
+document.getElementById('settings-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeSettings();
 });
 
-// Helper: make authenticated API call
+// Alias for callClaude compatibility
+function openApiModal() { openSettings(); }
+function closeApiModal() { closeSettings(); }
 async function callClaude(payload) {
   const key = getApiKey();
   if (!key) {
@@ -780,24 +1514,24 @@ async function callClaude(payload) {
       body: JSON.stringify(payload)
     });
   } catch(netErr) {
-    throw new Error('Netzwerkfehler – bitte Internetverbindung prüfen.');
+    // Show exact technical error for debugging
+    throw new Error('Fetch-Fehler: ' + (netErr?.message || String(netErr)));
   }
   
   let data;
-  try { data = await res.json(); } catch(e) { throw new Error(`Ungültige Antwort vom Server (HTTP ${res.status})`); }
+  try { data = await res.json(); } catch(e) { throw new Error(`Keine JSON-Antwort (HTTP ${res.status})`); }
 
   if (!res.ok) {
-    const msg = data?.error?.message || '';
-    if (res.status === 401) throw new Error('API-Key ungültig. Bitte neuen Key eingeben.');
-    if (res.status === 403) throw new Error('Zugriff verweigert – prüfe Billing unter console.anthropic.com.');
-    if (res.status === 429) throw new Error('Zu viele Anfragen – bitte kurz warten.');
-    if (res.status === 400) throw new Error('Anfragefehler: ' + (msg || 'Unbekannt'));
-    throw new Error(msg || `API-Fehler (HTTP ${res.status})`);
+    const msg = data?.error?.message || JSON.stringify(data);
+    if (res.status === 401) throw new Error('401 – API-Key ungültig. Neuen Key eingeben.');
+    if (res.status === 403) throw new Error('403 – Zugriff verweigert. Billing prüfen.');
+    if (res.status === 429) throw new Error('429 – Zu viele Anfragen. Kurz warten.');
+    if (res.status === 404) throw new Error('404 – Modell nicht gefunden: ' + (payload.model || ''));
+    throw new Error(`HTTP ${res.status}: ${msg}`);
   }
 
-  // Extract text from content array
   const text = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
-  if (!text) throw new Error('Leere Antwort erhalten – bitte erneut versuchen.');
+  if (!text) throw new Error('Leere Antwort. Rohdaten: ' + JSON.stringify(data).slice(0, 200));
   return text;
 }
 
@@ -838,7 +1572,9 @@ function switchSection(id) {
   if (id === 'vocab') initVocab();
   if (id === 'quiz') startQuiz();
   if (id === 'free') initFree();
-  if (id === 'home') updateHomeStats();
+  if (id === 'home') initHome();
+  if (id === 'generator') initGenerator();
+  if (id === 'myvocab') renderMyVocab();
 }
 
 document.querySelectorAll('.nav-btn').forEach(b => {
@@ -846,15 +1582,276 @@ document.querySelectorAll('.nav-btn').forEach(b => {
 });
 
 // ============================================================
-// LANGUAGE SELECTION
+// KI VOKABEL-GENERATOR
 // ============================================================
+const QUICK_TOPICS = [
+  'Restaurant & Bestellung','Emotionen & Gefühle','Kleidung & Mode',
+  'Arztbesuch & Gesundheit','Business & Büro','Schule & Studium',
+  'Telefon & Kommunikation','Einkaufen & Preise','Wetter & Klima',
+  'Phrasen & Redewendungen','Musik & Kunst','Sport & Fitness',
+  'Kochen & Rezepte','Auto & Verkehr','Politik & Gesellschaft',
+  'Technik & Gadgets','Urlaub & Hotel','Freundschaft & Liebe',
+];
+
+let generatedWords = [];
+
+function initGenerator() {
+  const grid = document.getElementById('gen-quick-topics');
+  grid.innerHTML = '';
+  QUICK_TOPICS.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'ai-chip';
+    btn.textContent = t;
+    btn.onclick = () => {
+      document.getElementById('gen-topic').value = t;
+      generateVocab();
+    };
+    grid.appendChild(btn);
+  });
+}
+
+async function generateVocab() {
+  const topic = document.getElementById('gen-topic').value.trim();
+  if (!topic) { showToast('Bitte ein Thema eingeben!'); return; }
+
+  document.getElementById('gen-loading').style.display = 'block';
+  document.getElementById('gen-result').style.display = 'none';
+  document.getElementById('gen-btn').disabled = true;
+
+  const lang = state.lang;
+  const langName = LANG_NAMES[lang];
+
+  try {
+    const result = await callClaude({
+      model: 'claude-haiku-4-5',
+      max_tokens: 1200,
+      system: `Du bist ein Sprachlehrer. Generiere eine Vokabelliste zum Thema auf ${langName} für deutschsprachige Lerner.
+Antworte NUR mit einem JSON-Array, kein Markdown, keine Erklärungen. Format:
+[{"f":"Fremdwort","t":"Deutsch","p":"Aussprache"},...]
+Generiere genau 20 Einträge. Aussprache ist eine vereinfachte phonetische Umschrift.`,
+      messages: [{ role: 'user', content: `Thema: ${topic}` }]
+    });
+
+    let parsed;
+    try {
+      const clean = result.replace(/```json|```/g, '').trim();
+      parsed = JSON.parse(clean);
+    } catch(e) {
+      // Try to extract JSON array from response
+      const match = result.match(/\[[\s\S]*\]/);
+      if (match) parsed = JSON.parse(match[0]);
+      else throw new Error('Antwortformat ungültig');
+    }
+
+    generatedWords = parsed.map(w => ({ ...w, saved: false }));
+    document.getElementById('gen-result-title').textContent = `✨ ${topic} – ${langName} (${generatedWords.length} Wörter)`;
+    renderGeneratedWords();
+    document.getElementById('gen-result').style.display = 'block';
+
+  } catch(e) {
+    showToast('⚠ ' + (e.message || 'Fehler beim Generieren'));
+  }
+
+  document.getElementById('gen-loading').style.display = 'none';
+  document.getElementById('gen-btn').disabled = false;
+}
+
+function renderGeneratedWords() {
+  const list = document.getElementById('gen-vocab-list');
+  list.innerHTML = '';
+  generatedWords.forEach((w, i) => {
+    const row = document.createElement('div');
+    row.className = 'gen-word-row';
+    row.innerHTML = `
+      <div style="flex:1;">
+        <div class="vi-foreign">${w.f}</div>
+        <div class="vi-translation">${w.t}${w.p ? ' · <em style="color:var(--muted)">' + w.p + '</em>' : ''}</div>
+      </div>
+      <div style="display:flex;gap:.4rem;align-items:center;">
+        <button class="vi-speak" onclick="speak('${w.f.replace(/'/g,"\\'")}','${state.lang}')">🔊</button>
+        <button class="gen-save-btn ${w.saved?'saved':''}" id="gsave-${i}" onclick="saveSingleGenWord(${i})">
+          ${w.saved ? '✓ Gespeichert' : '⭐ Speichern'}
+        </button>
+      </div>`;
+    list.appendChild(row);
+  });
+}
+
+function saveSingleGenWord(i) {
+  const w = generatedWords[i];
+  const lang = state.lang;
+  const key = `myVocab_${lang}`;
+  const existing = JSON.parse(localStorage.getItem(key) || '[]');
+  if (!existing.find(e => e.f === w.f)) {
+    existing.push({ f: w.f, t: w.t, p: w.p || '' });
+    localStorage.setItem(key, JSON.stringify(existing));
+  }
+  generatedWords[i].saved = true;
+  const btn = document.getElementById(`gsave-${i}`);
+  if (btn) { btn.textContent = '✓ Gespeichert'; btn.classList.add('saved'); }
+  showToast(`✓ "${w.f}" gespeichert`);
+}
+
+function saveGeneratedVocab() {
+  const lang = state.lang;
+  const key = `myVocab_${lang}`;
+  const existing = JSON.parse(localStorage.getItem(key) || '[]');
+  let added = 0;
+  generatedWords.forEach((w, i) => {
+    if (!existing.find(e => e.f === w.f)) {
+      existing.push({ f: w.f, t: w.t, p: w.p || '' });
+      generatedWords[i].saved = true;
+      added++;
+    }
+  });
+  localStorage.setItem(key, JSON.stringify(existing));
+  renderGeneratedWords();
+  showToast(`✓ ${added} Vokabeln gespeichert!`);
+}
+
+function addGeneratedToTraining() {
+  saveGeneratedVocab();
+  switchSection('vocab');
+  // Merge into vocab queue
+  const lang = state.lang;
+  const myWords = JSON.parse(localStorage.getItem(`myVocab_${lang}`) || '[]');
+  vocabQueue = [...myWords, ...getAllWords(lang)].sort(() => Math.random() - .5);
+  vocabIndex = 0;
+  vocabRevealed = false;
+  showVocabCard();
+  showToast('Meine Vokabeln ins Training geladen!');
+}
+
+// ============================================================
+// MEINE VOKABELN
+// ============================================================
+function getMyVocab(lang) {
+  return JSON.parse(localStorage.getItem(`myVocab_${lang}`) || '[]');
+}
+function saveMyVocab(lang, arr) {
+  localStorage.setItem(`myVocab_${lang}`, JSON.stringify(arr));
+}
+
+function addCustomVocab() {
+  const f = document.getElementById('mv-foreign').value.trim();
+  const t = document.getElementById('mv-translation').value.trim();
+  const p = document.getElementById('mv-phonetic').value.trim();
+  if (!f || !t) { showToast('Bitte Fremdwort und Übersetzung eingeben!'); return; }
+  const lang = state.lang;
+  const arr = getMyVocab(lang);
+  if (arr.find(e => e.f === f)) { showToast('Wort bereits vorhanden!'); return; }
+  arr.unshift({ f, t, p });
+  saveMyVocab(lang, arr);
+  document.getElementById('mv-foreign').value = '';
+  document.getElementById('mv-translation').value = '';
+  document.getElementById('mv-phonetic').value = '';
+  renderMyVocab();
+  showToast(`✓ "${f}" hinzugefügt!`);
+}
+
+function deleteMyVocabItem(f) {
+  const lang = state.lang;
+  const arr = getMyVocab(lang).filter(e => e.f !== f);
+  saveMyVocab(lang, arr);
+  renderMyVocab();
+}
+
+function clearAllMyVocab() {
+  if (!confirm('Alle eigenen Vokabeln löschen?')) return;
+  saveMyVocab(state.lang, []);
+  renderMyVocab();
+  showToast('Alle eigenen Vokabeln gelöscht.');
+}
+
+function trainMyVocab() {
+  const myWords = getMyVocab(state.lang);
+  if (myWords.length === 0) { showToast('Keine eigenen Vokabeln vorhanden!'); return; }
+  switchSection('vocab');
+  vocabQueue = [...myWords].sort(() => Math.random() - .5);
+  vocabIndex = 0;
+  vocabRevealed = false;
+  showVocabCard();
+  showToast(`Training mit ${myWords.length} eigenen Vokabeln gestartet!`);
+}
+
+function renderMyVocab() {
+  const lang = state.lang;
+  const arr = getMyVocab(lang);
+  const list = document.getElementById('mv-list');
+  const empty = document.getElementById('mv-empty');
+  document.getElementById('mv-count').textContent = `${arr.length} gespeicherte Vokabeln (${LANG_NAMES[lang]})`;
+
+  if (arr.length === 0) {
+    list.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  list.innerHTML = '';
+  arr.forEach(w => {
+    const item = document.createElement('div');
+    item.className = 'mv-item';
+    item.innerHTML = `
+      <div style="flex:1;">
+        <div class="vi-foreign">${w.f}</div>
+        <div class="vi-translation">${w.t}${w.p ? ' · <em style="color:var(--muted)">' + w.p + '</em>' : ''}</div>
+      </div>
+      <div class="mv-actions">
+        <button class="vi-speak" onclick="speak('${w.f.replace(/'/g,"\\'")}','${lang}')">🔊</button>
+        <button class="mv-del" onclick="deleteMyVocabItem('${w.f.replace(/'/g,"\\'")}')">✕</button>
+      </div>`;
+    list.appendChild(item);
+  });
+}
+
+// ============================================================
+// LANGUAGE PICKER (Home screen)
+// ============================================================
+function selectLanguage(lang) {
+  // Animate card selection
+  state.lang = lang;
+  saveState();
+  // Sync pills in header
+  document.querySelectorAll('.lang-pill').forEach(p => p.classList.toggle('active', p.dataset.lang === lang));
+  // Show dashboard with animation
+  showDashboard();
+}
+
+function showDashboard() {
+  const picker = document.getElementById('lang-picker');
+  const dash   = document.getElementById('dashboard');
+  picker.style.animation = 'fadeOut .2s ease forwards';
+  setTimeout(() => {
+    picker.style.display = 'none';
+    picker.style.animation = '';
+    dash.style.display = 'block';
+    dash.style.animation = 'fadeIn .35s ease';
+    updateHomeStats();
+  }, 180);
+}
+
+function showLangPicker() {
+  const picker = document.getElementById('lang-picker');
+  const dash   = document.getElementById('dashboard');
+  dash.style.animation = 'fadeOut .2s ease forwards';
+  setTimeout(() => {
+    dash.style.display = 'none';
+    dash.style.animation = '';
+    picker.style.display = 'block';
+    picker.style.animation = 'fadeIn .35s ease';
+  }, 180);
+}
+
+// Add fadeOut keyframe
+const styleEl = document.createElement('style');
+styleEl.textContent = '@keyframes fadeOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-8px)}}';
+document.head.appendChild(styleEl);
 document.querySelectorAll('.lang-pill').forEach(p => {
   p.addEventListener('click', () => {
     document.querySelectorAll('.lang-pill').forEach(x => x.classList.remove('active'));
     p.classList.add('active');
     state.lang = p.dataset.lang;
     saveState();
-    document.getElementById('home-lang-emoji').textContent = LANG_EMOJI[state.lang];
     const active = document.querySelector('.section.active')?.id;
     if (active === 'vocab') initVocab();
     if (active === 'quiz') startQuiz();
@@ -874,10 +1871,27 @@ function updateHomeStats() {
   const pct = state.quizTotal > 0 ? Math.round(state.quizCorrect / state.quizTotal * 100) : 0;
   document.getElementById('stat-correct').textContent = pct + '%';
   document.getElementById('stat-total').textContent = state.quizTotal;
-  document.getElementById('home-lang-emoji').textContent = LANG_EMOJI[lang];
+  const emoji = LANG_EMOJI[lang];
+  const name  = LANG_NAMES[lang];
+  document.getElementById('home-lang-emoji').textContent = emoji;
+  const sub = document.getElementById('dash-lang-subtitle');
+  if (sub) sub.textContent = 'Du lernst ' + name;
   document.querySelector(`.lang-pill[data-lang="${lang}"]`)?.classList.add('active');
 }
-updateHomeStats();
+
+// On home init: show picker if first visit, otherwise dashboard
+function initHome() {
+  const hasLang = !!localStorage.getItem('lingua_state');
+  if (hasLang && state.lang) {
+    document.getElementById('lang-picker').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    updateHomeStats();
+  } else {
+    document.getElementById('lang-picker').style.display = 'block';
+    document.getElementById('dashboard').style.display = 'none';
+  }
+}
+initHome();
 
 // ============================================================
 // VOCAB TRAINER
@@ -887,6 +1901,9 @@ let vocabQueue = [], vocabIndex = 0, vocabRevealed = false;
 function getAllWords(lang) {
   const all = [];
   for (const topic of Object.values(VOCAB[lang])) all.push(...topic);
+  // Also include custom saved vocab
+  const custom = getMyVocab(lang);
+  custom.forEach(w => { if (!all.find(x => x.f === w.f)) all.push(w); });
   return all;
 }
 
@@ -935,7 +1952,7 @@ function vocabAnswer(result) {
 
 function speakCurrent() {
   if (vocabQueue.length === 0) return;
-  speak(vocabQueue[vocabIndex].f, state.lang);
+  speak(vocabQueue[vocabIndex].f, state.lang, true);
 }
 
 // ============================================================
@@ -1100,7 +2117,7 @@ function swapLangs() {
 function speakTranslation() {
   const text = document.getElementById('trans-output').value;
   const lang = document.getElementById('trans-to').value;
-  if (text) speak(text, lang);
+  if (text) speak(text, lang, true);
 }
 
 function copyTranslation() {
@@ -1177,12 +2194,13 @@ function addMsg(role, html) {
 // ============================================================
 // SPEECH: TTS
 // ============================================================
-function speak(text, lang) {
+function speak(text, lang, force) {
   if (!('speechSynthesis' in window)) return;
+  if (!force && !autoSpeak) return;
   window.speechSynthesis.cancel();
   const utt = new SpeechSynthesisUtterance(text);
   utt.lang = LANG_VOICE[lang] || 'de-DE';
-  utt.rate = 0.9;
+  utt.rate = speechRate || 0.9;
   window.speechSynthesis.speak(utt);
 }
 
@@ -1233,10 +2251,12 @@ if ('serviceWorker' in navigator) {
 }
 
 // INIT
+speechRate = parseFloat(localStorage.getItem('lingua_speed') || '0.9');
+autoSpeak = localStorage.getItem('lingua_autospeak') !== 'off';
 initVocab();
 updateApiDot();
-// Show API key modal on first launch if no key set
-if (!getApiKey()) setTimeout(openApiModal, 800);
+// Show settings on first launch if no key set
+if (!getApiKey()) setTimeout(openSettings, 800);
 </script>
 </body>
 </html>
