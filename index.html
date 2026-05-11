@@ -1073,7 +1073,7 @@ async function doTranslate() {
 
   try {
     const result = await callClaude({
-      model:'claude-sonnet-4-20250514',
+      model:'claude-sonnet-4-5',
       max_tokens:1000,
       system:`Du bist ein präziser Übersetzer. Übersetze den gegebenen Text von ${fromName} nach ${toName}. Gib NUR die Übersetzung aus, ohne Erklärungen, Anmerkungen oder Formatierung.`,
       messages:[{role:'user',content:text}]
@@ -1148,7 +1148,7 @@ async function sendChat() {
 
   try {
     const reply = await callClaude({
-      model:'claude-sonnet-4-20250514',
+      model:'claude-sonnet-4-5',
       max_tokens:1000,
       system: MODE_PROMPTS[aiMode](state.lang),
       messages: chatHistory
