@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="description" content="LINGUA v1.1 – KI-gestützte Sprachlern-App von René Prause">
+<meta name="description" content="LINGUA v1.2 – KI-Sprachlern-App mit Gemini AI von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v1.1 · by René Prause</title>
+<title>LINGUA v1.2 Gemini · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -492,7 +492,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;">v1.1</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;">v1.2</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill active" data-lang="ru">🇷🇺 RU</button>
@@ -533,15 +533,48 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
           </div>
           <div style="font-size:.85rem;color:var(--muted);" id="ui-choose-lang">Wähle deine Lernsprache</div>
         </div>
+
         <div class="lang-select-grid">
-          <button class="lang-select-card" onclick="selectLanguage('ru')"><div class="lsc-flag">🇷🇺</div><div class="lsc-name">Russisch</div><div class="lsc-sub">Русский · Kyrillisch</div></button>
-          <button class="lang-select-card" onclick="selectLanguage('it')"><div class="lsc-flag">🇮🇹</div><div class="lsc-name">Italienisch</div><div class="lsc-sub">Italiano · Romanisch</div></button>
-          <button class="lang-select-card" onclick="selectLanguage('es')"><div class="lsc-flag">🇪🇸</div><div class="lsc-name">Spanisch</div><div class="lsc-sub">Español · Romanisch</div></button>
-          <button class="lang-select-card" onclick="selectLanguage('en')"><div class="lsc-flag">🇬🇧</div><div class="lsc-name">Englisch</div><div class="lsc-sub">English · Germanisch</div></button>
-          <button class="lang-select-card" onclick="selectLanguage('tr')"><div class="lsc-flag">🇹🇷</div><div class="lsc-name">Türkisch</div><div class="lsc-sub">Türkçe · Altaisch</div></button>
-          <button class="lang-select-card" onclick="selectLanguage('sq')"><div class="lsc-flag">🇦🇱</div><div class="lsc-name">Albanisch</div><div class="lsc-sub">Shqip · Isolat</div></button>
-          <button class="lang-select-card" onclick="selectLanguage('de')"><div class="lsc-flag">🇩🇪</div><div class="lsc-name">Deutsch</div><div class="lsc-sub">Deutsch · Germanisch</div></button>
-          <button class="lang-select-card" onclick="selectLanguage('th')"><div class="lsc-flag">🇹🇭</div><div class="lsc-name">Thailändisch</div><div class="lsc-sub">ภาษาไทย · Tai-Kadai</div></button>
+          <button class="lang-select-card" onclick="selectLanguage('ru')">
+            <div class="lsc-flag">🇷🇺</div>
+            <div class="lsc-name">Russisch</div>
+            <div class="lsc-sub">Русский · Kyrillisch</div>
+          </button>
+          <button class="lang-select-card" onclick="selectLanguage('it')">
+            <div class="lsc-flag">🇮🇹</div>
+            <div class="lsc-name">Italienisch</div>
+            <div class="lsc-sub">Italiano · Romanisch</div>
+          </button>
+          <button class="lang-select-card" onclick="selectLanguage('es')">
+            <div class="lsc-flag">🇪🇸</div>
+            <div class="lsc-name">Spanisch</div>
+            <div class="lsc-sub">Español · Romanisch</div>
+          </button>
+          <button class="lang-select-card" onclick="selectLanguage('en')">
+            <div class="lsc-flag">🇬🇧</div>
+            <div class="lsc-name">Englisch</div>
+            <div class="lsc-sub">English · Germanisch</div>
+          </button>
+          <button class="lang-select-card" onclick="selectLanguage('tr')">
+            <div class="lsc-flag">🇹🇷</div>
+            <div class="lsc-name">Türkisch</div>
+            <div class="lsc-sub">Türkçe · Altaisch</div>
+          </button>
+          <button class="lang-select-card" onclick="selectLanguage('sq')">
+            <div class="lsc-flag">🇦🇱</div>
+            <div class="lsc-name">Albanisch</div>
+            <div class="lsc-sub">Shqip · Isolat</div>
+          </button>
+          <button class="lang-select-card" onclick="selectLanguage('de')">
+            <div class="lsc-flag">🇩🇪</div>
+            <div class="lsc-name">Deutsch</div>
+            <div class="lsc-sub">Deutsch · Germanisch</div>
+          </button>
+          <button class="lang-select-card" onclick="selectLanguage('th')">
+            <div class="lsc-flag">🇹🇭</div>
+            <div class="lsc-name">Thailändisch</div>
+            <div class="lsc-sub">ภาษาไทย · Tai-Kadai</div>
+          </button>
         </div>
       </div>
 
@@ -558,39 +591,48 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
             🌍 Sprache wechseln
           </button>
         </div>
+
         <div class="stats-row" id="home-stats">
           <div class="stat-box"><div class="stat-num" id="stat-learned">0</div><div class="stat-lbl" id="ui-stat-learned">Gelernt</div></div>
           <div class="stat-box"><div class="stat-num" id="stat-streak">0</div><div class="stat-lbl" id="ui-stat-streak">Streak</div></div>
           <div class="stat-box"><div class="stat-num" id="stat-correct">0</div><div class="stat-lbl" id="ui-stat-correct">% Korrekt</div></div>
           <div class="stat-box"><div class="stat-num" id="stat-total">0</div><div class="stat-lbl" id="ui-stat-total">Quiz Total</div></div>
         </div>
+
         <div class="home-grid">
           <div class="home-card" style="--hc-color:var(--accent)" onclick="switchSection('vocab')">
-            <div class="hc-icon">📚</div><div class="hc-title" id="ui-hc-vocab">Vokabeltraining</div>
+            <div class="hc-icon">📚</div>
+            <div class="hc-title" id="ui-hc-vocab">Vokabeltraining</div>
             <div class="hc-desc" id="ui-hc-vocab-desc">Lerne neue Wörter mit Karteikarten und Sprachausgabe</div>
           </div>
           <div class="home-card" style="--hc-color:var(--accent2)" onclick="switchSection('quiz')">
-            <div class="hc-icon">❓</div><div class="hc-title" id="ui-hc-quiz">Quiz</div>
+            <div class="hc-icon">❓</div>
+            <div class="hc-title" id="ui-hc-quiz">Quiz</div>
             <div class="hc-desc" id="ui-hc-quiz-desc">Teste dein Wissen mit Multiple-Choice-Fragen</div>
           </div>
           <div class="home-card" style="--hc-color:var(--accent3)" onclick="switchSection('free')">
-            <div class="hc-icon">🗂</div><div class="hc-title" id="ui-hc-free">Freies Lernen</div>
+            <div class="hc-icon">🗂</div>
+            <div class="hc-title" id="ui-hc-free">Freies Lernen</div>
             <div class="hc-desc" id="ui-hc-free-desc">Wähle ein Thema und stöbere durch Vokabeln</div>
           </div>
           <div class="home-card" style="--hc-color:var(--accent4)" onclick="switchSection('translate')">
-            <div class="hc-icon">⇄</div><div class="hc-title" id="ui-hc-translate">Übersetzer</div>
+            <div class="hc-icon">⇄</div>
+            <div class="hc-title" id="ui-hc-translate">Übersetzer</div>
             <div class="hc-desc" id="ui-hc-translate-desc">Übersetze Begriffe und Sätze sofort</div>
           </div>
           <div class="home-card" style="--hc-color:#c77dff" onclick="switchSection('ai')">
-            <div class="hc-icon">✦</div><div class="hc-title" id="ui-hc-ai">KI-Sprachassistent</div>
+            <div class="hc-icon">✦</div>
+            <div class="hc-title" id="ui-hc-ai">KI-Sprachassistent</div>
             <div class="hc-desc" id="ui-hc-ai-desc">Übe Gespräche mit KI, Mikrofon & Sprachausgabe</div>
           </div>
           <div class="home-card" style="--hc-color:#f9c74f" onclick="switchSection('generator')">
-            <div class="hc-icon">✨</div><div class="hc-title" id="ui-hc-gen">KI-Vokabel-Generator</div>
+            <div class="hc-icon">✨</div>
+            <div class="hc-title" id="ui-hc-gen">KI-Vokabel-Generator</div>
             <div class="hc-desc" id="ui-hc-gen-desc">Thema eingeben – KI generiert sofort 20 Vokabeln</div>
           </div>
           <div class="home-card" style="--hc-color:#90e0ef" onclick="switchSection('myvocab')">
-            <div class="hc-icon">⭐</div><div class="hc-title" id="ui-hc-myvocab">Meine Vokabeln</div>
+            <div class="hc-icon">⭐</div>
+            <div class="hc-title" id="ui-hc-myvocab">Meine Vokabeln</div>
             <div class="hc-desc" id="ui-hc-myvocab-desc">Eigene Wörter speichern und gezielt trainieren</div>
           </div>
         </div>
@@ -663,7 +705,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
       </div>
 
       <div id="gen-loading" style="display:none;text-align:center;padding:2rem;color:var(--muted);">
-        <span class="spinner"></span><span id="ui-generating" style="margin-left:.75rem;">KI generiert Vokabeln...</span>
+        <span class="spinner"></span><span style="margin-left:.75rem;">KI generiert Vokabeln...</span>
       </div>
 
       <div id="gen-result" style="display:none;">
@@ -798,7 +840,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   </main>
 
   <footer>
-    LINGUA v1.1 · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA v1.2 · Gemini AI · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · 2026</span>
   </footer>
 </div>
@@ -811,16 +853,16 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
       <button onclick="closeSettings()" style="background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;">✕</button>
     </div>
 
-    <!-- API KEY -->
+    <!-- GEMINI API KEY -->
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;">
       <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;">
-        <span class="api-dot-inline" id="settings-api-dot"></span> <span id="set-api-label">Anthropic API-Key</span>
+        <span class="api-dot-inline" id="settings-api-dot"></span> <span id="set-gemini-key">Gemini API-Key (kostenlos)</span>
       </div>
       <div style="font-size:.75rem;color:var(--muted);margin-bottom:.75rem;line-height:1.5;">
-        <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent);text-decoration:none;">→ console.anthropic.com → Settings → API Keys</a>
+        <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--accent);text-decoration:none;">→ aistudio.google.com → API Key erstellen (gratis)</a>
       </div>
       <div style="position:relative;">
-        <input class="modal-input" id="api-key-input" type="password" placeholder="sk-ant-api03-..." style="padding-right:3rem;">
+        <input class="modal-input" id="api-key-input" type="password" placeholder="AIza..." style="padding-right:3rem;">
         <button onclick="toggleKeyVisibility()" style="position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:.9rem;">👁</button>
       </div>
       <div style="display:flex;gap:.5rem;">
@@ -877,7 +919,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;">
-      LINGUA v1.1 · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA v1.2 · Gemini AI · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · 2026</span>
     </div>
   </div>
@@ -2284,105 +2326,385 @@ const LANG_EMOJI = { ru:"🇷🇺", it:"🇮🇹", es:"🇪🇸", en:"🇬🇧",
 // UI LANGUAGE SYSTEM
 // ============================================================
 const UI_LANGS = {
-  de:{code:'de',label:'🇩🇪 Deutsch'}, en:{code:'en',label:'🇬🇧 English'},
-  ru:{code:'ru',label:'🇷🇺 Русский'}, it:{code:'it',label:'🇮🇹 Italiano'},
-  es:{code:'es',label:'🇪🇸 Español'}, tr:{code:'tr',label:'🇹🇷 Türkçe'},
-  sq:{code:'sq',label:'🇦🇱 Shqip'},   th:{code:'th',label:'🇹🇭 ภาษาไทย'},
+  de: { code:'de', label:'🇩🇪 Deutsch', flag:'🇩🇪' },
+  en: { code:'en', label:'🇬🇧 English', flag:'🇬🇧' },
+  ru: { code:'ru', label:'🇷🇺 Русский', flag:'🇷🇺' },
+  it: { code:'it', label:'🇮🇹 Italiano', flag:'🇮🇹' },
+  es: { code:'es', label:'🇪🇸 Español', flag:'🇪🇸' },
+  tr: { code:'tr', label:'🇹🇷 Türkçe', flag:'🇹🇷' },
+  sq: { code:'sq', label:'🇦🇱 Shqip', flag:'🇦🇱' },
+  th: { code:'th', label:'🇹🇭 ภาษาไทย', flag:'🇹🇭' },
 };
+
 const UI_STRINGS = {
-  de:{ nav_home:'Start',nav_vocab:'Vokabeln',nav_quiz:'Quiz',nav_free:'Freies Lernen',nav_gen:'KI-Generator',nav_myvocab:'Meine Vokabeln',nav_translate:'Übersetzer',nav_ai:'KI-Assistent',welcome_back:'Willkommen zurück',learning:'Du lernst',change_lang:'🌍 Sprache wechseln',which_lang:'Welche Sprache möchtest du lernen?',choose_lang:'Wähle deine Lernsprache',stat_learned:'Gelernt',stat_streak:'Streak',stat_correct:'% Korrekt',stat_total:'Quiz Total',vocab_title:'Vokabeltraining',quiz_title:'Quiz',free_title:'Freies Lernen',gen_title:'✨ KI-Vokabel-Generator',myvocab_title:'⭐ Meine Vokabeln',translate_title:'Übersetzer',ai_title:'KI-Sprachassistent',reveal:'Klicken zum Aufdecken',again:'✗ Nochmal',listen:'🔊 Anhören',skip:'→ Überspringen',knew:'✓ Gewusst',translate_btn:'Übersetzen',speak_out:'🔊 Vorlesen',copy:'⧉ Kopieren',input:'EINGABE',output:'AUSGABE',send:'Senden',new_quiz:'🔄 Neu starten',next:'Weiter →',correct:'✓ Richtig!',wrong:'✗ Falsch. Richtig:',enter_topic:'Thema eingeben',generate:'✨ Generieren',generating:'KI generiert Vokabeln...',save_all:'⭐ Alle speichern',to_training:'📚 Zum Training',add_word:'➕ Eigenes Wort hinzufügen',foreign_word:'FREMDWORT',translation_lbl:'DEUTSCH',phonetic:'AUSSPRACHE (optional)',add_btn:'+ Hinzufügen',train_mine:'📚 Meine Vokabeln trainieren',delete_all:'🗑 Alle löschen',no_vocab:'Noch keine eigenen Vokabeln. Füge Wörter hinzu oder generiere sie mit dem KI-Generator.',settings:'⚙ Einstellungen',save:'Speichern',delete:'Löschen',export:'⬇ Exportieren',reset:'🗑 Zurücksetzen',ai_welcome:'Hallo! Ich bin dein KI-Sprachassistent. Wähle eine Lernsprache und einen Modus, dann können wir loslegen!',mode_conv:'💬 Konversation',mode_grammar:'📝 Grammatik',mode_pron:'🎤 Aussprache',mode_corr:'✏️ Korrektur',quick_grammar:'📖 Grammatiktipp',quick_phrases:'💡 Sätze des Tages',quick_talk:'🗣 Gespräch starten',hc_vocab_desc:'Lerne neue Wörter mit Karteikarten und Sprachausgabe',hc_quiz_desc:'Teste dein Wissen mit Multiple-Choice-Fragen',hc_free_desc:'Wähle ein Thema und stöbere durch Vokabeln',hc_translate_desc:'Übersetze Begriffe und Sätze sofort',hc_ai_desc:'Übe Gespräche mit KI, Mikrofon & Sprachausgabe',hc_gen_desc:'Thema eingeben – KI generiert sofort 20 Vokabeln',hc_myvocab_desc:'Eigene Wörter speichern und gezielt trainieren',myvocab_desc:'Eigene Wörter hinzufügen, gespeicherte KI-Vokabeln verwalten und trainieren',gen_desc:'Gib ein Thema ein – die KI generiert passende Vokabeln für deine Lernsprache',footer_note:'Dein Fortschritt wird lokal gespeichert',chat_placeholder:'Nachricht eingeben oder 🎤 drücken...',},
-  en:{ nav_home:'Home',nav_vocab:'Vocabulary',nav_quiz:'Quiz',nav_free:'Free Learning',nav_gen:'AI Generator',nav_myvocab:'My Words',nav_translate:'Translator',nav_ai:'AI Assistant',welcome_back:'Welcome back',learning:'You are learning',change_lang:'🌍 Change language',which_lang:'Which language do you want to learn?',choose_lang:'Choose your learning language',stat_learned:'Learned',stat_streak:'Streak',stat_correct:'% Correct',stat_total:'Quiz Total',vocab_title:'Vocabulary Training',quiz_title:'Quiz',free_title:'Free Learning',gen_title:'✨ AI Vocabulary Generator',myvocab_title:'⭐ My Vocabulary',translate_title:'Translator',ai_title:'AI Language Assistant',reveal:'Tap to reveal',again:'✗ Again',listen:'🔊 Listen',skip:'→ Skip',knew:'✓ Got it',translate_btn:'Translate',speak_out:'🔊 Speak',copy:'⧉ Copy',input:'INPUT',output:'OUTPUT',send:'Send',new_quiz:'🔄 Restart',next:'Next →',correct:'✓ Correct!',wrong:'✗ Wrong. Correct:',enter_topic:'Enter topic',generate:'✨ Generate',generating:'AI is generating...',save_all:'⭐ Save all',to_training:'📚 To Training',add_word:'➕ Add custom word',foreign_word:'FOREIGN WORD',translation_lbl:'GERMAN',phonetic:'PRONUNCIATION (optional)',add_btn:'+ Add',train_mine:'📚 Train my vocabulary',delete_all:'🗑 Delete all',no_vocab:'No custom vocabulary yet. Add words or generate them with the AI Generator.',settings:'⚙ Settings',save:'Save',delete:'Delete',export:'⬇ Export',reset:'🗑 Reset',ai_welcome:'Hello! I am your AI language assistant. Choose a learning language and a mode to get started!',mode_conv:'💬 Conversation',mode_grammar:'📝 Grammar',mode_pron:'🎤 Pronunciation',mode_corr:'✏️ Correction',quick_grammar:'📖 Grammar tip',quick_phrases:'💡 Phrases of the day',quick_talk:'🗣 Start conversation',hc_vocab_desc:'Learn new words with flashcards and audio',hc_quiz_desc:'Test your knowledge with multiple choice questions',hc_free_desc:'Choose a topic and browse vocabulary',hc_translate_desc:'Translate words and sentences instantly',hc_ai_desc:'Practice conversations with AI and microphone',hc_gen_desc:'Enter a topic – AI generates 20 words instantly',hc_myvocab_desc:'Save custom words and train them',myvocab_desc:'Add words, manage AI vocabulary and train',gen_desc:'Enter a topic – the AI generates matching vocabulary',footer_note:'Your progress is saved locally',chat_placeholder:'Type a message or press 🎤...',},
-  ru:{ nav_home:'Главная',nav_vocab:'Словарь',nav_quiz:'Тест',nav_free:'Свободное обучение',nav_gen:'ИИ-Генератор',nav_myvocab:'Мои слова',nav_translate:'Переводчик',nav_ai:'ИИ-Ассистент',welcome_back:'С возвращением',learning:'Вы изучаете',change_lang:'🌍 Сменить язык',which_lang:'Какой язык вы хотите учить?',choose_lang:'Выберите язык',stat_learned:'Изучено',stat_streak:'Серия',stat_correct:'% Правильных',stat_total:'Всего тестов',vocab_title:'Тренировка слов',quiz_title:'Тест',free_title:'Свободное обучение',gen_title:'✨ ИИ-Генератор словаря',myvocab_title:'⭐ Мои слова',translate_title:'Переводчик',ai_title:'ИИ-Языковой ассистент',reveal:'Нажмите, чтобы открыть',again:'✗ Ещё раз',listen:'🔊 Слушать',skip:'→ Пропустить',knew:'✓ Знал',translate_btn:'Перевести',speak_out:'🔊 Озвучить',copy:'⧉ Копировать',input:'ВВОД',output:'ВЫВОД',send:'Отправить',new_quiz:'🔄 Заново',next:'Далее →',correct:'✓ Правильно!',wrong:'✗ Неверно. Правильно:',enter_topic:'Введите тему',generate:'✨ Генерировать',generating:'ИИ генерирует...',save_all:'⭐ Сохранить все',to_training:'📚 К тренировке',add_word:'➕ Добавить слово',foreign_word:'ИНОСТРАННОЕ СЛОВО',translation_lbl:'НЕМЕЦКИЙ',phonetic:'ПРОИЗНОШЕНИЕ (необязательно)',add_btn:'+ Добавить',train_mine:'📚 Тренировать мои слова',delete_all:'🗑 Удалить все',no_vocab:'Пока нет своих слов.',settings:'⚙ Настройки',save:'Сохранить',delete:'Удалить',export:'⬇ Экспорт',reset:'🗑 Сбросить',ai_welcome:'Привет! Я ваш ИИ-языковой ассистент. Выберите язык и режим для начала!',mode_conv:'💬 Разговор',mode_grammar:'📝 Грамматика',mode_pron:'🎤 Произношение',mode_corr:'✏️ Коррекция',quick_grammar:'📖 Совет по грамматике',quick_phrases:'💡 Фразы дня',quick_talk:'🗣 Начать разговор',hc_vocab_desc:'Учите новые слова с карточками и аудио',hc_quiz_desc:'Проверьте знания с тестами',hc_free_desc:'Выберите тему и просматривайте слова',hc_translate_desc:'Переводите слова и предложения мгновенно',hc_ai_desc:'Практикуйте разговор с ИИ и микрофоном',hc_gen_desc:'Введите тему – ИИ мгновенно создаёт 20 слов',hc_myvocab_desc:'Сохраняйте слова и тренируйте их',myvocab_desc:'Добавляйте слова, управляйте словарём ИИ и тренируйтесь',gen_desc:'Введите тему – ИИ создаёт подходящие слова',footer_note:'Ваш прогресс сохраняется локально',chat_placeholder:'Введите сообщение или нажмите 🎤...',},
-  it:{ nav_home:'Inizio',nav_vocab:'Vocaboli',nav_quiz:'Quiz',nav_free:'Studio libero',nav_gen:'Generatore IA',nav_myvocab:'Le mie parole',nav_translate:'Traduttore',nav_ai:'Assistente IA',welcome_back:'Bentornato',learning:'Stai imparando',change_lang:'🌍 Cambia lingua',which_lang:'Quale lingua vuoi imparare?',choose_lang:'Scegli la tua lingua',stat_learned:'Imparato',stat_streak:'Serie',stat_correct:'% Corretti',stat_total:'Quiz totali',vocab_title:'Allenamento vocaboli',quiz_title:'Quiz',free_title:'Studio libero',gen_title:'✨ Generatore vocaboli IA',myvocab_title:'⭐ I miei vocaboli',translate_title:'Traduttore',ai_title:'Assistente linguistico IA',reveal:'Clicca per rivelare',again:'✗ Di nuovo',listen:'🔊 Ascolta',skip:'→ Salta',knew:'✓ Lo sapevo',translate_btn:'Traduci',speak_out:'🔊 Leggi',copy:'⧉ Copia',input:'INGRESSO',output:'USCITA',send:'Invia',new_quiz:'🔄 Ricomincia',next:'Avanti →',correct:'✓ Corretto!',wrong:'✗ Sbagliato. Corretto:',enter_topic:'Inserisci argomento',generate:'✨ Genera',generating:'IA sta generando...',save_all:'⭐ Salva tutto',to_training:'📚 Allena',add_word:'➕ Aggiungi parola',foreign_word:'PAROLA STRANIERA',translation_lbl:'TEDESCO',phonetic:'PRONUNCIA (opzionale)',add_btn:'+ Aggiungi',train_mine:'📚 Allena i miei vocaboli',delete_all:'🗑 Elimina tutto',no_vocab:'Nessun vocabolo personale ancora.',settings:'⚙ Impostazioni',save:'Salva',delete:'Elimina',export:'⬇ Esporta',reset:'🗑 Reimposta',ai_welcome:'Ciao! Sono il tuo assistente linguistico IA. Scegli una lingua e una modalità per iniziare!',mode_conv:'💬 Conversazione',mode_grammar:'📝 Grammatica',mode_pron:'🎤 Pronuncia',mode_corr:'✏️ Correzione',quick_grammar:'📖 Consiglio grammaticale',quick_phrases:'💡 Frasi del giorno',quick_talk:'🗣 Inizia conversazione',hc_vocab_desc:'Impara nuove parole con flashcard e audio',hc_quiz_desc:'Testa la conoscenza con domande a scelta multipla',hc_free_desc:'Scegli un argomento e sfoglia il vocabolario',hc_translate_desc:'Traduci parole e frasi istantaneamente',hc_ai_desc:'Pratica conversazioni con IA e microfono',hc_gen_desc:'Inserisci un argomento – IA genera 20 parole',hc_myvocab_desc:'Salva parole personalizzate e allenale',myvocab_desc:'Aggiungi parole, gestisci il vocabolario IA e allenati',gen_desc:'Inserisci un argomento – IA genera vocaboli per la tua lingua',footer_note:'Il tuo progresso è salvato localmente',chat_placeholder:'Scrivi un messaggio o premi 🎤...',},
-  es:{ nav_home:'Inicio',nav_vocab:'Vocabulario',nav_quiz:'Quiz',nav_free:'Aprendizaje libre',nav_gen:'Generador IA',nav_myvocab:'Mis palabras',nav_translate:'Traductor',nav_ai:'Asistente IA',welcome_back:'Bienvenido de vuelta',learning:'Estás aprendiendo',change_lang:'🌍 Cambiar idioma',which_lang:'¿Qué idioma quieres aprender?',choose_lang:'Elige tu idioma',stat_learned:'Aprendido',stat_streak:'Racha',stat_correct:'% Correctas',stat_total:'Total quiz',vocab_title:'Entrenamiento de vocabulario',quiz_title:'Quiz',free_title:'Aprendizaje libre',gen_title:'✨ Generador de vocabulario IA',myvocab_title:'⭐ Mi vocabulario',translate_title:'Traductor',ai_title:'Asistente de idiomas IA',reveal:'Toca para revelar',again:'✗ Otra vez',listen:'🔊 Escuchar',skip:'→ Saltar',knew:'✓ Lo sabía',translate_btn:'Traducir',speak_out:'🔊 Leer',copy:'⧉ Copiar',input:'ENTRADA',output:'SALIDA',send:'Enviar',new_quiz:'🔄 Reiniciar',next:'Siguiente →',correct:'✓ ¡Correcto!',wrong:'✗ Incorrecto. Correcto:',enter_topic:'Introduce tema',generate:'✨ Generar',generating:'IA generando...',save_all:'⭐ Guardar todo',to_training:'📚 Entrenar',add_word:'➕ Añadir palabra',foreign_word:'PALABRA EXTRANJERA',translation_lbl:'ALEMÁN',phonetic:'PRONUNCIACIÓN (opcional)',add_btn:'+ Añadir',train_mine:'📚 Entrenar mi vocabulario',delete_all:'🗑 Eliminar todo',no_vocab:'Sin vocabulario propio todavía.',settings:'⚙ Ajustes',save:'Guardar',delete:'Eliminar',export:'⬇ Exportar',reset:'🗑 Restablecer',ai_welcome:'¡Hola! Soy tu asistente de idiomas IA. ¡Elige un idioma y un modo para comenzar!',mode_conv:'💬 Conversación',mode_grammar:'📝 Gramática',mode_pron:'🎤 Pronunciación',mode_corr:'✏️ Corrección',quick_grammar:'📖 Consejo gramatical',quick_phrases:'💡 Frases del día',quick_talk:'🗣 Iniciar conversación',hc_vocab_desc:'Aprende nuevas palabras con tarjetas y audio',hc_quiz_desc:'Pon a prueba tu conocimiento con preguntas de opción múltiple',hc_free_desc:'Elige un tema y navega por el vocabulario',hc_translate_desc:'Traduce palabras y frases al instante',hc_ai_desc:'Pratica conversaciones con IA y micrófono',hc_gen_desc:'Introduce un tema – IA genera 20 palabras',hc_myvocab_desc:'Guarda palabras personalizadas y entrénalas',myvocab_desc:'Añade palabras, gestiona vocabulario IA y entrena',gen_desc:'Introduce un tema – IA genera vocabulario para tu idioma',footer_note:'Tu progreso se guarda localmente',chat_placeholder:'Escribe un mensaje o pulsa 🎤...',},
-  tr:{ nav_home:'Ana Sayfa',nav_vocab:'Kelimeler',nav_quiz:'Test',nav_free:'Serbest Öğrenme',nav_gen:'YZ Üretici',nav_myvocab:'Kelimelerim',nav_translate:'Çevirmen',nav_ai:'YZ Asistan',welcome_back:'Tekrar hoş geldin',learning:'Öğreniyorsun',change_lang:'🌍 Dil değiştir',which_lang:'Hangi dili öğrenmek istiyorsun?',choose_lang:'Öğrenme dilini seç',stat_learned:'Öğrenildi',stat_streak:'Seri',stat_correct:'% Doğru',stat_total:'Test Toplam',vocab_title:'Kelime Antrenmanı',quiz_title:'Test',free_title:'Serbest Öğrenme',gen_title:'✨ YZ Kelime Üretici',myvocab_title:'⭐ Kelimelerim',translate_title:'Çevirmen',ai_title:'YZ Dil Asistanı',reveal:'Görmek için dokun',again:'✗ Tekrar',listen:'🔊 Dinle',skip:'→ Geç',knew:'✓ Bildim',translate_btn:'Çevir',speak_out:'🔊 Seslendir',copy:'⧉ Kopyala',input:'GİRİŞ',output:'ÇIKIŞ',send:'Gönder',new_quiz:'🔄 Yeniden başla',next:'İleri →',correct:'✓ Doğru!',wrong:'✗ Yanlış. Doğrusu:',enter_topic:'Konu girin',generate:'✨ Üret',generating:'YZ üretiyor...',save_all:'⭐ Hepsini kaydet',to_training:'📚 Antrenmana',add_word:'➕ Kelime ekle',foreign_word:'YABANCI KELİME',translation_lbl:'ALMANCA',phonetic:'OKUNUŞ (isteğe bağlı)',add_btn:'+ Ekle',train_mine:'📚 Kelimelerimi antrenman et',delete_all:'🗑 Hepsini sil',no_vocab:'Henüz kişisel kelime yok.',settings:'⚙ Ayarlar',save:'Kaydet',delete:'Sil',export:'⬇ Dışa aktar',reset:'🗑 Sıfırla',ai_welcome:'Merhaba! Ben senin YZ dil asistanınım. Başlamak için bir dil ve mod seç!',mode_conv:'💬 Konuşma',mode_grammar:'📝 Gramer',mode_pron:'🎤 Telaffuz',mode_corr:'✏️ Düzeltme',quick_grammar:'📖 Gramer ipucu',quick_phrases:'💡 Günün cümleleri',quick_talk:'🗣 Konuşma başlat',hc_vocab_desc:'Yeni kelimeleri kartlarla ve sesle öğren',hc_quiz_desc:'Bilgini çoktan seçmeli sorularla test et',hc_free_desc:'Bir konu seç ve kelimelere göz at',hc_translate_desc:'Kelimeleri ve cümleleri anında çevir',hc_ai_desc:'YZ ve mikrofon ile konuşma pratiği yap',hc_gen_desc:'Konu gir – YZ anında 20 kelime üretir',hc_myvocab_desc:'Kişisel kelimeleri kaydet ve antrenman yap',myvocab_desc:'Kelime ekle, YZ kelime haznesini yönet ve antrenman yap',gen_desc:'Konu gir – YZ öğrenme dilin için uygun kelimeler üretir',footer_note:'Gelişimin yerel olarak kaydedilir',chat_placeholder:'Mesaj yaz veya 🎤 düğmesine bas...',},
-  sq:{ nav_home:'Fillimi',nav_vocab:'Fjalor',nav_quiz:'Test',nav_free:'Mësim i lirë',nav_gen:'Gjenerator IA',nav_myvocab:'Fjalët e mia',nav_translate:'Përkthyes',nav_ai:'Asistent IA',welcome_back:'Mirë se u kthe',learning:'Po mëson',change_lang:'🌍 Ndrysho gjuhën',which_lang:'Çfarë gjuhe dëshiron të mësosh?',choose_lang:'Zgjedh gjuhën tuaj',stat_learned:'Mësuar',stat_streak:'Varg',stat_correct:'% Saktë',stat_total:'Total test',vocab_title:'Stërvitje fjalori',quiz_title:'Test',free_title:'Mësim i lirë',gen_title:'✨ Gjenerator fjalori IA',myvocab_title:'⭐ Fjalori im',translate_title:'Përkthyes',ai_title:'Asistent gjuhësor IA',reveal:'Kliko për të zbuluar',again:'✗ Sërish',listen:'🔊 Dëgjo',skip:'→ Kalo',knew:'✓ E dija',translate_btn:'Përkthe',speak_out:'🔊 Lexo',copy:'⧉ Kopjo',input:'HYRJE',output:'DALJE',send:'Dërgo',new_quiz:'🔄 Rifillo',next:'Tjetri →',correct:'✓ Saktë!',wrong:'✗ Gabim. Saktë:',enter_topic:'Shkruaj temën',generate:'✨ Gjenero',generating:'IA po gjeneron...',save_all:'⭐ Ruaj të gjitha',to_training:'📚 Tek stërvitja',add_word:'➕ Shto fjalë',foreign_word:'FJALË E HUAJ',translation_lbl:'GJERMANISHT',phonetic:'SHQIPTIM (opsional)',add_btn:'+ Shto',train_mine:'📚 Stërvit fjalësinë time',delete_all:'🗑 Fshi të gjitha',no_vocab:'Ende asnjë fjalë personale.',settings:'⚙ Cilësimet',save:'Ruaj',delete:'Fshi',export:'⬇ Eksporto',reset:'🗑 Rivendos',ai_welcome:'Përshëndetje! Jam asistenti juaj gjuhësor IA. Zgjedh gjuhën dhe modalitetin për të filluar!',mode_conv:'💬 Bisedë',mode_grammar:'📝 Gramatikë',mode_pron:'🎤 Shqiptim',mode_corr:'✏️ Korrigjim',quick_grammar:'📖 Këshillë gramatikore',quick_phrases:'💡 Frazat e ditës',quick_talk:'🗣 Fillo bisedën',hc_vocab_desc:'Mëso fjalë të reja me kartela dhe audio',hc_quiz_desc:'Testo njohuritë me pyetje me shumë zgjedhje',hc_free_desc:'Zgjedh temën dhe shfleto fjalët',hc_translate_desc:'Përkthe fjalë dhe fjali menjëherë',hc_ai_desc:'Praktiko bisedën me IA dhe mikrofon',hc_gen_desc:'Shkruaj temën – IA gjeneron 20 fjalë',hc_myvocab_desc:'Ruaj fjalë personale dhe stërviti',myvocab_desc:'Shto fjalë, menaxho fjalësinë IA dhe stërvitu',gen_desc:'Shkruaj temën – IA gjeneron fjalë për gjuhën tënde',footer_note:'Progresi juaj ruhet lokalisht',chat_placeholder:'Shkruaj mesazh ose shtyp 🎤...',},
-  th:{ nav_home:'หน้าหลัก',nav_vocab:'คำศัพท์',nav_quiz:'ทดสอบ',nav_free:'เรียนรู้อิสระ',nav_gen:'AI สร้างคำศัพท์',nav_myvocab:'คำศัพท์ของฉัน',nav_translate:'แปลภาษา',nav_ai:'AI ผู้ช่วย',welcome_back:'ยินดีต้อนรับกลับ',learning:'คุณกำลังเรียน',change_lang:'🌍 เปลี่ยนภาษา',which_lang:'คุณต้องการเรียนภาษาอะไร?',choose_lang:'เลือกภาษาที่ต้องการเรียน',stat_learned:'เรียนแล้ว',stat_streak:'ต่อเนื่อง',stat_correct:'% ถูก',stat_total:'ทำแบบทดสอบ',vocab_title:'ฝึกคำศัพท์',quiz_title:'ทดสอบ',free_title:'เรียนรู้อิสระ',gen_title:'✨ AI สร้างคำศัพท์',myvocab_title:'⭐ คำศัพท์ของฉัน',translate_title:'แปลภาษา',ai_title:'AI ผู้ช่วยภาษา',reveal:'แตะเพื่อดู',again:'✗ อีกครั้ง',listen:'🔊 ฟัง',skip:'→ ข้าม',knew:'✓ รู้แล้ว',translate_btn:'แปล',speak_out:'🔊 อ่านออกเสียง',copy:'⧉ คัดลอก',input:'ป้อนข้อความ',output:'ผลลัพธ์',send:'ส่ง',new_quiz:'🔄 เริ่มใหม่',next:'ถัดไป →',correct:'✓ ถูกต้อง!',wrong:'✗ ผิด. ถูกต้องคือ:',enter_topic:'ใส่หัวข้อ',generate:'✨ สร้าง',generating:'AI กำลังสร้าง...',save_all:'⭐ บันทึกทั้งหมด',to_training:'📚 ไปฝึก',add_word:'➕ เพิ่มคำ',foreign_word:'คำต่างประเทศ',translation_lbl:'ภาษาเยอรมัน',phonetic:'การออกเสียง (ไม่บังคับ)',add_btn:'+ เพิ่ม',train_mine:'📚 ฝึกคำศัพท์ของฉัน',delete_all:'🗑 ลบทั้งหมด',no_vocab:'ยังไม่มีคำศัพท์ส่วนตัว',settings:'⚙ ตั้งค่า',save:'บันทึก',delete:'ลบ',export:'⬇ ส่งออก',reset:'🗑 รีเซ็ต',ai_welcome:'สวัสดี! ฉันคือผู้ช่วย AI ด้านภาษาของคุณ เลือกภาษาและโหมดเพื่อเริ่มต้น!',mode_conv:'💬 สนทนา',mode_grammar:'📝 ไวยากรณ์',mode_pron:'🎤 การออกเสียง',mode_corr:'✏️ แก้ไข',quick_grammar:'📖 เคล็ดลับไวยากรณ์',quick_phrases:'💡 ประโยคประจำวัน',quick_talk:'🗣 เริ่มสนทนา',hc_vocab_desc:'เรียนคำศัพท์ใหม่ด้วยบัตรและเสียง',hc_quiz_desc:'ทดสอบความรู้ด้วยคำถามแบบตัวเลือก',hc_free_desc:'เลือกหัวข้อและดูคำศัพท์',hc_translate_desc:'แปลคำและประโยคได้ทันที',hc_ai_desc:'ฝึกสนทนากับ AI และไมโครโฟน',hc_gen_desc:'ใส่หัวข้อ – AI สร้าง 20 คำทันที',hc_myvocab_desc:'บันทึกคำส่วนตัวและฝึกอย่างเจาะจง',myvocab_desc:'เพิ่มคำ จัดการคำ AI และฝึก',gen_desc:'ใส่หัวข้อ – AI สร้างคำศัพท์สำหรับภาษาที่เรียน',footer_note:'ความก้าวหน้าของคุณถูกบันทึกในเครื่อง',chat_placeholder:'พิมพ์ข้อความหรือกด 🎤...',},
+  de: {
+    nav_home:'Start', nav_vocab:'Vokabeln', nav_quiz:'Quiz', nav_free:'Freies Lernen',
+    nav_gen:'KI-Generator', nav_myvocab:'Meine Vokabeln', nav_translate:'Übersetzer', nav_ai:'KI-Assistent',
+    welcome_back:'Willkommen zurück', learning:'Du lernst', change_lang:'🌍 Sprache wechseln',
+    which_lang:'Welche Sprache möchtest du lernen?', choose_lang:'Wähle deine Lernsprache',
+    stat_learned:'Gelernt', stat_streak:'Streak', stat_correct:'% Korrekt', stat_total:'Quiz Total',
+    vocab_title:'Vokabeltraining', quiz_title:'Quiz', free_title:'Freies Lernen',
+    gen_title:'✨ KI-Vokabel-Generator', myvocab_title:'⭐ Meine Vokabeln', translate_title:'Übersetzer',
+    ai_title:'KI-Sprachassistent', reveal:'Klicken zum Aufdecken', again:'✗ Nochmal',
+    listen:'🔊 Anhören', skip:'→ Überspringen', knew:'✓ Gewusst',
+    translate_btn:'Übersetzen', speak_out:'🔊 Vorlesen', copy:'⧉ Kopieren',
+    input:'EINGABE', output:'AUSGABE', send:'Senden', new_quiz:'🔄 Neu starten', next:'Weiter →',
+    correct:'✓ Richtig!', wrong:'✗ Falsch. Richtig:', enter_topic:'Thema eingeben',
+    generate:'✨ Generieren', generating:'KI generiert Vokabeln...', save_all:'⭐ Alle speichern',
+    to_training:'📚 Zum Training', add_word:'➕ Eigenes Wort hinzufügen',
+    foreign_word:'FREMDWORT', translation:'DEUTSCH', phonetic:'AUSSPRACHE (optional)',
+    add_btn:'+ Hinzufügen', train_mine:'📚 Meine Vokabeln trainieren', delete_all:'🗑 Alle löschen',
+    no_vocab:'Noch keine eigenen Vokabeln. Füge Wörter hinzu oder generiere sie mit dem KI-Generator.',
+    settings:'⚙ Einstellungen', save:'Speichern', delete:'Löschen', export:'⬇ Exportieren', reset:'🗑 Zurücksetzen',
+    ai_welcome:'Hallo! Ich bin dein KI-Sprachassistent. Wähle eine Lernsprache und einen Modus, dann können wir loslegen!',
+    mode_conv:'💬 Konversation', mode_grammar:'📝 Grammatik', mode_pron:'🎤 Aussprache', mode_corr:'✏️ Korrektur',
+    quick_grammar:'📖 Grammatiktipp', quick_phrases:'💡 Sätze des Tages', quick_talk:'🗣 Gespräch starten',
+    points:'Punkte', question:'Frage',
+    hc_vocab_desc:'Lerne neue Wörter mit Karteikarten und Sprachausgabe',
+    hc_quiz_desc:'Teste dein Wissen mit Multiple-Choice-Fragen',
+    hc_free_desc:'Wähle ein Thema und stöbere durch Vokabeln',
+    hc_translate_desc:'Übersetze Begriffe und Sätze sofort',
+    hc_ai_desc:'Übe Gespräche mit KI, Mikrofon und Sprachausgabe',
+    hc_gen_desc:'Thema eingeben – KI generiert sofort 20 Vokabeln',
+    hc_myvocab_desc:'Eigene Wörter speichern und gezielt trainieren',
+    myvocab_desc:'Eigene Wörter hinzufügen, gespeicherte KI-Vokabeln verwalten und trainieren',
+    gen_desc:'Gib ein Thema ein – die KI generiert passende Vokabeln für deine Lernsprache',
+    footer_note:'Dein Fortschritt wird lokal gespeichert',
+    chat_placeholder:'Nachricht eingeben oder 🎤 drücken...',
+  },
+  en: {
+    nav_home:'Home', nav_vocab:'Vocabulary', nav_quiz:'Quiz', nav_free:'Free Learning',
+    nav_gen:'AI Generator', nav_myvocab:'My Words', nav_translate:'Translator', nav_ai:'AI Assistant',
+    welcome_back:'Welcome back', learning:'You are learning', change_lang:'🌍 Change language',
+    which_lang:'Which language do you want to learn?', choose_lang:'Choose your learning language',
+    stat_learned:'Learned', stat_streak:'Streak', stat_correct:'% Correct', stat_total:'Quiz Total',
+    vocab_title:'Vocabulary Training', quiz_title:'Quiz', free_title:'Free Learning',
+    gen_title:'✨ AI Vocabulary Generator', myvocab_title:'⭐ My Vocabulary', translate_title:'Translator',
+    ai_title:'AI Language Assistant', reveal:'Tap to reveal', again:'✗ Again',
+    listen:'🔊 Listen', skip:'→ Skip', knew:'✓ Got it',
+    translate_btn:'Translate', speak_out:'🔊 Speak', copy:'⧉ Copy',
+    input:'INPUT', output:'OUTPUT', send:'Send', new_quiz:'🔄 Restart', next:'Next →',
+    correct:'✓ Correct!', wrong:'✗ Wrong. Correct:', enter_topic:'Enter topic',
+    generate:'✨ Generate', generating:'AI is generating...', save_all:'⭐ Save all',
+    to_training:'📚 To Training', add_word:'➕ Add custom word',
+    foreign_word:'FOREIGN WORD', translation:'GERMAN', phonetic:'PRONUNCIATION (optional)',
+    add_btn:'+ Add', train_mine:'📚 Train my vocabulary', delete_all:'🗑 Delete all',
+    no_vocab:'No custom vocabulary yet. Add words or generate them with the AI Generator.',
+    settings:'⚙ Settings', save:'Save', delete:'Delete', export:'⬇ Export', reset:'🗑 Reset',
+    ai_welcome:'Hello! I am your AI language assistant. Choose a learning language and a mode to get started!',
+    mode_conv:'💬 Conversation', mode_grammar:'📝 Grammar', mode_pron:'🎤 Pronunciation', mode_corr:'✏️ Correction',
+    quick_grammar:'📖 Grammar tip', quick_phrases:'💡 Phrases of the day', quick_talk:'🗣 Start conversation',
+    points:'Points', question:'Question',
+    hc_vocab_desc:'Learn new words with flashcards and audio output',
+    hc_quiz_desc:'Test your knowledge with multiple choice questions',
+    hc_free_desc:'Choose a topic and browse vocabulary',
+    hc_translate_desc:'Translate words and sentences instantly',
+    hc_ai_desc:'Practice conversations with AI, microphone and speech',
+    hc_gen_desc:'Enter a topic – AI generates 20 vocabulary words instantly',
+    hc_myvocab_desc:'Save custom words and train them specifically',
+    myvocab_desc:'Add words, manage saved AI vocabulary and train',
+    gen_desc:'Enter a topic – the AI generates matching vocabulary for your learning language',
+    footer_note:'Your progress is saved locally',
+    chat_placeholder:'Type a message or press 🎤...',
+  },
+  ru: {
+    nav_home:'Главная', nav_vocab:'Словарь', nav_quiz:'Тест', nav_free:'Свободное обучение',
+    nav_gen:'ИИ-Генератор', nav_myvocab:'Мои слова', nav_translate:'Переводчик', nav_ai:'ИИ-Ассистент',
+    welcome_back:'С возвращением', learning:'Вы изучаете', change_lang:'🌍 Сменить язык',
+    which_lang:'Какой язык вы хотите учить?', choose_lang:'Выберите язык',
+    stat_learned:'Изучено', stat_streak:'Серия', stat_correct:'% Правильных', stat_total:'Всего тестов',
+    vocab_title:'Тренировка слов', quiz_title:'Тест', free_title:'Свободное обучение',
+    gen_title:'✨ ИИ-Генератор словаря', myvocab_title:'⭐ Мои слова', translate_title:'Переводчик',
+    ai_title:'ИИ-Языковой ассистент', reveal:'Нажмите, чтобы открыть', again:'✗ Ещё раз',
+    listen:'🔊 Слушать', skip:'→ Пропустить', knew:'✓ Знал',
+    translate_btn:'Перевести', speak_out:'🔊 Озвучить', copy:'⧉ Копировать',
+    input:'ВВОД', output:'ВЫВОД', send:'Отправить', new_quiz:'🔄 Заново', next:'Далее →',
+    correct:'✓ Правильно!', wrong:'✗ Неверно. Правильно:', enter_topic:'Введите тему',
+    generate:'✨ Генерировать', generating:'ИИ генерирует...', save_all:'⭐ Сохранить все',
+    to_training:'📚 К тренировке', add_word:'➕ Добавить слово',
+    foreign_word:'ИНОСТРАННОЕ СЛОВО', translation:'НЕМЕЦКИЙ', phonetic:'ПРОИЗНОШЕНИЕ (необязательно)',
+    add_btn:'+ Добавить', train_mine:'📚 Тренировать мои слова', delete_all:'🗑 Удалить все',
+    no_vocab:'Пока нет своих слов. Добавьте слова или сгенерируйте их с ИИ-Генератором.',
+    settings:'⚙ Настройки', save:'Сохранить', delete:'Удалить', export:'⬇ Экспорт', reset:'🗑 Сбросить',
+    ai_welcome:'Привет! Я ваш ИИ-языковой ассистент. Выберите язык и режим для начала!',
+    mode_conv:'💬 Разговор', mode_grammar:'📝 Грамматика', mode_pron:'🎤 Произношение', mode_corr:'✏️ Коррекция',
+    quick_grammar:'📖 Совет по грамматике', quick_phrases:'💡 Фразы дня', quick_talk:'🗣 Начать разговор',
+    points:'Очки', question:'Вопрос',
+    hc_vocab_desc:'Учите новые слова с карточками и аудио',
+    hc_quiz_desc:'Проверьте знания с тестами',
+    hc_free_desc:'Выберите тему и просматривайте слова',
+    hc_translate_desc:'Переводите слова и предложения мгновенно',
+    hc_ai_desc:'Практикуйте разговор с ИИ и микрофоном',
+    hc_gen_desc:'Введите тему – ИИ мгновенно создаёт 20 слов',
+    hc_myvocab_desc:'Сохраняйте слова и тренируйте их',
+    myvocab_desc:'Добавляйте слова, управляйте словарём ИИ и тренируйтесь',
+    gen_desc:'Введите тему – ИИ создаёт подходящие слова для вашего языка',
+    footer_note:'Ваш прогресс сохраняется локально',
+    chat_placeholder:'Введите сообщение или нажмите 🎤...',
+  },
+  it: {
+    nav_home:'Inizio', nav_vocab:'Vocaboli', nav_quiz:'Quiz', nav_free:'Studio libero',
+    nav_gen:'Generatore IA', nav_myvocab:'Le mie parole', nav_translate:'Traduttore', nav_ai:'Assistente IA',
+    welcome_back:'Bentornato', learning:'Stai imparando', change_lang:'🌍 Cambia lingua',
+    which_lang:'Quale lingua vuoi imparare?', choose_lang:'Scegli la tua lingua',
+    stat_learned:'Imparato', stat_streak:'Serie', stat_correct:'% Corretti', stat_total:'Quiz totali',
+    vocab_title:'Allenamento vocaboli', quiz_title:'Quiz', free_title:'Studio libero',
+    gen_title:'✨ Generatore vocaboli IA', myvocab_title:'⭐ I miei vocaboli', translate_title:'Traduttore',
+    ai_title:'Assistente linguistico IA', reveal:'Clicca per rivelare', again:'✗ Di nuovo',
+    listen:'🔊 Ascolta', skip:'→ Salta', knew:'✓ Lo sapevo',
+    translate_btn:'Traduci', speak_out:'🔊 Leggi', copy:'⧉ Copia',
+    input:'INGRESSO', output:'USCITA', send:'Invia', new_quiz:'🔄 Ricomincia', next:'Avanti →',
+    correct:'✓ Corretto!', wrong:'✗ Sbagliato. Corretto:', enter_topic:'Inserisci argomento',
+    generate:'✨ Genera', generating:'IA sta generando...', save_all:'⭐ Salva tutto',
+    to_training:'📚 Allena', add_word:'➕ Aggiungi parola',
+    foreign_word:'PAROLA STRANIERA', translation:'TEDESCO', phonetic:'PRONUNCIA (opzionale)',
+    add_btn:'+ Aggiungi', train_mine:'📚 Allena i miei vocaboli', delete_all:'🗑 Elimina tutto',
+    no_vocab:'Nessun vocabolo personale ancora. Aggiungi parole o generale con IA.',
+    settings:'⚙ Impostazioni', save:'Salva', delete:'Elimina', export:'⬇ Esporta', reset:'🗑 Reimposta',
+    ai_welcome:'Ciao! Sono il tuo assistente linguistico IA. Scegli una lingua e una modalità per iniziare!',
+    mode_conv:'💬 Conversazione', mode_grammar:'📝 Grammatica', mode_pron:'🎤 Pronuncia', mode_corr:'✏️ Correzione',
+    quick_grammar:'📖 Consiglio grammaticale', quick_phrases:'💡 Frasi del giorno', quick_talk:'🗣 Inizia conversazione',
+    points:'Punti', question:'Domanda',
+    hc_vocab_desc:'Impara nuove parole con flashcard e audio',
+    hc_quiz_desc:'Testa la tua conoscenza con domande a scelta multipla',
+    hc_free_desc:'Scegli un argomento e sfoglia il vocabolario',
+    hc_translate_desc:'Traduci parole e frasi istantaneamente',
+    hc_ai_desc:'Pratica conversazioni con IA e microfono',
+    hc_gen_desc:'Inserisci un argomento – IA genera 20 parole istantaneamente',
+    hc_myvocab_desc:'Salva parole personalizzate e allenale',
+    myvocab_desc:'Aggiungi parole, gestisci il vocabolario IA e allenati',
+    gen_desc:'Inserisci un argomento – IA genera vocaboli per la tua lingua',
+    footer_note:'Il tuo progresso è salvato localmente',
+    chat_placeholder:'Scrivi un messaggio o premi 🎤...',
+  },
+  es: {
+    nav_home:'Inicio', nav_vocab:'Vocabulario', nav_quiz:'Quiz', nav_free:'Aprendizaje libre',
+    nav_gen:'Generador IA', nav_myvocab:'Mis palabras', nav_translate:'Traductor', nav_ai:'Asistente IA',
+    welcome_back:'Bienvenido de vuelta', learning:'Estás aprendiendo', change_lang:'🌍 Cambiar idioma',
+    which_lang:'¿Qué idioma quieres aprender?', choose_lang:'Elige tu idioma',
+    stat_learned:'Aprendido', stat_streak:'Racha', stat_correct:'% Correctas', stat_total:'Total quiz',
+    vocab_title:'Entrenamiento de vocabulario', quiz_title:'Quiz', free_title:'Aprendizaje libre',
+    gen_title:'✨ Generador de vocabulario IA', myvocab_title:'⭐ Mi vocabulario', translate_title:'Traductor',
+    ai_title:'Asistente de idiomas IA', reveal:'Toca para revelar', again:'✗ Otra vez',
+    listen:'🔊 Escuchar', skip:'→ Saltar', knew:'✓ Lo sabía',
+    translate_btn:'Traducir', speak_out:'🔊 Leer', copy:'⧉ Copiar',
+    input:'ENTRADA', output:'SALIDA', send:'Enviar', new_quiz:'🔄 Reiniciar', next:'Siguiente →',
+    correct:'✓ ¡Correcto!', wrong:'✗ Incorrecto. Correcto:', enter_topic:'Introduce tema',
+    generate:'✨ Generar', generating:'IA generando...', save_all:'⭐ Guardar todo',
+    to_training:'📚 Entrenar', add_word:'➕ Añadir palabra',
+    foreign_word:'PALABRA EXTRANJERA', translation:'ALEMÁN', phonetic:'PRONUNCIACIÓN (opcional)',
+    add_btn:'+ Añadir', train_mine:'📚 Entrenar mi vocabulario', delete_all:'🗑 Eliminar todo',
+    no_vocab:'Sin vocabulario propio todavía. Añade palabras o genéralas con IA.',
+    settings:'⚙ Ajustes', save:'Guardar', delete:'Eliminar', export:'⬇ Exportar', reset:'🗑 Restablecer',
+    ai_welcome:'¡Hola! Soy tu asistente de idiomas IA. ¡Elige un idioma y un modo para comenzar!',
+    mode_conv:'💬 Conversación', mode_grammar:'📝 Gramática', mode_pron:'🎤 Pronunciación', mode_corr:'✏️ Corrección',
+    quick_grammar:'📖 Consejo gramatical', quick_phrases:'💡 Frases del día', quick_talk:'🗣 Iniciar conversación',
+    points:'Puntos', question:'Pregunta',
+    hc_vocab_desc:'Aprende nuevas palabras con tarjetas y audio',
+    hc_quiz_desc:'Pon a prueba tu conocimiento con preguntas de opción múltiple',
+    hc_free_desc:'Elige un tema y navega por el vocabulario',
+    hc_translate_desc:'Traduce palabras y frases al instante',
+    hc_ai_desc:'Practica conversaciones con IA y micrófono',
+    hc_gen_desc:'Introduce un tema – IA genera 20 palabras al instante',
+    hc_myvocab_desc:'Guarda palabras personalizadas y entrénalas',
+    myvocab_desc:'Añade palabras, gestiona vocabulario IA y entrena',
+    gen_desc:'Introduce un tema – IA genera vocabulario para tu idioma',
+    footer_note:'Tu progreso se guarda localmente',
+    chat_placeholder:'Escribe un mensaje o pulsa 🎤...',
+  },
+  tr: {
+    nav_home:'Ana Sayfa', nav_vocab:'Kelimeler', nav_quiz:'Test', nav_free:'Serbest Öğrenme',
+    nav_gen:'YZ Üretici', nav_myvocab:'Kelimelerim', nav_translate:'Çevirmen', nav_ai:'YZ Asistan',
+    welcome_back:'Tekrar hoş geldin', learning:'Öğreniyorsun', change_lang:'🌍 Dil değiştir',
+    which_lang:'Hangi dili öğrenmek istiyorsun?', choose_lang:'Öğrenme dilini seç',
+    stat_learned:'Öğrenildi', stat_streak:'Seri', stat_correct:'% Doğru', stat_total:'Test Toplam',
+    vocab_title:'Kelime Antrenmanı', quiz_title:'Test', free_title:'Serbest Öğrenme',
+    gen_title:'✨ YZ Kelime Üretici', myvocab_title:'⭐ Kelimelerim', translate_title:'Çevirmen',
+    ai_title:'YZ Dil Asistanı', reveal:'Görmek için dokun', again:'✗ Tekrar',
+    listen:'🔊 Dinle', skip:'→ Geç', knew:'✓ Bildim',
+    translate_btn:'Çevir', speak_out:'🔊 Seslendir', copy:'⧉ Kopyala',
+    input:'GİRİŞ', output:'ÇIKIŞ', send:'Gönder', new_quiz:'🔄 Yeniden başla', next:'İleri →',
+    correct:'✓ Doğru!', wrong:'✗ Yanlış. Doğrusu:', enter_topic:'Konu girin',
+    generate:'✨ Üret', generating:'YZ üretiyor...', save_all:'⭐ Hepsini kaydet',
+    to_training:'📚 Antrenmana', add_word:'➕ Kelime ekle',
+    foreign_word:'YABANCI KELİME', translation:'ALMANCA', phonetic:'OKUNUŞ (isteğe bağlı)',
+    add_btn:'+ Ekle', train_mine:'📚 Kelimelerimi antrenman et', delete_all:'🗑 Hepsini sil',
+    no_vocab:'Henüz kişisel kelime yok. Kelime ekle veya YZ ile üret.',
+    settings:'⚙ Ayarlar', save:'Kaydet', delete:'Sil', export:'⬇ Dışa aktar', reset:'🗑 Sıfırla',
+    ai_welcome:'Merhaba! Ben senin YZ dil asistanınım. Başlamak için bir dil ve mod seç!',
+    mode_conv:'💬 Konuşma', mode_grammar:'📝 Gramer', mode_pron:'🎤 Telaffuz', mode_corr:'✏️ Düzeltme',
+    quick_grammar:'📖 Gramer ipucu', quick_phrases:'💡 Günün cümleleri', quick_talk:'🗣 Konuşma başlat',
+    points:'Puan', question:'Soru',
+    hc_vocab_desc:'Yeni kelimeleri kartlarla ve sesle öğren',
+    hc_quiz_desc:'Bilgini çoktan seçmeli sorularla test et',
+    hc_free_desc:'Bir konu seç ve kelimelere göz at',
+    hc_translate_desc:'Kelimeleri ve cümleleri anında çevir',
+    hc_ai_desc:'YZ ve mikrofon ile konuşma pratiği yap',
+    hc_gen_desc:'Konu gir – YZ anında 20 kelime üretir',
+    hc_myvocab_desc:'Kişisel kelimeleri kaydet ve antrenman yap',
+    myvocab_desc:'Kelime ekle, YZ kelime haznesini yönet ve antrenman yap',
+    gen_desc:'Konu gir – YZ öğrenme dilin için uygun kelimeler üretir',
+    footer_note:'Gelişimin yerel olarak kaydedilir',
+    chat_placeholder:'Mesaj yaz veya 🎤 düğmesine bas...',
+  },
+  sq: {
+    nav_home:'Fillimi', nav_vocab:'Fjalor', nav_quiz:'Test', nav_free:'Mësim i lirë',
+    nav_gen:'Gjenerator IA', nav_myvocab:'Fjalët e mia', nav_translate:'Përkthyes', nav_ai:'Asistent IA',
+    welcome_back:'Mirë se u kthe', learning:'Po mëson', change_lang:'🌍 Ndrysho gjuhën',
+    which_lang:'Çfarë gjuhe dëshiron të mësosh?', choose_lang:'Zgjedh gjuhën tuaj',
+    stat_learned:'Mësuar', stat_streak:'Varg', stat_correct:'% Saktë', stat_total:'Total test',
+    vocab_title:'Stërvitje fjalori', quiz_title:'Test', free_title:'Mësim i lirë',
+    gen_title:'✨ Gjenerator fjalori IA', myvocab_title:'⭐ Fjalori im', translate_title:'Përkthyes',
+    ai_title:'Asistent gjuhësor IA', reveal:'Kliko për të zbuluar', again:'✗ Sërish',
+    listen:'🔊 Dëgjo', skip:'→ Kalo', knew:'✓ E dija',
+    translate_btn:'Përkthe', speak_out:'🔊 Lexo', copy:'⧉ Kopjo',
+    input:'HYRJE', output:'DALJE', send:'Dërgo', new_quiz:'🔄 Rifillo', next:'Tjetri →',
+    correct:'✓ Saktë!', wrong:'✗ Gabim. Saktë:', enter_topic:'Shkruaj temën',
+    generate:'✨ Gjenero', generating:'IA po gjeneron...', save_all:'⭐ Ruaj të gjitha',
+    to_training:'📚 Tek stërvitja', add_word:'➕ Shto fjalë',
+    foreign_word:'FJALË E HUAJ', translation:'GJERMANISHT', phonetic:'SHQIPTIM (opsional)',
+    add_btn:'+ Shto', train_mine:'📚 Stërvit fjalësinë time', delete_all:'🗑 Fshi të gjitha',
+    no_vocab:'Ende asnjë fjalë personale. Shto fjalë ose gjenero me IA.',
+    settings:'⚙ Cilësimet', save:'Ruaj', delete:'Fshi', export:'⬇ Eksporto', reset:'🗑 Rivendos',
+    ai_welcome:'Përshëndetje! Jam asistenti juaj gjuhësor IA. Zgjedh gjuhën dhe modalitetin për të filluar!',
+    mode_conv:'💬 Bisedë', mode_grammar:'📝 Gramatikë', mode_pron:'🎤 Shqiptim', mode_corr:'✏️ Korrigjim',
+    quick_grammar:'📖 Këshillë gramatikore', quick_phrases:'💡 Frazat e ditës', quick_talk:'🗣 Fillo bisedën',
+    points:'Pikë', question:'Pyetje',
+    hc_vocab_desc:'Mëso fjalë të reja me kartela dhe audio',
+    hc_quiz_desc:'Testo njohuritë me pyetje me shumë zgjedhje',
+    hc_free_desc:'Zgjedh temën dhe shfleto fjalët',
+    hc_translate_desc:'Përkthe fjalë dhe fjali menjëherë',
+    hc_ai_desc:'Praktiko bisedën me IA dhe mikrofon',
+    hc_gen_desc:'Shkruaj temën – IA gjeneron 20 fjalë menjëherë',
+    hc_myvocab_desc:'Ruaj fjalë personale dhe stërviti',
+    myvocab_desc:'Shto fjalë, menaxho fjalësinë IA dhe stërvitu',
+    gen_desc:'Shkruaj temën – IA gjeneron fjalë për gjuhën tënde',
+    footer_note:'Progresi juaj ruhet lokalisht',
+    chat_placeholder:'Shkruaj mesazh ose shtyp 🎤...',
+  },
+  th: {
+    nav_home:'หน้าหลัก', nav_vocab:'คำศัพท์', nav_quiz:'ทดสอบ', nav_free:'เรียนรู้อิสระ',
+    nav_gen:'AI สร้างคำศัพท์', nav_myvocab:'คำศัพท์ของฉัน', nav_translate:'แปลภาษา', nav_ai:'AI ผู้ช่วย',
+    welcome_back:'ยินดีต้อนรับกลับ', learning:'คุณกำลังเรียน', change_lang:'🌍 เปลี่ยนภาษา',
+    which_lang:'คุณต้องการเรียนภาษาอะไร?', choose_lang:'เลือกภาษาที่ต้องการเรียน',
+    stat_learned:'เรียนแล้ว', stat_streak:'ต่อเนื่อง', stat_correct:'% ถูก', stat_total:'ทำแบบทดสอบ',
+    vocab_title:'ฝึกคำศัพท์', quiz_title:'ทดสอบ', free_title:'เรียนรู้อิสระ',
+    gen_title:'✨ AI สร้างคำศัพท์', myvocab_title:'⭐ คำศัพท์ของฉัน', translate_title:'แปลภาษา',
+    ai_title:'AI ผู้ช่วยภาษา', reveal:'แตะเพื่อดู', again:'✗ อีกครั้ง',
+    listen:'🔊 ฟัง', skip:'→ ข้าม', knew:'✓ รู้แล้ว',
+    translate_btn:'แปล', speak_out:'🔊 อ่านออกเสียง', copy:'⧉ คัดลอก',
+    input:'ป้อนข้อความ', output:'ผลลัพธ์', send:'ส่ง', new_quiz:'🔄 เริ่มใหม่', next:'ถัดไป →',
+    correct:'✓ ถูกต้อง!', wrong:'✗ ผิด. ถูกต้องคือ:', enter_topic:'ใส่หัวข้อ',
+    generate:'✨ สร้าง', generating:'AI กำลังสร้าง...', save_all:'⭐ บันทึกทั้งหมด',
+    to_training:'📚 ไปฝึก', add_word:'➕ เพิ่มคำ',
+    foreign_word:'คำต่างประเทศ', translation:'ภาษาเยอรมัน', phonetic:'การออกเสียง (ไม่บังคับ)',
+    add_btn:'+ เพิ่ม', train_mine:'📚 ฝึกคำศัพท์ของฉัน', delete_all:'🗑 ลบทั้งหมด',
+    no_vocab:'ยังไม่มีคำศัพท์ส่วนตัว เพิ่มคำหรือสร้างด้วย AI',
+    settings:'⚙ ตั้งค่า', save:'บันทึก', delete:'ลบ', export:'⬇ ส่งออก', reset:'🗑 รีเซ็ต',
+    ai_welcome:'สวัสดี! ฉันคือผู้ช่วย AI ด้านภาษาของคุณ เลือกภาษาและโหมดเพื่อเริ่มต้น!',
+    mode_conv:'💬 สนทนา', mode_grammar:'📝 ไวยากรณ์', mode_pron:'🎤 การออกเสียง', mode_corr:'✏️ แก้ไข',
+    quick_grammar:'📖 เคล็ดลับไวยากรณ์', quick_phrases:'💡 ประโยคประจำวัน', quick_talk:'🗣 เริ่มสนทนา',
+    points:'คะแนน', question:'คำถาม',
+    hc_vocab_desc:'เรียนคำศัพท์ใหม่ด้วยบัตรและเสียง',
+    hc_quiz_desc:'ทดสอบความรู้ด้วยคำถามแบบตัวเลือก',
+    hc_free_desc:'เลือกหัวข้อและดูคำศัพท์',
+    hc_translate_desc:'แปลคำและประโยคได้ทันที',
+    hc_ai_desc:'ฝึกสนทนากับ AI และไมโครโฟน',
+    hc_gen_desc:'ใส่หัวข้อ – AI สร้าง 20 คำทันที',
+    hc_myvocab_desc:'บันทึกคำส่วนตัวและฝึกอย่างเจาะจง',
+    myvocab_desc:'เพิ่มคำ จัดการคำ AI และฝึก',
+    gen_desc:'ใส่หัวข้อ – AI สร้างคำศัพท์สำหรับภาษาที่เรียน',
+    footer_note:'ความก้าวหน้าของคุณถูกบันทึกในเครื่อง',
+    chat_placeholder:'พิมพ์ข้อความหรือกด 🎤...',
+  },
 };
 
 let uiLang = localStorage.getItem('lingua_ui_lang') || 'de';
 function t(key) { return (UI_STRINGS[uiLang] || UI_STRINGS.de)[key] || UI_STRINGS.de[key] || key; }
 
-function renderUILangButtons() {
-  var container = document.getElementById('ui-lang-buttons');
-  if (!container) return;
-  container.innerHTML = '';
-  Object.values(UI_LANGS).forEach(function(l) {
-    var btn = document.createElement('button');
-    btn.className = 'lang-pill' + (l.code === uiLang ? ' active' : '');
-    btn.textContent = l.label;
-    btn.onclick = function() {
-      uiLang = l.code;
-      localStorage.setItem('lingua_ui_lang', uiLang);
-      applyUILanguage();
-      showToast(l.label);
-    };
-    container.appendChild(btn);
-  });
-}
-
 function applyUILanguage() {
   uiLang = localStorage.getItem('lingua_ui_lang') || 'de';
-  function setText(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
-  // Nav
-  var navIcons = {home:'⌂',vocab:'📚',quiz:'❓',free:'🗂',generator:'✨',myvocab:'⭐',translate:'⇄',ai:'✦'};
-  var navKeys  = {home:'nav_home',vocab:'nav_vocab',quiz:'nav_quiz',free:'nav_free',generator:'nav_gen',myvocab:'nav_myvocab',translate:'nav_translate',ai:'nav_ai'};
+
+  // Helper: set text of element by ID safely
+  function setText(id, text) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+
+  // Nav buttons
+  var navIcons = { home:'⌂', vocab:'📚', quiz:'❓', free:'🗂', generator:'✨', myvocab:'⭐', translate:'⇄', ai:'✦' };
+  var navKeys  = { home:'nav_home', vocab:'nav_vocab', quiz:'nav_quiz', free:'nav_free', generator:'nav_gen', myvocab:'nav_myvocab', translate:'nav_translate', ai:'nav_ai' };
   document.querySelectorAll('.nav-btn[data-section]').forEach(function(b) {
     var sec = b.dataset.section;
     if (navKeys[sec]) b.innerHTML = '<span class="nav-icon">' + (navIcons[sec]||'') + '</span> ' + t(navKeys[sec]);
   });
-  // Home picker
+
+  // Home – language picker
   setText('ui-which-lang', t('which_lang'));
   setText('ui-choose-lang', t('choose_lang'));
-  // Dashboard
+
+  // Home – dashboard
   setText('ui-welcome-back', t('welcome_back'));
   setText('ui-change-lang', t('change_lang'));
   setText('ui-stat-learned', t('stat_learned'));
   setText('ui-stat-streak', t('stat_streak'));
   setText('ui-stat-correct', t('stat_correct'));
   setText('ui-stat-total', t('stat_total'));
+
   // Home cards
-  setText('ui-hc-vocab', t('vocab_title'));       setText('ui-hc-vocab-desc', t('hc_vocab_desc'));
-  setText('ui-hc-quiz', t('quiz_title'));          setText('ui-hc-quiz-desc', t('hc_quiz_desc'));
-  setText('ui-hc-free', t('free_title'));          setText('ui-hc-free-desc', t('hc_free_desc'));
-  setText('ui-hc-translate', t('translate_title')); setText('ui-hc-translate-desc', t('hc_translate_desc'));
-  setText('ui-hc-ai', t('ai_title'));              setText('ui-hc-ai-desc', t('hc_ai_desc'));
-  setText('ui-hc-gen', t('gen_title'));            setText('ui-hc-gen-desc', t('hc_gen_desc'));
-  setText('ui-hc-myvocab', t('myvocab_title'));   setText('ui-hc-myvocab-desc', t('hc_myvocab_desc'));
-  // Vocab
+  setText('ui-hc-vocab', t('vocab_title'));
+  setText('ui-hc-vocab-desc', t('hc_vocab_desc'));
+  setText('ui-hc-quiz', t('quiz_title'));
+  setText('ui-hc-quiz-desc', t('hc_quiz_desc'));
+  setText('ui-hc-free', t('free_title'));
+  setText('ui-hc-free-desc', t('hc_free_desc'));
+  setText('ui-hc-translate', t('translate_title'));
+  setText('ui-hc-translate-desc', t('hc_translate_desc'));
+  setText('ui-hc-ai', t('ai_title'));
+  setText('ui-hc-ai-desc', t('hc_ai_desc'));
+  setText('ui-hc-gen', t('gen_title'));
+  setText('ui-hc-gen-desc', t('hc_gen_desc'));
+  setText('ui-hc-myvocab', t('myvocab_title'));
+  setText('ui-hc-myvocab-desc', t('hc_myvocab_desc'));
+
+  // Vocab trainer
   setText('ui-vocab-title', t('vocab_title'));
   setText('ui-flip-hint', t('reveal'));
   setText('ui-btn-again', t('again'));
   setText('ui-btn-listen', t('listen'));
   setText('ui-btn-skip', t('skip'));
   setText('ui-btn-knew', t('knew'));
+
   // Quiz
   setText('ui-quiz-title', t('quiz_title'));
   setText('ui-btn-new-quiz', t('new_quiz'));
   var nextBtn = document.getElementById('quiz-next-btn');
   if (nextBtn) nextBtn.textContent = t('next');
-  // Free
+
+  // Free Learning
   setText('ui-free-title', t('free_title'));
+
   // Generator
   setText('ui-gen-title', t('gen_title'));
   setText('ui-gen-desc', t('gen_desc'));
   setText('ui-gen-topic-label', t('enter_topic'));
   var genBtn = document.getElementById('gen-btn');
   if (genBtn) genBtn.textContent = t('generate');
-  setText('ui-generating', t('generating'));
   setText('ui-btn-save-all', t('save_all'));
   setText('ui-btn-to-training', t('to_training'));
+
   // My Vocab
   setText('ui-myvocab-title', t('myvocab_title'));
   setText('ui-myvocab-desc', t('myvocab_desc'));
   setText('ui-add-word-title', t('add_word'));
   setText('ui-lbl-foreign', t('foreign_word'));
-  setText('ui-lbl-translation', t('translation_lbl'));
+  setText('ui-lbl-translation', t('translation'));
   setText('ui-lbl-phonetic', t('phonetic'));
   setText('ui-btn-add', t('add_btn'));
   setText('ui-btn-train-mine', t('train_mine'));
   setText('ui-btn-delete-all', t('delete_all'));
   setText('mv-empty', t('no_vocab'));
+
   // Translator
   setText('ui-translate-title', t('translate_title'));
   setText('ui-lbl-input', t('input'));
@@ -2390,7 +2712,8 @@ function applyUILanguage() {
   setText('ui-btn-translate', t('translate_btn'));
   setText('ui-btn-speak-out', t('speak_out'));
   setText('ui-btn-copy', t('copy'));
-  // AI
+
+  // AI Assistant
   setText('ui-ai-title', t('ai_title'));
   setText('ui-btn-send', t('send'));
   setText('ui-btn-grammar-tip', t('quick_grammar'));
@@ -2398,26 +2721,52 @@ function applyUILanguage() {
   setText('ui-btn-talk', t('quick_talk'));
   var chatInp = document.getElementById('chat-input');
   if (chatInp) chatInp.placeholder = t('chat_placeholder');
+
+  // AI welcome message
   setText('ai-welcome-msg', t('ai_welcome'));
+
   // AI mode chips
-  var modeMap = {conversation:'mode_conv',grammar:'mode_grammar',pronunciation:'mode_pron',correction:'mode_corr'};
+  var modeMap = { conversation:'mode_conv', grammar:'mode_grammar', pronunciation:'mode_pron', correction:'mode_corr' };
   document.querySelectorAll('.ai-chip[data-mode]').forEach(function(c) {
-    var k = modeMap[c.dataset.mode]; if (k) c.textContent = t(k);
+    var k = modeMap[c.dataset.mode];
+    if (k) c.textContent = t(k);
   });
-  // Settings
+
+  // Settings modal
   setText('set-title', t('settings'));
+  setText('set-tts-title', '🔊 ' + (uiLang==='de'?'Sprachausgabe':'Speech output'));
+  setText('set-progress-title', '📊 ' + (uiLang==='de'?'Fortschritt':'Progress'));
+  setText('set-learn-lang-title', '🎓 ' + (uiLang==='de'?'Lernsprache':'Learning language'));
+  setText('set-ui-lang-title', '🌐 ' + (uiLang==='de'?'App-Sprache (Interface)':'App language (Interface)'));
   setText('set-save', t('save'));
   setText('set-delete', t('delete'));
   setText('set-export', t('export'));
   setText('set-reset', t('reset'));
-  setText('set-tts-title', '🔊 ' + (uiLang==='de'?'Sprachausgabe':'Speech output'));
-  setText('set-progress-title', '📊 ' + (uiLang==='de'?'Fortschritt':'Progress'));
-  setText('set-learn-lang-title', '🎓 ' + (uiLang==='de'?'Lernsprache':'Learning language'));
-  setText('set-ui-lang-title', '🌐 ' + (uiLang==='de'?'App-Sprache (Interface)':'App language'));
-  setText('set-local-note', t('footer_note'));
+
   // Footer
   setText('footer-text', t('footer_note'));
+
+  // Render UI language picker buttons
   renderUILangButtons();
+}
+
+function renderUILangButtons() {
+  const container = document.getElementById('ui-lang-buttons');
+  if (!container) return;
+  container.innerHTML = '';
+  Object.values(UI_LANGS).forEach(l => {
+    const btn = document.createElement('button');
+    btn.className = 'lang-pill' + (l.code === uiLang ? ' active' : '');
+    btn.textContent = l.label;
+    btn.onclick = () => {
+      uiLang = l.code;
+      localStorage.setItem('lingua_ui_lang', uiLang);
+      applyUILanguage();
+      renderUILangButtons();
+      showToast(l.flag + ' ' + l.label);
+    };
+    container.appendChild(btn);
+  });
 }
 
 // ============================================================
@@ -2426,7 +2775,7 @@ function applyUILanguage() {
 let autoSpeak = true;
 let speechRate = 0.9;
 
-function getApiKey() { return localStorage.getItem('lingua_api_key') || ''; }
+function getApiKey() { return localStorage.getItem('lingua_gemini_key') || ''; }
 
 function updateApiDot() {
   const ok = !!getApiKey();
@@ -2458,17 +2807,17 @@ function closeSettings() {
 function saveApiKey() {
   const key = document.getElementById('api-key-input').value.trim();
   if (key) {
-    localStorage.setItem('lingua_api_key', key);
-    showToast('✓ API-Key gespeichert!');
+    localStorage.setItem('lingua_gemini_key', key);
+    showToast('✓ Gemini API-Key gespeichert!');
   } else {
-    localStorage.removeItem('lingua_api_key');
+    localStorage.removeItem('lingua_gemini_key');
     showToast('API-Key entfernt.');
   }
   updateApiDot();
 }
 
 function clearApiKey() {
-  localStorage.removeItem('lingua_api_key');
+  localStorage.removeItem('lingua_gemini_key');
   document.getElementById('api-key-input').value = '';
   updateApiDot();
   showToast('API-Key gelöscht.');
@@ -2485,7 +2834,7 @@ function setLangFromSettings(lang) {
   document.querySelectorAll('.lang-pill').forEach(p => p.classList.toggle('active', p.dataset.lang === lang));
   document.querySelectorAll('[data-settings-lang]').forEach(b => b.classList.toggle('active', b.dataset.settingsLang === lang));
   document.getElementById('home-lang-emoji').textContent = LANG_EMOJI[lang];
-  showToast('Sprache: ' + LANG_NAMES[lang]);
+  showToast(LANG_EMOJI[lang] + ' ' + LANG_NAMES[lang]);
 }
 
 function toggleAutoSpeak() {
@@ -2509,7 +2858,7 @@ function updateSpeed(val) {
 
 function exportProgress() {
   const data = { state, myVocab: {} };
-  ['ru','it','es','en'].forEach(l => { data.myVocab[l] = getMyVocab(l); });
+  Object.keys(LANG_NAMES).forEach(l => { data.myVocab[l] = getMyVocab(l); });
   const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -2519,75 +2868,66 @@ function exportProgress() {
 }
 
 function resetProgress() {
-  if (!confirm('Gesamten Fortschritt zurücksetzen? (Eigene Vokabeln bleiben erhalten)')) return;
+  if (!confirm('Gesamten Fortschritt zurücksetzen?')) return;
   state.learned = {}; state.quizCorrect = 0; state.quizTotal = 0; state.streak = 0; state.lastDate = null;
   saveState();
   updateHomeStats();
   showToast('Fortschritt zurückgesetzt.');
 }
 
-// Close settings on backdrop click
 document.getElementById('settings-modal').addEventListener('click', function(e) {
   if (e.target === this) closeSettings();
 });
 
-// Alias for callClaude compatibility
 function openApiModal() { openSettings(); }
 function closeApiModal() { closeSettings(); }
+
+// ============================================================
+// GEMINI API CALL
+// ============================================================
 async function callClaude(payload) {
   const key = getApiKey();
-  if (!key) {
-    openApiModal();
-    throw new Error('Kein API-Key gesetzt. Bitte unter ⚙ eingeben.');
-  }
+  if (!key) { openApiModal(); throw new Error('Kein Gemini API-Key. Bitte unter ⚙ eintragen.'); }
 
-  // Build request — anthropic-dangerous-direct-browser-access enables CORS
-  const reqInit = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': key,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true',
-    },
-    body: JSON.stringify(payload)
-  };
+  // Convert Anthropic-style payload to Gemini format
+  const systemText = payload.system || '';
+  const messages = payload.messages || [];
+  const geminiContents = [];
+  if (systemText) {
+    geminiContents.push({ role:'user', parts:[{ text: systemText }] });
+    geminiContents.push({ role:'model', parts:[{ text:'Verstanden. Ich folge diesen Anweisungen.' }] });
+  }
+  messages.forEach(m => {
+    geminiContents.push({ role: m.role === 'assistant' ? 'model' : 'user', parts:[{ text: m.content }] });
+  });
+
+  const model = 'gemini-2.0-flash';
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
 
   let res;
   try {
-    res = await fetch('https://api.anthropic.com/v1/messages', reqInit);
-  } catch(netErr) {
-    const msg = netErr?.message || String(netErr);
-    // Safari CORS / network errors
-    if (msg.includes('Invalid response') || msg.includes('NetworkError') || msg.includes('Failed to fetch') || msg.includes('Load failed')) {
-      throw new Error('Verbindung zur API fehlgeschlagen. Mögliche Ursachen:\n1. App muss über HTTPS laufen (GitHub Pages)\n2. Internetverbindung prüfen\n3. API-Key prüfen (⚙)');
-    }
-    throw new Error('Netzwerkfehler: ' + msg);
+    res = await fetch(url, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ contents: geminiContents, generationConfig:{ maxOutputTokens: payload.max_tokens || 1000 } })
+    });
+  } catch(e) {
+    throw new Error('Netzwerkfehler: ' + (e.message || e));
   }
 
-  // Handle non-JSON responses gracefully
   let data;
-  const ct = res.headers.get('content-type') || '';
-  if (ct.includes('application/json')) {
-    try { data = await res.json(); } catch(e) { throw new Error('Antwort-Parsing fehlgeschlagen (HTTP ' + res.status + ')'); }
-  } else {
-    const raw = await res.text().catch(() => '');
-    throw new Error('Unerwartetes Antwortformat (HTTP ' + res.status + '): ' + raw.slice(0, 100));
-  }
+  try { data = await res.json(); } catch(e) { throw new Error(`Keine JSON-Antwort (HTTP ${res.status})`); }
 
   if (!res.ok) {
-    const msg = data?.error?.message || JSON.stringify(data).slice(0, 150);
-    if (res.status === 400) throw new Error('400 – Ungültige Anfrage. Modell: ' + (payload.model || 'unbekannt'));
-    if (res.status === 401) throw new Error('401 – API-Key ungültig. Unter ⚙ neuen Key eingeben.');
-    if (res.status === 403) throw new Error('403 – Zugriff verweigert. Billing unter console.anthropic.com prüfen.');
-    if (res.status === 404) throw new Error('404 – Modell nicht gefunden: ' + (payload.model || ''));
-    if (res.status === 429) throw new Error('429 – Zu viele Anfragen. Kurz warten und nochmal versuchen.');
-    if (res.status === 529) throw new Error('529 – Anthropic API überlastet. Bitte später versuchen.');
-    throw new Error('API-Fehler HTTP ' + res.status + ': ' + msg);
+    const msg = data?.error?.message || JSON.stringify(data);
+    if (res.status === 400) throw new Error('400 – Ungültige Anfrage: ' + msg);
+    if (res.status === 403) throw new Error('403 – API-Key ungültig oder keine Berechtigung.');
+    if (res.status === 429) throw new Error('429 – Zu viele Anfragen. Kurz warten.');
+    throw new Error(`HTTP ${res.status}: ${msg}`);
   }
 
-  const text = (data.content || []).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
-  if (!text) throw new Error('Leere Antwort erhalten. Bitte nochmal versuchen.');
+  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+  if (!text) throw new Error('Leere Antwort von Gemini.');
   return text;
 }
 
@@ -2679,7 +3019,7 @@ async function generateVocab() {
 
   try {
     const result = await callClaude({
-      model: 'claude-haiku-4-5-20251001',
+      model: 'claude-haiku-4-5',
       max_tokens: 1200,
       system: 'Du bist ein Sprachlehrer. Generiere eine Vokabelliste zum Thema auf ' + langName + ' fuer deutschsprachige Lerner. Antworte NUR mit einem JSON-Array, kein Markdown, keine Erklaerungen. Format: [{"f":"Fremdwort","t":"Deutsch","p":"Aussprache"},...] Generiere genau 20 Eintraege. Aussprache ist eine vereinfachte phonetische Umschrift.',
       messages: [{ role: 'user', content: `Thema: ${topic}` }]
@@ -2718,7 +3058,8 @@ function renderGeneratedWords() {
     row.innerHTML = '<div style="flex:1;">' +
       '<div class="vi-foreign">' + w.f + '</div>' +
       '<div class="vi-translation">' + w.t + (w.p ? ' · <em style="color:var(--muted)">' + w.p + '</em>' : '') + '</div>' +
-      '</div><div style="display:flex;gap:.4rem;align-items:center;">' +
+      '</div>' +
+      '<div style="display:flex;gap:.4rem;align-items:center;">' +
       '<button class="vi-speak" onclick="speak(\'' + w.f.replace(/'/g,"\\'") + '\',\'' + state.lang + '\')">🔊</button>' +
       '<button class="gen-save-btn ' + (w.saved?'saved':'') + '" id="gsave-' + i + '" onclick="saveSingleGenWord(' + i + ')">' +
       (w.saved ? '✓ Gespeichert' : '⭐ Speichern') + '</button></div>';
@@ -2843,7 +3184,8 @@ function renderMyVocab() {
     item.innerHTML = '<div style="flex:1;">' +
       '<div class="vi-foreign">' + w.f + '</div>' +
       '<div class="vi-translation">' + w.t + (w.p ? ' · <em style="color:var(--muted)">' + w.p + '</em>' : '') + '</div>' +
-      '</div><div class="mv-actions">' +
+      '</div>' +
+      '<div class="mv-actions">' +
       '<button class="vi-speak" onclick="speak(\'' + w.f.replace(/'/g,"\\'") + '\',\'' + lang + '\')">🔊</button>' +
       '<button class="mv-del" onclick="deleteMyVocabItem(\'' + w.f.replace(/'/g,"\\'") + '\')">✕</button>' +
       '</div>';
@@ -3135,7 +3477,7 @@ async function doTranslate() {
 
   try {
     const result = await callClaude({
-      model:'claude-sonnet-4-6',
+      model:'claude-sonnet-4-5',
       max_tokens:1000,
       system:`Du bist ein präziser Übersetzer. Übersetze den gegebenen Text von ${fromName} nach ${toName}. Gib NUR die Übersetzung aus, ohne Erklärungen, Anmerkungen oder Formatierung.`,
       messages:[{role:'user',content:text}]
@@ -3210,7 +3552,7 @@ async function sendChat() {
 
   try {
     const reply = await callClaude({
-      model:'claude-sonnet-4-6',
+      model:'claude-sonnet-4-5',
       max_tokens:1000,
       system: MODE_PROMPTS[aiMode](state.lang),
       messages: chatHistory
@@ -3343,6 +3685,7 @@ uiLang = localStorage.getItem('lingua_ui_lang') || 'de';
 initVocab();
 updateApiDot();
 applyUILanguage();
+// Show settings on first launch if no Gemini key set
 if (!getApiKey()) setTimeout(openSettings, 800);
 </script>
 </body>
