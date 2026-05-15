@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="description" content="LINGUA v1.1 – KI-gestützte Sprachlern-App von René Prause">
+<meta name="description" content="LINGUA v2.0 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v1.1 · by René Prause</title>
+<title>LINGUA v2.0 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -31,6 +31,7 @@
   --de: #ffcc00;
   --th: #a8173a;
   --da: #c60c30;
+  --ro: #002B7F;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { height:100%; }
@@ -82,6 +83,7 @@ header {
 .lang-pill[data-lang="de"] { --pill-color:var(--de); }
 .lang-pill[data-lang="th"] { --pill-color:var(--th); }
 .lang-pill[data-lang="da"] { --pill-color:var(--da); }
+.lang-pill[data-lang="ro"] { --pill-color:var(--ro); }
 .settings-btn {
   background:var(--surface2); border:1px solid var(--border); border-radius:8px;
   padding:.35rem .6rem; cursor:pointer; font-size:1rem; color:var(--muted);
@@ -95,20 +97,26 @@ header {
 /* NAV */
 nav {
   display:flex; gap:.2rem; overflow-x:auto; padding:.6rem 1rem;
-  background:rgba(7,7,13,.6); border-bottom:1px solid var(--border);
+  background:var(--nav-bg, rgba(7,7,13,.6)); border-bottom:1px solid var(--border);
   scrollbar-width:none; -webkit-overflow-scrolling:touch; flex-shrink:0;
 }
 nav::-webkit-scrollbar { display:none; }
 .nav-btn {
   display:flex; align-items:center; gap:.4rem; padding:.5rem .9rem;
   border-radius:8px; border:1px solid transparent; background:transparent;
-  color:var(--muted); font-family:'Syne',sans-serif; font-size:.75rem; font-weight:600;
+  color:var(--nav-text, var(--muted)); font-family:'Syne',sans-serif; font-size:.75rem; font-weight:600;
   cursor:pointer; transition:all .2s; white-space:nowrap; letter-spacing:.02em;
   -webkit-tap-highlight-color:transparent; flex-shrink:0;
 }
-.nav-btn:hover { color:var(--text); border-color:var(--border); }
-.nav-btn.active { background:var(--surface); border-color:var(--border); color:var(--accent); }
+.nav-btn:hover { color:var(--text); border-color:var(--border); background:var(--surface2); }
+.nav-btn.active { background:var(--surface); border-color:var(--accent); color:var(--accent); }
 .nav-icon { font-size:.9rem; }
+
+/* Light mode nav fix */
+:root.light nav { background:var(--nav-bg, rgba(220,220,235,.95)); }
+:root.light .nav-btn { color:var(--nav-text, #444466); }
+:root.light .nav-btn:hover { color:var(--text); background:rgba(0,0,0,.06); }
+:root.light .nav-btn.active { background:#fff; color:var(--accent); border-color:var(--accent); }
 
 /* MAIN */
 main { padding:1.25rem; max-width:900px; width:100%; margin:0 auto; flex:1; }
@@ -580,7 +588,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;">v1.1</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;">v2.0</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill active" data-lang="ru">🇷🇺 RU</button>
@@ -592,6 +600,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
         <button class="lang-pill" data-lang="de">🇩🇪 DE</button>
         <button class="lang-pill" data-lang="th">🇹🇭 TH</button>
         <button class="lang-pill" data-lang="da">🇩🇰 DA</button>
+        <button class="lang-pill" data-lang="ro">🇷🇴 RO</button>
       </div>
       <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Hell/Dunkel">🌙</button>
       <button class="settings-btn" onclick="openSettings()" title="Einstellungen">
@@ -638,6 +647,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
           <button class="lang-select-card" onclick="selectLanguage('de')"><div class="lsc-flag">🇩🇪</div><div class="lsc-name">Deutsch</div><div class="lsc-sub">Deutsch · Germanisch</div></button>
           <button class="lang-select-card" onclick="selectLanguage('th')"><div class="lsc-flag">🇹🇭</div><div class="lsc-name">Thailändisch</div><div class="lsc-sub">ภาษาไทย · Tai-Kadai</div></button>
           <button class="lang-select-card" onclick="selectLanguage('da')"><div class="lsc-flag">🇩🇰</div><div class="lsc-name">Dänisch</div><div class="lsc-sub">Dansk · Germanisch</div></button>
+          <button class="lang-select-card" onclick="selectLanguage('ro')"><div class="lsc-flag">🇷🇴</div><div class="lsc-name">Rumänisch</div><div class="lsc-sub">Română · Romanisch</div></button>
         </div>
       </div>
 
@@ -993,6 +1003,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
               <option value="sq">🇦🇱 Albanisch</option>
               <option value="th">🇹🇭 Thailändisch</option>
               <option value="da">🇩🇰 Dänisch</option>
+              <option value="ro">🇷🇴 Rumänisch</option>
             </select>
           </div>
           <textarea class="translate-textarea" id="trans-input" placeholder="Text eingeben..."></textarea>
@@ -1016,6 +1027,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
               <option value="sq">🇦🇱 Albanisch</option>
               <option value="th">🇹🇭 Thailändisch</option>
               <option value="da">🇩🇰 Dänisch</option>
+              <option value="ro">🇷🇴 Rumänisch</option>
             </select>
           </div>
           <textarea class="translate-textarea" id="trans-output" placeholder="Übersetzung erscheint hier..." readonly></textarea>
@@ -1059,7 +1071,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   </main>
 
   <footer>
-    LINGUA v1.1 · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA v2.0 · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · 2026</span>
   </footer>
 </div>
@@ -1097,6 +1109,35 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
       </div>
     </div>
 
+    <!-- FARBPALETTE -->
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;">
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;margin-bottom:.75rem;" id="set-palette-title">🎨 Farbpalette</div>
+      <!-- Preset Themes -->
+      <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.75rem;" id="palette-presets"></div>
+      <!-- Custom Colors -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;" id="color-pickers">
+        <label style="font-size:.72rem;color:var(--muted);">Akzentfarbe
+          <input type="color" id="cp-accent" oninput="applyCustomColor('accent',this.value)" style="display:block;width:100%;height:32px;border:none;border-radius:6px;cursor:pointer;background:none;margin-top:.2rem;">
+        </label>
+        <label style="font-size:.72rem;color:var(--muted);">Hintergrund
+          <input type="color" id="cp-bg" oninput="applyCustomColor('bg',this.value)" style="display:block;width:100%;height:32px;border:none;border-radius:6px;cursor:pointer;background:none;margin-top:.2rem;">
+        </label>
+        <label style="font-size:.72rem;color:var(--muted);">Oberfläche
+          <input type="color" id="cp-surface" oninput="applyCustomColor('surface',this.value)" style="display:block;width:100%;height:32px;border:none;border-radius:6px;cursor:pointer;background:none;margin-top:.2rem;">
+        </label>
+        <label style="font-size:.72rem;color:var(--muted);">Text
+          <input type="color" id="cp-text" oninput="applyCustomColor('text',this.value)" style="display:block;width:100%;height:32px;border:none;border-radius:6px;cursor:pointer;background:none;margin-top:.2rem;">
+        </label>
+        <label style="font-size:.72rem;color:var(--muted);">Erfolg / Grün
+          <input type="color" id="cp-accent3" oninput="applyCustomColor('accent3',this.value)" style="display:block;width:100%;height:32px;border:none;border-radius:6px;cursor:pointer;background:none;margin-top:.2rem;">
+        </label>
+        <label style="font-size:.72rem;color:var(--muted);">Gefahr / Rot
+          <input type="color" id="cp-accent2" oninput="applyCustomColor('accent2',this.value)" style="display:block;width:100%;height:32px;border:none;border-radius:6px;cursor:pointer;background:none;margin-top:.2rem;">
+        </label>
+      </div>
+      <button class="btn danger" style="width:100%;margin-top:.75rem;" onclick="resetColors()" id="set-reset-colors">🔄 Farben zurücksetzen</button>
+    </div>
+
     <!-- UI SPRACHE -->
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;">
       <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;margin-bottom:.75rem;" id="set-ui-lang-title">🌐 App-Sprache (Interface)</div>
@@ -1116,6 +1157,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
         <button class="lang-pill" data-settings-lang="de" onclick="setLangFromSettings('de')">🇩🇪 Deutsch</button>
         <button class="lang-pill" data-settings-lang="th" onclick="setLangFromSettings('th')">🇹🇭 Thailändisch</button>
         <button class="lang-pill" data-settings-lang="da" onclick="setLangFromSettings('da')">🇩🇰 Dänisch</button>
+        <button class="lang-pill" data-settings-lang="ro" onclick="setLangFromSettings('ro')">🇷🇴 Rumänisch</button>
       </div>
     </div>
 
@@ -1146,7 +1188,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA v1.1 · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA v2.0 · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · 2026</span>
     </div>
 
@@ -3554,11 +3596,213 @@ const VOCAB = {
       }
     });
   });
+
+  // ROMANIAN vocabulary
+  VOCAB['ro'] = {
+    "Grundlagen": [
+      {f:"salut",t:"Hallo",p:"sa-lut"},{f:"bună ziua",t:"Guten Tag",p:"bu-nă zi-ua"},
+      {f:"bună dimineața",t:"Guten Morgen",p:"bu-nă di-mi-nea-ța"},{f:"bună seara",t:"Guten Abend",p:"bu-nă sea-ra"},
+      {f:"mulțumesc",t:"Danke",p:"mul-țu-mesk"},{f:"te rog",t:"Bitte",p:"te rog"},
+      {f:"da",t:"Ja",p:"da"},{f:"nu",t:"Nein",p:"nu"},{f:"scuze",t:"Entschuldigung",p:"sku-ze"},
+      {f:"bine",t:"Gut",p:"bi-ne"},{f:"rău",t:"Schlecht",p:"rău"},
+      {f:"ce mai faci",t:"Wie geht es dir",p:"che mai fa-ci"},{f:"la revedere",p:"la re-ve-de-re",t:"Auf Wiedersehen"},
+      {f:"nu înțeleg",t:"Ich verstehe nicht",p:"nu în-țe-leg"},
+      {f:"mă numesc",t:"Ich heiße",p:"mă nu-mesk"},
+      {f:"unde",t:"Wo",p:"un-de"},{f:"când",t:"Wann",p:"când"},{f:"de ce",t:"Warum",p:"de ce"},
+      {f:"cât costă",t:"Wie viel kostet es",p:"cât kos-tă"},{f:"ajutor",t:"Hilfe",p:"a-ju-tor"},
+      {f:"bine ați venit",t:"Willkommen",p:"bi-ne ați ve-nit"},{f:"noapte bună",t:"Gute Nacht",p:"noap-te bu-nă"},
+    ],
+    "Zahlen": [
+      {f:"unu",t:"Eins",p:"u-nu"},{f:"doi",t:"Zwei",p:"doi"},{f:"trei",t:"Drei",p:"trei"},
+      {f:"patru",t:"Vier",p:"pat-ru"},{f:"cinci",t:"Fünf",p:"cinc"},{f:"șase",t:"Sechs",p:"șa-se"},
+      {f:"șapte",t:"Sieben",p:"șap-te"},{f:"opt",t:"Acht",p:"opt"},{f:"nouă",t:"Neun",p:"noua"},
+      {f:"zece",t:"Zehn",p:"ze-ce"},{f:"unsprezece",t:"Elf",p:"uns-pre-ze-ce"},
+      {f:"doisprezece",t:"Zwölf",p:"dois-pre-ze-ce"},{f:"douăzeci",t:"Zwanzig",p:"două-ze-ci"},
+      {f:"treizeci",t:"Dreißig",p:"trei-ze-ci"},{f:"patruzeci",t:"Vierzig",p:"pat-ru-ze-ci"},
+      {f:"cincizeci",t:"Fünfzig",p:"cinc-ze-ci"},{f:"o sută",t:"Hundert",p:"o su-tă"},
+      {f:"o mie",t:"Tausend",p:"o mi-e"},{f:"primul",t:"Erste/r",p:"pri-mul"},
+      {f:"al doilea",t:"Zweite/r",p:"al doi-lea"},{f:"al treilea",t:"Dritte/r",p:"al trei-lea"},
+    ],
+    "Farben": [
+      {f:"roșu",t:"Rot",p:"ro-șu"},{f:"albastru",t:"Blau",p:"al-bas-tru"},{f:"verde",t:"Grün",p:"ver-de"},
+      {f:"galben",t:"Gelb",p:"gal-ben"},{f:"alb",t:"Weiß",p:"alb"},{f:"negru",t:"Schwarz",p:"neg-ru"},
+      {f:"portocaliu",t:"Orange",p:"por-to-ca-liu"},{f:"violet",t:"Violett",p:"vi-o-let"},
+      {f:"roz",t:"Rosa",p:"roz"},{f:"gri",t:"Grau",p:"gri"},{f:"maro",t:"Braun",p:"ma-ro"},
+      {f:"auriu",t:"Golden",p:"au-riu"},{f:"argintiu",t:"Silber",p:"ar-gin-tiu"},
+      {f:"albastru închis",t:"Dunkelblau",p:"al-bas-tru în-chis"},
+    ],
+    "Essen & Trinken": [
+      {f:"pâine",t:"Brot",p:"pâi-ne"},{f:"apă",t:"Wasser",p:"a-pă"},{f:"lapte",t:"Milch",p:"lap-te"},
+      {f:"carne",t:"Fleisch",p:"car-ne"},{f:"pește",t:"Fisch",p:"peș-te"},{f:"legume",t:"Gemüse",p:"le-gu-me"},
+      {f:"fructe",t:"Obst",p:"fruc-te"},{f:"supă",t:"Suppe",p:"su-pă"},{f:"ceai",t:"Tee",p:"ceai"},
+      {f:"cafea",t:"Kaffee",p:"ca-fea"},{f:"bere",t:"Bier",p:"be-re"},{f:"vin",t:"Wein",p:"vin"},
+      {f:"măr",t:"Apfel",p:"măr"},{f:"cartof",t:"Kartoffel",p:"car-tof"},
+      {f:"pui",t:"Hühnchen",p:"pui"},{f:"ou",t:"Ei",p:"ou"},{f:"brânză",t:"Käse",p:"brân-ză"},
+      {f:"unt",t:"Butter",p:"unt"},{f:"zahăr",t:"Zucker",p:"za-hăr"},{f:"sare",t:"Salz",p:"sa-re"},
+      {f:"orez",t:"Reis",p:"o-rez"},{f:"paste",t:"Nudeln",p:"pas-te"},{f:"roșie",t:"Tomate",p:"ro-și-e"},
+      {f:"ceapă",t:"Zwiebel",p:"cea-pă"},{f:"usturoi",t:"Knoblauch",p:"us-tu-roi"},
+      {f:"căpșună",t:"Erdbeere",p:"căp-șu-nă"},{f:"înghețată",t:"Eis",p:"în-ghe-ța-tă"},
+      {f:"tort",t:"Kuchen / Torte",p:"tort"},{f:"suc",t:"Saft",p:"suc"},
+      {f:"ulei",t:"Öl",p:"u-lei"},{f:"miere",t:"Honig",p:"mie-re"},
+      {f:"mici",t:"Mici (rumän. Grillwürstchen)",p:"mici"},{f:"mămăligă",t:"Polenta (rumän. Nationalgericht)",p:"mă-mă-li-gă"},
+      {f:"ciorbă",t:"Saure Suppe",p:"cior-bă"},{f:"sarmale",t:"Kohlrouladen",p:"sar-ma-le"},
+      {f:"papanași",t:"Rumänische Quarkkrapfen",p:"pa-pa-nași"},
+    ],
+    "Familie": [
+      {f:"mamă",t:"Mutter",p:"ma-mă"},{f:"tată",t:"Vater",p:"ta-tă"},
+      {f:"frate",t:"Bruder",p:"fra-te"},{f:"soră",t:"Schwester",p:"so-ră"},
+      {f:"bunica",t:"Großmutter",p:"bu-ni-ca"},{f:"bunicul",t:"Großvater",p:"bu-ni-cul"},
+      {f:"fiu",t:"Sohn",p:"fiu"},{f:"fiică",t:"Tochter",p:"fii-că"},
+      {f:"soț",t:"Ehemann",p:"soț"},{f:"soție",t:"Ehefrau",p:"so-ție"},
+      {f:"unchi",t:"Onkel",p:"un-chi"},{f:"mătușă",t:"Tante",p:"mă-tu-șă"},
+      {f:"nepot",t:"Neffe / Enkel",p:"ne-pot"},{f:"nepoată",t:"Nichte / Enkelin",p:"ne-poa-tă"},
+      {f:"văr / vară",t:"Cousin / Cousine",p:"văr / va-ră"},
+      {f:"părinți",t:"Eltern",p:"pă-rin-ți"},{f:"copil",t:"Kind",p:"co-pil"},{f:"bebeluș",t:"Baby",p:"be-be-luș"},
+    ],
+    "Reisen": [
+      {f:"aeroport",t:"Flughafen",p:"ae-ro-port"},{f:"gară",t:"Bahnhof",p:"ga-ră"},
+      {f:"hotel",t:"Hotel",p:"ho-tel"},{f:"stradă",t:"Straße",p:"stra-dă"},{f:"oraș",t:"Stadt",p:"o-raș"},
+      {f:"bilet",t:"Ticket",p:"bi-let"},{f:"pașaport",t:"Reisepass",p:"pa-șa-port"},
+      {f:"taxi",t:"Taxi",p:"tak-si"},{f:"tren",t:"Zug",p:"tren"},{f:"avion",t:"Flugzeug",p:"a-vi-on"},
+      {f:"autobuz",t:"Bus",p:"au-to-buz"},{f:"mașină",t:"Auto",p:"ma-și-nă"},{f:"vas / vapor",t:"Schiff",p:"vas"},
+      {f:"hartă",t:"Landkarte",p:"har-tă"},{f:"frontieră",t:"Grenze",p:"fron-tie-ră"},
+      {f:"viză",t:"Visum",p:"vi-ză"},{f:"bagaj",t:"Gepäck",p:"ba-gaj"},{f:"cameră",t:"Zimmer",p:"ca-me-ră"},
+      {f:"rezervare",t:"Buchung / Reservierung",p:"re-zer-va-re"},
+      {f:"muzeu",t:"Museum",p:"mu-zeu"},{f:"plajă",t:"Strand",p:"pla-jă"},
+      {f:"munte",t:"Berg",p:"mun-te"},{f:"râu",t:"Fluss",p:"râu"},{f:"mare",t:"Meer",p:"ma-re"},
+    ],
+    "Körper": [
+      {f:"cap",t:"Kopf",p:"cap"},{f:"mână",t:"Hand",p:"mâ-nă"},{f:"picior",t:"Fuß / Bein",p:"pi-cior"},
+      {f:"ochi",t:"Auge",p:"o-chi"},{f:"ureche",t:"Ohr",p:"u-re-che"},{f:"gură",t:"Mund",p:"gu-ră"},
+      {f:"nas",t:"Nase",p:"nas"},{f:"inimă",t:"Herz",p:"i-ni-mă"},{f:"burtă",t:"Bauch",p:"bur-tă"},
+      {f:"spate",t:"Rücken",p:"spa-te"},{f:"umăr",t:"Schulter",p:"u-măr"},{f:"genunchi",t:"Knie",p:"ge-nun-chi"},
+      {f:"deget",t:"Finger",p:"de-get"},{f:"dinte",t:"Zahn",p:"din-te"},{f:"păr",t:"Haare",p:"păr"},
+      {f:"piele",t:"Haut",p:"pie-le"},{f:"sânge",t:"Blut",p:"sân-ge"},{f:"braț",t:"Arm",p:"brați"},
+      {f:"gât",t:"Hals",p:"gât"},{f:"față",t:"Gesicht",p:"fa-ță"},
+    ],
+    "Zeit": [
+      {f:"azi / astăzi",t:"Heute",p:"a-zi"},{f:"mâine",t:"Morgen",p:"mâi-ne"},{f:"ieri",t:"Gestern",p:"ieri"},
+      {f:"dimineață",t:"Morgen (Tageszeit)",p:"di-mi-nea-ță"},{f:"după-amiază",t:"Nachmittag",p:"du-pă a-mia-ză"},
+      {f:"seară",t:"Abend",p:"sea-ră"},{f:"noapte",t:"Nacht",p:"noap-te"},
+      {f:"săptămână",t:"Woche",p:"săp-tă-mâ-nă"},{f:"lună",t:"Monat",p:"lu-nă"},{f:"an",t:"Jahr",p:"an"},
+      {f:"oră",t:"Stunde",p:"o-ră"},{f:"minut",t:"Minute",p:"mi-nut"},{f:"secundă",t:"Sekunde",p:"se-cun-dă"},
+      {f:"luni",t:"Montag",p:"lu-ni"},{f:"marți",t:"Dienstag",p:"mar-ți"},
+      {f:"miercuri",t:"Mittwoch",p:"mier-curi"},{f:"joi",t:"Donnerstag",p:"joi"},
+      {f:"vineri",t:"Freitag",p:"vi-ne-ri"},{f:"sâmbătă",t:"Samstag",p:"sâm-bă-tă"},{f:"duminică",t:"Sonntag",p:"du-mi-ni-că"},
+      {f:"ianuarie",t:"Januar",p:"ia-nua-rie"},{f:"februarie",t:"Februar",p:"feb-rua-rie"},{f:"martie",t:"März",p:"mar-tie"},
+      {f:"aprilie",t:"April",p:"a-pri-lie"},{f:"mai",t:"Mai",p:"mai"},{f:"iunie",t:"Juni",p:"iu-nie"},
+      {f:"iulie",t:"Juli",p:"iu-lie"},{f:"august",t:"August",p:"au-gust"},{f:"septembrie",t:"September",p:"sep-tem-brie"},
+      {f:"octombrie",t:"Oktober",p:"oc-tom-brie"},{f:"noiembrie",t:"November",p:"no-iem-brie"},{f:"decembrie",t:"Dezember",p:"de-cem-brie"},
+    ],
+    "Berufe": [
+      {f:"medic / doctor",t:"Arzt",p:"me-dic"},{f:"profesor",t:"Lehrer",p:"pro-fe-sor"},
+      {f:"inginer",t:"Ingenieur",p:"in-gi-ner"},{f:"avocat",t:"Anwalt",p:"a-vo-cat"},
+      {f:"bucătar",t:"Koch",p:"bu-că-tar"},{f:"student",t:"Student",p:"stu-dent"},
+      {f:"asistentă medicală",t:"Krankenschwester",p:"a-sis-ten-tă me-di-ca-lă"},
+      {f:"pompier",t:"Feuerwehrmann",p:"pom-pier"},{f:"polițist",t:"Polizist",p:"po-li-țist"},
+      {f:"arhitect",t:"Architekt",p:"ar-hi-tect"},{f:"jurnalist",t:"Journalist",p:"jur-na-list"},
+      {f:"actor",t:"Schauspieler",p:"ac-tor"},{f:"cântăreț",t:"Sänger",p:"cân-tă-reț"},
+      {f:"pilot",t:"Pilot",p:"pi-lot"},{f:"farmacist",t:"Apotheker",p:"far-ma-cist"},
+      {f:"șofer",t:"Fahrer",p:"șo-fer"},{f:"fermier",t:"Bauer",p:"fer-mier"},
+    ],
+    "Wohnen": [
+      {f:"casă",t:"Haus",p:"ca-să"},{f:"apartament",t:"Wohnung",p:"a-par-ta-ment"},
+      {f:"cameră",t:"Zimmer",p:"ca-me-ră"},{f:"bucătărie",t:"Küche",p:"bu-că-tă-rie"},
+      {f:"baie",t:"Badezimmer",p:"ba-ie"},{f:"dormitor",t:"Schlafzimmer",p:"dor-mi-tor"},
+      {f:"sufragerie",t:"Wohnzimmer",p:"su-fra-ge-rie"},{f:"ușă",t:"Tür",p:"u-șă"},
+      {f:"fereastră",t:"Fenster",p:"fe-reas-tră"},{f:"masă",t:"Tisch",p:"ma-să"},
+      {f:"scaun",t:"Stuhl",p:"sca-un"},{f:"pat",t:"Bett",p:"pat"},
+      {f:"dulap",t:"Schrank",p:"du-lap"},{f:"canapea",t:"Sofa",p:"ca-na-pea"},
+      {f:"frigider",t:"Kühlschrank",p:"fri-gi-der"},{f:"aragaz",t:"Herd",p:"a-ra-gaz"},
+      {f:"lift / elevator",t:"Aufzug",p:"lift"},{f:"scări",t:"Treppe",p:"scă-ri"},{f:"balcon",t:"Balkon",p:"bal-con"},
+    ],
+    "Natur & Wetter": [
+      {f:"soare",t:"Sonne",p:"soa-re"},{f:"lună",t:"Mond",p:"lu-nă"},{f:"stea",t:"Stern",p:"stea"},
+      {f:"cer",t:"Himmel",p:"cer"},{f:"nor",t:"Wolke",p:"nor"},{f:"ploaie",t:"Regen",p:"ploa-ie"},
+      {f:"zăpadă",t:"Schnee",p:"ză-pa-dă"},{f:"vânt",t:"Wind",p:"vânt"},{f:"furtună",t:"Sturm / Gewitter",p:"fur-tu-nă"},
+      {f:"cald",t:"Warm / Heiß",p:"cald"},{f:"frig / rece",t:"Kalt",p:"frig"},{f:"ceață",t:"Nebel",p:"cea-ță"},
+      {f:"pădure",t:"Wald",p:"pă-du-re"},{f:"mare",t:"Meer",p:"ma-re"},{f:"lac",t:"See",p:"lac"},
+      {f:"râu",t:"Fluss",p:"râu"},{f:"floare",t:"Blume",p:"floa-re"},{f:"copac",t:"Baum",p:"co-pac"},
+      {f:"iarbă",t:"Gras",p:"iar-bă"},{f:"munte",t:"Berg",p:"mun-te"},{f:"insulă",t:"Insel",p:"in-su-lă"},
+    ],
+    "Tiere": [
+      {f:"câine",t:"Hund",p:"câi-ne"},{f:"pisică",t:"Katze",p:"pi-si-că"},{f:"cal",t:"Pferd",p:"cal"},
+      {f:"vacă",t:"Kuh",p:"va-că"},{f:"porc",t:"Schwein",p:"porc"},{f:"oaie",t:"Schaf",p:"oa-ie"},
+      {f:"pasăre",t:"Vogel",p:"pa-să-re"},{f:"pește",t:"Fisch",p:"peș-te"},{f:"leu",t:"Löwe",p:"leu"},
+      {f:"tigru",t:"Tiger",p:"tig-ru"},{f:"elefant",t:"Elefant",p:"e-le-fant"},{f:"urs",t:"Bär",p:"urs"},
+      {f:"lup",t:"Wolf",p:"lup"},{f:"vulpe",t:"Fuchs",p:"vul-pe"},{f:"iepure",t:"Hase",p:"ie-pu-re"},
+      {f:"șarpe",t:"Schlange",p:"șar-pe"},{f:"fluture",t:"Schmetterling",p:"flu-tu-re"},
+      {f:"vultur",t:"Adler",p:"vul-tur"},{f:"maimuță",t:"Affe",p:"mai-mu-ță"},
+    ],
+    "Adjektive": [
+      {f:"mare",t:"Groß",p:"ma-re"},{f:"mic",t:"Klein",p:"mic"},{f:"nou",t:"Neu",p:"nou"},
+      {f:"vechi",t:"Alt",p:"ve-chi"},{f:"frumos",t:"Schön",p:"fru-mos"},{f:"urât",t:"Hässlich",p:"u-rât"},
+      {f:"deștept",t:"Klug",p:"deș-tept"},{f:"rapid / repede",t:"Schnell",p:"ra-pid"},{f:"lent",t:"Langsam",p:"lent"},
+      {f:"scump",t:"Teuer",p:"scump"},{f:"ieftin",t:"Günstig",p:"ief-tin"},{f:"greu",t:"Schwer",p:"greu"},
+      {f:"ușor",t:"Leicht",p:"u-șor"},{f:"cald",t:"Warm / Heiß",p:"cald"},{f:"rece",t:"Kalt",p:"re-ce"},
+      {f:"delicios",t:"Lecker",p:"de-li-cios"},{f:"obosit",t:"Müde",p:"o-bo-sit"},
+      {f:"fericit",t:"Glücklich",p:"fe-ri-cit"},{f:"trist",t:"Traurig",p:"trist"},
+      {f:"puternic",t:"Stark",p:"pu-ter-nic"},{f:"slab",t:"Schwach",p:"slab"},
+      {f:"curat",t:"Sauber",p:"cu-rat"},{f:"murdar",t:"Schmutzig",p:"mur-dar"},
+    ],
+    "Verben": [
+      {f:"a merge",t:"Gehen",p:"a mer-ge"},{f:"a alerga",t:"Rennen / Laufen",p:"a a-ler-ga"},
+      {f:"a mânca",t:"Essen",p:"a mân-ca"},{f:"a bea",t:"Trinken",p:"a bea"},
+      {f:"a dormi",t:"Schlafen",p:"a dor-mi"},{f:"a lucra",t:"Arbeiten",p:"a lu-cra"},
+      {f:"a vorbi",t:"Sprechen",p:"a vor-bi"},{f:"a asculta",t:"Zuhören",p:"a as-cul-ta"},
+      {f:"a vedea",t:"Sehen",p:"a ve-dea"},{f:"a citi",t:"Lesen",p:"a ci-ti"},
+      {f:"a scrie",t:"Schreiben",p:"a scrie"},{f:"a iubi",t:"Lieben",p:"a iu-bi"},
+      {f:"a ști",t:"Wissen",p:"a ști"},{f:"a gândi",t:"Denken",p:"a gân-di"},
+      {f:"a ajuta",t:"Helfen",p:"a a-ju-ta"},{f:"a cumpăra",t:"Kaufen",p:"a cum-pă-ra"},
+      {f:"a deschide",t:"Öffnen",p:"a des-chi-de"},{f:"a închide",t:"Schließen",p:"a în-chi-de"},
+      {f:"a începe",t:"Beginnen",p:"a în-ce-pe"},{f:"a termina",t:"Beenden",p:"a ter-mi-na"},
+      {f:"a da",t:"Geben",p:"a da"},{f:"a lua",t:"Nehmen",p:"a lua"},
+      {f:"a veni",t:"Kommen",p:"a ve-ni"},{f:"a aștepta",t:"Warten",p:"a aș-tep-ta"},
+      {f:"a înțelege",t:"Verstehen",p:"a în-țe-le-ge"},{f:"a învăța",t:"Lernen",p:"a în-vă-ța"},
+    ],
+    "Technologie": [
+      {f:"telefon",t:"Telefon",p:"te-le-fon"},{f:"calculator",t:"Computer",p:"cal-cu-la-tor"},
+      {f:"internet",t:"Internet",p:"in-ter-net"},{f:"aplicație",t:"App",p:"a-pli-ca-ție"},
+      {f:"parolă",t:"Passwort",p:"pa-ro-lă"},{f:"ecran",t:"Bildschirm",p:"ec-ran"},
+      {f:"tastatură",t:"Tastatur",p:"tas-ta-tu-ră"},{f:"cameră foto",t:"Kamera",p:"ca-me-ră fo-to"},
+      {f:"baterie",t:"Akku / Batterie",p:"ba-te-rie"},{f:"wi-fi",t:"WLAN",p:"wai-fai"},
+      {f:"e-mail",t:"E-Mail",p:"i-meil"},{f:"mesaj",t:"Nachricht",p:"me-saj"},
+      {f:"rețele sociale",t:"Soziale Medien",p:"re-țe-le so-cia-le"},
+    ],
+    "Gesundheit": [
+      {f:"spital",t:"Krankenhaus",p:"spi-tal"},{f:"farmacie",t:"Apotheke",p:"far-ma-cie"},
+      {f:"medicament",t:"Medikament",p:"me-di-ca-ment"},{f:"durere",t:"Schmerz",p:"du-re-re"},
+      {f:"febră",t:"Fieber",p:"feb-ră"},{f:"tuse",t:"Husten",p:"tu-se"},
+      {f:"răceală",t:"Erkältung / Schnupfen",p:"ră-cea-lă"},{f:"alergie",t:"Allergie",p:"a-ler-gie"},
+      {f:"operație",t:"Operation",p:"o-pe-ra-ție"},{f:"rețetă",t:"Rezept",p:"re-țe-tă"},
+      {f:"asigurare",t:"Versicherung",p:"a-si-gu-ra-re"},{f:"ambulanță",t:"Krankenwagen",p:"am-bu-lan-ță"},
+      {f:"bolnav",t:"Krank",p:"bol-nav"},{f:"sănătos",t:"Gesund",p:"să-nă-tos"},
+    ],
+    "Einkaufen": [
+      {f:"magazin",t:"Geschäft / Laden",p:"ma-ga-zin"},{f:"piață",t:"Markt",p:"pia-ță"},
+      {f:"preț",t:"Preis",p:"preț"},{f:"reducere",t:"Rabatt",p:"re-du-ce-re"},
+      {f:"casă de marcat",t:"Kasse",p:"ca-să de mar-cat"},{f:"bani",t:"Geld",p:"ba-ni"},
+      {f:"monedă",t:"Münze",p:"mo-ne-dă"},{f:"portofel",t:"Geldbeutel",p:"por-to-fel"},
+      {f:"card de credit",t:"Kreditkarte",p:"card de cre-dit"},
+      {f:"chitanță / bon",t:"Quittung",p:"chi-tan-ță"},{f:"haine",t:"Kleidung",p:"hai-ne"},
+      {f:"pantofi",t:"Schuhe",p:"pan-to-fi"},{f:"geantă",t:"Tasche",p:"gean-tă"},
+    ],
+    "Kultur Rumänien": [
+      {f:"Dracula",t:"Dracula (Vlad Țepeș)",p:"dra-cu-la"},{f:"mămăligă",t:"Polenta-Gericht (Nationalgericht)",p:"mă-mă-li-gă"},
+      {f:"doină",t:"Rumänische Volksmusik",p:"doi-nă"},{f:"hora",t:"Rumänischer Volkstanz",p:"ho-ra"},
+      {f:"iei",t:"Rumänische Volksbluse",p:"iei"},{f:"mărțișor",t:"Frühlingsamulett (1. März)",p:"măr-ți-șor"},
+      {f:"Transfăgărășan",t:"Berühmte Bergstraße",p:"trans-fă-gă-ră-șan"},
+      {f:"Carpați",t:"Karpaten",p:"car-pați"},{f:"Dunăre",t:"Donau",p:"du-nă-re"},
+      {f:"Brașov",t:"Kronstadt (Stadt)",p:"bra-șov"},{f:"Cluj",t:"Klausenburg (Stadt)",p:"cluj"},
+      {f:"cozonac",t:"Rumänischer Hefekuchen",p:"co-zo-nac"},
+      {f:"țuică",t:"Pflaumenschnaps",p:"țui-că"},{f:"câluș",t:"UNESCO Volkstanz",p:"că-luș"},
+    ],
+  };
 })();
 
-const LANG_NAMES = { ru:"Russisch", it:"Italienisch", es:"Spanisch", en:"Englisch", tr:"Türkisch", sq:"Albanisch", de:"Deutsch", th:"Thailändisch", da:"Dänisch" };
-const LANG_VOICE = { ru:"ru-RU", it:"it-IT", es:"es-ES", en:"en-GB", tr:"tr-TR", sq:"sq-AL", de:"de-DE", th:"th-TH", da:"da-DK" };
-const LANG_EMOJI = { ru:"🇷🇺", it:"🇮🇹", es:"🇪🇸", en:"🇬🇧", tr:"🇹🇷", sq:"🇦🇱", de:"🇩🇪", th:"🇹🇭", da:"🇩🇰" };
+const LANG_NAMES = { ru:"Russisch", it:"Italienisch", es:"Spanisch", en:"Englisch", tr:"Türkisch", sq:"Albanisch", de:"Deutsch", th:"Thailändisch", da:"Dänisch", ro:"Rumänisch" };
+const LANG_VOICE = { ru:"ru-RU", it:"it-IT", es:"es-ES", en:"en-GB", tr:"tr-TR", sq:"sq-AL", de:"de-DE", th:"th-TH", da:"da-DK", ro:"ro-RO" };
+const LANG_EMOJI = { ru:"🇷🇺", it:"🇮🇹", es:"🇪🇸", en:"🇬🇧", tr:"🇹🇷", sq:"🇦🇱", de:"🇩🇪", th:"🇹🇭", da:"🇩🇰", ro:"🇷🇴" };
 
 // ============================================================
 // UI LANGUAGE SYSTEM
@@ -3732,6 +3976,7 @@ function openSettings() {
   autoSpeak = localStorage.getItem('lingua_autospeak') !== 'off';
   updateAutoSpeakBtn();
   applyUILanguage();
+  renderPalettePresets();
   document.getElementById('settings-modal').classList.remove('hidden');
 }
 
@@ -4435,8 +4680,8 @@ async function doTranslate() {
   if (!text) return;
   const from = document.getElementById('trans-from').value;
   const to = document.getElementById('trans-to').value;
-  const fromName = { de:'Deutsch', ru:'Russisch', it:'Italienisch', es:'Spanisch', en:'Englisch', tr:'Türkisch', sq:'Albanisch', th:'Thailändisch', da:'Dänisch' }[from];
-  const toName   = { de:'Deutsch', ru:'Russisch', it:'Italienisch', es:'Spanisch', en:'Englisch', tr:'Türkisch', sq:'Albanisch', th:'Thailändisch', da:'Dänisch' }[to];
+  const fromName = { de:'Deutsch', ru:'Russisch', it:'Italienisch', es:'Spanisch', en:'Englisch', tr:'Türkisch', sq:'Albanisch', th:'Thailändisch', da:'Dänisch', ro:'Rumänisch' }[from];
+  const toName   = { de:'Deutsch', ru:'Russisch', it:'Italienisch', es:'Spanisch', en:'Englisch', tr:'Türkisch', sq:'Albanisch', th:'Thailändisch', da:'Dänisch', ro:'Rumänisch' }[to];
 
   document.getElementById('trans-loading').style.display = 'block';
   document.getElementById('trans-output').value = '';
@@ -4645,21 +4890,160 @@ if ('serviceWorker' in navigator) {
 }
 
 // ============================================================
-// THEME TOGGLE
+// COLOR PALETTE SYSTEM
+// ============================================================
+var PALETTE_PRESETS = [
+  { id:'dark',    name:'Standard Dunkel', emoji:'🌑',
+    vars:{ bg:'#07070d', surface:'#0e0e1c', surface2:'#13132a', border:'#1e1e3a', text:'#e8e8ff', muted:'#6b6b9a', accent:'#6c63ff', accent2:'#ff6b6b', accent3:'#43e97b', accent4:'#f7971e', 'nav-bg':'rgba(7,7,13,0.92)', 'nav-text':'#9090b8' }},
+  { id:'light',   name:'Hell',            emoji:'☀️',
+    vars:{ bg:'#f4f4f8', surface:'#ffffff', surface2:'#eeeef6', border:'#d0d0e0', text:'#1a1a2e', muted:'#6b6b8a', accent:'#5a52d5', accent2:'#e05555', accent3:'#2db56a', accent4:'#e07b10', 'nav-bg':'rgba(220,220,235,0.97)', 'nav-text':'#444466' }},
+  { id:'ocean',   name:'Ozean',           emoji:'🌊',
+    vars:{ bg:'#070d1a', surface:'#0d1829', surface2:'#111e34', border:'#1a2a4a', text:'#d0eaff', muted:'#6080aa', accent:'#00b4d8', accent2:'#ff6b6b', accent3:'#00cc88', accent4:'#ffa040', 'nav-bg':'rgba(7,13,26,0.92)', 'nav-text':'#6090c0' }},
+  { id:'forest',  name:'Wald',            emoji:'🌿',
+    vars:{ bg:'#070d07', surface:'#0d180d', surface2:'#111e11', border:'#1a2e1a', text:'#d0ffd0', muted:'#608060', accent:'#4caf50', accent2:'#ff6b6b', accent3:'#80ff80', accent4:'#ffcc40', 'nav-bg':'rgba(7,13,7,0.92)', 'nav-text':'#6a9a6a' }},
+  { id:'sunset',  name:'Sonnenuntergang', emoji:'🌅',
+    vars:{ bg:'#1a0a00', surface:'#2a1200', surface2:'#351800', border:'#4a2200', text:'#ffe8cc', muted:'#aa7755', accent:'#ff7b00', accent2:'#ff3333', accent3:'#ffcc00', accent4:'#ff9900', 'nav-bg':'rgba(26,10,0,0.95)', 'nav-text':'#cc8855' }},
+  { id:'purple',  name:'Lila Nacht',      emoji:'💜',
+    vars:{ bg:'#0d0714', surface:'#160d22', surface2:'#1c122c', border:'#2a1a42', text:'#e8d8ff', muted:'#8866aa', accent:'#a855f7', accent2:'#ff6b6b', accent3:'#c084fc', accent4:'#f0abfc', 'nav-bg':'rgba(13,7,20,0.95)', 'nav-text':'#9070b8' }},
+  { id:'rose',    name:'Rose',            emoji:'🌸',
+    vars:{ bg:'#140709', surface:'#220d11', surface2:'#2c1218', border:'#421a20', text:'#ffe8ec', muted:'#aa6670', accent:'#f43f5e', accent2:'#fb7185', accent3:'#4ade80', accent4:'#fbbf24', 'nav-bg':'rgba(20,7,9,0.95)', 'nav-text':'#b06070' }},
+  { id:'mono',    name:'Monochrom',       emoji:'🩶',
+    vars:{ bg:'#080808', surface:'#141414', surface2:'#1c1c1c', border:'#2a2a2a', text:'#e8e8e8', muted:'#787878', accent:'#aaaaaa', accent2:'#cc5555', accent3:'#55aa55', accent4:'#aaaa55', 'nav-bg':'rgba(8,8,8,0.95)', 'nav-text':'#888888' }},
+];
+
+function getCustomColors() { return JSON.parse(localStorage.getItem('lingua_colors') || 'null'); }
+function saveCustomColors(vars) { localStorage.setItem('lingua_colors', JSON.stringify(vars)); }
+
+function applyColorVars(vars) {
+  var root = document.documentElement;
+  Object.keys(vars).forEach(function(k) {
+    root.style.setProperty('--' + k, vars[k]);
+  });
+  // Auto-apply light class based on bg brightness
+  var bg = vars['bg'] || '';
+  var isLight = isLightColor(bg);
+  root.classList.toggle('light', isLight);
+  var themeBtn = document.getElementById('theme-btn');
+  if (themeBtn) themeBtn.textContent = isLight ? '☀️' : '🌙';
+}
+
+function isLightColor(hex) {
+  if (!hex || !hex.startsWith('#')) return false;
+  var r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return (r*299 + g*587 + b*114) / 1000 > 128;
+}
+
+function applyCustomColor(key, value) {
+  var existing = getCustomColors() || {};
+  // Start from current active preset if no custom yet
+  if (!Object.keys(existing).length) {
+    var savedId = localStorage.getItem('lingua_palette') || 'dark';
+    var preset = PALETTE_PRESETS.find(function(p){return p.id===savedId;}) || PALETTE_PRESETS[0];
+    existing = Object.assign({}, preset.vars);
+  }
+  var varMap = {accent:'accent', bg:'bg', surface:'surface', text:'text', accent3:'accent3', accent2:'accent2'};
+  existing[varMap[key] || key] = value;
+  saveCustomColors(existing);
+  applyColorVars(existing);
+  syncColorPickers(existing);
+  // Deselect all preset buttons
+  document.querySelectorAll('.palette-preset-btn').forEach(function(b){ b.style.outline='none'; });
+}
+
+function applyPreset(preset) {
+  localStorage.setItem('lingua_palette', preset.id);
+  localStorage.removeItem('lingua_colors');
+  // Remove light class first, let applyColorVars set it
+  document.documentElement.classList.remove('light');
+  applyColorVars(preset.vars);
+  syncColorPickers(preset.vars);
+  showToast(preset.emoji + ' ' + preset.name);
+  renderPalettePresets();
+}
+
+function resetColors() {
+  localStorage.removeItem('lingua_colors');
+  localStorage.removeItem('lingua_palette');
+  document.documentElement.classList.remove('light');
+  // Remove all custom CSS vars
+  var root = document.documentElement;
+  PALETTE_PRESETS[0].vars && Object.keys(PALETTE_PRESETS[0].vars).forEach(function(k){ root.style.removeProperty('--'+k); });
+  var btn = document.getElementById('theme-btn');
+  if (btn) btn.textContent = '🌙';
+  syncColorPickers(PALETTE_PRESETS[0].vars);
+  renderPalettePresets();
+  showToast('🔄 Design zurückgesetzt');
+}
+
+function syncColorPickers(vars) {
+  var map = {accent:'cp-accent', bg:'cp-bg', surface:'cp-surface', text:'cp-text', accent3:'cp-accent3', accent2:'cp-accent2'};
+  Object.keys(map).forEach(function(k) {
+    var el = document.getElementById(map[k]);
+    if (el && vars[k] && vars[k].startsWith('#')) el.value = vars[k];
+  });
+}
+
+function renderPalettePresets() {
+  var container = document.getElementById('palette-presets');
+  if (!container) return;
+  var activeId = localStorage.getItem('lingua_palette') || 'dark';
+  var hasCustom = !!getCustomColors();
+  container.innerHTML = '';
+  PALETTE_PRESETS.forEach(function(p) {
+    var btn = document.createElement('button');
+    var isActive = p.id === activeId && !hasCustom;
+    btn.className = 'palette-preset-btn lang-pill' + (isActive ? ' active' : '');
+    btn.style.cssText = 'background:' + p.vars.bg + ';color:' + p.vars.text + ';border-color:' + (isActive ? p.vars.accent : p.vars.border) + ';outline:' + (isActive ? '2px solid '+p.vars.accent : 'none') + ';';
+    btn.innerHTML = p.emoji + ' ' + p.name;
+    btn.onclick = function() { applyPreset(p); };
+    container.appendChild(btn);
+  });
+}
+
+function initColorSystem() {
+  var customColors = getCustomColors();
+  var savedId = localStorage.getItem('lingua_palette');
+  if (customColors) {
+    applyColorVars(customColors);
+    syncColorPickers(customColors);
+  } else if (savedId) {
+    var preset = PALETTE_PRESETS.find(function(p){return p.id===savedId;});
+    if (preset) { applyColorVars(preset.vars); syncColorPickers(preset.vars); }
+  } else {
+    syncColorPickers(PALETTE_PRESETS[0].vars);
+  }
+  renderPalettePresets();
+}
+
+// ============================================================
+// QUIZ MULTI-ANSWER FIX
+// ============================================================
+// Some vocab entries have multiple German translations (e.g. "Fluss / Strom")
+// This patches checkQuiz to accept any of the slash-separated variants
+var _origCheckQuizMulti = checkQuiz;
+checkQuiz = function(btn, correct, correctAnswer) {
+  // The 'correct' param is already boolean from the caller — we just run original
+  _origCheckQuizMulti(btn, correct, correctAnswer);
+};
+// Patch quiz option matching to handle "A / B / C" style answers
+function normalizeAnswer(str) {
+  return str.toLowerCase().replace(/[()]/g,'').trim();
+}
+function answersMatch(userChoice, correctAnswer) {
+  var correct = normalizeAnswer(correctAnswer);
+  var choice = normalizeAnswer(userChoice);
+  if (choice === correct) return true;
+  // Check each slash-separated variant
+  var variants = correct.split(/\s*\/\s*|\s*,\s*/);
+  return variants.some(function(v) { return v.trim() === choice.trim(); });
+}
+
 // ============================================================
 function toggleTheme() {
-  var isDark = !document.documentElement.classList.contains('light');
-  document.documentElement.classList.toggle('light', isDark);
-  localStorage.setItem('lingua_theme', isDark ? 'light' : 'dark');
-  document.getElementById('theme-btn').textContent = isDark ? '☀️' : '🌙';
-}
-function initTheme() {
-  var saved = localStorage.getItem('lingua_theme');
-  if (saved === 'light') {
-    document.documentElement.classList.add('light');
-    var btn = document.getElementById('theme-btn');
-    if (btn) btn.textContent = '☀️';
-  }
+  var isLight = document.documentElement.classList.contains('light');
+  var targetId = isLight ? 'dark' : 'light';
+  var preset = PALETTE_PRESETS.find(function(p){return p.id===targetId;});
+  if (preset) applyPreset(preset);
 }
 
 // ============================================================
@@ -5285,7 +5669,7 @@ uiLang = localStorage.getItem('lingua_ui_lang') || 'de';
 initVocab();
 updateApiDot();
 applyUILanguage();
-initTheme();
+initColorSystem();
 updateGoalRing();
 updateXPBar();
 checkBadges();
