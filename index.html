@@ -285,13 +285,14 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 /* API KEY MODAL */
 .modal-overlay {
   position:fixed; inset:0; background:rgba(0,0,0,.75); z-index:500;
-  display:flex; align-items:center; justify-content:center; padding:1.5rem;
-  backdrop-filter:blur(8px);
+  display:flex; align-items:center; justify-content:center; padding:1rem;
+  backdrop-filter:blur(8px); overflow-y:auto;
 }
 .modal-overlay.hidden { display:none; }
 .modal-box {
   background:var(--surface); border:1px solid var(--border); border-radius:20px;
-  padding:2rem; max-width:420px; width:100%;
+  padding:1.5rem; max-width:460px; width:100%;
+  max-height:90vh; overflow:hidden;
 }
 .modal-title { font-family:'Syne',sans-serif; font-weight:800; font-size:1.2rem; margin-bottom:.5rem; }
 .modal-desc { font-size:.8rem; color:var(--muted); line-height:1.6; margin-bottom:1.25rem; }
@@ -811,11 +812,18 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 
 <!-- SETTINGS MODAL -->
 <div class="modal-overlay hidden" id="settings-modal">
-  <div class="modal-box" style="max-width:460px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
-      <div class="modal-title" style="margin:0;" id="set-title">⚙ Einstellungen</div>
-      <button onclick="closeSettings()" style="background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;">✕</button>
+  <div class="modal-box" style="max-width:460px;display:flex;flex-direction:column;max-height:90vh;">
+
+    <!-- FIXED HEADER -->
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-shrink:0;">
+      <button onclick="closeSettings()" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.4rem .75rem;cursor:pointer;font-size:.85rem;color:var(--muted);transition:all .2s;display:flex;align-items:center;gap:.3rem;" title="Zurück">
+        ← <span id="set-back-label" style="font-size:.75rem;font-family:'Syne',sans-serif;font-weight:600;">Zurück</span>
+      </button>
+      <div class="modal-title" style="margin:0;flex:1;" id="set-title">⚙ Einstellungen</div>
     </div>
+
+    <!-- SCROLLABLE CONTENT -->
+    <div style="overflow-y:auto;flex:1;padding-right:.25rem;-webkit-overflow-scrolling:touch;">
 
     <!-- API KEY -->
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;">
@@ -883,10 +891,12 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
       </div>
     </div>
 
-    <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;">
+    <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
       LINGUA v1.1 · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · 2026</span>
     </div>
+
+    </div><!-- end scrollable -->
   </div>
 </div>
 
@@ -2496,8 +2506,801 @@ const VOCAB = {
       {f:"matematik",t:"Mathematik",p:"ma-te-ma-tik"},{f:"historie",t:"Geschichte",p:"his-to-rie"},
       {f:"geografi",t:"Geographie",p:"ge-o-gra-fi"},{f:"kemi",t:"Chemie",p:"ke-mi"},
     ],
+    "Gefühle": [
+      {f:"glad",t:"Froh / Glücklich",p:"glad"},{f:"ked af det",t:"Traurig",p:"ke af de"},
+      {f:"vred",t:"Wütend",p:"vred"},{f:"bange",t:"Ängstlich",p:"bang-e"},
+      {f:"overrasket",t:"Überrascht",p:"over-ras-ket"},{f:"træt",t:"Müde",p:"tret"},
+      {f:"sulten",t:"Hungrig",p:"sul-ten"},{f:"tørstig",t:"Durstig",p:"tör-sti"},
+      {f:"forelsket",t:"Verliebt",p:"fo-rel-sket"},{f:"ensom",t:"Einsam",p:"en-som"},
+      {f:"stolt",t:"Stolz",p:"stolt"},{f:"nervøs",t:"Nervös",p:"ner-vös"},
+    ],
   }
 };
+
+// ============================================================
+// VOCAB EXTENSIONS (+500 Wörter pro Sprache)
+// ============================================================
+(function() {
+  var EXT = {
+    ru: {
+      "Kleidung": [
+        {f:"рубашка",t:"Hemd",p:"rubashka"},{f:"брюки",t:"Hose",p:"bryuki"},{f:"платье",t:"Kleid",p:"plat'ye"},
+        {f:"юбка",t:"Rock",p:"yubka"},{f:"куртка",t:"Jacke",p:"kurtka"},{f:"пальто",t:"Mantel",p:"pal'to"},
+        {f:"свитер",t:"Pullover",p:"sviter"},{f:"носки",t:"Socken",p:"noski"},{f:"ботинки",t:"Stiefel / Schuhe",p:"botinki"},
+        {f:"шапка",t:"Mütze",p:"shapka"},{f:"шарф",t:"Schal",p:"sharf"},{f:"перчатки",t:"Handschuhe",p:"perchatki"},
+        {f:"пижама",t:"Pyjama",p:"pizhama"},{f:"купальник",t:"Badeanzug",p:"kupal'nik"},
+        {f:"галстук",t:"Krawatte",p:"galstuk"},{f:"ремень",t:"Gürtel",p:"remen'"},
+      ],
+      "Emotionen": [
+        {f:"радость",t:"Freude",p:"radost'"},{f:"грусть",t:"Traurigkeit",p:"grust'"},
+        {f:"злость",t:"Wut",p:"zlost'"},{f:"страх",t:"Angst",p:"strakh"},
+        {f:"удивление",t:"Überraschung",p:"udivleniye"},{f:"гордость",t:"Stolz",p:"gordost'"},
+        {f:"любовь",t:"Liebe",p:"lyubov'"},{f:"ненависть",t:"Hass",p:"nenavist'"},
+        {f:"зависть",t:"Neid",p:"zavist'"},{f:"одиночество",t:"Einsamkeit",p:"odinochestvo"},
+        {f:"счастье",t:"Glück",p:"schast'ye"},{f:"тревога",t:"Sorge / Angst",p:"trevoga"},
+        {f:"надежда",t:"Hoffnung",p:"nadezhda"},{f:"уверенность",t:"Selbstvertrauen",p:"uverennost'"},
+      ],
+      "Restaurant": [
+        {f:"меню",t:"Speisekarte",p:"menyu"},{f:"официант",t:"Kellner",p:"ofitsiant"},
+        {f:"столик",t:"Tisch (Restaurant)",p:"stolik"},{f:"заказать",t:"Bestellen",p:"zakazat'"},
+        {f:"счёт",t:"Rechnung",p:"shchyot"},{f:"чаевые",t:"Trinkgeld",p:"chaevyye"},
+        {f:"закуска",t:"Vorspeise",p:"zakuska"},{f:"основное блюдо",t:"Hauptgericht",p:"osnovnoye blyudo"},
+        {f:"десерт",t:"Dessert",p:"desert"},{f:"напиток",t:"Getränk",p:"napitok"},
+        {f:"порция",t:"Portion",p:"portsiya"},{f:"вегетарианский",t:"Vegetarisch",p:"vegetarianskiy"},
+        {f:"аллергия на",t:"Allergie gegen",p:"allergiya na"},{f:"вкусно",t:"Lecker / Es schmeckt gut",p:"vkusno"},
+        {f:"бронирование стола",t:"Tischreservierung",p:"bronirovaniye stola"},
+      ],
+      "Wetter (erweitert)": [
+        {f:"температура",t:"Temperatur",p:"temperatura"},{f:"прогноз погоды",t:"Wettervorhersage",p:"prognoz pogody"},
+        {f:"молния",t:"Blitz",p:"molniya"},{f:"радуга",t:"Regenbogen",p:"raduga"},
+        {f:"засуха",t:"Dürre",p:"zasukha"},{f:"наводнение",t:"Überschwemmung",p:"navodnenie"},
+        {f:"жаркий",t:"Heiß",p:"zharkiy"},{f:"влажный",t:"Feucht / Schwül",p:"vlazhnyy"},
+        {f:"пасмурный",t:"Bewölkt",p:"pasmurnyy"},{f:"солнечный",t:"Sonnig",p:"solnechnyy"},
+        {f:"дождливый",t:"Regnerisch",p:"dozhdelivyy"},{f:"снежный",t:"Schneereich",p:"snezhnyy"},
+        {f:"климат",t:"Klima",p:"klimat"},{f:"сезон",t:"Jahreszeit",p:"sezon"},
+      ],
+      "Körper (erweitert)": [
+        {f:"печень",t:"Leber",p:"pechen'"},{f:"почки",t:"Nieren",p:"pochki"},
+        {f:"позвоночник",t:"Wirbelsäule",p:"pozvonochnik"},{f:"суставы",t:"Gelenke",p:"sustavy"},
+        {f:"мышцы",t:"Muskeln",p:"myshtsy"},{f:"кости",t:"Knochen",p:"kosti"},
+        {f:"нерв",t:"Nerv",p:"nerv"},{f:"щека",t:"Wange",p:"shcheka"},
+        {f:"лоб",t:"Stirn",p:"lob"},{f:"подбородок",t:"Kinn",p:"podborodok"},
+        {f:"запястье",t:"Handgelenk",p:"zapyast'ye"},{f:"щиколотка",t:"Knöchel",p:"shchikol'otka"},
+        {f:"грудь",t:"Brust",p:"grud'"},{f:"бедро",t:"Hüfte",p:"bedro"},
+      ],
+      "Haus & Haushalt": [
+        {f:"пылесос",t:"Staubsauger",p:"pylesos"},{f:"стиральная машина",t:"Waschmaschine",p:"stiralnaya mashina"},
+        {f:"посудомоечная машина",t:"Geschirrspüler",p:"posudomoechnaya mashina"},
+        {f:"микроволновка",t:"Mikrowelle",p:"mikrovolnovka"},{f:"утюг",t:"Bügeleisen",p:"utyug"},
+        {f:"фен",t:"Haartrockner",p:"fen"},{f:"зеркало",t:"Spiegel",p:"zerkalo"},
+        {f:"ковёр",t:"Teppich",p:"kovyor"},{f:"штора",t:"Vorhang",p:"shtora"},
+        {f:"подушка",t:"Kissen",p:"podushka"},{f:"одеяло",t:"Decke (Bett)",p:"odeyalo"},
+        {f:"полотенце",t:"Handtuch",p:"polotentse"},{f:"мыло",t:"Seife",p:"mylo"},
+        {f:"зубная щётка",t:"Zahnbürste",p:"zubnaya shchotka"},{f:"шампунь",t:"Shampoo",p:"shampun'"},
+      ],
+      "Verkehr & Stadt": [
+        {f:"светофор",t:"Ampel",p:"svetofor"},{f:"перекрёсток",t:"Kreuzung",p:"perekryostok"},
+        {f:"пробка",t:"Stau",p:"probka"},{f:"парковка",t:"Parkplatz",p:"parkovka"},
+        {f:"пешеходный переход",t:"Zebrastreifen",p:"peshehodnyy perekhod"},
+        {f:"велосипедная дорожка",t:"Fahrradweg",p:"velosipednaya dorozhka"},
+        {f:"площадь",t:"Platz (in der Stadt)",p:"ploshchad'"},{f:"парк",t:"Park",p:"park"},
+        {f:"супермаркет",t:"Supermarkt",p:"supermarket"},{f:"аптека",t:"Apotheke",p:"apteka"},
+        {f:"почта",t:"Post",p:"pochta"},{f:"банк",t:"Bank",p:"bank"},
+        {f:"полицейский участок",t:"Polizeiwache",p:"politseyskiy uchastok"},
+        {f:"пожарная станция",t:"Feuerwehrwache",p:"pozharnaya stantsiya"},
+      ],
+      "Gefühle": [
+        {f:"радость",t:"Freude",p:"radost'"},{f:"грусть",t:"Traurigkeit",p:"grust'"},
+        {f:"злость",t:"Wut",p:"zlost'"},{f:"страх",t:"Angst",p:"strakh"},
+        {f:"удивление",t:"Überraschung",p:"udivleniye"},{f:"гордость",t:"Stolz",p:"gordost'"},
+        {f:"любовь",t:"Liebe",p:"lyubov'"},{f:"надежда",t:"Hoffnung",p:"nadezhda"},
+        {f:"счастье",t:"Glück",p:"shchas'tye"},{f:"тревога",t:"Besorgnis",p:"trevoga"},
+        {f:"одиночество",t:"Einsamkeit",p:"odinochestvo"},{f:"зависть",t:"Neid",p:"zavist'"},
+      ],
+      "Präpositionen & Verbindungen": [
+        {f:"в",t:"In / Nach",p:"v"},{f:"на",t:"Auf / An",p:"na"},{f:"под",t:"Unter",p:"pod"},
+        {f:"над",t:"Über",p:"nad"},{f:"перед",t:"Vor",p:"pered"},{f:"после",t:"Nach / Danach",p:"posle"},
+        {f:"между",t:"Zwischen",p:"mezhdu"},{f:"через",t:"Durch / In (Zeit)",p:"cherez"},
+        {f:"без",t:"Ohne",p:"bez"},{f:"с",t:"Mit",p:"s"},{f:"для",t:"Für",p:"dlya"},
+        {f:"из-за",t:"Wegen",p:"iz-za"},{f:"несмотря на",t:"Trotz",p:"nesmotrya na"},
+        {f:"поэтому",t:"Deshalb",p:"poetomu"},{f:"однако",t:"Jedoch",p:"odnako"},
+        {f:"кроме того",t:"Außerdem",p:"krome togo"},{f:"наконец",t:"Schließlich",p:"nakonets"},
+      ],
+    },
+    it: {
+      "Abbigliamento": [
+        {f:"camicia",t:"Hemd",p:"ka-mi-sha"},{f:"pantaloni",t:"Hose",p:"pan-ta-lo-ni"},
+        {f:"vestito",t:"Kleid",p:"ves-ti-to"},{f:"gonna",t:"Rock",p:"gon-na"},
+        {f:"giacca",t:"Jacke",p:"djak-ka"},{f:"cappotto",t:"Mantel",p:"kap-pot-to"},
+        {f:"maglione",t:"Pullover",p:"ma-ljo-ne"},{f:"calzini",t:"Socken",p:"kal-tsi-ni"},
+        {f:"stivali",t:"Stiefel",p:"sti-va-li"},{f:"cappello",t:"Hut / Mütze",p:"kap-pel-lo"},
+        {f:"sciarpa",t:"Schal",p:"shar-pa"},{f:"guanti",t:"Handschuhe",p:"gwan-ti"},
+        {f:"cintura",t:"Gürtel",p:"tʃin-tu-ra"},{f:"cravatta",t:"Krawatte",p:"kra-vat-ta"},
+        {f:"tuta",t:"Trainingsanzug",p:"tu-ta"},{f:"costume da bagno",t:"Badeanzug",p:"kos-tu-me da ban-yo"},
+      ],
+      "Emozioni": [
+        {f:"gioia",t:"Freude",p:"dʒo-ja"},{f:"tristezza",t:"Traurigkeit",p:"tris-tet-tsa"},
+        {f:"rabbia",t:"Wut",p:"rab-bja"},{f:"paura",t:"Angst",p:"pa-u-ra"},
+        {f:"sorpresa",t:"Überraschung",p:"sor-pre-za"},{f:"orgoglio",t:"Stolz",p:"or-gol-lyo"},
+        {f:"amore",t:"Liebe",p:"a-mo-re"},{f:"speranza",t:"Hoffnung",p:"spe-ran-tsa"},
+        {f:"felicità",t:"Glück",p:"fe-li-tʃi-ta"},{f:"ansia",t:"Angst / Sorge",p:"an-sja"},
+        {f:"solitudine",t:"Einsamkeit",p:"so-li-tu-di-ne"},{f:"invidia",t:"Neid",p:"in-vi-dja"},
+        {f:"vergogna",t:"Scham",p:"ver-gon-ya"},{f:"fiducia",t:"Vertrauen",p:"fi-du-tʃa"},
+      ],
+      "Ristorante": [
+        {f:"menù",t:"Speisekarte",p:"me-nu"},{f:"cameriere",t:"Kellner",p:"ka-me-rje-re"},
+        {f:"prenotare un tavolo",t:"Tisch reservieren",p:"pre-no-ta-re"},{f:"ordinare",t:"Bestellen",p:"or-di-na-re"},
+        {f:"conto",t:"Rechnung",p:"kon-to"},{f:"mancia",t:"Trinkgeld",p:"man-tʃa"},
+        {f:"antipasto",t:"Vorspeise",p:"an-ti-pas-to"},{f:"primo piatto",t:"Erstes Gericht",p:"pri-mo pjat-to"},
+        {f:"secondo piatto",t:"Hauptgericht",p:"se-kon-do pjat-to"},{f:"contorno",t:"Beilage",p:"kon-tor-no"},
+        {f:"dolce",t:"Dessert / Süßspeise",p:"dol-tʃe"},{f:"bevanda",t:"Getränk",p:"be-van-da"},
+        {f:"vegetariano",t:"Vegetarisch",p:"ve-dʒe-ta-rja-no"},{f:"allergico a",t:"Allergisch gegen",p:"al-ler-dʒi-ko a"},
+      ],
+      "Casa & Arredamento": [
+        {f:"aspirapolvere",t:"Staubsauger",p:"as-pi-ra-pol-ve-re"},{f:"lavatrice",t:"Waschmaschine",p:"la-va-tri-tʃe"},
+        {f:"lavastoviglie",t:"Geschirrspüler",p:"la-va-sto-vil-le"},{f:"microonde",t:"Mikrowelle",p:"mi-kro-on-de"},
+        {f:"ferro da stiro",t:"Bügeleisen",p:"fer-ro da sti-ro"},{f:"asciugacapelli",t:"Haartrockner",p:"a-shu-ga-ka-pel-li"},
+        {f:"specchio",t:"Spiegel",p:"spek-kjo"},{f:"tappeto",t:"Teppich",p:"tap-pe-to"},
+        {f:"tenda",t:"Vorhang",p:"ten-da"},{f:"cuscino",t:"Kissen",p:"ku-shi-no"},
+        {f:"coperta",t:"Decke (Bett)",p:"ko-per-ta"},{f:"asciugamano",t:"Handtuch",p:"a-shu-ga-ma-no"},
+        {f:"sapone",t:"Seife",p:"sa-po-ne"},{f:"spazzolino da denti",t:"Zahnbürste",p:"spat-tso-li-no"},
+        {f:"shampoo",t:"Shampoo",p:"sham-po"},{f:"lampadina",t:"Glühbirne",p:"lam-pa-di-na"},
+      ],
+      "Città & Trasporti": [
+        {f:"semaforo",t:"Ampel",p:"se-ma-fo-ro"},{f:"incrocio",t:"Kreuzung",p:"in-kro-tʃo"},
+        {f:"traffico",t:"Verkehr / Stau",p:"traf-fi-ko"},{f:"parcheggio",t:"Parkplatz",p:"par-ked-dʒo"},
+        {f:"strisce pedonali",t:"Zebrastreifen",p:"stri-she pe-do-na-li"},
+        {f:"pista ciclabile",t:"Fahrradweg",p:"pis-ta tʃi-kla-bi-le"},
+        {f:"piazza",t:"Platz",p:"pjat-tsa"},{f:"parco",t:"Park",p:"par-ko"},
+        {f:"supermercato",t:"Supermarkt",p:"su-per-mer-ka-to"},{f:"farmacia",t:"Apotheke",p:"far-ma-tʃa"},
+        {f:"posta",t:"Post",p:"pos-ta"},{f:"banca",t:"Bank",p:"ban-ka"},
+        {f:"ospedale",t:"Krankenhaus",p:"os-pe-da-le"},{f:"scuola",t:"Schule",p:"skwo-la"},
+      ],
+      "Avverbi & Congiunzioni": [
+        {f:"sempre",t:"Immer",p:"sem-pre"},{f:"mai",t:"Nie",p:"mai"},{f:"spesso",t:"Oft",p:"spes-so"},
+        {f:"a volte",t:"Manchmal",p:"a vol-te"},{f:"già",t:"Schon",p:"dʒa"},
+        {f:"ancora",t:"Noch / Nochmal",p:"an-ko-ra"},{f:"subito",t:"Sofort",p:"su-bi-to"},
+        {f:"forse",t:"Vielleicht",p:"for-se"},{f:"probabilmente",t:"Wahrscheinlich",p:"pro-ba-bil-men-te"},
+        {f:"certamente",t:"Sicherlich",p:"tʃer-ta-men-te"},{f:"purtroppo",t:"Leider",p:"pur-trop-po"},
+        {f:"però",t:"Aber / Jedoch",p:"pe-ro"},{f:"quindi",t:"Also / Deshalb",p:"kwin-di"},
+        {f:"mentre",t:"Während",p:"men-tre"},{f:"sebbene",t:"Obwohl",p:"seb-be-ne"},
+        {f:"oppure",t:"Oder / Sonst",p:"op-pu-re"},{f:"eppure",t:"Und trotzdem",p:"ep-pu-re"},
+      ],
+      "Sport & Hobbies (erweitert)": [
+        {f:"ciclismo",t:"Radfahren",p:"tʃi-kliz-mo"},{f:"escursionismo",t:"Wandern",p:"es-kur-sjo-niz-mo"},
+        {f:"palestra",t:"Fitnessstudio",p:"pa-les-tra"},{f:"nuotare",t:"Schwimmen",p:"nwo-ta-re"},
+        {f:"scalata",t:"Klettern",p:"ska-la-ta"},{f:"pattinaggio",t:"Schlittschuhlaufen",p:"pat-ti-nad-dʒo"},
+        {f:"ginnastica",t:"Turnen / Gymnastic",p:"dʒin-nas-ti-ka"},{f:"arti marziali",t:"Kampfsport",p:"ar-ti mar-tsja-li"},
+        {f:"scultura",t:"Bildhauerei",p:"skul-tu-ra"},{f:"ceramica",t:"Töpferei",p:"tʃe-ra-mi-ka"},
+        {f:"giardinaggio",t:"Gärtnern",p:"dʒar-di-nad-dʒo"},{f:"cucito",t:"Nähen",p:"ku-tʃi-to"},
+        {f:"origami",t:"Origami",p:"o-ri-ga-mi"},{f:"birdwatching",t:"Vogelbeobachtung",p:"bird-wat-ching"},
+      ],
+    },
+    es: {
+      "Ropa": [
+        {f:"camisa",t:"Hemd",p:"ka-mi-sa"},{f:"pantalones",t:"Hose",p:"pan-ta-lo-nes"},
+        {f:"vestido",t:"Kleid",p:"bes-ti-do"},{f:"falda",t:"Rock",p:"fal-da"},
+        {f:"chaqueta",t:"Jacke",p:"tʃa-ke-ta"},{f:"abrigo",t:"Mantel",p:"a-bri-ɣo"},
+        {f:"jersey",t:"Pullover",p:"xer-sei"},{f:"calcetines",t:"Socken",p:"kal-θe-ti-nes"},
+        {f:"botas",t:"Stiefel",p:"bo-tas"},{f:"gorro",t:"Mütze",p:"go-ro"},
+        {f:"bufanda",t:"Schal",p:"bu-fan-da"},{f:"guantes",t:"Handschuhe",p:"gwan-tes"},
+        {f:"cinturón",t:"Gürtel",p:"θin-tu-ron"},{f:"corbata",t:"Krawatte",p:"kor-ba-ta"},
+        {f:"bañador",t:"Badeanzug",p:"ba-ɲa-dor"},{f:"pijama",t:"Pyjama",p:"pi-xa-ma"},
+      ],
+      "Emociones": [
+        {f:"alegría",t:"Freude",p:"a-le-ɣri-a"},{f:"tristeza",t:"Traurigkeit",p:"tris-te-θa"},
+        {f:"ira / rabia",t:"Wut",p:"i-ra"},{f:"miedo",t:"Angst",p:"mje-do"},
+        {f:"sorpresa",t:"Überraschung",p:"sor-pre-sa"},{f:"orgullo",t:"Stolz",p:"or-ɣu-ʎo"},
+        {f:"amor",t:"Liebe",p:"a-mor"},{f:"esperanza",t:"Hoffnung",p:"es-pe-ran-θa"},
+        {f:"felicidad",t:"Glück",p:"fe-li-θi-dad"},{f:"ansiedad",t:"Angst / Sorge",p:"an-sje-dad"},
+        {f:"soledad",t:"Einsamkeit",p:"so-le-dad"},{f:"envidia",t:"Neid",p:"em-bi-dja"},
+        {f:"vergüenza",t:"Scham",p:"ber-ɣwen-θa"},{f:"confianza",t:"Vertrauen",p:"kon-fjan-θa"},
+      ],
+      "Restaurante": [
+        {f:"carta / menú",t:"Speisekarte",p:"kar-ta"},{f:"camarero",t:"Kellner",p:"ka-ma-re-ro"},
+        {f:"reservar una mesa",t:"Tisch reservieren",p:"re-ser-bar"},{f:"pedir",t:"Bestellen",p:"pe-dir"},
+        {f:"cuenta",t:"Rechnung",p:"kwen-ta"},{f:"propina",t:"Trinkgeld",p:"pro-pi-na"},
+        {f:"entrante",t:"Vorspeise",p:"en-tran-te"},{f:"plato principal",t:"Hauptgericht",p:"pla-to prin-θi-pal"},
+        {f:"postre",t:"Dessert",p:"pos-tre"},{f:"bebida",t:"Getränk",p:"be-bi-da"},
+        {f:"ración",t:"Portion",p:"ra-θjon"},{f:"vegetariano",t:"Vegetarisch",p:"be-xe-ta-rja-no"},
+        {f:"alérgico a",t:"Allergisch gegen",p:"a-ler-xi-ko a"},{f:"sin gluten",t:"Glutenfrei",p:"sin glu-ten"},
+        {f:"la cuenta por favor",t:"Die Rechnung bitte",p:"la kwen-ta por fa-bor"},
+      ],
+      "Casa & Hogar": [
+        {f:"aspiradora",t:"Staubsauger",p:"as-pi-ra-do-ra"},{f:"lavadora",t:"Waschmaschine",p:"la-ba-do-ra"},
+        {f:"lavavajillas",t:"Geschirrspüler",p:"la-ba-ba-xi-ʎas"},{f:"microondas",t:"Mikrowelle",p:"mi-kro-on-das"},
+        {f:"plancha",t:"Bügeleisen",p:"plan-tʃa"},{f:"secador de pelo",t:"Haartrockner",p:"se-ka-dor de pe-lo"},
+        {f:"espejo",t:"Spiegel",p:"es-pe-xo"},{f:"alfombra",t:"Teppich",p:"al-fom-bra"},
+        {f:"cortina",t:"Vorhang",p:"kor-ti-na"},{f:"almohada",t:"Kissen",p:"al-mo-a-da"},
+        {f:"manta",t:"Decke (Bett)",p:"man-ta"},{f:"toalla",t:"Handtuch",p:"to-a-ʎa"},
+        {f:"jabón",t:"Seife",p:"xa-bon"},{f:"cepillo de dientes",t:"Zahnbürste",p:"θe-pi-ʎo de djen-tes"},
+        {f:"champú",t:"Shampoo",p:"tʃam-pu"},{f:"bombilla",t:"Glühbirne",p:"bom-bi-ʎa"},
+      ],
+      "Ciudad & Transporte": [
+        {f:"semáforo",t:"Ampel",p:"se-ma-fo-ro"},{f:"cruce",t:"Kreuzung",p:"kru-θe"},
+        {f:"atasco",t:"Stau",p:"a-tas-ko"},{f:"aparcamiento",t:"Parkplatz",p:"a-par-ka-mjen-to"},
+        {f:"paso de cebra",t:"Zebrastreifen",p:"pa-so de θe-bra"},
+        {f:"carril bici",t:"Fahrradweg",p:"ka-ril bi-θi"},
+        {f:"plaza",t:"Platz",p:"pla-θa"},{f:"parque",t:"Park",p:"par-ke"},
+        {f:"supermercado",t:"Supermarkt",p:"su-per-mer-ka-do"},{f:"farmacia",t:"Apotheke",p:"far-ma-θja"},
+        {f:"correos",t:"Post",p:"ko-re-os"},{f:"banco",t:"Bank",p:"ban-ko"},
+        {f:"ayuntamiento",t:"Rathaus",p:"a-yun-ta-mjen-to"},{f:"comisaría",t:"Polizeiwache",p:"ko-mi-sa-ri-a"},
+      ],
+      "Adverbios & Conectores": [
+        {f:"siempre",t:"Immer",p:"sjem-pre"},{f:"nunca",t:"Nie",p:"nun-ka"},
+        {f:"a menudo",t:"Oft",p:"a me-nu-do"},{f:"a veces",t:"Manchmal",p:"a be-θes"},
+        {f:"ya",t:"Schon",p:"ja"},{f:"todavía",t:"Noch",p:"to-da-bi-a"},
+        {f:"enseguida",t:"Sofort",p:"en-se-ɣi-da"},{f:"quizás",t:"Vielleicht",p:"ki-θas"},
+        {f:"probablemente",t:"Wahrscheinlich",p:"pro-ba-ble-men-te"},
+        {f:"sin embargo",t:"Jedoch / Trotzdem",p:"sin em-bar-ɣo"},
+        {f:"por lo tanto",t:"Deshalb",p:"por lo tan-to"},{f:"además",t:"Außerdem",p:"a-de-mas"},
+        {f:"aunque",t:"Obwohl",p:"awn-ke"},{f:"mientras",t:"Während",p:"mjen-tras"},
+        {f:"o bien",t:"Oder / Sonst",p:"o bjen"},{f:"sino",t:"Sondern",p:"si-no"},
+      ],
+    },
+    en: {
+      "Clothing": [
+        {f:"shirt",t:"Hemd",p:"ʃɜːrt"},{f:"trousers",t:"Hose",p:"ˈtraʊzərz"},
+        {f:"dress",t:"Kleid",p:"drɛs"},{f:"skirt",t:"Rock",p:"skɜːrt"},
+        {f:"jacket",t:"Jacke",p:"ˈdʒækɪt"},{f:"coat",t:"Mantel",p:"koʊt"},
+        {f:"sweater",t:"Pullover",p:"ˈswɛtər"},{f:"socks",t:"Socken",p:"sɒks"},
+        {f:"boots",t:"Stiefel",p:"buːts"},{f:"hat",t:"Hut / Mütze",p:"hæt"},
+        {f:"scarf",t:"Schal",p:"skɑːrf"},{f:"gloves",t:"Handschuhe",p:"ɡlʌvz"},
+        {f:"belt",t:"Gürtel",p:"bɛlt"},{f:"tie",t:"Krawatte",p:"taɪ"},
+        {f:"swimsuit",t:"Badeanzug",p:"ˈswɪmsuːt"},{f:"pyjamas",t:"Pyjama",p:"pɪˈdʒɑːməz"},
+        {f:"underwear",t:"Unterwäsche",p:"ˈʌndərwɛər"},{f:"raincoat",t:"Regenmantel",p:"ˈreɪnkoʊt"},
+      ],
+      "Emotions": [
+        {f:"joy",t:"Freude",p:"dʒɔɪ"},{f:"sadness",t:"Traurigkeit",p:"ˈsædnɪs"},
+        {f:"anger",t:"Wut",p:"ˈæŋɡər"},{f:"fear",t:"Angst",p:"fɪər"},
+        {f:"surprise",t:"Überraschung",p:"sərˈpraɪz"},{f:"pride",t:"Stolz",p:"praɪd"},
+        {f:"love",t:"Liebe",p:"lʌv"},{f:"hope",t:"Hoffnung",p:"hoʊp"},
+        {f:"happiness",t:"Glück",p:"ˈhæpɪnɪs"},{f:"anxiety",t:"Angst / Sorge",p:"æŋˈzaɪəti"},
+        {f:"loneliness",t:"Einsamkeit",p:"ˈloʊnlɪnɪs"},{f:"jealousy",t:"Eifersucht / Neid",p:"ˈdʒɛləsi"},
+        {f:"shame",t:"Scham",p:"ʃeɪm"},{f:"trust",t:"Vertrauen",p:"trʌst"},
+        {f:"disgust",t:"Ekel",p:"dɪsˈɡʌst"},{f:"excitement",t:"Aufregung / Begeisterung",p:"ɪkˈsaɪtmənt"},
+      ],
+      "Restaurant": [
+        {f:"menu",t:"Speisekarte",p:"ˈmɛnjuː"},{f:"waiter",t:"Kellner",p:"ˈweɪtər"},
+        {f:"to book a table",t:"Tisch reservieren",p:"tə bʊk ə ˈteɪbəl"},{f:"to order",t:"Bestellen",p:"tə ˈɔːrdər"},
+        {f:"bill",t:"Rechnung",p:"bɪl"},{f:"tip",t:"Trinkgeld",p:"tɪp"},
+        {f:"starter",t:"Vorspeise",p:"ˈstɑːrtər"},{f:"main course",t:"Hauptgericht",p:"meɪn kɔːrs"},
+        {f:"dessert",t:"Dessert",p:"dɪˈzɜːrt"},{f:"drink",t:"Getränk",p:"drɪŋk"},
+        {f:"portion",t:"Portion",p:"ˈpɔːrʃən"},{f:"vegetarian",t:"Vegetarisch",p:"ˌvɛdʒɪˈtɛəriən"},
+        {f:"allergic to",t:"Allergisch gegen",p:"əˈlɜːrdʒɪk tuː"},{f:"gluten-free",t:"Glutenfrei",p:"ˈɡluːtən friː"},
+        {f:"could I have the bill",t:"Die Rechnung bitte",p:"kʊd aɪ hæv ðə bɪl"},
+      ],
+      "Home & Household": [
+        {f:"vacuum cleaner",t:"Staubsauger",p:"ˈvækjuəm ˈkliːnər"},{f:"washing machine",t:"Waschmaschine",p:"ˈwɒʃɪŋ məˈʃiːn"},
+        {f:"dishwasher",t:"Geschirrspüler",p:"ˈdɪʃwɒʃər"},{f:"microwave",t:"Mikrowelle",p:"ˈmaɪkrəweɪv"},
+        {f:"iron",t:"Bügeleisen",p:"ˈaɪərn"},{f:"hair dryer",t:"Haartrockner",p:"hɛər ˈdraɪər"},
+        {f:"mirror",t:"Spiegel",p:"ˈmɪrər"},{f:"carpet",t:"Teppich",p:"ˈkɑːrpɪt"},
+        {f:"curtain",t:"Vorhang",p:"ˈkɜːrtən"},{f:"pillow",t:"Kissen",p:"ˈpɪloʊ"},
+        {f:"blanket",t:"Decke (Bett)",p:"ˈblæŋkɪt"},{f:"towel",t:"Handtuch",p:"ˈtaʊəl"},
+        {f:"soap",t:"Seife",p:"soʊp"},{f:"toothbrush",t:"Zahnbürste",p:"ˈtuːθbrʌʃ"},
+        {f:"shampoo",t:"Shampoo",p:"ʃæmˈpuː"},{f:"light bulb",t:"Glühbirne",p:"laɪt bʌlb"},
+      ],
+      "City & Transport": [
+        {f:"traffic light",t:"Ampel",p:"ˈtræfɪk laɪt"},{f:"crossroads",t:"Kreuzung",p:"ˈkrɒsroʊdz"},
+        {f:"traffic jam",t:"Stau",p:"ˈtræfɪk dʒæm"},{f:"car park",t:"Parkplatz",p:"kɑːr pɑːrk"},
+        {f:"zebra crossing",t:"Zebrastreifen",p:"ˈziːbrə ˈkrɒsɪŋ"},
+        {f:"cycle lane",t:"Fahrradweg",p:"ˈsaɪkəl leɪn"},
+        {f:"square",t:"Platz",p:"skwɛər"},{f:"park",t:"Park",p:"pɑːrk"},
+        {f:"supermarket",t:"Supermarkt",p:"ˈsuːpərmɑːrkɪt"},{f:"pharmacy",t:"Apotheke",p:"ˈfɑːrməsi"},
+        {f:"post office",t:"Post",p:"poʊst ˈɒfɪs"},{f:"bank",t:"Bank",p:"bæŋk"},
+        {f:"town hall",t:"Rathaus",p:"taʊn hɔːl"},{f:"police station",t:"Polizeiwache",p:"pəˈliːs ˈsteɪʃən"},
+        {f:"fire station",t:"Feuerwache",p:"faɪər ˈsteɪʃən"},{f:"library",t:"Bibliothek",p:"ˈlaɪbrəri"},
+      ],
+      "Adverbs & Conjunctions": [
+        {f:"always",t:"Immer",p:"ˈɔːlweɪz"},{f:"never",t:"Nie",p:"ˈnɛvər"},
+        {f:"often",t:"Oft",p:"ˈɒfən"},{f:"sometimes",t:"Manchmal",p:"ˈsʌmtaɪmz"},
+        {f:"already",t:"Schon",p:"ɔːlˈrɛdi"},{f:"still",t:"Noch",p:"stɪl"},
+        {f:"immediately",t:"Sofort",p:"ɪˈmiːdiətli"},{f:"perhaps",t:"Vielleicht",p:"pərˈhæps"},
+        {f:"probably",t:"Wahrscheinlich",p:"ˈprɒbəbli"},{f:"however",t:"Jedoch",p:"haʊˈɛvər"},
+        {f:"therefore",t:"Deshalb",p:"ˈðɛərfɔːr"},{f:"furthermore",t:"Außerdem",p:"ˈfɜːrðərmɔːr"},
+        {f:"although",t:"Obwohl",p:"ɔːlˈðoʊ"},{f:"while",t:"Während",p:"waɪl"},
+        {f:"otherwise",t:"Sonst / Andernfalls",p:"ˈʌðərwaɪz"},{f:"moreover",t:"Überdies",p:"mɔːrˈoʊvər"},
+        {f:"meanwhile",t:"Inzwischen",p:"ˈmiːnwaɪl"},{f:"consequently",t:"Folglich",p:"ˈkɒnsɪkwəntli"},
+      ],
+      "Technology (extended)": [
+        {f:"artificial intelligence",t:"Künstliche Intelligenz",p:"ˌɑːrtɪˈfɪʃəl ɪnˈtɛlɪdʒəns"},
+        {f:"cloud computing",t:"Cloud-Computing",p:"klaʊd kəmˈpjuːtɪŋ"},
+        {f:"software",t:"Software",p:"ˈsɒftweər"},{f:"hardware",t:"Hardware",p:"ˈhɑːrdwɛər"},
+        {f:"download",t:"Herunterladen",p:"ˈdaʊnloʊd"},{f:"upload",t:"Hochladen",p:"ˈʌploʊd"},
+        {f:"database",t:"Datenbank",p:"ˈdeɪtəbeɪs"},{f:"algorithm",t:"Algorithmus",p:"ˈælɡərɪðəm"},
+        {f:"encryption",t:"Verschlüsselung",p:"ɪnˈkrɪpʃən"},{f:"firewall",t:"Firewall",p:"ˈfaɪərwɔːl"},
+        {f:"backup",t:"Sicherungskopie",p:"ˈbækʌp"},{f:"update",t:"Aktualisierung",p:"ˈʌpdeɪt"},
+        {f:"notification",t:"Benachrichtigung",p:"ˌnoʊtɪfɪˈkeɪʃən"},{f:"streaming",t:"Streaming",p:"ˈstriːmɪŋ"},
+        {f:"wireless",t:"Kabellos",p:"ˈwaɪərləs"},{f:"virtual reality",t:"Virtuelle Realität",p:"ˈvɜːrtʃuəl riˈæləti"},
+      ],
+    },
+    tr: {
+      "Kıyafetler": [
+        {f:"gömlek",t:"Hemd",p:"göm-lek"},{f:"pantolon",t:"Hose",p:"pan-to-lon"},
+        {f:"elbise",t:"Kleid",p:"el-bi-se"},{f:"etek",t:"Rock",p:"e-tek"},
+        {f:"ceket",t:"Jacke",p:"ca-ket"},{f:"palto",t:"Mantel",p:"pal-to"},
+        {f:"kazak",t:"Pullover",p:"ka-zak"},{f:"çorap",t:"Socken",p:"ço-rap"},
+        {f:"çizme",t:"Stiefel",p:"çiz-me"},{f:"bere",t:"Mütze",p:"be-re"},
+        {f:"atkı / eşarp",t:"Schal",p:"at-kı"},{f:"eldiven",t:"Handschuhe",p:"el-di-ven"},
+        {f:"kemer",t:"Gürtel",p:"ke-mer"},{f:"kravat",t:"Krawatte",p:"kra-vat"},
+        {f:"mayo",t:"Badeanzug",p:"ma-yo"},{f:"pijama",t:"Pyjama",p:"pi-ja-ma"},
+        {f:"iç çamaşırı",t:"Unterwäsche",p:"iç ça-ma-şı-rı"},{f:"yağmurluk",t:"Regenmantel",p:"yağ-mur-luk"},
+      ],
+      "Duygular": [
+        {f:"sevinç",t:"Freude",p:"se-vinç"},{f:"üzüntü",t:"Traurigkeit",p:"ü-zün-tü"},
+        {f:"öfke",t:"Wut",p:"öf-ke"},{f:"korku",t:"Angst",p:"kor-ku"},
+        {f:"şaşkınlık",t:"Überraschung",p:"şaş-kın-lık"},{f:"gurur",t:"Stolz",p:"gu-rur"},
+        {f:"aşk / sevgi",t:"Liebe",p:"aşk"},{f:"umut",t:"Hoffnung",p:"u-mut"},
+        {f:"mutluluk",t:"Glück",p:"mut-lu-luk"},{f:"kaygı / endişe",t:"Sorge / Angst",p:"kay-gı"},
+        {f:"yalnızlık",t:"Einsamkeit",p:"yal-nız-lık"},{f:"kıskançlık",t:"Eifersucht / Neid",p:"kıs-kanç-lık"},
+        {f:"utanç",t:"Scham",p:"u-tanç"},{f:"güven",t:"Vertrauen",p:"gü-ven"},
+        {f:"nefret",t:"Hass",p:"nef-ret"},{f:"heyecan",t:"Aufregung / Begeisterung",p:"he-ye-can"},
+      ],
+      "Restoran": [
+        {f:"menü",t:"Speisekarte",p:"me-nü"},{f:"garson",t:"Kellner",p:"gar-son"},
+        {f:"masa rezervasyonu",t:"Tischreservierung",p:"ma-sa re-zer-vas-yo-nu"},
+        {f:"sipariş vermek",t:"Bestellen",p:"si-pa-riş ver-mek"},
+        {f:"hesap",t:"Rechnung",p:"he-sap"},{f:"bahşiş",t:"Trinkgeld",p:"bah-şiş"},
+        {f:"başlangıç yemeği",t:"Vorspeise",p:"baş-lan-gıç ye-me-ği"},
+        {f:"ana yemek",t:"Hauptgericht",p:"a-na ye-mek"},
+        {f:"tatlı",t:"Dessert / Süßspeise",p:"tat-lı"},{f:"içecek",t:"Getränk",p:"i-çe-cek"},
+        {f:"vejetaryen",t:"Vegetarisch",p:"ve-je-tar-yen"},
+        {f:"alerjim var",t:"Ich bin allergisch",p:"a-ler-jim var"},
+        {f:"hesabı getirir misiniz",t:"Die Rechnung bitte",p:"he-sa-bı ge-ti-rir mi-si-niz"},
+        {f:"glutensiz",t:"Glutenfrei",p:"glu-ten-siz"},
+      ],
+      "Ev & Eşyalar": [
+        {f:"elektrikli süpürge",t:"Staubsauger",p:"e-lek-trik-li sü-pür-ge"},
+        {f:"çamaşır makinesi",t:"Waschmaschine",p:"ça-ma-şır ma-ki-ne-si"},
+        {f:"bulaşık makinesi",t:"Geschirrspüler",p:"bu-la-şık ma-ki-ne-si"},
+        {f:"mikrodalga",t:"Mikrowelle",p:"mik-ro-dal-ga"},
+        {f:"ütü",t:"Bügeleisen",p:"ü-tü"},{f:"saç kurutma makinesi",t:"Haartrockner",p:"saç ku-rut-ma"},
+        {f:"ayna",t:"Spiegel",p:"ay-na"},{f:"halı",t:"Teppich",p:"ha-lı"},
+        {f:"perde",t:"Vorhang",p:"per-de"},{f:"yastık",t:"Kissen",p:"yas-tık"},
+        {f:"battaniye",t:"Decke (Bett)",p:"bat-ta-ni-ye"},{f:"havlu",t:"Handtuch",p:"hav-lu"},
+        {f:"sabun",t:"Seife",p:"sa-bun"},{f:"diş fırçası",t:"Zahnbürste",p:"diş fır-ça-sı"},
+        {f:"şampuan",t:"Shampoo",p:"şam-pu-an"},{f:"ampul",t:"Glühbirne",p:"am-pul"},
+      ],
+      "Şehir & Ulaşım": [
+        {f:"trafik ışığı",t:"Ampel",p:"tra-fik ı-şı-ğı"},{f:"kavşak",t:"Kreuzung",p:"kav-şak"},
+        {f:"trafik sıkışıklığı",t:"Stau",p:"tra-fik sı-kı-şık-lı-ğı"},
+        {f:"otopark",t:"Parkplatz",p:"o-to-park"},
+        {f:"yaya geçidi",t:"Zebrastreifen",p:"ya-ya ge-çi-di"},
+        {f:"bisiklet yolu",t:"Fahrradweg",p:"bi-sik-let yo-lu"},
+        {f:"meydan",t:"Platz",p:"mey-dan"},{f:"park",t:"Park",p:"park"},
+        {f:"süpermarket",t:"Supermarkt",p:"sü-per-mar-ket"},
+        {f:"postane",t:"Post",p:"pos-ta-ne"},{f:"banka",t:"Bank",p:"ban-ka"},
+        {f:"belediye binası",t:"Rathaus",p:"be-le-di-ye bi-na-sı"},
+        {f:"karakol",t:"Polizeiwache",p:"ka-ra-kol"},
+      ],
+      "Zarflar & Bağlaçlar": [
+        {f:"her zaman",t:"Immer",p:"her za-man"},{f:"hiçbir zaman",t:"Nie",p:"hiç-bir za-man"},
+        {f:"sık sık",t:"Oft",p:"sık sık"},{f:"bazen",t:"Manchmal",p:"ba-zen"},
+        {f:"zaten",t:"Schon / Bereits",p:"za-ten"},{f:"hâlâ",t:"Noch",p:"ha-la"},
+        {f:"hemen",t:"Sofort",p:"he-men"},{f:"belki",t:"Vielleicht",p:"bel-ki"},
+        {f:"muhtemelen",t:"Wahrscheinlich",p:"muh-te-me-len"},
+        {f:"ancak / fakat",t:"Jedoch",p:"an-cak"},{f:"bu nedenle",t:"Deshalb",p:"bu ne-den-le"},
+        {f:"ayrıca",t:"Außerdem",p:"ay-rı-ca"},{f:"her ne kadar",t:"Obwohl",p:"her ne ka-dar"},
+        {f:"sırasında",t:"Während",p:"sı-ra-sın-da"},
+        {f:"aksi takdirde",t:"Sonst / Andernfalls",p:"ak-si tak-dir-de"},
+      ],
+    },
+    sq: {
+      "Veshjet": [
+        {f:"këmishë",t:"Hemd",p:"kə-mi-shə"},{f:"pantallona",t:"Hose",p:"pan-ta-lo-na"},
+        {f:"fustan",t:"Kleid",p:"fus-tan"},{f:"fund",t:"Rock",p:"fund"},
+        {f:"xhaketë",t:"Jacke",p:"xha-ke-tə"},{f:"pallto",t:"Mantel",p:"pal-to"},
+        {f:"triko",t:"Pullover",p:"tri-ko"},{f:"çorape",t:"Socken",p:"ço-ra-pe"},
+        {f:"çizmë",t:"Stiefel",p:"çiz-mə"},{f:"kapelë",t:"Hut / Mütze",p:"ka-pe-lə"},
+        {f:"shall",t:"Schal",p:"shall"},{f:"doreza",t:"Handschuhe",p:"do-re-za"},
+        {f:"rrip",t:"Gürtel",p:"rrip"},{f:"kravatë",t:"Krawatte",p:"kra-va-tə"},
+        {f:"kostum banje",t:"Badeanzug",p:"kos-tum ban-ye"},{f:"pizhama",t:"Pyjama",p:"pi-zha-ma"},
+      ],
+      "Ndjenjat": [
+        {f:"gëzim",t:"Freude",p:"gə-zim"},{f:"trishtim",t:"Traurigkeit",p:"trish-tim"},
+        {f:"zemërim",t:"Wut",p:"ze-mə-rim"},{f:"frikë",t:"Angst",p:"fri-kə"},
+        {f:"habi",t:"Überraschung",p:"ha-bi"},{f:"krenari",t:"Stolz",p:"kre-na-ri"},
+        {f:"dashuri",t:"Liebe",p:"da-shu-ri"},{f:"shpresë",t:"Hoffnung",p:"shpre-sə"},
+        {f:"lumturi",t:"Glück",p:"lum-tu-ri"},{f:"shqetësim",t:"Sorge / Angst",p:"shqe-tə-sim"},
+        {f:"vetmi",t:"Einsamkeit",p:"vet-mi"},{f:"zili",t:"Neid",p:"zi-li"},
+        {f:"turp",t:"Scham",p:"turp"},{f:"besim",t:"Vertrauen",p:"be-sim"},
+        {f:"urrejtje",t:"Hass",p:"ur-reit-ye"},{f:"entuziazëm",t:"Begeisterung",p:"en-tu-zia-zəm"},
+      ],
+      "Restoranti": [
+        {f:"menu",t:"Speisekarte",p:"me-nu"},{f:"kamarier",t:"Kellner",p:"ka-ma-rier"},
+        {f:"rezervim tavoline",t:"Tischreservierung",p:"re-zer-vim ta-vo-li-ne"},
+        {f:"porositje",t:"Bestellung",p:"po-ro-sit-ye"},
+        {f:"fatura",t:"Rechnung",p:"fa-tu-ra"},{f:"bakshish",t:"Trinkgeld",p:"bak-shish"},
+        {f:"hors d'oeuvre",t:"Vorspeise",p:"hor duvrə"},{f:"pjata kryesore",t:"Hauptgericht",p:"pja-ta krye-so-re"},
+        {f:"ëmbëlsirë",t:"Dessert",p:"əm-bəl-si-rə"},{f:"pije",t:"Getränk",p:"pi-ye"},
+        {f:"vegetarian",t:"Vegetarisch",p:"ve-ge-ta-ri-an"},
+        {f:"jam alergjik ndaj",t:"Ich bin allergisch gegen",p:"yam a-ler-gyik ndai"},
+        {f:"llogarinë ju lutem",t:"Die Rechnung bitte",p:"llo-ga-ri-nə yu lu-tem"},
+      ],
+      "Shtëpia & Pajisjet": [
+        {f:"fshesë elektrike",t:"Staubsauger",p:"fshe-sə e-lek-tri-ke"},
+        {f:"lavatriçe",t:"Waschmaschine",p:"la-va-tri-çe"},
+        {f:"makinë larëse enësh",t:"Geschirrspüler",p:"ma-ki-nə la-rə-se e-nəsh"},
+        {f:"mikrovalë",t:"Mikrowelle",p:"mi-kro-va-lə"},
+        {f:"hekur rrobash",t:"Bügeleisen",p:"he-kur ro-bash"},
+        {f:"tharëse flokësh",t:"Haartrockner",p:"tha-rə-se flo-kəsh"},
+        {f:"pasqyrë",t:"Spiegel",p:"pas-qy-rə"},{f:"qilim",t:"Teppich",p:"qi-lim"},
+        {f:"perde",t:"Vorhang",p:"per-de"},{f:"jastëk",t:"Kissen",p:"yas-tək"},
+        {f:"batanije",t:"Decke (Bett)",p:"ba-ta-ni-ye"},{f:"peshqir",t:"Handtuch",p:"pesh-qir"},
+        {f:"sapun",t:"Seife",p:"sa-pun"},{f:"furçë dhëmbësh",t:"Zahnbürste",p:"fur-çə dhəm-bəsh"},
+        {f:"shampo",t:"Shampoo",p:"sham-po"},{f:"llambë",t:"Glühbirne",p:"llam-bə"},
+      ],
+      "Qyteti & Transporti": [
+        {f:"semafor",t:"Ampel",p:"se-ma-for"},{f:"kryqëzim",t:"Kreuzung",p:"kry-qə-zim"},
+        {f:"bllokim trafiku",t:"Stau",p:"bllo-kim tra-fi-ku"},
+        {f:"parkim",t:"Parkplatz",p:"par-kim"},
+        {f:"kalim për këmbësorë",t:"Zebrastreifen",p:"ka-lim pər kəm-bə-so-rə"},
+        {f:"pistë biçiklete",t:"Fahrradweg",p:"pis-tə bi-çik-le-te"},
+        {f:"shesh",t:"Platz",p:"shesh"},{f:"park",t:"Park",p:"park"},
+        {f:"supermarket",t:"Supermarkt",p:"su-per-mar-ket"},
+        {f:"postë",t:"Post",p:"pos-tə"},{f:"bankë",t:"Bank",p:"ban-kə"},
+        {f:"bashkia",t:"Rathaus",p:"bash-kia"},{f:"komisariat",t:"Polizeiwache",p:"ko-mi-sa-ri-at"},
+      ],
+      "Lidhëzat & Ndajfoljet": [
+        {f:"gjithmonë",t:"Immer",p:"gjith-mo-nə"},{f:"kurrë",t:"Nie",p:"kur-rə"},
+        {f:"shpesh",t:"Oft",p:"shpesh"},{f:"ndonjëherë",t:"Manchmal",p:"ndon-yə-he-rə"},
+        {f:"tashmë",t:"Schon / Bereits",p:"tash-mə"},{f:"ende",t:"Noch",p:"en-de"},
+        {f:"menjëherë",t:"Sofort",p:"men-yə-he-rə"},{f:"ndoshta",t:"Vielleicht",p:"ndosh-ta"},
+        {f:"me shumë mundësi",t:"Wahrscheinlich",p:"me shu-mə mun-də-si"},
+        {f:"megjithatë",t:"Jedoch / Trotzdem",p:"meg-jit-ha-tə"},
+        {f:"prandaj",t:"Deshalb",p:"pran-dai"},{f:"për më tepër",t:"Außerdem",p:"pər mə te-pər"},
+        {f:"edhe pse",t:"Obwohl",p:"e-dhe pse"},{f:"ndërsa",t:"Während",p:"ndər-sa"},
+        {f:"përndryshe",t:"Sonst",p:"pər-ndry-she"},
+      ],
+    },
+    de: {
+      "Kleidung": [
+        {f:"die Bluse",t:"Bluse",p:"di blu-ze"},{f:"die Jogginghose",t:"Jogginghose",p:"di jo-ging-ho-ze"},
+        {f:"der Rock",t:"Rock",p:"der rok"},{f:"das Hemd",t:"Hemd",p:"das hemt"},
+        {f:"der Anzug",t:"Anzug",p:"der an-tsuk"},{f:"der Regenmantel",t:"Regenmantel",p:"der re-gen-man-tel"},
+        {f:"die Unterwäsche",t:"Unterwäsche",p:"di un-ter-ve-she"},{f:"der Gürtel",t:"Gürtel",p:"der gür-tel"},
+        {f:"die Handschuhe",t:"Handschuhe",p:"di hant-shu-e"},{f:"die Mütze",t:"Mütze",p:"di mü-tse"},
+        {f:"der Schal",t:"Schal",p:"der shal"},{f:"der Badeanzug",t:"Badeanzug",p:"der ba-de-an-tsuk"},
+        {f:"der Schlafanzug",t:"Schlafanzug / Pyjama",p:"der shlaf-an-tsuk"},
+      ],
+      "Gefühle": [
+        {f:"die Freude",t:"Freude",p:"di froy-de"},{f:"die Traurigkeit",t:"Traurigkeit",p:"di trau-rig-kait"},
+        {f:"die Wut",t:"Wut",p:"di vut"},{f:"die Angst",t:"Angst",p:"di angst"},
+        {f:"die Überraschung",t:"Überraschung",p:"di ü-ber-ra-shung"},{f:"der Stolz",t:"Stolz",p:"der shtolts"},
+        {f:"die Liebe",t:"Liebe",p:"di li-be"},{f:"die Hoffnung",t:"Hoffnung",p:"di hof-nung"},
+        {f:"das Glück",t:"Glück",p:"das glük"},{f:"die Einsamkeit",t:"Einsamkeit",p:"di ain-zam-kait"},
+        {f:"die Eifersucht",t:"Eifersucht",p:"di ai-fer-zucht"},{f:"die Scham",t:"Scham",p:"di sham"},
+        {f:"das Vertrauen",t:"Vertrauen",p:"das fer-trau-en"},{f:"der Neid",t:"Neid",p:"der naid"},
+        {f:"die Begeisterung",t:"Begeisterung",p:"di be-gais-ter-ung"},
+      ],
+      "Restaurant": [
+        {f:"die Speisekarte",t:"Speisekarte",p:"di shpai-ze-kar-te"},{f:"der Kellner",t:"Kellner",p:"der kel-ner"},
+        {f:"einen Tisch reservieren",t:"Einen Tisch reservieren",p:"ai-nen tish re-zer-vi-ren"},
+        {f:"bestellen",t:"Bestellen",p:"be-shtel-en"},{f:"die Rechnung",t:"Rechnung",p:"di rech-nung"},
+        {f:"das Trinkgeld",t:"Trinkgeld",p:"das trink-gelt"},
+        {f:"die Vorspeise",t:"Vorspeise",p:"di for-shpai-ze"},{f:"das Hauptgericht",t:"Hauptgericht",p:"das haupt-ge-richt"},
+        {f:"die Nachspeise",t:"Dessert / Nachspeise",p:"di nach-shpai-ze"},
+        {f:"das Getränk",t:"Getränk",p:"das ge-trenk"},{f:"vegetarisch",t:"Vegetarisch",p:"ve-ge-ta-rish"},
+        {f:"ich bin allergisch gegen",t:"Ich bin allergisch gegen",p:"ich bin a-ler-gish"},
+        {f:"glutenfrei",t:"Glutenfrei",p:"glu-ten-frai"},
+      ],
+      "Haushalt": [
+        {f:"der Staubsauger",t:"Staubsauger",p:"der shtaub-zau-ger"},{f:"die Waschmaschine",t:"Waschmaschine",p:"di wash-ma-shi-ne"},
+        {f:"der Geschirrspüler",t:"Geschirrspüler",p:"der ge-shir-shpü-ler"},{f:"die Mikrowelle",t:"Mikrowelle",p:"di mi-kro-vel-e"},
+        {f:"das Bügeleisen",t:"Bügeleisen",p:"das bü-gel-ai-zen"},{f:"der Haartrockner",t:"Haartrockner",p:"der har-trok-ner"},
+        {f:"der Spiegel",t:"Spiegel",p:"der shpi-gel"},{f:"der Teppich",t:"Teppich",p:"der tep-pich"},
+        {f:"der Vorhang",t:"Vorhang",p:"der for-hang"},{f:"das Kissen",t:"Kissen",p:"das ki-sen"},
+        {f:"die Decke",t:"Decke (Bett)",p:"di de-ke"},{f:"das Handtuch",t:"Handtuch",p:"das hant-tuch"},
+        {f:"die Seife",t:"Seife",p:"di zai-fe"},{f:"die Zahnbürste",t:"Zahnbürste",p:"di tsan-bürs-te"},
+        {f:"das Shampoo",t:"Shampoo",p:"das sham-po"},{f:"die Glühbirne",t:"Glühbirne",p:"di glü-bir-ne"},
+      ],
+      "Stadt & Verkehr": [
+        {f:"die Ampel",t:"Ampel",p:"di am-pel"},{f:"die Kreuzung",t:"Kreuzung",p:"di kroy-tsung"},
+        {f:"der Stau",t:"Stau",p:"der shtau"},{f:"der Parkplatz",t:"Parkplatz",p:"der park-plats"},
+        {f:"der Zebrastreifen",t:"Zebrastreifen",p:"der tse-bra-shtrai-fen"},
+        {f:"der Fahrradweg",t:"Fahrradweg",p:"der far-rat-vek"},
+        {f:"der Platz",t:"Platz",p:"der plats"},{f:"der Supermarkt",t:"Supermarkt",p:"der zu-per-markt"},
+        {f:"das Rathaus",t:"Rathaus",p:"das rat-haus"},{f:"die Polizeiwache",t:"Polizeiwache",p:"di po-li-tsai-va-che"},
+        {f:"die Fußgängerzone",t:"Fußgängerzone",p:"di fus-geng-er-tso-ne"},
+        {f:"die Einbahnstraße",t:"Einbahnstraße",p:"di ain-ban-shtras-e"},
+        {f:"das Parkverbot",t:"Parkverbot",p:"das park-fer-bot"},
+      ],
+      "Konjunktionen & Präpositionen": [
+        {f:"immer",t:"Immer",p:"im-er"},{f:"niemals",t:"Niemals / Nie",p:"ni-mals"},
+        {f:"oft",t:"Oft",p:"oft"},{f:"manchmal",t:"Manchmal",p:"manch-mal"},
+        {f:"bereits",t:"Bereits / Schon",p:"be-raits"},{f:"trotzdem",t:"Trotzdem",p:"trots-dem"},
+        {f:"sofort",t:"Sofort",p:"zo-fort"},{f:"vielleicht",t:"Vielleicht",p:"fil-laicht"},
+        {f:"wahrscheinlich",t:"Wahrscheinlich",p:"var-shain-lich"},
+        {f:"außerdem",t:"Außerdem",p:"aus-er-dem"},{f:"deshalb",t:"Deshalb",p:"des-halb"},
+        {f:"obwohl",t:"Obwohl",p:"ob-vol"},{f:"während",t:"Während",p:"ve-rent"},
+        {f:"andernfalls",t:"Andernfalls / Sonst",p:"an-dern-falls"},
+        {f:"infolgedessen",t:"Infolgedessen",p:"in-fol-ge-des-en"},
+      ],
+    },
+    th: {
+      "เสื้อผ้า": [
+        {f:"เสื้อเชิ้ต",t:"Hemd",p:"suea-chert"},{f:"กางเกง",t:"Hose",p:"kang-keng"},
+        {f:"ชุดเดรส",t:"Kleid",p:"chut-dress"},{f:"กระโปรง",t:"Rock",p:"kra-prong"},
+        {f:"แจ็กเก็ต",t:"Jacke",p:"jaek-ket"},{f:"เสื้อโค้ต",t:"Mantel",p:"suea-khoat"},
+        {f:"เสื้อกันหนาว",t:"Pullover",p:"suea-kan-nao"},{f:"ถุงเท้า",t:"Socken",p:"thung-thao"},
+        {f:"รองเท้าบูท",t:"Stiefel",p:"rong-thao-but"},{f:"หมวก",t:"Hut / Mütze",p:"muak"},
+        {f:"ผ้าพันคอ",t:"Schal",p:"pha-phan-kho"},{f:"ถุงมือ",t:"Handschuhe",p:"thung-mue"},
+        {f:"เข็มขัด",t:"Gürtel",p:"khem-khat"},{f:"เนคไท",t:"Krawatte",p:"nek-thai"},
+        {f:"ชุดว่ายน้ำ",t:"Badeanzug",p:"chut-wai-nam"},{f:"ชุดนอน",t:"Pyjama",p:"chut-non"},
+      ],
+      "อารมณ์": [
+        {f:"ความสุข",t:"Freude / Glück",p:"khwam-suk"},{f:"ความเศร้า",t:"Traurigkeit",p:"khwam-sao"},
+        {f:"ความโกรธ",t:"Wut",p:"khwam-krot"},{f:"ความกลัว",t:"Angst",p:"khwam-klua"},
+        {f:"ความประหลาดใจ",t:"Überraschung",p:"khwam-pra-lad-jai"},{f:"ความภาคภูมิใจ",t:"Stolz",p:"khwam-phak-phum-jai"},
+        {f:"ความรัก",t:"Liebe",p:"khwam-rak"},{f:"ความหวัง",t:"Hoffnung",p:"khwam-wang"},
+        {f:"ความเหงา",t:"Einsamkeit",p:"khwam-ngao"},{f:"ความอิจฉา",t:"Neid / Eifersucht",p:"khwam-it-cha"},
+        {f:"ความละอายใจ",t:"Scham",p:"khwam-la-ai-jai"},{f:"ความไว้วางใจ",t:"Vertrauen",p:"khwam-wai-wang-jai"},
+        {f:"ความเกลียด",t:"Hass",p:"khwam-kliat"},{f:"ความตื่นเต้น",t:"Begeisterung",p:"khwam-tuen-ten"},
+      ],
+      "ร้านอาหาร": [
+        {f:"รายการอาหาร",t:"Speisekarte",p:"rai-kan-a-han"},{f:"พนักงานเสิร์ฟ",t:"Kellner",p:"pha-nak-ngan-soef"},
+        {f:"จองโต๊ะ",t:"Tisch reservieren",p:"chong-to"},{f:"สั่งอาหาร",t:"Bestellen",p:"sang-a-han"},
+        {f:"บิล / ใบเสร็จ",t:"Rechnung",p:"bin / bai-set"},{f:"ทิป",t:"Trinkgeld",p:"thip"},
+        {f:"อาหารเรียกน้ำย่อย",t:"Vorspeise",p:"a-han-riak-nam-yoi"},{f:"อาหารจานหลัก",t:"Hauptgericht",p:"a-han-chan-lak"},
+        {f:"ของหวาน",t:"Dessert",p:"khong-wan"},{f:"เครื่องดื่ม",t:"Getränk",p:"khrueang-duem"},
+        {f:"มังสวิรัติ",t:"Vegetarisch",p:"mang-sa-wi-rat"},{f:"แพ้อาหาร",t:"Lebensmittelallergie",p:"phae-a-han"},
+        {f:"ขอเช็คบิลด้วย",t:"Die Rechnung bitte",p:"kho-chek-bin-duai"},
+        {f:"ปลอดกลูเตน",t:"Glutenfrei",p:"plod-klu-ten"},
+      ],
+      "บ้านและของใช้": [
+        {f:"เครื่องดูดฝุ่น",t:"Staubsauger",p:"khrueang-dut-fun"},{f:"เครื่องซักผ้า",t:"Waschmaschine",p:"khrueang-sak-pha"},
+        {f:"เครื่องล้างจาน",t:"Geschirrspüler",p:"khrueang-lang-chan"},{f:"ไมโครเวฟ",t:"Mikrowelle",p:"mai-khro-wet"},
+        {f:"เตารีด",t:"Bügeleisen",p:"tao-rit"},{f:"ไดร์เป่าผม",t:"Haartrockner",p:"dai-pao-phom"},
+        {f:"กระจก",t:"Spiegel",p:"kra-chok"},{f:"พรม",t:"Teppich",p:"phrom"},
+        {f:"ม่านหน้าต่าง",t:"Vorhang",p:"man-na-tang"},{f:"หมอน",t:"Kissen",p:"mon"},
+        {f:"ผ้าห่ม",t:"Decke (Bett)",p:"pha-hom"},{f:"ผ้าขนหนู",t:"Handtuch",p:"pha-khon-nu"},
+        {f:"สบู่",t:"Seife",p:"sa-bu"},{f:"แปรงสีฟัน",t:"Zahnbürste",p:"praeng-si-fan"},
+        {f:"แชมพู",t:"Shampoo",p:"chaem-phu"},{f:"หลอดไฟ",t:"Glühbirne",p:"lod-fai"},
+      ],
+      "เมืองและการเดินทาง": [
+        {f:"ไฟจราจร",t:"Ampel",p:"fai-cha-ra-chon"},{f:"สี่แยก",t:"Kreuzung",p:"si-yaek"},
+        {f:"รถติด",t:"Stau",p:"rot-tit"},{f:"ที่จอดรถ",t:"Parkplatz",p:"thi-chot-rot"},
+        {f:"ทางม้าลาย",t:"Zebrastreifen",p:"thang-ma-lai"},{f:"ทางจักรยาน",t:"Fahrradweg",p:"thang-chak-ka-yan"},
+        {f:"ลานสาธารณะ",t:"Platz",p:"lan-sa-tha-ra-na"},{f:"ห้างสรรพสินค้า",t:"Kaufhaus",p:"hang-sap-sin-kha"},
+        {f:"ร้านขายยา",t:"Apotheke",p:"ran-khai-ya"},{f:"ที่ทำการไปรษณีย์",t:"Post",p:"thi-tham-kan-prai-sa-ni"},
+        {f:"ธนาคาร",t:"Bank",p:"tha-na-khan"},{f:"ศาลากลาง",t:"Rathaus",p:"sa-la-klang"},
+        {f:"สถานีตำรวจ",t:"Polizeiwache",p:"sa-tha-ni-tam-ruat"},
+        {f:"สถานีดับเพลิง",t:"Feuerwache",p:"sa-tha-ni-dap-phloeng"},
+      ],
+      "คำวิเศษณ์และคำเชื่อม": [
+        {f:"เสมอ",t:"Immer",p:"sa-moe"},{f:"ไม่เคย",t:"Nie",p:"mai-khoei"},
+        {f:"บ่อยๆ",t:"Oft",p:"boi-boi"},{f:"บางครั้ง",t:"Manchmal",p:"bang-khrang"},
+        {f:"แล้ว",t:"Schon / Bereits",p:"laeo"},{f:"ยังคง",t:"Noch",p:"yang-khong"},
+        {f:"ทันที",t:"Sofort",p:"than-thi"},{f:"บางที",t:"Vielleicht",p:"bang-thi"},
+        {f:"น่าจะ",t:"Wahrscheinlich",p:"na-cha"},{f:"อย่างไรก็ตาม",t:"Jedoch",p:"yang-rai-ko-tam"},
+        {f:"ดังนั้น",t:"Deshalb",p:"dang-nan"},{f:"นอกจากนี้",t:"Außerdem",p:"nok-chak-ni"},
+        {f:"แม้ว่า",t:"Obwohl",p:"mae-wa"},{f:"ในขณะที่",t:"Während",p:"nai-kha-na-thi"},
+        {f:"มิฉะนั้น",t:"Sonst / Andernfalls",p:"mi-cha-nan"},
+      ],
+    },
+    da: {
+      "Tøj": [
+        {f:"skjorte",t:"Hemd",p:"skyor-te"},{f:"bukser",t:"Hose",p:"buk-ser"},
+        {f:"kjole",t:"Kleid",p:"kyo-le"},{f:"nederdel",t:"Rock",p:"ne-der-del"},
+        {f:"jakke",t:"Jacke",p:"ya-ke"},{f:"frakke",t:"Mantel",p:"fra-ke"},
+        {f:"sweater / bluse",t:"Pullover / Bluse",p:"swi-ter"},{f:"strømper",t:"Socken",p:"stöm-per"},
+        {f:"støvler",t:"Stiefel",p:"stöv-ler"},{f:"hue",t:"Mütze",p:"hu-e"},
+        {f:"tørklæde",t:"Schal",p:"tör-kle-de"},{f:"handsker",t:"Handschuhe",p:"hans-ker"},
+        {f:"bælte",t:"Gürtel",p:"bel-te"},{f:"slips",t:"Krawatte",p:"slips"},
+        {f:"badedragter",t:"Badeanzug",p:"ba-de-drag-ter"},{f:"pyjamas",t:"Pyjama",p:"py-ya-mas"},
+        {f:"undertøj",t:"Unterwäsche",p:"un-er-töy"},{f:"regnfrakke",t:"Regenmantel",p:"rain-fra-ke"},
+      ],
+      "Følelser": [
+        {f:"glæde",t:"Freude",p:"gle-de"},{f:"sorg",t:"Traurigkeit",p:"sorg"},
+        {f:"vrede",t:"Wut",p:"vre-de"},{f:"frygt",t:"Angst",p:"frygt"},
+        {f:"overraskelse",t:"Überraschung",p:"o-ver-ras-kel-se"},{f:"stolthed",t:"Stolz",p:"stol-hed"},
+        {f:"kærlighed",t:"Liebe",p:"ker-li-hed"},{f:"håb",t:"Hoffnung",p:"hob"},
+        {f:"lykke",t:"Glück",p:"lyk-ke"},{f:"ensomhed",t:"Einsamkeit",p:"en-som-hed"},
+        {f:"jalousi",t:"Eifersucht / Neid",p:"ya-lu-si"},{f:"skam",t:"Scham",p:"skam"},
+        {f:"tillid",t:"Vertrauen",p:"ti-lid"},{f:"had",t:"Hass",p:"had"},
+        {f:"begejstring",t:"Begeisterung",p:"be-gais-tring"},{f:"bekymring",t:"Sorge",p:"be-kym-ring"},
+      ],
+      "Restaurant": [
+        {f:"menukort",t:"Speisekarte",p:"me-nu-kort"},{f:"tjener",t:"Kellner",p:"tye-ner"},
+        {f:"reservere et bord",t:"Tisch reservieren",p:"re-ser-ve-re"},{f:"bestille",t:"Bestellen",p:"be-sti-le"},
+        {f:"regningen",t:"Rechnung",p:"rai-ning-en"},{f:"drikkepenge",t:"Trinkgeld",p:"dri-ke-peng-e"},
+        {f:"forret",t:"Vorspeise",p:"fo-ret"},{f:"hovedret",t:"Hauptgericht",p:"ho-ved-ret"},
+        {f:"dessert",t:"Dessert",p:"de-sert"},{f:"drikkevarer",t:"Getränke",p:"dri-ke-va-rer"},
+        {f:"vegetarisk",t:"Vegetarisch",p:"ve-ge-ta-risk"},{f:"jeg er allergisk over for",t:"Ich bin allergisch gegen",p:"yai er a-ler-gisk"},
+        {f:"må jeg bede om regningen",t:"Die Rechnung bitte",p:"mo yai be om rai-ning-en"},
+        {f:"glutenfri",t:"Glutenfrei",p:"glu-ten-fri"},
+      ],
+      "Hushold": [
+        {f:"støvsuger",t:"Staubsauger",p:"stöv-su-er"},{f:"vaskemaskine",t:"Waschmaschine",p:"vas-ke-mas-ki-ne"},
+        {f:"opvaskemaskine",t:"Geschirrspüler",p:"op-vas-ke-mas-ki-ne"},{f:"mikroovn",t:"Mikrowelle",p:"mi-kro-ovn"},
+        {f:"strygejern",t:"Bügeleisen",p:"stry-e-yern"},{f:"hårtørrer",t:"Haartrockner",p:"hor-tö-rer"},
+        {f:"spejl",t:"Spiegel",p:"spail"},{f:"tæppe",t:"Teppich",p:"tep-pe"},
+        {f:"gardin",t:"Vorhang",p:"gar-din"},{f:"pude",t:"Kissen",p:"pu-de"},
+        {f:"dyne",t:"Decke (Bett)",p:"dy-ne"},{f:"håndklæde",t:"Handtuch",p:"hon-kle-de"},
+        {f:"sæbe",t:"Seife",p:"se-be"},{f:"tandbørste",t:"Zahnbürste",p:"tan-börs-te"},
+        {f:"shampoo",t:"Shampoo",p:"sham-po"},{f:"pære",t:"Glühbirne",p:"pe-re"},
+      ],
+      "By & Transport": [
+        {f:"lyskryds",t:"Ampel",p:"lys-krys"},{f:"vejkryds",t:"Kreuzung",p:"vai-krys"},
+        {f:"trafikprop",t:"Stau",p:"tra-fik-prop"},{f:"parkeringsplads",t:"Parkplatz",p:"par-ke-rings-plas"},
+        {f:"fodgængerovergang",t:"Zebrastreifen",p:"fod-geng-er-o-ver-gang"},
+        {f:"cykelsti",t:"Fahrradweg",p:"sy-kel-sti"},
+        {f:"torv / plads",t:"Platz",p:"torv"},{f:"supermarked",t:"Supermarkt",p:"su-per-mar-ked"},
+        {f:"rådhus",t:"Rathaus",p:"rod-hus"},{f:"politistation",t:"Polizeiwache",p:"po-li-ti-sta-sjon"},
+        {f:"posthus",t:"Post",p:"post-hus"},{f:"bibliotek",t:"Bibliothek",p:"bib-lio-tek"},
+        {f:"brandstation",t:"Feuerwache",p:"bran-sta-sjon"},{f:"hospital",t:"Krankenhaus",p:"hos-pi-tal"},
+      ],
+      "Biord & Konjunktioner": [
+        {f:"altid",t:"Immer",p:"al-tid"},{f:"aldrig",t:"Nie",p:"al-dri"},
+        {f:"ofte",t:"Oft",p:"of-te"},{f:"sommetider",t:"Manchmal",p:"so-me-ti-er"},
+        {f:"allerede",t:"Schon / Bereits",p:"a-le-re-de"},{f:"stadig",t:"Noch",p:"sta-di"},
+        {f:"straks",t:"Sofort",p:"straks"},{f:"måske",t:"Vielleicht",p:"mos-ke"},
+        {f:"sandsynligvis",t:"Wahrscheinlich",p:"san-sün-li-vis"},
+        {f:"dog / alligevel",t:"Jedoch / Trotzdem",p:"do"},{f:"derfor",t:"Deshalb",p:"der-for"},
+        {f:"desuden",t:"Außerdem",p:"de-su-den"},{f:"selvom",t:"Obwohl",p:"sel-vom"},
+        {f:"mens",t:"Während",p:"mens"},{f:"ellers",t:"Sonst / Andernfalls",p:"el-ers"},
+        {f:"som følge heraf",t:"Folglich",p:"som föl-e her-af"},
+      ],
+    },
+  };
+
+  // Merge extensions into VOCAB
+  Object.keys(EXT).forEach(function(lang) {
+    if (!VOCAB[lang]) return;
+    Object.keys(EXT[lang]).forEach(function(topic) {
+      if (VOCAB[lang][topic]) {
+        VOCAB[lang][topic] = VOCAB[lang][topic].concat(EXT[lang][topic]);
+      } else {
+        VOCAB[lang][topic] = EXT[lang][topic];
+      }
+    });
+  });
+
+  // EXT2: additional words for it, es, en, tr, de, th to reach 500+
+  var EXT2 = {
+    it: {
+      "Verbi (estesi)": [
+        {f:"capire",t:"Verstehen",p:"ka-pi-re"},{f:"spiegare",t:"Erklären",p:"spje-ga-re"},
+        {f:"scegliere",t:"Wählen",p:"she-lye-re"},{f:"ricordare",t:"Erinnern",p:"ri-kor-da-re"},
+        {f:"dimenticare",t:"Vergessen",p:"di-men-ti-ka-re"},{f:"incontrare",t:"Treffen",p:"in-kon-tra-re"},
+        {f:"aspettare",t:"Warten",p:"as-pet-ta-re"},{f:"camminare",t:"Spazieren",p:"kam-mi-na-re"},
+        {f:"cucinare",t:"Kochen",p:"ku-tʃi-na-re"},{f:"giocare",t:"Spielen",p:"dʒo-ka-re"},
+        {f:"cantare",t:"Singen",p:"kan-ta-re"},{f:"disegnare",t:"Zeichnen",p:"di-zen-ya-re"},
+        {f:"fotografare",t:"Fotografieren",p:"fo-to-gra-fa-re"},{f:"esercitarsi",t:"Sport treiben",p:"e-zer-tʃi-tar-si"},
+      ],
+      "Natura": [
+        {f:"inquinamento",t:"Umweltverschmutzung",p:"in-kwi-na-men-to"},{f:"riciclaggio",t:"Recycling",p:"ri-tʃi-klad-dʒo"},
+        {f:"cambiamento climatico",t:"Klimawandel",p:"kam-bja-men-to kli-ma-ti-ko"},
+        {f:"pianeta",t:"Planet",p:"pja-ne-ta"},{f:"oceano",t:"Ozean",p:"o-tʃe-a-no"},
+        {f:"vulcano",t:"Vulkan",p:"vul-ka-no"},{f:"terremoto",t:"Erdbeben",p:"ter-re-mo-to"},
+        {f:"alluvione",t:"Überschwemmung",p:"al-lu-vjo-ne"},{f:"siccità",t:"Dürre",p:"sit-tʃi-ta"},
+        {f:"deserto",t:"Wüste",p:"de-zer-to"},{f:"ghiacciaio",t:"Gletscher",p:"gjat-tʃa-jo"},
+        {f:"biodiversità",t:"Artenvielfalt",p:"bio-di-ver-si-ta"},
+        {f:"energia rinnovabile",t:"Erneuerbare Energie",p:"e-ner-dʒia ri-no-va-bi-le"},
+        {f:"riscaldamento globale",t:"Globale Erwärmung",p:"ri-skal-da-men-to glo-ba-le"},
+      ],
+    },
+    es: {
+      "Verbos (estendido)": [
+        {f:"entender",t:"Verstehen",p:"en-ten-der"},{f:"explicar",t:"Erklären",p:"eks-pli-kar"},
+        {f:"elegir",t:"Wählen",p:"e-le-xir"},{f:"recordar",t:"Erinnern",p:"re-kor-dar"},
+        {f:"olvidar",t:"Vergessen",p:"ol-bi-dar"},{f:"encontrar",t:"Treffen",p:"en-kon-trar"},
+        {f:"esperar",t:"Warten",p:"es-pe-rar"},{f:"caminar",t:"Spazieren",p:"ka-mi-nar"},
+        {f:"cocinar",t:"Kochen",p:"ko-θi-nar"},{f:"jugar",t:"Spielen",p:"xu-ɣar"},
+        {f:"cantar",t:"Singen",p:"kan-tar"},{f:"dibujar",t:"Zeichnen",p:"di-bu-xar"},
+        {f:"fotografiar",t:"Fotografieren",p:"fo-to-gra-fjar"},{f:"hacer deporte",t:"Sport treiben",p:"a-θer de-por-te"},
+      ],
+      "Naturaleza": [
+        {f:"contaminación",t:"Umweltverschmutzung",p:"kon-ta-mi-na-θjon"},{f:"reciclaje",t:"Recycling",p:"re-θi-kla-xe"},
+        {f:"cambio climático",t:"Klimawandel",p:"kam-bjo kli-ma-ti-ko"},
+        {f:"planeta",t:"Planet",p:"pla-ne-ta"},{f:"océano",t:"Ozean",p:"o-θe-a-no"},
+        {f:"volcán",t:"Vulkan",p:"bol-kan"},{f:"terremoto",t:"Erdbeben",p:"ter-re-mo-to"},
+        {f:"inundación",t:"Überschwemmung",p:"i-nun-da-θjon"},{f:"sequía",t:"Dürre",p:"se-ki-a"},
+        {f:"glaciar",t:"Gletscher",p:"gla-θjar"},{f:"biodiversidad",t:"Artenvielfalt",p:"bio-di-ber-si-dad"},
+        {f:"energía renovable",t:"Erneuerbare Energie",p:"e-ner-xi-a re-no-ba-ble"},
+        {f:"calentamiento global",t:"Globale Erwärmung",p:"ka-len-ta-mjen-to glo-bal"},
+        {f:"desierto",t:"Wüste",p:"de-sjer-to"},
+      ],
+    },
+    en: {
+      "Extended Verbs 2": [
+        {f:"to understand",t:"Verstehen",p:"tə ʌndərˈstænd"},{f:"to explain",t:"Erklären",p:"tə ɪkˈspleɪn"},
+        {f:"to choose",t:"Wählen",p:"tə tʃuːz"},{f:"to remember",t:"Erinnern",p:"tə rɪˈmɛmbər"},
+        {f:"to forget",t:"Vergessen",p:"tə fərˈɡɛt"},{f:"to meet",t:"Treffen",p:"tə miːt"},
+        {f:"to wait",t:"Warten",p:"tə weɪt"},{f:"to cook",t:"Kochen",p:"tə kʊk"},
+        {f:"to sing",t:"Singen",p:"tə sɪŋ"},{f:"to draw",t:"Zeichnen",p:"tə drɔː"},
+        {f:"to photograph",t:"Fotografieren",p:"tə ˈfoʊtəɡræf"},{f:"to exercise",t:"Sport treiben",p:"tə ˈɛksərsaɪz"},
+      ],
+      "Environment": [
+        {f:"pollution",t:"Umweltverschmutzung",p:"pəˈluːʃən"},{f:"recycling",t:"Recycling",p:"riːˈsaɪklɪŋ"},
+        {f:"climate change",t:"Klimawandel",p:"ˈklaɪmɪt tʃeɪndʒ"},
+        {f:"planet",t:"Planet",p:"ˈplænɪt"},{f:"ocean",t:"Ozean",p:"ˈoʊʃən"},
+        {f:"volcano",t:"Vulkan",p:"vɒlˈkeɪnoʊ"},{f:"earthquake",t:"Erdbeben",p:"ˈɜːrθkweɪk"},
+        {f:"flood",t:"Überschwemmung",p:"flʌd"},{f:"drought",t:"Dürre",p:"draʊt"},
+        {f:"glacier",t:"Gletscher",p:"ˈɡleɪʃər"},{f:"biodiversity",t:"Artenvielfalt",p:"ˌbaɪoʊdaɪˈvɜːrsɪti"},
+        {f:"renewable energy",t:"Erneuerbare Energie",p:"rɪˈnjuːəbəl ˈɛnərdʒi"},
+        {f:"global warming",t:"Globale Erwärmung",p:"ˈɡloʊbəl ˈwɔːrmɪŋ"},
+        {f:"desert",t:"Wüste",p:"ˈdɛzərt"},
+      ],
+    },
+    tr: {
+      "Fiiller 2": [
+        {f:"anlamak",t:"Verstehen",p:"an-la-mak"},{f:"açıklamak",t:"Erklären",p:"a-çık-la-mak"},
+        {f:"seçmek",t:"Wählen",p:"seç-mek"},{f:"hatırlamak",t:"Erinnern",p:"ha-tır-la-mak"},
+        {f:"unutmak",t:"Vergessen",p:"u-nut-mak"},{f:"buluşmak",t:"Treffen",p:"bu-luş-mak"},
+        {f:"beklemek",t:"Warten",p:"bek-le-mek"},{f:"pişirmek",t:"Kochen",p:"pi-şir-mek"},
+        {f:"şarkı söylemek",t:"Singen",p:"şar-kı söy-le-mek"},{f:"çizmek",t:"Zeichnen",p:"çiz-mek"},
+        {f:"fotoğraf çekmek",t:"Fotografieren",p:"fo-toğ-raf çek-mek"},{f:"egzersiz yapmak",t:"Sport treiben",p:"eg-zer-siz yap-mak"},
+      ],
+      "Çevre": [
+        {f:"kirlilik",t:"Umweltverschmutzung",p:"kir-li-lik"},{f:"geri dönüşüm",t:"Recycling",p:"ge-ri dö-nü-şüm"},
+        {f:"iklim değişikliği",t:"Klimawandel",p:"ik-lim de-ği-şik-li-ği"},
+        {f:"gezegen",t:"Planet",p:"ge-ze-gen"},{f:"okyanus",t:"Ozean",p:"ok-ya-nus"},
+        {f:"yanardağ",t:"Vulkan",p:"ya-nar-dağ"},{f:"deprem",t:"Erdbeben",p:"dep-rem"},
+        {f:"sel",t:"Überschwemmung",p:"sel"},{f:"kuraklık",t:"Dürre",p:"ku-rak-lık"},
+        {f:"buzul",t:"Gletscher",p:"bu-zul"},{f:"biyoçeşitlilik",t:"Artenvielfalt",p:"bi-yo-çe-şit-li-lik"},
+        {f:"yenilenebilir enerji",t:"Erneuerbare Energie",p:"ye-ni-le-ne-bi-lir e-ner-ji"},
+        {f:"küresel ısınma",t:"Globale Erwärmung",p:"kü-re-sel ı-sın-ma"},
+      ],
+    },
+    de: {
+      "Verben 2": [
+        {f:"verstehen",t:"Verstehen",p:"fer-shte-en"},{f:"erklären",t:"Erklären",p:"er-kle-ren"},
+        {f:"wählen",t:"Wählen",p:"ve-len"},{f:"erinnern",t:"Erinnern",p:"er-in-ern"},
+        {f:"vergessen",t:"Vergessen",p:"fer-ge-sen"},{f:"treffen",t:"Treffen",p:"tre-fen"},
+        {f:"warten",t:"Warten",p:"var-ten"},{f:"kochen",t:"Kochen",p:"ko-chen"},
+        {f:"singen",t:"Singen",p:"zing-en"},{f:"zeichnen",t:"Zeichnen",p:"tsaich-nen"},
+        {f:"fotografieren",t:"Fotografieren",p:"fo-to-gra-fi-ren"},{f:"Sport treiben",t:"Sport treiben",p:"shport trai-ben"},
+      ],
+      "Natur 2": [
+        {f:"die Umweltverschmutzung",t:"Umweltverschmutzung",p:"di um-velt-fer-shmu-tsung"},
+        {f:"das Recycling",t:"Recycling",p:"das re-sai-kling"},
+        {f:"der Klimawandel",t:"Klimawandel",p:"der kli-ma-van-del"},
+        {f:"der Planet",t:"Planet",p:"der pla-net"},{f:"der Ozean",t:"Ozean",p:"der o-tse-an"},
+        {f:"der Vulkan",t:"Vulkan",p:"der vul-kan"},{f:"das Erdbeben",t:"Erdbeben",p:"das ert-be-ben"},
+        {f:"die Überschwemmung",t:"Überschwemmung",p:"di ü-ber-shvem-ung"},
+        {f:"die Dürre",t:"Dürre",p:"di dü-re"},{f:"der Gletscher",t:"Gletscher",p:"der glet-sher"},
+        {f:"die Artenvielfalt",t:"Artenvielfalt",p:"di ar-ten-fil-falt"},
+        {f:"erneuerbare Energie",t:"Erneuerbare Energie",p:"er-noi-er-ba-re e-ner-gi"},
+        {f:"die globale Erwärmung",t:"Globale Erwärmung",p:"di glo-ba-le er-ver-mung"},
+        {f:"die Nachhaltigkeit",t:"Nachhaltigkeit",p:"di nach-hal-tig-kait"},
+      ],
+    },
+    th: {
+      "กริยา 2": [
+        {f:"เข้าใจ",t:"Verstehen",p:"khao-jai"},{f:"อธิบาย",t:"Erklären",p:"a-thi-bai"},
+        {f:"เลือก",t:"Wählen",p:"lueak"},{f:"จำ",t:"Erinnern",p:"cham"},
+        {f:"ลืม",t:"Vergessen",p:"luem"},{f:"พบ",t:"Treffen",p:"phop"},
+        {f:"รอ",t:"Warten",p:"ro"},{f:"ปรุงอาหาร",t:"Kochen",p:"prung-a-han"},
+        {f:"ร้องเพลง",t:"Singen",p:"rong-phleng"},{f:"วาดรูป",t:"Zeichnen",p:"wat-rup"},
+        {f:"ถ่ายรูป",t:"Fotografieren",p:"thai-rup"},{f:"ออกกำลังกาย",t:"Sport treiben",p:"ok-kam-lang-kai"},
+      ],
+      "สิ่งแวดล้อม": [
+        {f:"มลพิษ",t:"Umweltverschmutzung",p:"mon-pha-phit"},{f:"การรีไซเคิล",t:"Recycling",p:"kan-ri-sai-koen"},
+        {f:"การเปลี่ยนแปลงสภาพภูมิอากาศ",t:"Klimawandel",p:"kan-plian-plaeng"},
+        {f:"ดาวเคราะห์",t:"Planet",p:"dao-khrao"},{f:"มหาสมุทร",t:"Ozean",p:"ma-ha-sa-mut"},
+        {f:"ภูเขาไฟ",t:"Vulkan",p:"phu-khao-fai"},{f:"แผ่นดินไหว",t:"Erdbeben",p:"phaen-din-wai"},
+        {f:"อุทกภัย",t:"Überschwemmung",p:"u-thok-phai"},{f:"ภัยแล้ง",t:"Dürre",p:"phai-laeng"},
+        {f:"ธารน้ำแข็ง",t:"Gletscher",p:"than-nam-khaeng"},
+        {f:"ความหลากหลายทางชีวภาพ",t:"Artenvielfalt",p:"khwam-lak-lai-thang-chi-wa-phap"},
+        {f:"พลังงานหมุนเวียน",t:"Erneuerbare Energie",p:"phalang-ngan-mun-wian"},
+        {f:"ภาวะโลกร้อน",t:"Globale Erwärmung",p:"pha-wa-lok-ron"},
+        {f:"ความยั่งยืน",t:"Nachhaltigkeit",p:"khwam-yang-yuen"},
+      ],
+    },
+  };
+
+  Object.keys(EXT2).forEach(function(lang) {
+    if (!VOCAB[lang]) return;
+    Object.keys(EXT2[lang]).forEach(function(topic) {
+      if (VOCAB[lang][topic]) {
+        VOCAB[lang][topic] = VOCAB[lang][topic].concat(EXT2[lang][topic]);
+      } else {
+        VOCAB[lang][topic] = EXT2[lang][topic];
+      }
+    });
+  });
+})();
 
 const LANG_NAMES = { ru:"Russisch", it:"Italienisch", es:"Spanisch", en:"Englisch", tr:"Türkisch", sq:"Albanisch", de:"Deutsch", th:"Thailändisch", da:"Dänisch" };
 const LANG_VOICE = { ru:"ru-RU", it:"it-IT", es:"es-ES", en:"en-GB", tr:"tr-TR", sq:"sq-AL", de:"de-DE", th:"th-TH", da:"da-DK" };
@@ -2639,6 +3442,9 @@ function applyUILanguage() {
   setText('set-learn-lang-title', '🎓 ' + (uiLang==='de'?'Lernsprache':'Learning language'));
   setText('set-ui-lang-title', '🌐 ' + (uiLang==='de'?'App-Sprache (Interface)':'App language'));
   setText('set-local-note', t('footer_note'));
+  // Back button label
+  var backLabel = {de:'Zurück',en:'Back',ru:'Назад',it:'Indietro',es:'Volver',tr:'Geri',sq:'Kthehu',th:'กลับ',da:'Tilbage'};
+  setText('set-back-label', backLabel[uiLang] || 'Zurück');
   // Footer
   setText('footer-text', t('footer_note'));
   renderUILangButtons();
