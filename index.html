@@ -491,6 +491,91 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   .vocab-card { min-height:200px; }
 }
 </style>
+
+<style>
+/* ============================================================
+   NEW FEATURES CSS
+   ============================================================ */
+
+/* THEME TOGGLE */
+:root.light {
+  --bg:#f4f4f8; --surface:#ffffff; --surface2:#eeeef6; --border:#d0d0e0;
+  --text:#1a1a2e; --muted:#6b6b8a; --accent:#5a52d5; --accent2:#e05555;
+  --accent3:#2db56a; --accent4:#e07b10;
+}
+:root.light body::before { opacity:.04; }
+:root.light .vocab-card, :root.light .card { box-shadow:0 2px 12px rgba(0,0,0,.08); }
+.theme-toggle { background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:.3rem .65rem; cursor:pointer; font-size:.8rem; transition:all .2s; }
+
+/* STATS CHARTS */
+.chart-bar-wrap { display:flex; flex-direction:column; gap:.5rem; }
+.chart-bar-row { display:flex; align-items:center; gap:.75rem; font-size:.75rem; }
+.chart-bar-label { width:80px; color:var(--muted); flex-shrink:0; text-align:right; }
+.chart-bar-track { flex:1; background:var(--border); border-radius:4px; height:10px; overflow:hidden; }
+.chart-bar-fill { height:100%; border-radius:4px; background:var(--accent); transition:width .8s ease; }
+.chart-bar-val { width:35px; color:var(--muted); font-size:.7rem; }
+
+/* CALENDAR STREAK */
+.streak-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:3px; }
+.streak-cell { aspect-ratio:1; border-radius:3px; background:var(--border); }
+.streak-cell.active { background:var(--accent3); }
+.streak-cell.today { outline:2px solid var(--accent); }
+
+/* WRITING EXERCISE */
+.write-input { width:100%; background:var(--surface2); border:2px solid var(--border); border-radius:12px; color:var(--text); font-family:'Instrument Serif',serif; font-size:1.6rem; padding:.75rem 1rem; outline:none; text-align:center; transition:border-color .2s; }
+.write-input:focus { border-color:var(--accent); }
+.write-input.correct { border-color:var(--accent3); background:rgba(67,233,123,.1); }
+.write-input.wrong { border-color:var(--accent2); background:rgba(255,107,107,.1); }
+.write-hint { font-size:.75rem; color:var(--muted); margin-top:.5rem; text-align:center; min-height:1.2rem; }
+
+/* XP / GAMIFICATION */
+.xp-bar-track { height:8px; background:var(--border); border-radius:4px; overflow:hidden; margin:.5rem 0; }
+.xp-bar-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--accent),#a855f7); transition:width .6s ease; }
+.badge-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(80px,1fr)); gap:.75rem; }
+.badge-item { background:var(--surface2); border:1px solid var(--border); border-radius:12px; padding:.75rem .5rem; text-align:center; transition:all .2s; }
+.badge-item.unlocked { border-color:var(--accent4); background:rgba(247,151,30,.1); }
+.badge-item.locked { opacity:.4; filter:grayscale(1); }
+.badge-icon { font-size:1.8rem; display:block; margin-bottom:.3rem; }
+.badge-name { font-size:.65rem; color:var(--muted); font-family:'Syne',sans-serif; font-weight:600; }
+
+/* PRONUNCIATION RATING */
+.pron-meter { display:flex; gap:4px; margin:.75rem 0; }
+.pron-bar { flex:1; height:20px; border-radius:3px; background:var(--border); transition:background .4s; }
+.pron-bar.fill-green { background:var(--accent3); }
+.pron-bar.fill-yellow { background:var(--accent4); }
+.pron-bar.fill-red { background:var(--accent2); }
+
+/* SENTENCE EXAMPLES */
+.example-box { background:var(--surface2); border-left:3px solid var(--accent); border-radius:0 8px 8px 0; padding:.6rem .9rem; margin:.4rem 0; font-size:.82rem; line-height:1.5; }
+.example-de { color:var(--muted); font-size:.75rem; margin-top:.2rem; }
+
+/* SHARE */
+.share-code { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:.6rem 1rem; font-family:'DM Mono',monospace; font-size:.75rem; word-break:break-all; color:var(--accent); }
+
+/* DAILY GOAL */
+.goal-ring { position:relative; width:80px; height:80px; flex-shrink:0; }
+.goal-ring svg { transform:rotate(-90deg); }
+.goal-ring circle { fill:none; stroke-width:6; }
+.goal-ring .track { stroke:var(--border); }
+.goal-ring .fill { stroke:var(--accent3); stroke-linecap:round; transition:stroke-dashoffset .8s ease; }
+.goal-ring-label { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:'Syne',sans-serif; }
+.goal-ring-num { font-size:.95rem; font-weight:800; line-height:1; }
+.goal-ring-sub { font-size:.5rem; color:var(--muted); }
+
+/* LEARNING PATH */
+.path-step { display:flex; gap:.75rem; align-items:flex-start; padding:.75rem; background:var(--surface2); border-radius:12px; border:1px solid var(--border); margin-bottom:.5rem; cursor:pointer; transition:all .2s; }
+.path-step:hover { border-color:var(--accent); }
+.path-step.done { border-color:var(--accent3); background:rgba(67,233,123,.07); }
+.path-step.locked { opacity:.45; cursor:not-allowed; }
+.path-step-icon { font-size:1.5rem; flex-shrink:0; }
+.path-step-info { flex:1; }
+.path-step-title { font-family:'Syne',sans-serif; font-weight:700; font-size:.85rem; }
+.path-step-desc { font-size:.72rem; color:var(--muted); margin-top:.2rem; }
+.path-step-badge { font-size:.65rem; padding:.15rem .5rem; border-radius:100px; font-family:'Syne',sans-serif; font-weight:700; }
+.psb-done { background:rgba(67,233,123,.2); color:var(--accent3); }
+.psb-lock { background:var(--border); color:var(--muted); }
+.psb-new { background:rgba(108,99,255,.2); color:var(--accent); }
+</style>
 </head>
 <body>
 <div id="app">
@@ -508,6 +593,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
         <button class="lang-pill" data-lang="th">🇹🇭 TH</button>
         <button class="lang-pill" data-lang="da">🇩🇰 DA</button>
       </div>
+      <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Hell/Dunkel">🌙</button>
       <button class="settings-btn" onclick="openSettings()" title="Einstellungen">
         <span class="api-dot-inline" id="api-dot"></span>⚙
       </button>
@@ -517,8 +603,13 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   <nav>
     <button class="nav-btn active" data-section="home"><span class="nav-icon">⌂</span> Start</button>
     <button class="nav-btn" data-section="vocab"><span class="nav-icon">📚</span> Vokabeln</button>
+    <button class="nav-btn" data-section="srs"><span class="nav-icon">🧠</span> SRS</button>
+    <button class="nav-btn" data-section="write"><span class="nav-icon">✍</span> Schreiben</button>
     <button class="nav-btn" data-section="quiz"><span class="nav-icon">❓</span> Quiz</button>
     <button class="nav-btn" data-section="free"><span class="nav-icon">🗂</span> Freies Lernen</button>
+    <button class="nav-btn" data-section="path"><span class="nav-icon">🗺</span> Lernpfad</button>
+    <button class="nav-btn" data-section="stats"><span class="nav-icon">📊</span> Statistiken</button>
+    <button class="nav-btn" data-section="badges"><span class="nav-icon">🏆</span> Abzeichen</button>
     <button class="nav-btn" data-section="generator"><span class="nav-icon">✨</span> KI-Generator</button>
     <button class="nav-btn" data-section="myvocab"><span class="nav-icon">⭐</span> Meine Vokabeln</button>
     <button class="nav-btn" data-section="translate"><span class="nav-icon">⇄</span> Übersetzer</button>
@@ -597,6 +688,26 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
           <div class="home-card" style="--hc-color:#90e0ef" onclick="switchSection('myvocab')">
             <div class="hc-icon">⭐</div><div class="hc-title" id="ui-hc-myvocab">Meine Vokabeln</div>
             <div class="hc-desc" id="ui-hc-myvocab-desc">Eigene Wörter speichern und gezielt trainieren</div>
+          </div>
+          <div class="home-card" style="--hc-color:#48cae4" onclick="switchSection('srs')">
+            <div class="hc-icon">🧠</div><div class="hc-title">Spaced Repetition</div>
+            <div class="hc-desc">Smarter lernen mit adaptiver Wiederholung</div>
+          </div>
+          <div class="home-card" style="--hc-color:#a8dadc" onclick="switchSection('write')">
+            <div class="hc-icon">✍</div><div class="hc-title">Schreibübung</div>
+            <div class="hc-desc">Tippe die Übersetzung und festige dein Wissen</div>
+          </div>
+          <div class="home-card" style="--hc-color:#e9c46a" onclick="switchSection('stats')">
+            <div class="hc-icon">📊</div><div class="hc-title">Statistiken</div>
+            <div class="hc-desc">Dein Fortschritt, Streak und Schwächen im Überblick</div>
+          </div>
+          <div class="home-card" style="--hc-color:#f4a261" onclick="switchSection('badges')">
+            <div class="hc-icon">🏆</div><div class="hc-title">Abzeichen & XP</div>
+            <div class="hc-desc">Sammle Punkte und schalte Abzeichen frei</div>
+          </div>
+          <div class="home-card" style="--hc-color:#e76f51" onclick="switchSection('path')">
+            <div class="hc-icon">🗺</div><div class="hc-title">Lernpfad</div>
+            <div class="hc-desc">Strukturierte Lektionen von Anfänger bis Fortgeschritten</div>
           </div>
         </div>
       </div>
@@ -719,6 +830,149 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
       <div id="mv-empty" style="text-align:center;padding:3rem;color:var(--muted);font-size:.85rem;">
         Noch keine eigenen Vokabeln.<br>Füge Wörter hinzu oder generiere sie mit dem KI-Generator.
       </div>
+    </div>
+
+    <!-- SRS - SPACED REPETITION -->
+    <div class="section" id="srs">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;" id="ui-srs-title">🧠 Spaced Repetition</div>
+        <span class="badge badge-accent" id="srs-counter">0 fällig</span>
+      </div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:1.25rem;" id="ui-srs-desc">Wörter die du nicht kennst, kommen öfter. Wörter die du kennst, seltener.</div>
+      <div class="progress-bar"><div class="progress-fill" id="srs-progress" style="width:0%"></div></div>
+      <div class="vocab-card" id="srs-card" onclick="revealSRS()" style="margin-top:1rem;">
+        <div class="word-main" id="srs-word">—</div>
+        <div class="word-sub" id="srs-phonetic"></div>
+        <div class="word-translation" id="srs-translation"></div>
+        <div class="flip-hint" id="ui-srs-flip">Klicken zum Aufdecken</div>
+      </div>
+      <div id="srs-buttons" style="display:none;">
+        <div style="text-align:center;font-size:.75rem;color:var(--muted);margin:.75rem 0;">Wie gut wusstest du es?</div>
+        <div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;">
+          <button class="btn danger" onclick="rateSRS(1)">😰 Gar nicht</button>
+          <button class="btn warn" onclick="rateSRS(2)">😐 Schwer</button>
+          <button class="btn" onclick="rateSRS(3)">🙂 Ok</button>
+          <button class="btn success" onclick="rateSRS(4)">😊 Leicht</button>
+          <button class="btn" style="border-color:var(--accent3);color:var(--accent3);" onclick="rateSRS(5)">🚀 Perfekt</button>
+        </div>
+      </div>
+      <div id="srs-done" style="display:none;text-align:center;padding:2rem;">
+        <div style="font-size:3rem;">🎉</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;margin:.5rem 0;" id="ui-srs-done">Alle fälligen Karten erledigt!</div>
+        <div style="color:var(--muted);font-size:.8rem;" id="ui-srs-next">Komm morgen wieder für neue Wiederholungen.</div>
+        <button class="btn primary" style="margin-top:1rem;" onclick="initSRS()">🔄 Nochmal</button>
+      </div>
+    </div>
+
+    <!-- SCHREIBÜBUNG -->
+    <div class="section" id="write">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;" id="ui-write-title">✍ Schreibübung</div>
+        <span class="badge badge-accent" id="write-counter">0 / 0</span>
+      </div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:1.25rem;" id="ui-write-desc">Sieh das Fremdwort und tippe die deutsche Übersetzung.</div>
+      <div class="progress-bar"><div class="progress-fill" id="write-progress" style="width:0%"></div></div>
+      <div class="vocab-card" style="cursor:default;margin-top:1rem;">
+        <div class="word-main" id="write-word">—</div>
+        <div class="word-sub" id="write-phonetic"></div>
+      </div>
+      <input class="write-input" id="write-input" type="text" placeholder="Deutsche Übersetzung eingeben..."
+        onkeydown="if(event.key==='Enter')checkWrite()">
+      <div class="write-hint" id="write-hint"></div>
+      <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+        <button class="btn primary" onclick="checkWrite()" id="ui-btn-check" style="flex:1;">✓ Prüfen</button>
+        <button class="btn" onclick="hintWrite()" id="ui-btn-hint">💡 Hinweis</button>
+        <button class="btn warn" onclick="skipWrite()" id="ui-btn-skip-w">→ Überspringen</button>
+      </div>
+      <div id="write-example-box" style="display:none;margin-top:1rem;"></div>
+    </div>
+
+    <!-- STATISTIKEN -->
+    <div class="section" id="stats">
+      <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:1.5rem;" id="ui-stats-title">📊 Statistiken</div>
+
+      <!-- Daily Goal -->
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="card-title" id="ui-stats-goal">🎯 Tagesziel</div>
+        <div style="display:flex;align-items:center;gap:1.5rem;">
+          <div class="goal-ring">
+            <svg width="80" height="80" viewBox="0 0 80 80">
+              <circle class="track" cx="40" cy="40" r="34"/>
+              <circle class="fill" id="goal-ring-fill" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+            </svg>
+            <div class="goal-ring-label">
+              <span class="goal-ring-num" id="goal-today">0</span>
+              <span class="goal-ring-sub" id="ui-goal-sub">von 10</span>
+            </div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:.85rem;font-weight:600;" id="ui-goal-words">Wörter heute gelernt</div>
+            <div style="font-size:.75rem;color:var(--muted);margin-top:.25rem;" id="ui-goal-streak">Streak: 0 Tage</div>
+            <div style="margin-top:.75rem;display:flex;gap:.5rem;align-items:center;">
+              <span style="font-size:.72rem;color:var(--muted);">Ziel:</span>
+              <input type="number" id="goal-input" min="1" max="100" value="10" style="width:55px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:.2rem .4rem;font-size:.75rem;text-align:center;" oninput="saveGoal(this.value)">
+              <span style="font-size:.72rem;color:var(--muted);" id="ui-goal-per-day">Wörter/Tag</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Streak Calendar -->
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="card-title" id="ui-stats-streak">🔥 Streak-Kalender (letzte 28 Tage)</div>
+        <div class="streak-grid" id="streak-calendar"></div>
+        <div style="display:flex;gap:1rem;margin-top:.75rem;font-size:.72rem;color:var(--muted);">
+          <span>⬜ Kein Lernen</span><span style="color:var(--accent3);">🟩 Gelernt</span>
+        </div>
+      </div>
+
+      <!-- Accuracy Chart -->
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="card-title" id="ui-stats-accuracy">🎯 Quiz-Genauigkeit nach Sprache</div>
+        <div class="chart-bar-wrap" id="accuracy-chart"></div>
+      </div>
+
+      <!-- Topic Weakness -->
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="card-title" id="ui-stats-weak">⚠ Schwächste Themen</div>
+        <div id="weak-topics-list" style="font-size:.82rem;color:var(--muted);">Noch keine Daten</div>
+      </div>
+
+      <!-- Total Stats -->
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-num" id="stats-total-learned">0</div><div class="stat-lbl" id="ui-stats-total-learned">Gesamt gelernt</div></div>
+        <div class="stat-box"><div class="stat-num" id="stats-total-quiz">0</div><div class="stat-lbl" id="ui-stats-total-quiz">Quiz gesamt</div></div>
+        <div class="stat-box"><div class="stat-num" id="stats-best-streak">0</div><div class="stat-lbl" id="ui-stats-best-streak">Bester Streak</div></div>
+        <div class="stat-box"><div class="stat-num" id="stats-xp">0</div><div class="stat-lbl">XP</div></div>
+      </div>
+    </div>
+
+    <!-- ABZEICHEN -->
+    <div class="section" id="badges">
+      <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:.5rem;" id="ui-badges-title">🏆 Abzeichen & Level</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:1.25rem;" id="ui-badges-desc">Schalte Abzeichen frei und steige im Level auf.</div>
+
+      <!-- XP & Level -->
+      <div class="card" style="margin-bottom:1rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;">
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;" id="level-label">Level 1 – Anfänger</div>
+            <div style="font-size:.75rem;color:var(--muted);" id="xp-label">0 / 100 XP</div>
+          </div>
+          <div style="font-size:2.5rem;" id="level-icon">🌱</div>
+        </div>
+        <div class="xp-bar-track"><div class="xp-bar-fill" id="xp-bar" style="width:0%"></div></div>
+      </div>
+
+      <!-- Badge Grid -->
+      <div class="badge-grid" id="badge-grid"></div>
+    </div>
+
+    <!-- LERNPFAD -->
+    <div class="section" id="path">
+      <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:.5rem;" id="ui-path-title">🗺 Lernpfad</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:1.25rem;" id="ui-path-desc">Strukturierte Lektionen — schließe sie der Reihe nach ab.</div>
+      <div id="path-steps"></div>
     </div>
 
     <!-- ÜBERSETZER -->
@@ -3317,7 +3571,7 @@ const UI_LANGS = {
   da:{code:'da',label:'🇩🇰 Dansk'},
 };
 const UI_STRINGS = {
-  de:{ nav_home:'Start',nav_vocab:'Vokabeln',nav_quiz:'Quiz',nav_free:'Freies Lernen',nav_gen:'KI-Generator',nav_myvocab:'Meine Vokabeln',nav_translate:'Übersetzer',nav_ai:'KI-Assistent',welcome_back:'Willkommen zurück',learning:'Du lernst',change_lang:'🌍 Sprache wechseln',which_lang:'Welche Sprache möchtest du lernen?',choose_lang:'Wähle deine Lernsprache',stat_learned:'Gelernt',stat_streak:'Streak',stat_correct:'% Korrekt',stat_total:'Quiz Total',vocab_title:'Vokabeltraining',quiz_title:'Quiz',free_title:'Freies Lernen',gen_title:'✨ KI-Vokabel-Generator',myvocab_title:'⭐ Meine Vokabeln',translate_title:'Übersetzer',ai_title:'KI-Sprachassistent',reveal:'Klicken zum Aufdecken',again:'✗ Nochmal',listen:'🔊 Anhören',skip:'→ Überspringen',knew:'✓ Gewusst',translate_btn:'Übersetzen',speak_out:'🔊 Vorlesen',copy:'⧉ Kopieren',input:'EINGABE',output:'AUSGABE',send:'Senden',new_quiz:'🔄 Neu starten',next:'Weiter →',correct:'✓ Richtig!',wrong:'✗ Falsch. Richtig:',enter_topic:'Thema eingeben',generate:'✨ Generieren',generating:'KI generiert Vokabeln...',save_all:'⭐ Alle speichern',to_training:'📚 Zum Training',add_word:'➕ Eigenes Wort hinzufügen',foreign_word:'FREMDWORT',translation_lbl:'DEUTSCH',phonetic:'AUSSPRACHE (optional)',add_btn:'+ Hinzufügen',train_mine:'📚 Meine Vokabeln trainieren',delete_all:'🗑 Alle löschen',no_vocab:'Noch keine eigenen Vokabeln. Füge Wörter hinzu oder generiere sie mit dem KI-Generator.',settings:'⚙ Einstellungen',save:'Speichern',delete:'Löschen',export:'⬇ Exportieren',reset:'🗑 Zurücksetzen',ai_welcome:'Hallo! Ich bin dein KI-Sprachassistent. Wähle eine Lernsprache und einen Modus, dann können wir loslegen!',mode_conv:'💬 Konversation',mode_grammar:'📝 Grammatik',mode_pron:'🎤 Aussprache',mode_corr:'✏️ Korrektur',quick_grammar:'📖 Grammatiktipp',quick_phrases:'💡 Sätze des Tages',quick_talk:'🗣 Gespräch starten',hc_vocab_desc:'Lerne neue Wörter mit Karteikarten und Sprachausgabe',hc_quiz_desc:'Teste dein Wissen mit Multiple-Choice-Fragen',hc_free_desc:'Wähle ein Thema und stöbere durch Vokabeln',hc_translate_desc:'Übersetze Begriffe und Sätze sofort',hc_ai_desc:'Übe Gespräche mit KI, Mikrofon & Sprachausgabe',hc_gen_desc:'Thema eingeben – KI generiert sofort 20 Vokabeln',hc_myvocab_desc:'Eigene Wörter speichern und gezielt trainieren',myvocab_desc:'Eigene Wörter hinzufügen, gespeicherte KI-Vokabeln verwalten und trainieren',gen_desc:'Gib ein Thema ein – die KI generiert passende Vokabeln für deine Lernsprache',footer_note:'Dein Fortschritt wird lokal gespeichert',chat_placeholder:'Nachricht eingeben oder 🎤 drücken...',},
+  de:{ nav_home:'Start',nav_vocab:'Vokabeln',nav_quiz:'Quiz',nav_free:'Freies Lernen',nav_gen:'KI-Generator',nav_myvocab:'Meine Vokabeln',nav_translate:'Übersetzer',nav_ai:'KI-Assistent',nav_srs:'🧠 SRS',nav_write:'✍ Schreiben',nav_stats:'📊 Statistiken',nav_badges:'🏆 Abzeichen',nav_path:'🗺 Lernpfad',welcome_back:'Willkommen zurück',learning:'Du lernst',change_lang:'🌍 Sprache wechseln',which_lang:'Welche Sprache möchtest du lernen?',choose_lang:'Wähle deine Lernsprache',stat_learned:'Gelernt',stat_streak:'Streak',stat_correct:'% Korrekt',stat_total:'Quiz Total',vocab_title:'Vokabeltraining',quiz_title:'Quiz',free_title:'Freies Lernen',gen_title:'✨ KI-Vokabel-Generator',myvocab_title:'⭐ Meine Vokabeln',translate_title:'Übersetzer',ai_title:'KI-Sprachassistent',reveal:'Klicken zum Aufdecken',again:'✗ Nochmal',listen:'🔊 Anhören',skip:'→ Überspringen',knew:'✓ Gewusst',translate_btn:'Übersetzen',speak_out:'🔊 Vorlesen',copy:'⧉ Kopieren',input:'EINGABE',output:'AUSGABE',send:'Senden',new_quiz:'🔄 Neu starten',next:'Weiter →',correct:'✓ Richtig!',wrong:'✗ Falsch. Richtig:',enter_topic:'Thema eingeben',generate:'✨ Generieren',generating:'KI generiert Vokabeln...',save_all:'⭐ Alle speichern',to_training:'📚 Zum Training',add_word:'➕ Eigenes Wort hinzufügen',foreign_word:'FREMDWORT',translation_lbl:'DEUTSCH',phonetic:'AUSSPRACHE (optional)',add_btn:'+ Hinzufügen',train_mine:'📚 Meine Vokabeln trainieren',delete_all:'🗑 Alle löschen',no_vocab:'Noch keine eigenen Vokabeln. Füge Wörter hinzu oder generiere sie mit dem KI-Generator.',settings:'⚙ Einstellungen',save:'Speichern',delete:'Löschen',export:'⬇ Exportieren',reset:'🗑 Zurücksetzen',ai_welcome:'Hallo! Ich bin dein KI-Sprachassistent. Wähle eine Lernsprache und einen Modus, dann können wir loslegen!',mode_conv:'💬 Konversation',mode_grammar:'📝 Grammatik',mode_pron:'🎤 Aussprache',mode_corr:'✏️ Korrektur',quick_grammar:'📖 Grammatiktipp',quick_phrases:'💡 Sätze des Tages',quick_talk:'🗣 Gespräch starten',hc_vocab_desc:'Lerne neue Wörter mit Karteikarten und Sprachausgabe',hc_quiz_desc:'Teste dein Wissen mit Multiple-Choice-Fragen',hc_free_desc:'Wähle ein Thema und stöbere durch Vokabeln',hc_translate_desc:'Übersetze Begriffe und Sätze sofort',hc_ai_desc:'Übe Gespräche mit KI, Mikrofon & Sprachausgabe',hc_gen_desc:'Thema eingeben – KI generiert sofort 20 Vokabeln',hc_myvocab_desc:'Eigene Wörter speichern und gezielt trainieren',myvocab_desc:'Eigene Wörter hinzufügen, gespeicherte KI-Vokabeln verwalten und trainieren',gen_desc:'Gib ein Thema ein – die KI generiert passende Vokabeln für deine Lernsprache',footer_note:'Dein Fortschritt wird lokal gespeichert',chat_placeholder:'Nachricht eingeben oder 🎤 drücken...',},
   en:{ nav_home:'Home',nav_vocab:'Vocabulary',nav_quiz:'Quiz',nav_free:'Free Learning',nav_gen:'AI Generator',nav_myvocab:'My Words',nav_translate:'Translator',nav_ai:'AI Assistant',welcome_back:'Welcome back',learning:'You are learning',change_lang:'🌍 Change language',which_lang:'Which language do you want to learn?',choose_lang:'Choose your learning language',stat_learned:'Learned',stat_streak:'Streak',stat_correct:'% Correct',stat_total:'Quiz Total',vocab_title:'Vocabulary Training',quiz_title:'Quiz',free_title:'Free Learning',gen_title:'✨ AI Vocabulary Generator',myvocab_title:'⭐ My Vocabulary',translate_title:'Translator',ai_title:'AI Language Assistant',reveal:'Tap to reveal',again:'✗ Again',listen:'🔊 Listen',skip:'→ Skip',knew:'✓ Got it',translate_btn:'Translate',speak_out:'🔊 Speak',copy:'⧉ Copy',input:'INPUT',output:'OUTPUT',send:'Send',new_quiz:'🔄 Restart',next:'Next →',correct:'✓ Correct!',wrong:'✗ Wrong. Correct:',enter_topic:'Enter topic',generate:'✨ Generate',generating:'AI is generating...',save_all:'⭐ Save all',to_training:'📚 To Training',add_word:'➕ Add custom word',foreign_word:'FOREIGN WORD',translation_lbl:'GERMAN',phonetic:'PRONUNCIATION (optional)',add_btn:'+ Add',train_mine:'📚 Train my vocabulary',delete_all:'🗑 Delete all',no_vocab:'No custom vocabulary yet. Add words or generate them with the AI Generator.',settings:'⚙ Settings',save:'Save',delete:'Delete',export:'⬇ Export',reset:'🗑 Reset',ai_welcome:'Hello! I am your AI language assistant. Choose a learning language and a mode to get started!',mode_conv:'💬 Conversation',mode_grammar:'📝 Grammar',mode_pron:'🎤 Pronunciation',mode_corr:'✏️ Correction',quick_grammar:'📖 Grammar tip',quick_phrases:'💡 Phrases of the day',quick_talk:'🗣 Start conversation',hc_vocab_desc:'Learn new words with flashcards and audio',hc_quiz_desc:'Test your knowledge with multiple choice questions',hc_free_desc:'Choose a topic and browse vocabulary',hc_translate_desc:'Translate words and sentences instantly',hc_ai_desc:'Practice conversations with AI and microphone',hc_gen_desc:'Enter a topic – AI generates 20 words instantly',hc_myvocab_desc:'Save custom words and train them',myvocab_desc:'Add words, manage AI vocabulary and train',gen_desc:'Enter a topic – the AI generates matching vocabulary',footer_note:'Your progress is saved locally',chat_placeholder:'Type a message or press 🎤...',},
   ru:{ nav_home:'Главная',nav_vocab:'Словарь',nav_quiz:'Тест',nav_free:'Свободное обучение',nav_gen:'ИИ-Генератор',nav_myvocab:'Мои слова',nav_translate:'Переводчик',nav_ai:'ИИ-Ассистент',welcome_back:'С возвращением',learning:'Вы изучаете',change_lang:'🌍 Сменить язык',which_lang:'Какой язык вы хотите учить?',choose_lang:'Выберите язык',stat_learned:'Изучено',stat_streak:'Серия',stat_correct:'% Правильных',stat_total:'Всего тестов',vocab_title:'Тренировка слов',quiz_title:'Тест',free_title:'Свободное обучение',gen_title:'✨ ИИ-Генератор словаря',myvocab_title:'⭐ Мои слова',translate_title:'Переводчик',ai_title:'ИИ-Языковой ассистент',reveal:'Нажмите, чтобы открыть',again:'✗ Ещё раз',listen:'🔊 Слушать',skip:'→ Пропустить',knew:'✓ Знал',translate_btn:'Перевести',speak_out:'🔊 Озвучить',copy:'⧉ Копировать',input:'ВВОД',output:'ВЫВОД',send:'Отправить',new_quiz:'🔄 Заново',next:'Далее →',correct:'✓ Правильно!',wrong:'✗ Неверно. Правильно:',enter_topic:'Введите тему',generate:'✨ Генерировать',generating:'ИИ генерирует...',save_all:'⭐ Сохранить все',to_training:'📚 К тренировке',add_word:'➕ Добавить слово',foreign_word:'ИНОСТРАННОЕ СЛОВО',translation_lbl:'НЕМЕЦКИЙ',phonetic:'ПРОИЗНОШЕНИЕ (необязательно)',add_btn:'+ Добавить',train_mine:'📚 Тренировать мои слова',delete_all:'🗑 Удалить все',no_vocab:'Пока нет своих слов.',settings:'⚙ Настройки',save:'Сохранить',delete:'Удалить',export:'⬇ Экспорт',reset:'🗑 Сбросить',ai_welcome:'Привет! Я ваш ИИ-языковой ассистент. Выберите язык и режим для начала!',mode_conv:'💬 Разговор',mode_grammar:'📝 Грамматика',mode_pron:'🎤 Произношение',mode_corr:'✏️ Коррекция',quick_grammar:'📖 Совет по грамматике',quick_phrases:'💡 Фразы дня',quick_talk:'🗣 Начать разговор',hc_vocab_desc:'Учите новые слова с карточками и аудио',hc_quiz_desc:'Проверьте знания с тестами',hc_free_desc:'Выберите тему и просматривайте слова',hc_translate_desc:'Переводите слова и предложения мгновенно',hc_ai_desc:'Практикуйте разговор с ИИ и микрофоном',hc_gen_desc:'Введите тему – ИИ мгновенно создаёт 20 слов',hc_myvocab_desc:'Сохраняйте слова и тренируйте их',myvocab_desc:'Добавляйте слова, управляйте словарём ИИ и тренируйтесь',gen_desc:'Введите тему – ИИ создаёт подходящие слова',footer_note:'Ваш прогресс сохраняется локально',chat_placeholder:'Введите сообщение или нажмите 🎤...',},
   it:{ nav_home:'Inizio',nav_vocab:'Vocaboli',nav_quiz:'Quiz',nav_free:'Studio libero',nav_gen:'Generatore IA',nav_myvocab:'Le mie parole',nav_translate:'Traduttore',nav_ai:'Assistente IA',welcome_back:'Bentornato',learning:'Stai imparando',change_lang:'🌍 Cambia lingua',which_lang:'Quale lingua vuoi imparare?',choose_lang:'Scegli la tua lingua',stat_learned:'Imparato',stat_streak:'Serie',stat_correct:'% Corretti',stat_total:'Quiz totali',vocab_title:'Allenamento vocaboli',quiz_title:'Quiz',free_title:'Studio libero',gen_title:'✨ Generatore vocaboli IA',myvocab_title:'⭐ I miei vocaboli',translate_title:'Traduttore',ai_title:'Assistente linguistico IA',reveal:'Clicca per rivelare',again:'✗ Di nuovo',listen:'🔊 Ascolta',skip:'→ Salta',knew:'✓ Lo sapevo',translate_btn:'Traduci',speak_out:'🔊 Leggi',copy:'⧉ Copia',input:'INGRESSO',output:'USCITA',send:'Invia',new_quiz:'🔄 Ricomincia',next:'Avanti →',correct:'✓ Corretto!',wrong:'✗ Sbagliato. Corretto:',enter_topic:'Inserisci argomento',generate:'✨ Genera',generating:'IA sta generando...',save_all:'⭐ Salva tutto',to_training:'📚 Allena',add_word:'➕ Aggiungi parola',foreign_word:'PAROLA STRANIERA',translation_lbl:'TEDESCO',phonetic:'PRONUNCIA (opzionale)',add_btn:'+ Aggiungi',train_mine:'📚 Allena i miei vocaboli',delete_all:'🗑 Elimina tutto',no_vocab:'Nessun vocabolo personale ancora.',settings:'⚙ Impostazioni',save:'Salva',delete:'Elimina',export:'⬇ Esporta',reset:'🗑 Reimposta',ai_welcome:'Ciao! Sono il tuo assistente linguistico IA. Scegli una lingua e una modalità per iniziare!',mode_conv:'💬 Conversazione',mode_grammar:'📝 Grammatica',mode_pron:'🎤 Pronuncia',mode_corr:'✏️ Correzione',quick_grammar:'📖 Consiglio grammaticale',quick_phrases:'💡 Frasi del giorno',quick_talk:'🗣 Inizia conversazione',hc_vocab_desc:'Impara nuove parole con flashcard e audio',hc_quiz_desc:'Testa la conoscenza con domande a scelta multipla',hc_free_desc:'Scegli un argomento e sfoglia il vocabolario',hc_translate_desc:'Traduci parole e frasi istantaneamente',hc_ai_desc:'Pratica conversazioni con IA e microfono',hc_gen_desc:'Inserisci un argomento – IA genera 20 parole',hc_myvocab_desc:'Salva parole personalizzate e allenale',myvocab_desc:'Aggiungi parole, gestisci il vocabolario IA e allenati',gen_desc:'Inserisci un argomento – IA genera vocaboli per la tua lingua',footer_note:'Il tuo progresso è salvato localmente',chat_placeholder:'Scrivi un messaggio o premi 🎤...',},
@@ -3352,8 +3606,8 @@ function applyUILanguage() {
   uiLang = localStorage.getItem('lingua_ui_lang') || 'de';
   function setText(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
   // Nav
-  var navIcons = {home:'⌂',vocab:'📚',quiz:'❓',free:'🗂',generator:'✨',myvocab:'⭐',translate:'⇄',ai:'✦'};
-  var navKeys  = {home:'nav_home',vocab:'nav_vocab',quiz:'nav_quiz',free:'nav_free',generator:'nav_gen',myvocab:'nav_myvocab',translate:'nav_translate',ai:'nav_ai'};
+  var navIcons = {home:'⌂',vocab:'📚',quiz:'❓',free:'🗂',generator:'✨',myvocab:'⭐',translate:'⇄',ai:'✦',srs:'🧠',write:'✍',stats:'📊',badges:'🏆',path:'🗺'};
+  var navKeys  = {home:'nav_home',vocab:'nav_vocab',quiz:'nav_quiz',free:'nav_free',generator:'nav_gen',myvocab:'nav_myvocab',translate:'nav_translate',ai:'nav_ai',srs:'nav_srs',write:'nav_write',stats:'nav_stats',badges:'nav_badges',path:'nav_path'};
   document.querySelectorAll('.nav-btn[data-section]').forEach(function(b) {
     var sec = b.dataset.section;
     if (navKeys[sec]) b.innerHTML = '<span class="nav-icon">' + (navIcons[sec]||'') + '</span> ' + t(navKeys[sec]);
@@ -4390,13 +4644,651 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 
-// INIT
+// ============================================================
+// THEME TOGGLE
+// ============================================================
+function toggleTheme() {
+  var isDark = !document.documentElement.classList.contains('light');
+  document.documentElement.classList.toggle('light', isDark);
+  localStorage.setItem('lingua_theme', isDark ? 'light' : 'dark');
+  document.getElementById('theme-btn').textContent = isDark ? '☀️' : '🌙';
+}
+function initTheme() {
+  var saved = localStorage.getItem('lingua_theme');
+  if (saved === 'light') {
+    document.documentElement.classList.add('light');
+    var btn = document.getElementById('theme-btn');
+    if (btn) btn.textContent = '☀️';
+  }
+}
+
+// ============================================================
+// XP & GAMIFICATION
+// ============================================================
+function getXP() { return parseInt(localStorage.getItem('lingua_xp') || '0'); }
+function addXP(amount) {
+  var xp = getXP() + amount;
+  localStorage.setItem('lingua_xp', xp);
+  showXPToast('+' + amount + ' XP');
+  updateXPBar();
+  checkBadges();
+  return xp;
+}
+function showXPToast(msg) {
+  var el = document.createElement('div');
+  el.style.cssText = 'position:fixed;top:5rem;right:1rem;background:var(--accent);color:#fff;padding:.4rem .9rem;border-radius:20px;font-family:Syne,sans-serif;font-size:.8rem;font-weight:700;z-index:999;animation:fadeIn .3s ease;pointer-events:none;';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(function() { el.remove(); }, 2000);
+}
+function getLevelInfo(xp) {
+  var levels = [
+    {min:0,    max:100,  name:'Anfänger',      icon:'🌱', key:'beginner'},
+    {min:100,  max:300,  name:'Entdecker',      icon:'🔍', key:'explorer'},
+    {min:300,  max:600,  name:'Lernender',      icon:'📖', key:'learner'},
+    {min:600,  max:1000, name:'Fortgeschritten', icon:'⚡', key:'advanced'},
+    {min:1000, max:2000, name:'Experte',         icon:'🎓', key:'expert'},
+    {min:2000, max:4000, name:'Meister',         icon:'🏅', key:'master'},
+    {min:4000, max:99999,name:'Großmeister',     icon:'👑', key:'grandmaster'},
+  ];
+  for (var i = levels.length - 1; i >= 0; i--) {
+    if (xp >= levels[i].min) return Object.assign({}, levels[i], {idx:i+1, progress: Math.min(100, Math.round((xp - levels[i].min) / (levels[i].max - levels[i].min) * 100))});
+  }
+  return levels[0];
+}
+function updateXPBar() {
+  var xp = getXP();
+  var lvl = getLevelInfo(xp);
+  var lbl = document.getElementById('level-label');
+  var xlbl = document.getElementById('xp-label');
+  var bar = document.getElementById('xp-bar');
+  var icon = document.getElementById('level-icon');
+  if (lbl) lbl.textContent = 'Level ' + lvl.idx + ' – ' + lvl.name;
+  if (xlbl) xlbl.textContent = xp + ' / ' + lvl.max + ' XP';
+  if (bar) bar.style.width = lvl.progress + '%';
+  if (icon) icon.textContent = lvl.icon;
+}
+
+// ============================================================
+// BADGES
+// ============================================================
+var BADGES_DEF = [
+  {id:'first_word',    icon:'🌟', name:'Erste Schritte',    desc:'Ersten Vokabel gelernt',      check:function(s){return (s.quizTotal||0)>=1;}},
+  {id:'ten_words',     icon:'📚', name:'Fleißiger Leser',   desc:'10 Quiz-Fragen beantwortet',  check:function(s){return (s.quizTotal||0)>=10;}},
+  {id:'fifty_quiz',    icon:'🎯', name:'Quiz-Profi',        desc:'50 Quiz-Fragen beantwortet',  check:function(s){return (s.quizTotal||0)>=50;}},
+  {id:'streak_3',      icon:'🔥', name:'Auf Kurs',          desc:'3 Tage Streak',               check:function(s){return (s.streak||0)>=3;}},
+  {id:'streak_7',      icon:'💪', name:'Wochenkrieger',     desc:'7 Tage Streak',               check:function(s){return (s.streak||0)>=7;}},
+  {id:'streak_30',     icon:'🏆', name:'Monatsmeister',     desc:'30 Tage Streak',              check:function(s){return (s.streak||0)>=30;}},
+  {id:'xp_100',        icon:'⚡', name:'Energiebündel',     desc:'100 XP erreicht',             check:function(){return getXP()>=100;}},
+  {id:'xp_500',        icon:'💎', name:'Diamant',           desc:'500 XP erreicht',             check:function(){return getXP()>=500;}},
+  {id:'xp_1000',       icon:'👑', name:'König',             desc:'1000 XP erreicht',            check:function(){return getXP()>=1000;}},
+  {id:'perfect_quiz',  icon:'💯', name:'Perfektes Quiz',    desc:'Quiz ohne Fehler abgeschlossen', check:function(s){return (s.perfectQuizzes||0)>=1;}},
+  {id:'five_langs',    icon:'🌍', name:'Weltenbürger',      desc:'5 Sprachen ausprobiert',      check:function(s){return Object.keys(s.learned||{}).length>=5;}},
+  {id:'custom_vocab',  icon:'✏️', name:'Eigener Forscher',  desc:'10 eigene Vokabeln hinzugefügt', check:function(){
+    var total = 0;
+    ['ru','it','es','en','tr','sq','de','th','da'].forEach(function(l){total += getMyVocab(l).length;});
+    return total >= 10;
+  }},
+];
+function getUnlockedBadges() { return JSON.parse(localStorage.getItem('lingua_badges') || '[]'); }
+function checkBadges() {
+  var unlocked = getUnlockedBadges();
+  var newOnes = [];
+  BADGES_DEF.forEach(function(b) {
+    if (unlocked.indexOf(b.id) < 0 && b.check(state)) {
+      unlocked.push(b.id);
+      newOnes.push(b);
+    }
+  });
+  if (newOnes.length) {
+    localStorage.setItem('lingua_badges', JSON.stringify(unlocked));
+    newOnes.forEach(function(b) {
+      setTimeout(function() { showToast(b.icon + ' Abzeichen: ' + b.name); }, 500);
+    });
+    renderBadges();
+  }
+}
+function renderBadges() {
+  var grid = document.getElementById('badge-grid');
+  if (!grid) return;
+  var unlocked = getUnlockedBadges();
+  grid.innerHTML = '';
+  BADGES_DEF.forEach(function(b) {
+    var isUnlocked = unlocked.indexOf(b.id) >= 0;
+    var div = document.createElement('div');
+    div.className = 'badge-item ' + (isUnlocked ? 'unlocked' : 'locked');
+    div.title = b.desc;
+    div.innerHTML = '<span class="badge-icon">' + b.icon + '</span><div class="badge-name">' + b.name + '</div>';
+    if (isUnlocked) div.style.cursor = 'default';
+    grid.appendChild(div);
+  });
+  updateXPBar();
+}
+
+// ============================================================
+// DAILY GOAL & STREAK CALENDAR
+// ============================================================
+function getDailyGoal() { return parseInt(localStorage.getItem('lingua_goal') || '10'); }
+function saveGoal(val) { localStorage.setItem('lingua_goal', Math.max(1, parseInt(val)||10)); updateGoalRing(); }
+function getTodayKey() { return new Date().toISOString().slice(0,10); }
+function getDailyLearned() {
+  var data = JSON.parse(localStorage.getItem('lingua_daily') || '{}');
+  return data[getTodayKey()] || 0;
+}
+function incrementDailyLearned() {
+  var data = JSON.parse(localStorage.getItem('lingua_daily') || '{}');
+  var key = getTodayKey();
+  data[key] = (data[key] || 0) + 1;
+  localStorage.setItem('lingua_daily', JSON.stringify(data));
+  updateGoalRing();
+  checkBadges();
+}
+function updateGoalRing() {
+  var done = getDailyLearned();
+  var goal = getDailyGoal();
+  var pct = Math.min(1, done / goal);
+  var circumference = 213.6;
+  var offset = circumference * (1 - pct);
+  var fill = document.getElementById('goal-ring-fill');
+  if (fill) fill.setAttribute('stroke-dashoffset', offset.toFixed(1));
+  var todayEl = document.getElementById('goal-today');
+  if (todayEl) todayEl.textContent = done;
+  var goalInp = document.getElementById('goal-input');
+  if (goalInp) goalInp.value = goal;
+  var goalSub = document.getElementById('ui-goal-sub');
+  if (goalSub) goalSub.textContent = 'von ' + goal;
+  var streakEl = document.getElementById('ui-goal-streak');
+  if (streakEl) streakEl.textContent = 'Streak: ' + (state.streak || 0) + ' Tage';
+}
+function renderStreakCalendar() {
+  var cal = document.getElementById('streak-calendar');
+  if (!cal) return;
+  var data = JSON.parse(localStorage.getItem('lingua_daily') || '{}');
+  var today = new Date();
+  cal.innerHTML = '';
+  for (var i = 27; i >= 0; i--) {
+    var d = new Date(today);
+    d.setDate(d.getDate() - i);
+    var key = d.toISOString().slice(0,10);
+    var cell = document.createElement('div');
+    cell.className = 'streak-cell' + (data[key] ? ' active' : '') + (i===0 ? ' today' : '');
+    cell.title = key;
+    cal.appendChild(cell);
+  }
+}
+function renderAccuracyChart() {
+  var chart = document.getElementById('accuracy-chart');
+  if (!chart) return;
+  var langs = ['ru','it','es','en','tr','sq','de','th','da'];
+  var names = {ru:'Russisch',it:'Italienisch',es:'Spanisch',en:'Englisch',tr:'Türkisch',sq:'Albanisch',de:'Deutsch',th:'Thailändisch',da:'Dänisch'};
+  var data = JSON.parse(localStorage.getItem('lingua_quiz_stats') || '{}');
+  chart.innerHTML = '';
+  langs.forEach(function(l) {
+    var s = data[l] || {correct:0, total:0};
+    var pct = s.total > 0 ? Math.round(s.correct / s.total * 100) : 0;
+    var row = document.createElement('div');
+    row.className = 'chart-bar-row';
+    row.innerHTML = '<div class="chart-bar-label">' + (names[l]||l) + '</div>' +
+      '<div class="chart-bar-track"><div class="chart-bar-fill" style="width:' + pct + '%;background:' + (pct>=80?'var(--accent3)':pct>=50?'var(--accent4)':'var(--accent2)') + '"></div></div>' +
+      '<div class="chart-bar-val">' + (s.total>0 ? pct+'%' : '–') + '</div>';
+    chart.appendChild(row);
+  });
+}
+function renderWeakTopics() {
+  var el = document.getElementById('weak-topics-list');
+  if (!el) return;
+  var data = JSON.parse(localStorage.getItem('lingua_topic_stats') || '{}');
+  var entries = Object.entries(data).sort(function(a,b){return (a[1].correct/Math.max(1,a[1].total)) - (b[1].correct/Math.max(1,b[1].total));}).slice(0,5);
+  if (!entries.length) { el.textContent = 'Noch keine Daten'; return; }
+  el.innerHTML = entries.map(function(e) {
+    var pct = Math.round(e[1].correct/Math.max(1,e[1].total)*100);
+    return '<div style="display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border);"><span>' + e[0] + '</span><span style="color:' + (pct<50?'var(--accent2)':'var(--accent4)') + '">' + pct + '%</span></div>';
+  }).join('');
+}
+function updateAllStats() {
+  updateGoalRing();
+  renderStreakCalendar();
+  renderAccuracyChart();
+  renderWeakTopics();
+  renderBadges();
+  var tl = document.getElementById('stats-total-learned');
+  if (tl) tl.textContent = Object.values(state.learned||{}).reduce(function(a,b){return a+Object.keys(b).length;},0);
+  var tq = document.getElementById('stats-total-quiz');
+  if (tq) tq.textContent = state.quizTotal || 0;
+  var bs = document.getElementById('stats-best-streak');
+  if (bs) bs.textContent = state.bestStreak || state.streak || 0;
+  var xpEl = document.getElementById('stats-xp');
+  if (xpEl) xpEl.textContent = getXP();
+}
+
+// ============================================================
+// SRS - SPACED REPETITION
+// ============================================================
+var SRS_KEY = 'lingua_srs';
+function getSRSData() { return JSON.parse(localStorage.getItem(SRS_KEY) || '{}'); }
+function saveSRSData(d) { localStorage.setItem(SRS_KEY, JSON.stringify(d)); }
+function getSRSCard(lang, word) {
+  var d = getSRSData();
+  return (d[lang] && d[lang][word]) || {interval:1, ease:2.5, due:0, reps:0};
+}
+function updateSRSCard(lang, word, rating) {
+  var d = getSRSData();
+  if (!d[lang]) d[lang] = {};
+  var c = d[lang][word] || {interval:1, ease:2.5, due:0, reps:0};
+  // SM-2 algorithm
+  c.ease = Math.max(1.3, c.ease + 0.1 - (5 - rating) * (0.08 + (5 - rating) * 0.02));
+  if (rating < 3) {
+    c.interval = 1;
+    c.reps = 0;
+  } else {
+    if (c.reps === 0) c.interval = 1;
+    else if (c.reps === 1) c.interval = 6;
+    else c.interval = Math.round(c.interval * c.ease);
+    c.reps++;
+  }
+  c.due = Date.now() + c.interval * 86400000;
+  d[lang][word] = c;
+  saveSRSData(d);
+}
+var srsQueue = [], srsIndex = 0, srsRevealed = false;
+function initSRS() {
+  var lang = state.lang;
+  var all = getAllWords(lang);
+  var d = getSRSData();
+  var now = Date.now();
+  var due = all.filter(function(w) {
+    var c = (d[lang] && d[lang][w.f]);
+    return !c || c.due <= now;
+  });
+  srsQueue = due.sort(function() { return Math.random() - .5; }).slice(0, 30);
+  srsIndex = 0;
+  srsRevealed = false;
+  showSRSCard();
+}
+function showSRSCard() {
+  var counter = document.getElementById('srs-counter');
+  var done = document.getElementById('srs-done');
+  var card = document.getElementById('srs-card');
+  var btns = document.getElementById('srs-buttons');
+  if (srsIndex >= srsQueue.length) {
+    if (card) card.style.display = 'none';
+    if (btns) btns.style.display = 'none';
+    if (done) done.style.display = 'block';
+    if (counter) counter.textContent = '✓ Fertig';
+    return;
+  }
+  if (done) done.style.display = 'none';
+  if (card) card.style.display = 'flex';
+  if (btns) btns.style.display = 'none';
+  var w = srsQueue[srsIndex];
+  var wordEl = document.getElementById('srs-word');
+  var phonEl = document.getElementById('srs-phonetic');
+  var transEl = document.getElementById('srs-translation');
+  if (wordEl) wordEl.textContent = w.f;
+  if (phonEl) phonEl.textContent = w.p ? '[' + w.p + ']' : '';
+  if (transEl) { transEl.textContent = w.t; transEl.style.opacity = '0'; }
+  if (counter) counter.textContent = (srsIndex + 1) + ' / ' + srsQueue.length;
+  var prog = document.getElementById('srs-progress');
+  if (prog) prog.style.width = (srsIndex / srsQueue.length * 100) + '%';
+  srsRevealed = false;
+}
+function revealSRS() {
+  if (srsRevealed) return;
+  srsRevealed = true;
+  var transEl = document.getElementById('srs-translation');
+  var btns = document.getElementById('srs-buttons');
+  if (transEl) transEl.style.opacity = '1';
+  if (btns) btns.style.display = 'block';
+  if (srsQueue[srsIndex]) speak(srsQueue[srsIndex].f, state.lang, true);
+}
+function rateSRS(rating) {
+  var w = srsQueue[srsIndex];
+  if (!w) return;
+  updateSRSCard(state.lang, w.f, rating);
+  if (rating >= 3) {
+    addXP(2);
+    incrementDailyLearned();
+    if (!state.learned[state.lang]) state.learned[state.lang] = {};
+    state.learned[state.lang][w.f] = true;
+    saveState();
+  }
+  srsIndex++;
+  srsRevealed = false;
+  showSRSCard();
+}
+
+// ============================================================
+// WRITING EXERCISE
+// ============================================================
+var writeQueue = [], writeIndex = 0, writeHints = 0;
+function initWrite() {
+  var lang = state.lang;
+  writeQueue = getAllWords(lang).sort(function() { return Math.random() - .5; }).slice(0, 20);
+  writeIndex = 0;
+  showWriteCard();
+}
+function showWriteCard() {
+  var counter = document.getElementById('write-counter');
+  var prog = document.getElementById('write-progress');
+  var wordEl = document.getElementById('write-word');
+  var phonEl = document.getElementById('write-phonetic');
+  var inp = document.getElementById('write-input');
+  var hint = document.getElementById('write-hint');
+  var exBox = document.getElementById('write-example-box');
+  if (writeIndex >= writeQueue.length) {
+    if (wordEl) wordEl.textContent = '🎉';
+    if (phonEl) phonEl.textContent = '';
+    if (inp) { inp.value = ''; inp.disabled = true; }
+    if (hint) hint.textContent = 'Übung abgeschlossen!';
+    return;
+  }
+  var w = writeQueue[writeIndex];
+  if (wordEl) wordEl.textContent = w.f;
+  if (phonEl) phonEl.textContent = w.p ? '[' + w.p + ']' : '';
+  if (inp) { inp.value = ''; inp.disabled = false; inp.className = 'write-input'; inp.focus(); }
+  if (hint) hint.textContent = '';
+  if (exBox) exBox.style.display = 'none';
+  if (counter) counter.textContent = (writeIndex+1) + ' / ' + writeQueue.length;
+  if (prog) prog.style.width = (writeIndex / writeQueue.length * 100) + '%';
+  writeHints = 0;
+}
+function checkWrite() {
+  var w = writeQueue[writeIndex];
+  if (!w) return;
+  var inp = document.getElementById('write-input');
+  var hint = document.getElementById('write-hint');
+  if (!inp) return;
+  var answer = inp.value.trim().toLowerCase();
+  var correct = w.t.toLowerCase();
+  // Allow minor typos (simple check: remove special chars, compare)
+  var normalize = function(s) { return s.replace(/[äöüÄÖÜß]/g, function(c){return {ä:'a',ö:'o',ü:'u',Ä:'A',Ö:'O',Ü:'U',ß:'ss'}[c]||c; }).toLowerCase().trim(); };
+  var isCorrect = normalize(answer) === normalize(correct) || answer === correct;
+  if (isCorrect) {
+    inp.className = 'write-input correct';
+    if (hint) hint.textContent = '✓ Richtig!';
+    addXP(3);
+    incrementDailyLearned();
+    if (!state.learned[state.lang]) state.learned[state.lang] = {};
+    state.learned[state.lang][w.f] = true;
+    saveState();
+    fetchSentenceExample(w.f, state.lang, w.t);
+    setTimeout(function() { writeIndex++; showWriteCard(); }, 1800);
+  } else {
+    inp.className = 'write-input wrong';
+    if (hint) hint.textContent = '✗ Richtig wäre: ' + w.t;
+    setTimeout(function() { inp.className = 'write-input'; }, 1500);
+  }
+}
+function hintWrite() {
+  var w = writeQueue[writeIndex];
+  if (!w) return;
+  var hint = document.getElementById('write-hint');
+  var correct = w.t;
+  writeHints++;
+  var revealed = correct.slice(0, Math.min(writeHints * 2, correct.length));
+  var rest = '_'.repeat(Math.max(0, correct.length - revealed.length));
+  if (hint) hint.textContent = '💡 ' + revealed + rest;
+}
+function skipWrite() {
+  var w = writeQueue[writeIndex];
+  if (w && document.getElementById('write-hint'))
+    document.getElementById('write-hint').textContent = '→ ' + w.t;
+  setTimeout(function() { writeIndex++; showWriteCard(); }, 1000);
+}
+
+// ============================================================
+// SENTENCE EXAMPLES (KI)
+// ============================================================
+async function fetchSentenceExample(word, lang, translation) {
+  var exBox = document.getElementById('write-example-box');
+  if (!exBox) return;
+  exBox.style.display = 'block';
+  exBox.innerHTML = '<div style="color:var(--muted);font-size:.75rem;">⏳ Lade Beispielsatz...</div>';
+  try {
+    var result = await callClaude({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 200,
+      system: 'Gib einen kurzen natuerlichen Beispielsatz auf ' + LANG_NAMES[lang] + ' mit dem Wort "' + word + '" und darunter die deutsche Uebersetzung. Format: Satz auf Fremdsprache | Deutsche Uebersetzung. Nur diese zwei Zeilen, nichts sonst.',
+      messages: [{role:'user', content: word}]
+    });
+    var parts = result.split('|');
+    if (parts.length >= 2) {
+      exBox.innerHTML = '<div class="example-box">' + parts[0].trim() + '<div class="example-de">🇩🇪 ' + parts[1].trim() + '</div></div>';
+    } else {
+      exBox.innerHTML = '<div class="example-box">' + result.trim() + '</div>';
+    }
+  } catch(e) {
+    exBox.style.display = 'none';
+  }
+}
+
+// ============================================================
+// LEARNING PATH
+// ============================================================
+var LEARNING_PATHS = [
+  {id:'basics',    icon:'👋', title:'Grundlagen',         desc:'Hallo, Danke, Zahlen 1-10', topics:['Grundlagen','Zahlen'], xpReward:20},
+  {id:'colors',    icon:'🎨', title:'Farben & Adjektive', desc:'Beschreibe deine Welt', topics:['Farben','Adjektive'], xpReward:25},
+  {id:'food',      icon:'🍕', title:'Essen & Trinken',    desc:'Im Restaurant bestellen', topics:['Essen & Trinken'], xpReward:30},
+  {id:'family',    icon:'👨‍👩‍👧', title:'Familie & Menschen', desc:'Über deine Familie sprechen', topics:['Familie','Berufe'], xpReward:30},
+  {id:'travel',    icon:'✈️', title:'Reisen',              desc:'Im Urlaub zurechtkommen', topics:['Reisen'], xpReward:35},
+  {id:'body',      icon:'💪', title:'Körper & Gesundheit', desc:'Beim Arzt & Sport', topics:['Körper','Gesundheit'], xpReward:35},
+  {id:'time',      icon:'📅', title:'Zeit & Datum',        desc:'Wochentage, Monate, Uhrzeiten', topics:['Zeit'], xpReward:30},
+  {id:'home',      icon:'🏠', title:'Wohnen & Haushalt',   desc:'Zu Hause und im Alltag', topics:['Wohnen'], xpReward:35},
+  {id:'nature',    icon:'🌿', title:'Natur & Wetter',      desc:'Die Welt um uns herum', topics:['Natur & Wetter','Tiere'], xpReward:35},
+  {id:'tech',      icon:'💻', title:'Technologie',         desc:'Digital kommunizieren', topics:['Technologie'], xpReward:40},
+  {id:'emotions',  icon:'❤️', title:'Gefühle & Emotionen', desc:'Ausdrücken was du fühlst', topics:['Emotionen','Gefühle'], xpReward:40},
+  {id:'advanced',  icon:'🎓', title:'Fortgeschritten',     desc:'Verben, Präpositionen & mehr', topics:['Verben','Adjektive','Präpositionen & Verbindungen'], xpReward:50},
+];
+function getCompletedPaths() { return JSON.parse(localStorage.getItem('lingua_paths') || '[]'); }
+function renderLearningPath() {
+  var container = document.getElementById('path-steps');
+  if (!container) return;
+  var completed = getCompletedPaths();
+  container.innerHTML = '';
+  LEARNING_PATHS.forEach(function(step, idx) {
+    var isDone = completed.indexOf(step.id) >= 0;
+    var isLocked = idx > 0 && completed.indexOf(LEARNING_PATHS[idx-1].id) < 0;
+    var div = document.createElement('div');
+    div.className = 'path-step' + (isDone?' done':'') + (isLocked?' locked':'');
+    var badge = isDone ? '<span class="path-step-badge psb-done">✓ Fertig</span>' : isLocked ? '<span class="path-step-badge psb-lock">🔒</span>' : '<span class="path-step-badge psb-new">Neu</span>';
+    div.innerHTML = '<div class="path-step-icon">' + step.icon + '</div>' +
+      '<div class="path-step-info"><div class="path-step-title">' + step.title + ' ' + badge + '</div>' +
+      '<div class="path-step-desc">' + step.desc + ' · +' + step.xpReward + ' XP</div></div>';
+    if (!isLocked) {
+      div.onclick = function() { startPathStep(step); };
+    }
+    container.appendChild(div);
+  });
+}
+function startPathStep(step) {
+  var lang = state.lang;
+  var words = [];
+  step.topics.forEach(function(topic) {
+    if (VOCAB[lang] && VOCAB[lang][topic]) words = words.concat(VOCAB[lang][topic]);
+  });
+  if (!words.length) { showToast('Keine Wörter für dieses Thema verfügbar'); return; }
+  // Launch vocab trainer with these words
+  vocabQueue = words.sort(function(){return Math.random()-.5;});
+  vocabIndex = 0; vocabRevealed = false;
+  switchSection('vocab');
+  showToast('Lernpfad: ' + step.icon + ' ' + step.title);
+  // Mark as done after starting
+  var completed = getCompletedPaths();
+  if (completed.indexOf(step.id) < 0) {
+    completed.push(step.id);
+    localStorage.setItem('lingua_paths', JSON.stringify(completed));
+    addXP(step.xpReward);
+    renderLearningPath();
+  }
+}
+
+// ============================================================
+// PRONUNCIATION RATING (via STT + comparison)
+// ============================================================
+function startPronunciationCheck() {
+  if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+    showToast('Spracherkennung nicht verfügbar');
+    return;
+  }
+  var w = vocabQueue[vocabIndex];
+  if (!w) return;
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var rec = new SR();
+  rec.lang = LANG_VOICE[state.lang];
+  rec.interimResults = false;
+  rec.onresult = function(e) {
+    var spoken = e.results[0][0].transcript.toLowerCase().trim();
+    var target = w.f.toLowerCase().trim();
+    var score = calcPronScore(spoken, target);
+    showPronScore(score, spoken, target);
+    if (score >= 70) addXP(5);
+  };
+  rec.onerror = function() { showToast('Mikrofon-Fehler'); };
+  rec.start();
+  showToast('🎤 Sprich jetzt: ' + w.f);
+}
+function calcPronScore(spoken, target) {
+  if (spoken === target) return 100;
+  // Simple Levenshtein-based score
+  var m = spoken.length, n = target.length;
+  var dp = [];
+  for (var i = 0; i <= m; i++) { dp[i] = [i]; }
+  for (var j = 0; j <= n; j++) { dp[0][j] = j; }
+  for (var ii = 1; ii <= m; ii++) {
+    for (var jj = 1; jj <= n; jj++) {
+      dp[ii][jj] = spoken[ii-1] === target[jj-1] ? dp[ii-1][jj-1] : 1 + Math.min(dp[ii-1][jj], dp[ii][jj-1], dp[ii-1][jj-1]);
+    }
+  }
+  var dist = dp[m][n];
+  return Math.max(0, Math.round((1 - dist / Math.max(m, n)) * 100));
+}
+function showPronScore(score, spoken, target) {
+  var color = score >= 80 ? 'var(--accent3)' : score >= 50 ? 'var(--accent4)' : 'var(--accent2)';
+  var emoji = score >= 80 ? '🌟' : score >= 50 ? '👍' : '🔁';
+  showToast(emoji + ' Aussprache: ' + score + '% – du sagtest: "' + spoken + '"');
+}
+
+// ============================================================
+// SHARE VOCAB LIST
+// ============================================================
+function shareMyVocab() {
+  var lang = state.lang;
+  var words = getMyVocab(lang);
+  if (!words.length) { showToast('Keine eigenen Vokabeln zum Teilen'); return; }
+  var data = {lang: lang, words: words, v: 1};
+  var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+  var code = encoded.slice(0, 100) + '...';
+  showToast('Code kopiert! (' + words.length + ' Wörter)');
+  navigator.clipboard.writeText(encoded).catch(function(){});
+}
+function importVocabCode() {
+  var code = prompt('Vokabel-Code einfügen:');
+  if (!code) return;
+  try {
+    var data = JSON.parse(decodeURIComponent(escape(atob(code))));
+    var lang = data.lang || state.lang;
+    var existing = getMyVocab(lang);
+    var added = 0;
+    (data.words || []).forEach(function(w) {
+      if (!existing.find(function(e){return e.f===w.f;})) { existing.push(w); added++; }
+    });
+    localStorage.setItem('myVocab_' + lang, JSON.stringify(existing));
+    showToast(added + ' Vokabeln importiert!');
+    renderMyVocab();
+  } catch(e) {
+    showToast('Ungültiger Code');
+  }
+}
+
+// ============================================================
+// OVERRIDE switchSection to handle new sections
+// ============================================================
+var _origSwitchSection = switchSection;
+switchSection = function(id) {
+  _origSwitchSection(id);
+  if (id === 'srs') initSRS();
+  if (id === 'write') initWrite();
+  if (id === 'stats') updateAllStats();
+  if (id === 'badges') renderBadges();
+  if (id === 'path') renderLearningPath();
+};
+
+// ============================================================
+// OVERRIDE vocabAnswer to award XP & daily progress
+// ============================================================
+var _origVocabAnswer = vocabAnswer;
+vocabAnswer = function(result) {
+  if (result === true) {
+    addXP(1);
+    incrementDailyLearned();
+  }
+  _origVocabAnswer(result);
+};
+
+// ============================================================
+// OVERRIDE checkQuiz to track per-lang & per-topic stats
+// ============================================================
+var _origCheckQuiz = checkQuiz;
+checkQuiz = function(btn, correct, correctAnswer) {
+  _origCheckQuiz(btn, correct, correctAnswer);
+  // Track per-language accuracy
+  var stats = JSON.parse(localStorage.getItem('lingua_quiz_stats') || '{}');
+  var lang = state.lang;
+  if (!stats[lang]) stats[lang] = {correct:0, total:0};
+  stats[lang].total++;
+  if (correct) stats[lang].correct++;
+  localStorage.setItem('lingua_quiz_stats', JSON.stringify(stats));
+  if (correct) {
+    addXP(2);
+    incrementDailyLearned();
+  }
+  // Track best streak
+  if ((state.streak||0) > (state.bestStreak||0)) {
+    state.bestStreak = state.streak;
+    saveState();
+  }
+  checkBadges();
+};
+
+// Add pronunciation button to vocab controls
+(function() {
+  var controls = document.querySelector('.vocab-controls');
+  if (controls) {
+    var btn = document.createElement('button');
+    btn.className = 'btn';
+    btn.id = 'pron-check-btn';
+    btn.textContent = '🎤 Aussprache testen';
+    btn.onclick = startPronunciationCheck;
+    controls.appendChild(btn);
+  }
+})();
+
+// Add share buttons to myvocab section
+(function() {
+  var mvCount = document.getElementById('mv-count');
+  if (mvCount && mvCount.parentNode) {
+    var shareBtn = document.createElement('button');
+    shareBtn.className = 'btn';
+    shareBtn.textContent = '📤 Teilen';
+    shareBtn.onclick = shareMyVocab;
+    var importBtn = document.createElement('button');
+    importBtn.className = 'btn';
+    importBtn.textContent = '📥 Importieren';
+    importBtn.onclick = importVocabCode;
+    mvCount.parentNode.appendChild(shareBtn);
+    mvCount.parentNode.appendChild(importBtn);
+  }
+})();
 speechRate = parseFloat(localStorage.getItem('lingua_speed') || '0.9');
 autoSpeak = localStorage.getItem('lingua_autospeak') !== 'off';
 uiLang = localStorage.getItem('lingua_ui_lang') || 'de';
 initVocab();
 updateApiDot();
 applyUILanguage();
+initTheme();
+updateGoalRing();
+updateXPBar();
+checkBadges();
 if (!getApiKey()) setTimeout(openSettings, 800);
 </script>
 </body>
