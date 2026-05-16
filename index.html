@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="description" content="LINGUA v2.3 – KI-gestützte Sprachlern-App von René Prause">
+<meta name="description" content="LINGUA v2.4 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v2.3 · by René Prause</title>
+<title>LINGUA v2.4 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -510,7 +510,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
    ============================================================ */
 
 /* ============================================================
-   NEUE FEATURES v2.3: ONBOARDING · SUCHE · KONJUGATION
+   NEUE FEATURES v2.4: ONBOARDING · SUCHE · KONJUGATION
    ============================================================ */
 
 /* ONBOARDING OVERLAY */
@@ -652,7 +652,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;">v2.3</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;">v2.4</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill active" data-lang="sq">🇦🇱 SQ</button>
@@ -1255,7 +1255,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   </main>
 
   <footer>
-    LINGUA v2.3 · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA v2.4 · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · 2026</span>
   </footer>
 </div>
@@ -1397,7 +1397,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA v2.3 · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA v2.4 · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · 2026</span>
     </div>
 
@@ -4373,6 +4373,670 @@ const VOCAB = {
   };
 })();
 
+// ============================================================
+// VOCAB EXTENSION v2.4 — +500 Wörter pro Sprache
+// ============================================================
+(function() {
+  var EXT3 = {
+    ru: {
+      "Kochen & Rezepte": [
+        {f:"рецепт",t:"Rezept",p:"re-tsept"},{f:"ингредиент",t:"Zutat",p:"in-gre-di-ent"},
+        {f:"нарезать",t:"Schneiden",p:"na-re-zat'"},{f:"варить",t:"Kochen (sieden)",p:"va-rit'"},
+        {f:"жарить",t:"Braten / Frittieren",p:"zha-rit'"},{f:"запекать",t:"Backen / Im Ofen garen",p:"za-pe-kat'"},
+        {f:"тушить",t:"Schmoren / Dünsten",p:"tu-shit'"},{f:"смешивать",t:"Mischen / Vermengen",p:"sme-shi-vat'"},
+        {f:"сковорода",t:"Bratpfanne",p:"sko-vo-ro-da"},{f:"кастрюля",t:"Kochtopf",p:"kas-try-lya"},
+        {f:"духовка",t:"Backofen",p:"du-khov-ka"},{f:"тёрка",t:"Reibe",p:"tyorka"},
+        {f:"доска для нарезки",t:"Schneidebrett",p:"dos-ka dlya na-rez-ki"},
+        {f:"венчик",t:"Schneebesen",p:"ven-chik"},{f:"порция",t:"Portion",p:"por-tsiya"},
+        {f:"острый",t:"Scharf (Gewürz)",p:"os-try"},{f:"сладкий",t:"Süß",p:"slat-kiy"},
+        {f:"кислый",t:"Sauer",p:"kis-ly"},{f:"горький",t:"Bitter",p:"gor'-kiy"},
+        {f:"солёный",t:"Salzig",p:"so-lyony"},{f:"маринад",t:"Marinade",p:"ma-ri-nad"},
+      ],
+      "Sport (erweitert)": [
+        {f:"тренажёрный зал",t:"Fitnessstudio",p:"tre-na-zhyor-ny zal"},{f:"тренировка",t:"Training",p:"tre-ni-rov-ka"},
+        {f:"тренер",t:"Trainer",p:"tre-ner"},{f:"соревнование",t:"Wettkampf",p:"so-rev-no-va-ni-ye"},
+        {f:"победа",t:"Sieg",p:"po-be-da"},{f:"поражение",t:"Niederlage",p:"po-ra-zhe-ni-ye"},
+        {f:"ничья",t:"Unentschieden",p:"ni-ch'ya"},{f:"счёт",t:"Spielstand",p:"shchyot"},
+        {f:"команда",t:"Mannschaft / Team",p:"ko-man-da"},{f:"судья",t:"Schiedsrichter",p:"sud'-ya"},
+        {f:"стадион",t:"Stadion",p:"sta-di-on"},{f:"трибуна",t:"Tribüne",p:"tri-bu-na"},
+        {f:"болельщик",t:"Fan / Anhänger",p:"bo-lel'-shchik"},{f:"чемпион",t:"Champion",p:"chem-pi-on"},
+        {f:"рекорд",t:"Rekord",p:"re-kord"},{f:"марафон",t:"Marathon",p:"ma-ra-fon"},
+        {f:"штанга",t:"Hantelstange",p:"shtan-ga"},{f:"прыжок",t:"Sprung",p:"pry-zhok"},
+        {f:"финиш",t:"Ziel / Finish",p:"fi-nish"},{f:"старт",t:"Start",p:"start"},
+      ],
+      "Wissenschaft": [
+        {f:"наука",t:"Wissenschaft",p:"nau-ka"},{f:"исследование",t:"Forschung",p:"is-sle-do-va-ni-ye"},
+        {f:"эксперимент",t:"Experiment",p:"ek-spe-ri-ment"},{f:"теория",t:"Theorie",p:"te-o-ri-ya"},
+        {f:"гипотеза",t:"Hypothese",p:"gi-po-te-za"},{f:"доказательство",t:"Beweis",p:"do-ka-za-tel'-stvo"},
+        {f:"лаборатория",t:"Labor",p:"la-bo-ra-to-ri-ya"},{f:"микроскоп",t:"Mikroskop",p:"mik-ro-skop"},
+        {f:"молекула",t:"Molekül",p:"mo-le-ku-la"},{f:"атом",t:"Atom",p:"a-tom"},
+        {f:"физика",t:"Physik",p:"fi-zi-ka"},{f:"химия",t:"Chemie",p:"khi-mi-ya"},
+        {f:"биология",t:"Biologie",p:"bi-o-lo-gi-ya"},{f:"астрономия",t:"Astronomie",p:"as-tro-no-mi-ya"},
+        {f:"эволюция",t:"Evolution",p:"e-vo-lyu-tsi-ya"},{f:"генетика",t:"Genetik",p:"ge-ne-ti-ka"},
+        {f:"вирус",t:"Virus",p:"vi-rus"},{f:"бактерия",t:"Bakterie",p:"bak-te-ri-ya"},
+        {f:"энергия",t:"Energie",p:"e-ner-gi-ya"},{f:"сила тяжести",t:"Schwerkraft",p:"si-la tya-zhes-ti"},
+      ],
+      "Wirtschaft & Finanzen": [
+        {f:"экономика",t:"Wirtschaft",p:"e-ko-no-mi-ka"},{f:"бюджет",t:"Budget",p:"byu-dzhet"},
+        {f:"доход",t:"Einkommen",p:"do-khod"},{f:"расход",t:"Ausgabe",p:"ras-khod"},
+        {f:"прибыль",t:"Gewinn",p:"pri-byl'"},{f:"убыток",t:"Verlust",p:"u-by-tok"},
+        {f:"инвестиция",t:"Investition",p:"in-ves-ti-tsi-ya"},{f:"акция",t:"Aktie",p:"ak-tsi-ya"},
+        {f:"налог",t:"Steuer",p:"na-log"},{f:"кредит",t:"Kredit",p:"kre-dit"},
+        {f:"долг",t:"Schulden",p:"dolg"},{f:"проценты",t:"Zinsen",p:"pro-tsen-ty"},
+        {f:"рынок",t:"Markt",p:"ry-nok"},{f:"торговля",t:"Handel",p:"tor-gov-lya"},
+        {f:"импорт",t:"Import",p:"im-port"},{f:"экспорт",t:"Export",p:"ek-sport"},
+        {f:"валюта",t:"Währung",p:"va-lyu-ta"},{f:"инфляция",t:"Inflation",p:"in-fly-a-tsi-ya"},
+        {f:"безработица",t:"Arbeitslosigkeit",p:"bez-ra-bo-ti-tsa"},{f:"зарплата",t:"Gehalt / Lohn",p:"zar-pla-ta"},
+      ],
+      "Kunst & Kultur": [
+        {f:"живопись",t:"Malerei",p:"zhi-vo-pis'"},{f:"скульптура",t:"Skulptur",p:"skul'p-tu-ra"},
+        {f:"архитектура",t:"Architektur",p:"ar-khi-tek-tu-ra"},{f:"литература",t:"Literatur",p:"li-te-ra-tu-ra"},
+        {f:"поэзия",t:"Poesie / Lyrik",p:"po-e-zi-ya"},{f:"роман",t:"Roman",p:"ro-man"},
+        {f:"симфония",t:"Symphonie",p:"sim-fo-ni-ya"},{f:"опера",t:"Oper",p:"o-pe-ra"},
+        {f:"балет",t:"Ballett",p:"ba-let"},{f:"кино",t:"Kino / Film",p:"ki-no"},
+        {f:"выставка",t:"Ausstellung",p:"vys-tav-ka"},{f:"галерея",t:"Galerie",p:"ga-le-re-ya"},
+        {f:"коллекция",t:"Sammlung",p:"kol-lek-tsi-ya"},{f:"шедевр",t:"Meisterwerk",p:"she-devr"},
+        {f:"вдохновение",t:"Inspiration",p:"vdokh-no-ve-ni-ye"},{f:"творчество",t:"Kreativität / Schaffen",p:"tvor-ches-tvo"},
+        {f:"культура",t:"Kultur",p:"kul'-tu-ra"},{f:"традиция",t:"Tradition",p:"tra-di-tsi-ya"},
+        {f:"наследие",t:"Erbe / Kulturerbe",p:"nas-le-di-ye"},{f:"фестиваль",t:"Festival",p:"fes-ti-val'"},
+      ],
+    },
+    de: {
+      "Kochen & Rezepte": [
+        {f:"das Rezept",t:"Rezept",p:"das re-tsept"},{f:"die Zutat",t:"Zutat",p:"di tsu-tat"},
+        {f:"schneiden",t:"Schneiden",p:"shnai-den"},{f:"kochen",t:"Kochen",p:"ko-chen"},
+        {f:"braten",t:"Braten",p:"bra-ten"},{f:"backen",t:"Backen",p:"ba-ken"},
+        {f:"dünsten",t:"Dünsten",p:"düns-ten"},{f:"rühren",t:"Rühren / Umrühren",p:"rü-ren"},
+        {f:"die Bratpfanne",t:"Bratpfanne",p:"di brat-pfa-ne"},{f:"der Topf",t:"Kochtopf",p:"der topf"},
+        {f:"der Backofen",t:"Backofen",p:"der bak-o-fen"},{f:"die Reibe",t:"Reibe",p:"di rai-be"},
+        {f:"das Schneidebrett",t:"Schneidebrett",p:"das shnai-de-bret"},
+        {f:"der Schneebesen",t:"Schneebesen",p:"der shne-be-zen"},
+        {f:"scharf",t:"Scharf",p:"sharf"},{f:"süß",t:"Süß",p:"züs"},
+        {f:"sauer",t:"Sauer",p:"zau-er"},{f:"bitter",t:"Bitter",p:"bi-ter"},
+        {f:"salzig",t:"Salzig",p:"zal-tsig"},{f:"die Marinade",t:"Marinade",p:"di ma-ri-na-de"},
+        {f:"würzen",t:"Würzen",p:"vür-tsen"},{f:"abschmecken",t:"Abschmecken",p:"ap-shme-ken"},
+      ],
+      "Sport & Fitness": [
+        {f:"das Fitnessstudio",t:"Fitnessstudio",p:"das fit-nes-shtu-dio"},{f:"das Training",t:"Training",p:"das tre-ning"},
+        {f:"der Trainer",t:"Trainer",p:"der tre-ner"},{f:"der Wettkampf",t:"Wettkampf",p:"der vet-kampf"},
+        {f:"der Sieg",t:"Sieg",p:"der zik"},{f:"die Niederlage",t:"Niederlage",p:"di ni-der-la-ge"},
+        {f:"das Unentschieden",t:"Unentschieden",p:"das un-ent-shi-den"},{f:"der Spielstand",t:"Spielstand",p:"der shpil-shtant"},
+        {f:"die Mannschaft",t:"Mannschaft",p:"di man-shaft"},{f:"der Schiedsrichter",t:"Schiedsrichter",p:"der shits-rich-ter"},
+        {f:"das Stadion",t:"Stadion",p:"das shta-di-on"},{f:"der Fan",t:"Fan",p:"der fan"},
+        {f:"der Champion",t:"Champion",p:"der sham-pi-on"},{f:"der Rekord",t:"Rekord",p:"der re-kord"},
+        {f:"der Marathon",t:"Marathon",p:"der ma-ra-ton"},{f:"der Sprung",t:"Sprung",p:"der shprung"},
+        {f:"das Ziel",t:"Ziel",p:"das tsil"},{f:"aufwärmen",t:"Aufwärmen",p:"auf-ver-men"},
+        {f:"dehnen",t:"Dehnen / Strecken",p:"de-nen"},{f:"der Muskelkater",t:"Muskelkater",p:"der mus-kel-ka-ter"},
+      ],
+      "Natur & Umwelt (erweitert)": [
+        {f:"das Ökosystem",t:"Ökosystem",p:"das ö-ko-zys-tem"},{f:"die Artenvielfalt",t:"Artenvielfalt",p:"di ar-ten-fil-falt"},
+        {f:"der Naturschutz",t:"Naturschutz",p:"der na-tur-shutz"},{f:"die Umweltverschmutzung",t:"Umweltverschmutzung",p:"di um-velt-fer-shmu-tsung"},
+        {f:"erneuerbare Energien",t:"Erneuerbare Energien",p:"er-noy-er-ba-re e-ner-gi-en"},
+        {f:"der Klimawandel",t:"Klimawandel",p:"der kli-ma-van-del"},{f:"das Treibhausgas",t:"Treibhausgas",p:"das traib-haus-gas"},
+        {f:"die Nachhaltigkeit",t:"Nachhaltigkeit",p:"di nach-hal-tig-kait"},{f:"recyceln",t:"Recyceln",p:"re-sai-keln"},
+        {f:"kompostieren",t:"Kompostieren",p:"kom-pos-ti-ren"},{f:"der Solarstrom",t:"Solarstrom",p:"der zo-lar-shtrom"},
+        {f:"die Windkraft",t:"Windkraft",p:"di vint-kraft"},{f:"das Elektroauto",t:"Elektroauto",p:"das e-lek-tro-au-to"},
+        {f:"der Fußabdruck",t:"(CO₂-)Fußabdruck",p:"der fus-ap-druk"},{f:"die Mülltrennung",t:"Mülltrennung",p:"di mül-tren-ung"},
+        {f:"biologisch abbaubar",t:"Biologisch abbaubar",p:"bi-o-lo-gish a-bau-bar"},
+        {f:"das Naturschutzgebiet",t:"Naturschutzgebiet",p:"das na-tur-shutz-ge-bit"},
+        {f:"die Waldrodung",t:"Abholzung",p:"di valt-ro-dung"},{f:"die Überfischung",t:"Überfischung",p:"di ü-ber-fi-shung"},
+        {f:"das Bienensterben",t:"Bienensterben",p:"das bi-nen-shter-ben"},
+      ],
+      "Digitale Welt": [
+        {f:"der Algorithmus",t:"Algorithmus",p:"der al-go-rit-mus"},{f:"künstliche Intelligenz",t:"Künstliche Intelligenz",p:"küns-tli-che in-te-li-gents"},
+        {f:"das Maschinelles Lernen",t:"Maschinelles Lernen",p:"das ma-shi-nel-les ler-nen"},
+        {f:"die Datenverschlüsselung",t:"Datenverschlüsselung",p:"di da-ten-fer-shlüs-se-lung"},
+        {f:"der Cloud-Speicher",t:"Cloud-Speicher",p:"der klaud-shpai-cher"},
+        {f:"das soziale Netzwerk",t:"Soziales Netzwerk",p:"das zo-tsia-les nets-verk"},
+        {f:"der Influencer",t:"Influencer",p:"der in-flu-en-cer"},{f:"viral gehen",t:"Viral gehen",p:"vi-ral ge-en"},
+        {f:"der Podcast",t:"Podcast",p:"der pod-kast"},{f:"streamen",t:"Streamen",p:"stri-men"},
+        {f:"die App-Store",t:"App-Store",p:"di ep-stor"},{f:"das Update",t:"Update",p:"das up-deit"},
+        {f:"die Benachrichtigung",t:"Benachrichtigung",p:"di be-nach-rich-ti-gung"},
+        {f:"der Datenschutz",t:"Datenschutz",p:"der da-ten-shutz"},{f:"die Zwei-Faktor-Authentifizierung",t:"Zwei-Faktor-Authentifizierung",p:"di tsvai-fak-tor-au-ten-ti-fi-tsi-rung"},
+        {f:"der Hack",t:"Hack / Angriff",p:"der hak"},{f:"die Firewall",t:"Firewall",p:"di fai-er-val"},
+        {f:"das Backup",t:"Backup / Sicherung",p:"das bek-ap"},{f:"das Open Source",t:"Open Source",p:"das o-pen sors"},
+      ],
+      "Politik & Gesellschaft": [
+        {f:"die Demokratie",t:"Demokratie",p:"di de-mo-kra-ti"},{f:"die Republik",t:"Republik",p:"di re-pub-lik"},
+        {f:"die Wahl",t:"Wahl",p:"di val"},{f:"der Kandidat",t:"Kandidat",p:"der kan-di-dat"},
+        {f:"die Regierung",t:"Regierung",p:"di re-gi-rung"},{f:"das Parlament",t:"Parlament",p:"das par-la-ment"},
+        {f:"das Gesetz",t:"Gesetz",p:"das ge-zets"},{f:"die Verfassung",t:"Verfassung",p:"di fer-fas-ung"},
+        {f:"die Menschenrechte",t:"Menschenrechte",p:"di men-shen-rech-te"},{f:"die Gleichberechtigung",t:"Gleichberechtigung",p:"di glaich-be-rech-ti-gung"},
+        {f:"die Gesellschaft",t:"Gesellschaft",p:"di ge-zel-shaft"},{f:"die Gemeinschaft",t:"Gemeinschaft",p:"di ge-main-shaft"},
+        {f:"die Integration",t:"Integration",p:"di in-te-gra-tsi-on"},{f:"die Vielfalt",t:"Vielfalt",p:"di fil-falt"},
+        {f:"die Diskriminierung",t:"Diskriminierung",p:"di dis-kri-mi-ni-rung"},
+        {f:"der Protest",t:"Protest",p:"der pro-test"},{f:"die Demonstration",t:"Demonstration",p:"di de-mons-tra-tsi-on"},
+        {f:"die Meinungsfreiheit",t:"Meinungsfreiheit",p:"di mai-nungs-frai-hait"},
+        {f:"die Pressefreiheit",t:"Pressefreiheit",p:"di pre-se-frai-hait"},{f:"die Solidarität",t:"Solidarität",p:"di zo-li-da-ri-tet"},
+      ],
+    },
+    fr: {
+      "Cuisine & Recettes": [
+        {f:"la recette",t:"Rezept",p:"la re-set"},{f:"l'ingrédient",t:"Zutat",p:"lẽ-gre-djã"},
+        {f:"couper",t:"Schneiden",p:"ku-pe"},{f:"faire bouillir",t:"Kochen (sieden)",p:"fer bu-jir"},
+        {f:"faire frire",t:"Braten / Frittieren",p:"fer frir"},{f:"faire cuire au four",t:"Im Ofen backen",p:"fer küir o fur"},
+        {f:"mijoter",t:"Schmoren",p:"mi-zho-te"},{f:"mélanger",t:"Mischen",p:"me-lã-zhe"},
+        {f:"la poêle",t:"Bratpfanne",p:"la pwal"},{f:"la casserole",t:"Kochtopf",p:"la kas-rol"},
+        {f:"le four",t:"Backofen",p:"le fur"},{f:"la râpe",t:"Reibe",p:"la rap"},
+        {f:"la planche à découper",t:"Schneidebrett",p:"la plãsh a de-ku-pe"},
+        {f:"le fouet",t:"Schneebesen",p:"le fwe"},{f:"épicé",t:"Scharf",p:"e-pi-se"},
+        {f:"sucré",t:"Süß",p:"sü-kre"},{f:"acide / aigre",t:"Sauer",p:"a-sid"},
+        {f:"amer",t:"Bitter",p:"a-mer"},{f:"salé",t:"Salzig",p:"sa-le"},
+        {f:"la marinade",t:"Marinade",p:"la ma-ri-nad"},{f:"assaisonner",t:"Würzen",p:"a-se-zo-ne"},
+        {f:"goûter",t:"Abschmecken",p:"gu-te"},{f:"la sauce",t:"Soße / Sauce",p:"la sos"},
+      ],
+      "Sport & Fitness": [
+        {f:"la salle de sport",t:"Fitnessstudio",p:"la sal de spor"},{f:"l'entraînement",t:"Training",p:"lã-tren-mã"},
+        {f:"l'entraîneur",t:"Trainer",p:"lã-tre-nør"},{f:"la compétition",t:"Wettkampf",p:"la kõ-pe-ti-sjõ"},
+        {f:"la victoire",t:"Sieg",p:"la vik-twar"},{f:"la défaite",t:"Niederlage",p:"la de-fet"},
+        {f:"le match nul",t:"Unentschieden",p:"le mash nül"},{f:"le score",t:"Spielstand",p:"le skor"},
+        {f:"l'équipe",t:"Mannschaft / Team",p:"le-kip"},{f:"l'arbitre",t:"Schiedsrichter",p:"lar-bitr"},
+        {f:"le stade",t:"Stadion",p:"le stad"},{f:"le supporter",t:"Fan",p:"le su-por-ter"},
+        {f:"le champion",t:"Champion",p:"le shã-pjõ"},{f:"le record",t:"Rekord",p:"le re-kor"},
+        {f:"le marathon",t:"Marathon",p:"le ma-ra-tõ"},{f:"le saut",t:"Sprung",p:"le so"},
+        {f:"l'arrivée",t:"Ziel / Ankunft",p:"la-ri-ve"},{f:"s'échauffer",t:"Aufwärmen",p:"se-sho-fe"},
+        {f:"s'étirer",t:"Dehnen / Strecken",p:"se-ti-re"},{f:"les courbatures",t:"Muskelkater",p:"le kur-ba-tür"},
+      ],
+      "Environnement": [
+        {f:"l'écosystème",t:"Ökosystem",p:"le-ko-sis-tem"},{f:"la biodiversité",t:"Artenvielfalt",p:"la bio-di-ver-si-te"},
+        {f:"la protection de la nature",t:"Naturschutz",p:"la pro-tek-sjõ de la na-tür"},
+        {f:"la pollution",t:"Umweltverschmutzung",p:"la po-ly-sjõ"},{f:"les énergies renouvelables",t:"Erneuerbare Energien",p:"le ze-ner-zhi re-nu-vabl"},
+        {f:"le changement climatique",t:"Klimawandel",p:"le shãzh-mã kli-ma-tik"},
+        {f:"le gaz à effet de serre",t:"Treibhausgas",p:"le ga a e-fe de ser"},
+        {f:"le développement durable",t:"Nachhaltigkeit",p:"le de-ve-lop-mã dy-rabl"},
+        {f:"recycler",t:"Recyceln",p:"re-si-kle"},{f:"composter",t:"Kompostieren",p:"kõ-pos-te"},
+        {f:"l'énergie solaire",t:"Solarenergie",p:"le-ner-zhi so-ler"},{f:"l'éolienne",t:"Windkraftanlage",p:"le-o-lyen"},
+        {f:"la voiture électrique",t:"Elektroauto",p:"la vwa-tür e-lek-trik"},
+        {f:"l'empreinte carbone",t:"CO₂-Fußabdruck",p:"lã-prẽt kar-bon"},
+        {f:"le tri sélectif",t:"Mülltrennung",p:"le tri se-lek-tif"},
+        {f:"la déforestation",t:"Abholzung",p:"la de-fo-res-ta-sjõ"},
+        {f:"la surpêche",t:"Überfischung",p:"la sür-pesh"},{f:"l'extinction",t:"Aussterben",p:"lek-stẽk-sjõ"},
+        {f:"la réserve naturelle",t:"Naturschutzgebiet",p:"la re-zerv na-ty-rel"},
+        {f:"la faune sauvage",t:"Wildtiere",p:"la fon so-vazh"},
+      ],
+      "Monde numérique": [
+        {f:"l'algorithme",t:"Algorithmus",p:"la-go-ritm"},{f:"l'intelligence artificielle",t:"Künstliche Intelligenz",p:"lẽ-te-li-zhãs ar-ti-fi-sjel"},
+        {f:"l'apprentissage automatique",t:"Maschinelles Lernen",p:"la-prã-ti-sazh o-to-ma-tik"},
+        {f:"le chiffrement",t:"Verschlüsselung",p:"le shi-frö-mã"},{f:"le nuage (cloud)",t:"Cloud-Speicher",p:"le nüazh"},
+        {f:"le réseau social",t:"Soziales Netzwerk",p:"le re-zo so-sjal"},
+        {f:"l'influenceur",t:"Influencer",p:"lẽ-fly-ã-sør"},{f:"devenir viral",t:"Viral gehen",p:"de-ve-nir vi-ral"},
+        {f:"le podcast",t:"Podcast",p:"le pod-kast"},{f:"diffuser en direct",t:"Livestreamen",p:"di-fü-ze ã di-rekt"},
+        {f:"la notification",t:"Benachrichtigung",p:"la no-ti-fi-ka-sjõ"},
+        {f:"la protection des données",t:"Datenschutz",p:"la pro-tek-sjõ de do-ne"},
+        {f:"la cyberattaque",t:"Cyberangriff",p:"la si-ber-a-tak"},
+        {f:"le logiciel",t:"Software",p:"le lo-zhi-sjel"},{f:"le matériel",t:"Hardware",p:"le ma-te-rjel"},
+        {f:"le code source ouvert",t:"Open Source",p:"le kod surs u-ver"},
+        {f:"l'interface",t:"Benutzeroberfläche",p:"lẽ-ter-fas"},
+        {f:"le bug",t:"Fehler / Bug",p:"le byg"},{f:"mettre à jour",t:"Aktualisieren",p:"metr a zhur"},
+      ],
+      "Politique & Société": [
+        {f:"la démocratie",t:"Demokratie",p:"la de-mo-kra-si"},{f:"la république",t:"Republik",p:"la re-py-blik"},
+        {f:"l'élection",t:"Wahl",p:"le-lek-sjõ"},{f:"le candidat",t:"Kandidat",p:"le kã-di-da"},
+        {f:"le gouvernement",t:"Regierung",p:"le gu-vern-mã"},{f:"le parlement",t:"Parlament",p:"le par-le-mã"},
+        {f:"la loi",t:"Gesetz",p:"la lwa"},{f:"la constitution",t:"Verfassung",p:"la kõs-ti-tü-sjõ"},
+        {f:"les droits de l'homme",t:"Menschenrechte",p:"le drwa de lom"},
+        {f:"l'égalité",t:"Gleichberechtigung",p:"le-ga-li-te"},{f:"la société",t:"Gesellschaft",p:"la so-sje-te"},
+        {f:"la communauté",t:"Gemeinschaft",p:"la ko-my-no-te"},{f:"l'intégration",t:"Integration",p:"lẽ-te-gra-sjõ"},
+        {f:"la diversité",t:"Vielfalt",p:"la di-ver-si-te"},{f:"la discrimination",t:"Diskriminierung",p:"la dis-kri-mi-na-sjõ"},
+        {f:"la protestation",t:"Protest",p:"la pro-tes-ta-sjõ"},{f:"la manifestation",t:"Demonstration",p:"la ma-ni-fes-ta-sjõ"},
+        {f:"la liberté d'expression",t:"Meinungsfreiheit",p:"la li-ber-te dek-spre-sjõ"},
+        {f:"la solidarité",t:"Solidarität",p:"la so-li-da-ri-te"},
+        {f:"la laïcité",t:"Laizismus",p:"la la-i-si-te"},
+      ],
+    },
+    sv: {
+      "Matlagning & Recept": [
+        {f:"receptet",t:"Rezept",p:"re-sep-tet"},{f:"ingrediensen",t:"Zutat",p:"in-gre-di-en-sen"},
+        {f:"skära",t:"Schneiden",p:"she-ra"},{f:"koka",t:"Kochen",p:"ko-ka"},
+        {f:"steka",t:"Braten",p:"ste-ka"},{f:"baka",t:"Backen",p:"ba-ka"},
+        {f:"sjuda",t:"Schmoren / Köcheln",p:"shu-da"},{f:"röra om",t:"Umrühren",p:"rö-ra om"},
+        {f:"stekpannan",t:"Bratpfanne",p:"stek-pa-nan"},{f:"kastrullen",t:"Kochtopf",p:"kas-trul-en"},
+        {f:"ugnen",t:"Backofen",p:"ug-nen"},{f:"rivjärnet",t:"Reibe",p:"riv-yer-net"},
+        {f:"skärbrädan",t:"Schneidebrett",p:"sher-bre-dan"},
+        {f:"vispen",t:"Schneebesen",p:"vis-pen"},{f:"stark / kryddig",t:"Scharf",p:"stark"},
+        {f:"söt",t:"Süß",p:"söt"},{f:"sur",t:"Sauer",p:"sur"},
+        {f:"bitter",t:"Bitter",p:"bi-ter"},{f:"salt",t:"Salzig",p:"salt"},
+        {f:"marinaden",t:"Marinade",p:"ma-ri-na-den"},{f:"krydda",t:"Würzen",p:"kry-da"},
+        {f:"smaka av",t:"Abschmecken",p:"sma-ka av"},{f:"såsen",t:"Soße",p:"so-sen"},
+      ],
+      "Sport & Hälsa": [
+        {f:"gymmet",t:"Fitnessstudio",p:"gym-et"},{f:"träningen",t:"Training",p:"tre-ning-en"},
+        {f:"tränaren",t:"Trainer",p:"tre-na-ren"},{f:"tävlingen",t:"Wettkampf",p:"tev-ling-en"},
+        {f:"segern",t:"Sieg",p:"se-gern"},{f:"nederlaget",t:"Niederlage",p:"ne-der-la-get"},
+        {f:"oavgjort",t:"Unentschieden",p:"o-av-yort"},{f:"ställningen",t:"Spielstand",p:"stel-ning-en"},
+        {f:"laget",t:"Mannschaft / Team",p:"la-get"},{f:"domaren",t:"Schiedsrichter",p:"do-ma-ren"},
+        {f:"stadion",t:"Stadion",p:"sta-di-on"},{f:"supportern",t:"Fan",p:"su-por-tern"},
+        {f:"mästaren",t:"Champion / Meister",p:"mes-ta-ren"},{f:"rekordet",t:"Rekord",p:"re-kor-det"},
+        {f:"maratonen",t:"Marathon",p:"ma-ra-to-nen"},{f:"hoppet",t:"Sprung",p:"ho-pet"},
+        {f:"mållinjen",t:"Ziellinie",p:"mol-lin-yen"},{f:"värma upp",t:"Aufwärmen",p:"ver-ma up"},
+        {f:"sträcka ut",t:"Dehnen",p:"stre-ka ut"},{f:"träningsvärk",t:"Muskelkater",p:"tre-nings-verk"},
+      ],
+      "Miljö & Natur": [
+        {f:"ekosystemet",t:"Ökosystem",p:"e-ko-sys-te-met"},{f:"den biologiska mångfalden",t:"Artenvielfalt",p:"bi-o-lo-gis-ka mong-fal-den"},
+        {f:"naturskyddet",t:"Naturschutz",p:"na-tur-shy-det"},{f:"miljöförstöringen",t:"Umweltverschmutzung",p:"mil-yö-för-stö-ring-en"},
+        {f:"förnybara energikällor",t:"Erneuerbare Energien",p:"fö-rnü-ba-ra e-ner-gi-shal-or"},
+        {f:"klimatförändringen",t:"Klimawandel",p:"kli-mat-för-en-dring-en"},
+        {f:"växthusgasen",t:"Treibhausgas",p:"vekst-hus-ga-sen"},{f:"hållbarhet",t:"Nachhaltigkeit",p:"hol-bar-het"},
+        {f:"återvinna",t:"Recyceln",p:"o-ter-vi-na"},{f:"kompostera",t:"Kompostieren",p:"kom-pos-te-ra"},
+        {f:"solenergi",t:"Solarenergie",p:"sol-e-ner-gi"},{f:"vindkraft",t:"Windkraft",p:"vind-kraft"},
+        {f:"elbilen",t:"Elektroauto",p:"el-bi-len"},{f:"koldioxidavtrycket",t:"CO₂-Fußabdruck",p:"kol-di-ok-sid-av-trü-ket"},
+        {f:"sopsortering",t:"Mülltrennung",p:"sop-sor-te-ring"},{f:"avskogning",t:"Abholzung",p:"av-skog-ning"},
+        {f:"överfiske",t:"Überfischung",p:"ö-ver-fis-ke"},{f:"utrotning",t:"Aussterben",p:"ut-rot-ning"},
+        {f:"naturreservat",t:"Naturschutzgebiet",p:"na-tur-re-ser-vat"},{f:"vilda djur",t:"Wildtiere",p:"vil-da yur"},
+      ],
+      "Digital värld": [
+        {f:"algoritmen",t:"Algorithmus",p:"al-go-rit-men"},{f:"artificiell intelligens",t:"Künstliche Intelligenz",p:"ar-ti-fi-sjel in-te-li-gens"},
+        {f:"maskininlärning",t:"Maschinelles Lernen",p:"ma-skin-in-ler-ning"},
+        {f:"kryptering",t:"Verschlüsselung",p:"kryp-te-ring"},{f:"molnlagring",t:"Cloud-Speicher",p:"moln-lag-ring"},
+        {f:"sociala medier",t:"Soziales Netzwerk",p:"so-sia-la me-dier"},
+        {f:"influencern",t:"Influencer",p:"in-flu-en-sern"},{f:"bli viral",t:"Viral gehen",p:"bli vi-ral"},
+        {f:"podcasten",t:"Podcast",p:"pod-kas-ten"},{f:"streama",t:"Streamen",p:"stri-ma"},
+        {f:"notifikationen",t:"Benachrichtigung",p:"no-ti-fi-ka-shon-en"},
+        {f:"dataskyddet",t:"Datenschutz",p:"da-ta-shy-det"},{f:"cyberattack",t:"Cyberangriff",p:"sai-ber-a-tak"},
+        {f:"mjukvaran",t:"Software",p:"myuk-va-ran"},{f:"hårdvaran",t:"Hardware",p:"hord-va-ran"},
+        {f:"öppen källkod",t:"Open Source",p:"ö-pen shel-kod"},{f:"gränssnittet",t:"Benutzeroberfläche",p:"grens-snit-et"},
+        {f:"buggen",t:"Fehler / Bug",p:"bug-en"},{f:"uppdatera",t:"Aktualisieren",p:"up-da-te-ra"},
+      ],
+      "Politik & Samhälle": [
+        {f:"demokratin",t:"Demokratie",p:"de-mo-kra-tin"},{f:"republiken",t:"Republik",p:"re-pub-li-ken"},
+        {f:"valet",t:"Wahl",p:"va-let"},{f:"kandidaten",t:"Kandidat",p:"kan-di-da-ten"},
+        {f:"regeringen",t:"Regierung",p:"re-ge-ring-en"},{f:"parlamentet",t:"Parlament",p:"par-la-men-tet"},
+        {f:"lagen",t:"Gesetz",p:"la-gen"},{f:"grundlagen",t:"Verfassung",p:"grund-la-gen"},
+        {f:"mänskliga rättigheter",t:"Menschenrechte",p:"mens-kli-ga ret-ig-he-ter"},
+        {f:"jämlikhet",t:"Gleichberechtigung",p:"yem-lik-het"},{f:"samhället",t:"Gesellschaft",p:"sam-hel-et"},
+        {f:"gemenskapen",t:"Gemeinschaft",p:"ge-men-ska-pen"},{f:"integrationen",t:"Integration",p:"in-te-gra-shon-en"},
+        {f:"mångfald",t:"Vielfalt",p:"mong-fald"},{f:"diskriminering",t:"Diskriminierung",p:"dis-kri-mi-ne-ring"},
+        {f:"protesten",t:"Protest",p:"pro-tes-ten"},{f:"demonstrationen",t:"Demonstration",p:"de-mons-tra-shon-en"},
+        {f:"yttrandefriheten",t:"Meinungsfreiheit",p:"yt-ran-de-fri-he-ten"},
+        {f:"solidariteten",t:"Solidarität",p:"so-li-da-ri-te-ten"},{f:"lagom",t:"Genau richtig",p:"la-gom"},
+      ],
+    },
+    ro: {
+      "Gătit & Rețete": [
+        {f:"rețeta",t:"Rezept",p:"re-țe-ta"},{f:"ingredientul",t:"Zutat",p:"in-gre-dien-tul"},
+        {f:"a tăia",t:"Schneiden",p:"a tă-ia"},{f:"a fierbe",t:"Kochen (sieden)",p:"a fier-be"},
+        {f:"a prăji",t:"Braten",p:"a pră-ji"},{f:"a coace la cuptor",t:"Im Ofen backen",p:"a coa-ce la cup-tor"},
+        {f:"a înăbuși",t:"Schmoren",p:"a î-nă-bu-și"},{f:"a amesteca",t:"Mischen",p:"a a-mes-te-ca"},
+        {f:"tigaia",t:"Bratpfanne",p:"ti-gaia"},{f:"oala",t:"Kochtopf",p:"oa-la"},
+        {f:"cuptorul",t:"Backofen",p:"cup-to-rul"},{f:"răzătoarea",t:"Reibe",p:"ră-ză-toa-rea"},
+        {f:"tocătorul",t:"Schneidebrett",p:"to-că-to-rul"},
+        {f:"telul",t:"Schneebesen",p:"te-lul"},{f:"picant",t:"Scharf",p:"pi-cant"},
+        {f:"dulce",t:"Süß",p:"dul-ce"},{f:"acru",t:"Sauer",p:"a-cru"},
+        {f:"amar",t:"Bitter",p:"a-mar"},{f:"sărat",t:"Salzig",p:"să-rat"},
+        {f:"marinada",t:"Marinade",p:"ma-ri-na-da"},{f:"a condimenta",t:"Würzen",p:"a con-di-men-ta"},
+        {f:"a gusta",t:"Abschmecken",p:"a gus-ta"},{f:"sosul",t:"Soße",p:"so-sul"},
+      ],
+      "Sport & Sănătate": [
+        {f:"sala de fitness",t:"Fitnessstudio",p:"sa-la de fit-nes"},{f:"antrenamentul",t:"Training",p:"an-tre-na-men-tul"},
+        {f:"antrenorul",t:"Trainer",p:"an-tre-no-rul"},{f:"competiția",t:"Wettkampf",p:"com-pe-ti-ția"},
+        {f:"victoria",t:"Sieg",p:"vic-to-ria"},{f:"înfrângerea",t:"Niederlage",p:"în-frân-ge-rea"},
+        {f:"egalul",t:"Unentschieden",p:"e-ga-lul"},{f:"scorul",t:"Spielstand",p:"sco-rul"},
+        {f:"echipa",t:"Mannschaft / Team",p:"e-chi-pa"},{f:"arbitrul",t:"Schiedsrichter",p:"ar-bi-trul"},
+        {f:"stadionul",t:"Stadion",p:"sta-dio-nul"},{f:"suporterul",t:"Fan",p:"su-por-te-rul"},
+        {f:"campionul",t:"Champion",p:"cam-pio-nul"},{f:"recordul",t:"Rekord",p:"re-cor-dul"},
+        {f:"maratonul",t:"Marathon",p:"ma-ra-to-nul"},{f:"săritura",t:"Sprung",p:"să-ri-tu-ra"},
+        {f:"linia de sosire",t:"Ziellinie",p:"li-nia de so-si-re"},{f:"a se încălzi",t:"Aufwärmen",p:"a se în-căl-zi"},
+        {f:"a se întinde",t:"Dehnen",p:"a se în-tin-de"},{f:"dureri musculare",t:"Muskelkater",p:"du-reri mus-cu-la-re"},
+      ],
+      "Mediu & Natură": [
+        {f:"ecosistemul",t:"Ökosystem",p:"e-co-sis-te-mul"},{f:"biodiversitatea",t:"Artenvielfalt",p:"bio-di-ver-si-ta-tea"},
+        {f:"protecția naturii",t:"Naturschutz",p:"pro-tec-ția na-tu-rii"},
+        {f:"poluarea",t:"Umweltverschmutzung",p:"po-lua-rea"},{f:"energiile regenerabile",t:"Erneuerbare Energien",p:"e-ner-gi-i-le re-ge-ne-ra-bi-le"},
+        {f:"schimbările climatice",t:"Klimawandel",p:"schim-bă-ri-le cli-ma-ti-ce"},
+        {f:"gazele cu efect de seră",t:"Treibhausgase",p:"ga-ze-le cu e-fect de se-ră"},
+        {f:"sustenabilitatea",t:"Nachhaltigkeit",p:"sus-te-na-bi-li-ta-tea"},
+        {f:"a recicla",t:"Recyceln",p:"a re-cic-la"},{f:"a composta",t:"Kompostieren",p:"a com-pos-ta"},
+        {f:"energia solară",t:"Solarenergie",p:"e-ner-gia so-la-ră"},{f:"energia eoliană",t:"Windkraft",p:"e-ner-gia e-o-lia-nă"},
+        {f:"mașina electrică",t:"Elektroauto",p:"ma-și-na e-lec-tri-că"},
+        {f:"amprenta de carbon",t:"CO₂-Fußabdruck",p:"am-pren-ta de car-bon"},
+        {f:"sortarea deșeurilor",t:"Mülltrennung",p:"sor-ta-rea de-șeu-ri-lor"},
+        {f:"defrișarea",t:"Abholzung",p:"de-fri-șa-rea"},{f:"suprapescuitul",t:"Überfischung",p:"su-pra-pes-cuitul"},
+        {f:"extincția",t:"Aussterben",p:"ex-tinc-ția"},{f:"rezervația naturală",t:"Naturschutzgebiet",p:"re-zer-va-ția na-tu-ra-lă"},
+        {f:"fauna sălbatică",t:"Wildtiere",p:"fau-na săl-ba-ti-că"},
+      ],
+      "Lumea digitală": [
+        {f:"algoritmul",t:"Algorithmus",p:"al-go-rit-mul"},{f:"inteligența artificială",t:"Künstliche Intelligenz",p:"in-te-li-gen-ța ar-ti-fi-cia-lă"},
+        {f:"învățarea automată",t:"Maschinelles Lernen",p:"în-vă-ța-rea au-to-ma-tă"},
+        {f:"criptarea",t:"Verschlüsselung",p:"crip-ta-rea"},{f:"stocarea în cloud",t:"Cloud-Speicher",p:"sto-ca-rea în cloud"},
+        {f:"rețeaua de socializare",t:"Soziales Netzwerk",p:"re-țea-ua de so-cia-li-za-re"},
+        {f:"influencerul",t:"Influencer",p:"in-fluen-ce-rul"},{f:"a deveni viral",t:"Viral gehen",p:"a de-ve-ni vi-ral"},
+        {f:"podcastul",t:"Podcast",p:"pod-cas-tul"},{f:"a transmite live",t:"Livestreamen",p:"a trans-mi-te live"},
+        {f:"notificarea",t:"Benachrichtigung",p:"no-ti-fi-ca-rea"},
+        {f:"protecția datelor",t:"Datenschutz",p:"pro-tec-ția da-te-lor"},
+        {f:"atacul cibernetic",t:"Cyberangriff",p:"a-ta-cul ci-ber-ne-tic"},
+        {f:"software-ul",t:"Software",p:"sof-tua-rul"},{f:"hardware-ul",t:"Hardware",p:"hard-ua-rul"},
+        {f:"codul sursă deschis",t:"Open Source",p:"co-dul sur-să des-chis"},
+        {f:"interfața",t:"Benutzeroberfläche",p:"in-ter-fa-ța"},{f:"eroarea",t:"Fehler",p:"e-roa-rea"},
+        {f:"actualizarea",t:"Aktualisierung",p:"ac-tua-li-za-rea"},
+      ],
+      "Politică & Societate": [
+        {f:"democrația",t:"Demokratie",p:"de-mo-cra-ția"},{f:"republica",t:"Republik",p:"re-pub-li-ca"},
+        {f:"alegerile",t:"Wahl",p:"a-le-ge-ri-le"},{f:"candidatul",t:"Kandidat",p:"can-di-da-tul"},
+        {f:"guvernul",t:"Regierung",p:"gu-ver-nul"},{f:"parlamentul",t:"Parlament",p:"par-la-men-tul"},
+        {f:"legea",t:"Gesetz",p:"le-gea"},{f:"constituția",t:"Verfassung",p:"con-sti-tu-ția"},
+        {f:"drepturile omului",t:"Menschenrechte",p:"drep-tu-ri-le o-mu-lui"},
+        {f:"egalitatea",t:"Gleichberechtigung",p:"e-ga-li-ta-tea"},{f:"societatea",t:"Gesellschaft",p:"so-cie-ta-tea"},
+        {f:"comunitatea",t:"Gemeinschaft",p:"co-mu-ni-ta-tea"},{f:"integrarea",t:"Integration",p:"in-te-gra-rea"},
+        {f:"diversitatea",t:"Vielfalt",p:"di-ver-si-ta-tea"},{f:"discriminarea",t:"Diskriminierung",p:"dis-cri-mi-na-rea"},
+        {f:"protestul",t:"Protest",p:"pro-tes-tul"},{f:"demonstrația",t:"Demonstration",p:"de-mons-tra-ția"},
+        {f:"libertatea de exprimare",t:"Meinungsfreiheit",p:"li-ber-ta-tea de ex-pri-ma-re"},
+        {f:"solidaritatea",t:"Solidarität",p:"so-li-da-ri-ta-tea"},
+        {f:"drepturile civile",t:"Bürgerrechte",p:"drep-tu-ri-le ci-vi-le"},
+      ],
+    },
+    en: {
+      "Cooking & Recipes": [
+        {f:"recipe",t:"Rezept",p:"ˈrɛsɪpi"},{f:"ingredient",t:"Zutat",p:"ɪnˈɡriːdiənt"},
+        {f:"to chop",t:"Hacken / Schneiden",p:"tə tʃɒp"},{f:"to boil",t:"Kochen / Sieden",p:"tə bɔɪl"},
+        {f:"to fry",t:"Braten / Frittieren",p:"tə fraɪ"},{f:"to bake",t:"Backen",p:"tə beɪk"},
+        {f:"to simmer",t:"Köcheln / Schmoren",p:"tə ˈsɪmər"},{f:"to stir",t:"Umrühren",p:"tə stɜːr"},
+        {f:"frying pan",t:"Bratpfanne",p:"ˈfraɪɪŋ pæn"},{f:"pot / saucepan",t:"Kochtopf",p:"pɒt"},
+        {f:"oven",t:"Backofen",p:"ˈʌvən"},{f:"grater",t:"Reibe",p:"ˈɡreɪtər"},
+        {f:"chopping board",t:"Schneidebrett",p:"ˈtʃɒpɪŋ bɔːrd"},
+        {f:"whisk",t:"Schneebesen",p:"wɪsk"},{f:"spicy",t:"Scharf",p:"ˈspaɪsi"},
+        {f:"sweet",t:"Süß",p:"swiːt"},{f:"sour",t:"Sauer",p:"ˈsaʊər"},
+        {f:"bitter",t:"Bitter",p:"ˈbɪtər"},{f:"salty",t:"Salzig",p:"ˈsɔːlti"},
+        {f:"marinade",t:"Marinade",p:"ˌmærɪˈneɪd"},{f:"to season",t:"Würzen",p:"tə ˈsiːzən"},
+        {f:"to taste",t:"Abschmecken / Kosten",p:"tə teɪst"},{f:"sauce",t:"Soße",p:"sɔːs"},
+      ],
+      "Sport & Fitness (extended)": [
+        {f:"gym",t:"Fitnessstudio",p:"dʒɪm"},{f:"workout",t:"Training",p:"ˈwɜːkaʊt"},
+        {f:"coach",t:"Trainer",p:"koʊtʃ"},{f:"competition",t:"Wettkampf",p:"ˌkɒmpɪˈtɪʃən"},
+        {f:"victory",t:"Sieg",p:"ˈvɪktəri"},{f:"defeat",t:"Niederlage",p:"dɪˈfiːt"},
+        {f:"draw / tie",t:"Unentschieden",p:"drɔː"},{f:"score",t:"Spielstand",p:"skɔːr"},
+        {f:"team",t:"Mannschaft",p:"tiːm"},{f:"referee",t:"Schiedsrichter",p:"ˌrɛfəˈriː"},
+        {f:"stadium",t:"Stadion",p:"ˈsteɪdiəm"},{f:"fan / supporter",t:"Fan",p:"fæn"},
+        {f:"champion",t:"Champion",p:"ˈtʃæmpiən"},{f:"record",t:"Rekord",p:"ˈrɛkərd"},
+        {f:"marathon",t:"Marathon",p:"ˈmærəθɒn"},{f:"jump",t:"Sprung",p:"dʒʌmp"},
+        {f:"finish line",t:"Ziellinie",p:"ˈfɪnɪʃ laɪn"},{f:"to warm up",t:"Aufwärmen",p:"tə wɔːrm ʌp"},
+        {f:"to stretch",t:"Dehnen",p:"tə strɛtʃ"},{f:"muscle soreness",t:"Muskelkater",p:"ˈmʌsəl ˈsɔːrnɪs"},
+      ],
+      "Politics & Society": [
+        {f:"democracy",t:"Demokratie",p:"dɪˈmɒkrəsi"},{f:"republic",t:"Republik",p:"rɪˈpʌblɪk"},
+        {f:"election",t:"Wahl",p:"ɪˈlɛkʃən"},{f:"candidate",t:"Kandidat",p:"ˈkændɪdɪt"},
+        {f:"government",t:"Regierung",p:"ˈɡʌvənmənt"},{f:"parliament",t:"Parlament",p:"ˈpɑːrləmənt"},
+        {f:"law",t:"Gesetz",p:"lɔː"},{f:"constitution",t:"Verfassung",p:"ˌkɒnstɪˈtuːʃən"},
+        {f:"human rights",t:"Menschenrechte",p:"ˈhjuːmən raɪts"},{f:"equality",t:"Gleichberechtigung",p:"ɪˈkwɒlɪti"},
+        {f:"society",t:"Gesellschaft",p:"səˈsaɪɪti"},{f:"community",t:"Gemeinschaft",p:"kəˈmjuːnɪti"},
+        {f:"integration",t:"Integration",p:"ˌɪntɪˈɡreɪʃən"},{f:"diversity",t:"Vielfalt",p:"daɪˈvɜːrsɪti"},
+        {f:"discrimination",t:"Diskriminierung",p:"dɪˌskrɪmɪˈneɪʃən"},{f:"protest",t:"Protest",p:"ˈproʊtɛst"},
+        {f:"demonstration",t:"Demonstration",p:"ˌdɛmənˈstreɪʃən"},{f:"freedom of speech",t:"Meinungsfreiheit",p:"ˈfriːdəm əv spiːtʃ"},
+        {f:"solidarity",t:"Solidarität",p:"ˌsɒlɪˈdærɪti"},{f:"civil rights",t:"Bürgerrechte",p:"ˈsɪvəl raɪts"},
+      ],
+      "Science & Research": [
+        {f:"science",t:"Wissenschaft",p:"ˈsaɪəns"},{f:"research",t:"Forschung",p:"rɪˈsɜːrtʃ"},
+        {f:"experiment",t:"Experiment",p:"ɪkˈspɛrɪmənt"},{f:"theory",t:"Theorie",p:"ˈθɪəri"},
+        {f:"hypothesis",t:"Hypothese",p:"haɪˈpɒθɪsɪs"},{f:"evidence",t:"Beweis",p:"ˈɛvɪdəns"},
+        {f:"laboratory",t:"Labor",p:"ˈlæbrətɔːri"},{f:"microscope",t:"Mikroskop",p:"ˈmaɪkrəskoʊp"},
+        {f:"molecule",t:"Molekül",p:"ˈmɒlɪkjuːl"},{f:"atom",t:"Atom",p:"ˈætəm"},
+        {f:"physics",t:"Physik",p:"ˈfɪzɪks"},{f:"chemistry",t:"Chemie",p:"ˈkɛmɪstri"},
+        {f:"biology",t:"Biologie",p:"baɪˈɒlədʒi"},{f:"astronomy",t:"Astronomie",p:"əˈstrɒnəmi"},
+        {f:"evolution",t:"Evolution",p:"ˌɛvəˈluːʃən"},{f:"genetics",t:"Genetik",p:"dʒɪˈnɛtɪks"},
+        {f:"virus",t:"Virus",p:"ˈvaɪrəs"},{f:"bacteria",t:"Bakterien",p:"bækˈtɪəriə"},
+        {f:"energy",t:"Energie",p:"ˈɛnərdʒi"},{f:"gravity",t:"Schwerkraft",p:"ˈɡrævɪti"},
+      ],
+    },
+    es: {
+      "Cocina & Recetas": [
+        {f:"la receta",t:"Rezept",p:"la re-θe-ta"},{f:"el ingrediente",t:"Zutat",p:"el in-gre-djen-te"},
+        {f:"cortar",t:"Schneiden",p:"kor-tar"},{f:"hervir",t:"Kochen / Sieden",p:"er-bir"},
+        {f:"freír",t:"Braten / Frittieren",p:"fre-ir"},{f:"hornear",t:"Backen",p:"or-ne-ar"},
+        {f:"guisar",t:"Schmoren",p:"gi-sar"},{f:"mezclar",t:"Mischen",p:"mes-klar"},
+        {f:"la sartén",t:"Bratpfanne",p:"la sar-ten"},{f:"la olla",t:"Kochtopf",p:"la o-ʎa"},
+        {f:"el horno",t:"Backofen",p:"el or-no"},{f:"el rallador",t:"Reibe",p:"el ra-ʎa-dor"},
+        {f:"la tabla de cortar",t:"Schneidebrett",p:"la ta-bla de kor-tar"},
+        {f:"las varillas",t:"Schneebesen",p:"las ba-ri-ʎas"},{f:"picante",t:"Scharf",p:"pi-kan-te"},
+        {f:"dulce",t:"Süß",p:"dul-θe"},{f:"ácido",t:"Sauer",p:"a-θi-do"},
+        {f:"amargo",t:"Bitter",p:"a-mar-go"},{f:"salado",t:"Salzig",p:"sa-la-do"},
+        {f:"la marinada",t:"Marinade",p:"la ma-ri-na-da"},{f:"sazonar",t:"Würzen",p:"sa-θo-nar"},
+        {f:"probar",t:"Abschmecken",p:"pro-bar"},{f:"la salsa",t:"Soße / Sauce",p:"la sal-sa"},
+      ],
+      "Ciencia & Investigación": [
+        {f:"la ciencia",t:"Wissenschaft",p:"la θjen-θja"},{f:"la investigación",t:"Forschung",p:"la in-bes-ti-ga-θjon"},
+        {f:"el experimento",t:"Experiment",p:"el eks-pe-ri-men-to"},{f:"la teoría",t:"Theorie",p:"la te-o-ri-a"},
+        {f:"la hipótesis",t:"Hypothese",p:"la i-po-te-sis"},{f:"la evidencia",t:"Beweis",p:"la e-bi-den-θja"},
+        {f:"el laboratorio",t:"Labor",p:"el la-bo-ra-to-rjo"},{f:"el microscopio",t:"Mikroskop",p:"el mi-kros-ko-pjo"},
+        {f:"la molécula",t:"Molekül",p:"la mo-le-ku-la"},{f:"el átomo",t:"Atom",p:"el a-to-mo"},
+        {f:"la física",t:"Physik",p:"la fi-si-ka"},{f:"la química",t:"Chemie",p:"la ki-mi-ka"},
+        {f:"la biología",t:"Biologie",p:"la bjo-lo-xi-a"},{f:"la astronomía",t:"Astronomie",p:"la as-tro-no-mi-a"},
+        {f:"la evolución",t:"Evolution",p:"la e-bo-lu-θjon"},{f:"la genética",t:"Genetik",p:"la xe-ne-ti-ka"},
+        {f:"el virus",t:"Virus",p:"el bi-rus"},{f:"la bacteria",t:"Bakterie",p:"la bak-te-rja"},
+        {f:"la energía",t:"Energie",p:"la e-ner-xi-a"},{f:"la gravedad",t:"Schwerkraft",p:"la gra-be-dad"},
+      ],
+      "Política & Sociedad": [
+        {f:"la democracia",t:"Demokratie",p:"la de-mo-kra-θja"},{f:"la república",t:"Republik",p:"la re-pu-bli-ka"},
+        {f:"las elecciones",t:"Wahl",p:"las e-lek-θjo-nes"},{f:"el candidato",t:"Kandidat",p:"el kan-di-da-to"},
+        {f:"el gobierno",t:"Regierung",p:"el go-bjer-no"},{f:"el parlamento",t:"Parlament",p:"el par-la-men-to"},
+        {f:"la ley",t:"Gesetz",p:"la lei"},{f:"la constitución",t:"Verfassung",p:"la kons-ti-tu-θjon"},
+        {f:"los derechos humanos",t:"Menschenrechte",p:"los de-re-tʃos u-ma-nos"},
+        {f:"la igualdad",t:"Gleichberechtigung",p:"la i-gwal-dad"},{f:"la sociedad",t:"Gesellschaft",p:"la so-θje-dad"},
+        {f:"la comunidad",t:"Gemeinschaft",p:"la ko-mu-ni-dad"},{f:"la integración",t:"Integration",p:"la in-te-gra-θjon"},
+        {f:"la diversidad",t:"Vielfalt",p:"la di-ber-si-dad"},{f:"la discriminación",t:"Diskriminierung",p:"la dis-kri-mi-na-θjon"},
+        {f:"la protesta",t:"Protest",p:"la pro-tes-ta"},{f:"la manifestación",t:"Demonstration",p:"la ma-ni-fes-ta-θjon"},
+        {f:"la libertad de expresión",t:"Meinungsfreiheit",p:"la li-ber-tad de eks-pre-sjon"},
+        {f:"la solidaridad",t:"Solidarität",p:"la so-li-da-ri-dad"},{f:"los derechos civiles",t:"Bürgerrechte",p:"los de-re-tʃos θi-bi-les"},
+      ],
+    },
+    it: {
+      "Cucina & Ricette": [
+        {f:"la ricetta",t:"Rezept",p:"la ri-chet-ta"},{f:"l'ingrediente",t:"Zutat",p:"lin-gre-djen-te"},
+        {f:"tagliare",t:"Schneiden",p:"ta-ʎa-re"},{f:"far bollire",t:"Kochen",p:"far bol-li-re"},
+        {f:"friggere",t:"Braten / Frittieren",p:"frid-dʒe-re"},{f:"cuocere al forno",t:"Backen",p:"kwo-tʃe-re al for-no"},
+        {f:"stufare",t:"Schmoren",p:"stu-fa-re"},{f:"mescolare",t:"Mischen",p:"mes-ko-la-re"},
+        {f:"la padella",t:"Bratpfanne",p:"la pa-del-la"},{f:"la pentola",t:"Kochtopf",p:"la pen-to-la"},
+        {f:"il forno",t:"Backofen",p:"il for-no"},{f:"la grattugia",t:"Reibe",p:"la grat-tu-dʒa"},
+        {f:"il tagliere",t:"Schneidebrett",p:"il ta-ʎe-re"},
+        {f:"la frusta",t:"Schneebesen",p:"la frus-ta"},{f:"piccante",t:"Scharf",p:"pik-kan-te"},
+        {f:"dolce",t:"Süß",p:"dol-tʃe"},{f:"acido",t:"Sauer",p:"a-tʃi-do"},
+        {f:"amaro",t:"Bitter",p:"a-ma-ro"},{f:"salato",t:"Salzig",p:"sa-la-to"},
+        {f:"la marinata",t:"Marinade",p:"la ma-ri-na-ta"},{f:"condire",t:"Würzen",p:"kon-di-re"},
+        {f:"assaggiare",t:"Abschmecken",p:"as-sad-dʒa-re"},{f:"il sugo / la salsa",t:"Soße",p:"il su-go"},
+      ],
+      "Scienza & Ricerca": [
+        {f:"la scienza",t:"Wissenschaft",p:"la shjen-tsa"},{f:"la ricerca",t:"Forschung",p:"la ri-cher-ka"},
+        {f:"l'esperimento",t:"Experiment",p:"les-pe-ri-men-to"},{f:"la teoria",t:"Theorie",p:"la te-o-ri-a"},
+        {f:"l'ipotesi",t:"Hypothese",p:"li-po-te-zi"},{f:"la prova / l'evidenza",t:"Beweis",p:"la pro-va"},
+        {f:"il laboratorio",t:"Labor",p:"il la-bo-ra-to-rjo"},{f:"il microscopio",t:"Mikroskop",p:"il mi-kros-ko-pjo"},
+        {f:"la molecola",t:"Molekül",p:"la mo-le-ko-la"},{f:"l'atomo",t:"Atom",p:"la-to-mo"},
+        {f:"la fisica",t:"Physik",p:"la fi-zi-ka"},{f:"la chimica",t:"Chemie",p:"la ki-mi-ka"},
+        {f:"la biologia",t:"Biologie",p:"la bjo-lo-dʒa"},{f:"l'astronomia",t:"Astronomie",p:"las-tro-no-mi-a"},
+        {f:"l'evoluzione",t:"Evolution",p:"le-vo-lu-tsjo-ne"},{f:"la genetica",t:"Genetik",p:"la dʒe-ne-ti-ka"},
+        {f:"il virus",t:"Virus",p:"il vi-rus"},{f:"il batterio",t:"Bakterie",p:"il bat-te-rjo"},
+        {f:"l'energia",t:"Energie",p:"le-ner-dʒa"},{f:"la gravità",t:"Schwerkraft",p:"la gra-vi-ta"},
+      ],
+      "Politica & Società": [
+        {f:"la democrazia",t:"Demokratie",p:"la de-mo-kra-tsja"},{f:"la repubblica",t:"Republik",p:"la re-pub-bli-ka"},
+        {f:"le elezioni",t:"Wahl",p:"le e-le-tsjo-ni"},{f:"il candidato",t:"Kandidat",p:"il kan-di-da-to"},
+        {f:"il governo",t:"Regierung",p:"il go-ver-no"},{f:"il parlamento",t:"Parlament",p:"il par-la-men-to"},
+        {f:"la legge",t:"Gesetz",p:"la led-dʒe"},{f:"la costituzione",t:"Verfassung",p:"la kos-ti-tu-tsjo-ne"},
+        {f:"i diritti umani",t:"Menschenrechte",p:"i di-rit-ti u-ma-ni"},
+        {f:"l'uguaglianza",t:"Gleichberechtigung",p:"lu-gwa-ʎan-tsa"},{f:"la società",t:"Gesellschaft",p:"la so-tʃe-ta"},
+        {f:"la comunità",t:"Gemeinschaft",p:"la ko-mu-ni-ta"},{f:"l'integrazione",t:"Integration",p:"lin-te-gra-tsjo-ne"},
+        {f:"la diversità",t:"Vielfalt",p:"la di-ver-si-ta"},{f:"la discriminazione",t:"Diskriminierung",p:"la dis-kri-mi-na-tsjo-ne"},
+        {f:"la protesta",t:"Protest",p:"la pro-tes-ta"},{f:"la manifestazione",t:"Demonstration",p:"la ma-ni-fes-ta-tsjo-ne"},
+        {f:"la libertà di parola",t:"Meinungsfreiheit",p:"la li-ber-ta di pa-ro-la"},
+        {f:"la solidarietà",t:"Solidarität",p:"la so-li-da-rje-ta"},{f:"i diritti civili",t:"Bürgerrechte",p:"i di-rit-ti tʃi-vi-li"},
+      ],
+    },
+    tr: {
+      "Yemek & Tarifler": [
+        {f:"tarif",t:"Rezept",p:"ta-rif"},{f:"malzeme",t:"Zutat",p:"mal-ze-me"},
+        {f:"doğramak",t:"Schneiden / Hacken",p:"doğ-ra-mak"},{f:"kaynatmak",t:"Kochen / Sieden",p:"kay-nat-mak"},
+        {f:"kızartmak",t:"Braten / Frittieren",p:"kı-zart-mak"},{f:"fırında pişirmek",t:"Im Ofen backen",p:"fı-rın-da pi-şir-mek"},
+        {f:"haşlamak",t:"Dünsten / Köcheln",p:"haş-la-mak"},{f:"karıştırmak",t:"Umrühren",p:"ka-rış-tır-mak"},
+        {f:"tava",t:"Bratpfanne",p:"ta-va"},{f:"tencere",t:"Kochtopf",p:"ten-ce-re"},
+        {f:"fırın",t:"Backofen",p:"fı-rın"},{f:"rende",t:"Reibe",p:"ren-de"},
+        {f:"kesme tahtası",t:"Schneidebrett",p:"kes-me tah-ta-sı"},
+        {f:"çırpıcı",t:"Schneebesen",p:"çır-pı-cı"},{f:"acı / baharatlı",t:"Scharf",p:"a-cı"},
+        {f:"tatlı",t:"Süß",p:"tat-lı"},{f:"ekşi",t:"Sauer",p:"ek-şi"},
+        {f:"acı / bitter",t:"Bitter",p:"a-cı"},{f:"tuzlu",t:"Salzig",p:"tuz-lu"},
+        {f:"marine sosu",t:"Marinade",p:"ma-ri-ne so-su"},{f:"baharatlandırmak",t:"Würzen",p:"ba-ha-rat-lan-dır-mak"},
+        {f:"tatmak",t:"Abschmecken",p:"tat-mak"},{f:"sos",t:"Soße",p:"sos"},
+      ],
+      "Bilim & Araştırma": [
+        {f:"bilim",t:"Wissenschaft",p:"bi-lim"},{f:"araştırma",t:"Forschung",p:"a-raş-tır-ma"},
+        {f:"deney",t:"Experiment",p:"de-ney"},{f:"teori",t:"Theorie",p:"te-o-ri"},
+        {f:"hipotez",t:"Hypothese",p:"hi-po-tez"},{f:"kanıt",t:"Beweis",p:"ka-nıt"},
+        {f:"laboratuvar",t:"Labor",p:"la-bo-ra-tu-var"},{f:"mikroskop",t:"Mikroskop",p:"mik-ros-kop"},
+        {f:"molekül",t:"Molekül",p:"mo-le-kül"},{f:"atom",t:"Atom",p:"a-tom"},
+        {f:"fizik",t:"Physik",p:"fi-zik"},{f:"kimya",t:"Chemie",p:"kim-ya"},
+        {f:"biyoloji",t:"Biologie",p:"bi-yo-lo-ji"},{f:"astronomi",t:"Astronomie",p:"as-tro-no-mi"},
+        {f:"evrim",t:"Evolution",p:"ev-rim"},{f:"genetik",t:"Genetik",p:"ge-ne-tik"},
+        {f:"virüs",t:"Virus",p:"vi-rüs"},{f:"bakteri",t:"Bakterie",p:"bak-te-ri"},
+        {f:"enerji",t:"Energie",p:"e-ner-ji"},{f:"yerçekimi",t:"Schwerkraft",p:"yer-çe-ki-mi"},
+      ],
+      "Siyaset & Toplum": [
+        {f:"demokrasi",t:"Demokratie",p:"de-mok-ra-si"},{f:"cumhuriyet",t:"Republik",p:"cum-hu-ri-yet"},
+        {f:"seçim",t:"Wahl",p:"se-çim"},{f:"aday",t:"Kandidat",p:"a-day"},
+        {f:"hükümet",t:"Regierung",p:"hü-kü-met"},{f:"parlamento",t:"Parlament",p:"par-la-men-to"},
+        {f:"yasa / kanun",t:"Gesetz",p:"ya-sa"},{f:"anayasa",t:"Verfassung",p:"a-na-ya-sa"},
+        {f:"insan hakları",t:"Menschenrechte",p:"in-san hak-la-rı"},
+        {f:"eşitlik",t:"Gleichberechtigung",p:"e-şit-lik"},{f:"toplum",t:"Gesellschaft",p:"top-lum"},
+        {f:"topluluk",t:"Gemeinschaft",p:"top-lu-luk"},{f:"entegrasyon",t:"Integration",p:"en-teg-ras-yon"},
+        {f:"çeşitlilik",t:"Vielfalt",p:"çe-şit-li-lik"},{f:"ayrımcılık",t:"Diskriminierung",p:"ay-rım-cı-lık"},
+        {f:"protesto",t:"Protest",p:"pro-tes-to"},{f:"gösteri",t:"Demonstration",p:"gös-te-ri"},
+        {f:"ifade özgürlüğü",t:"Meinungsfreiheit",p:"i-fa-de öz-gür-lü-ğü"},
+        {f:"dayanışma",t:"Solidarität",p:"da-ya-nış-ma"},{f:"sivil haklar",t:"Bürgerrechte",p:"si-vil hak-lar"},
+      ],
+    },
+    sq: {
+      "Gatimi & Receta": [
+        {f:"receta",t:"Rezept",p:"re-ce-ta"},{f:"përbërësi",t:"Zutat",p:"pər-bə-rə-si"},
+        {f:"prerje",t:"Schneiden",p:"pre-rje"},{f:"zierje",t:"Kochen / Sieden",p:"zie-rje"},
+        {f:"skuqje",t:"Braten / Frittieren",p:"skuq-je"},{f:"pjekje në furrë",t:"Im Ofen backen",p:"pjek-je nə fur-rə"},
+        {f:"zierje e ngadaltë",t:"Köcheln",p:"zie-rje e nga-dal-tə"},{f:"përzierje",t:"Mischen",p:"pər-zie-rje"},
+        {f:"tiganin",t:"Bratpfanne",p:"ti-ga-nin"},{f:"tenxheren",t:"Kochtopf",p:"ten-xhe-ren"},
+        {f:"furra",t:"Backofen",p:"fur-ra"},{f:"renden",t:"Reibe",p:"ren-den"},
+        {f:"dërrasa e prerjes",t:"Schneidebrett",p:"dər-ra-sa e pre-rjes"},
+        {f:"rrahësin",t:"Schneebesen",p:"rra-hə-sin"},{f:"pikant",t:"Scharf",p:"pi-kant"},
+        {f:"i ëmbël",t:"Süß",p:"i əm-bəl"},{f:"i thartë",t:"Sauer",p:"i thar-tə"},
+        {f:"i hidhur",t:"Bitter",p:"i hi-dhur"},{f:"i kripur",t:"Salzig",p:"i kri-pur"},
+        {f:"marinada",t:"Marinade",p:"ma-ri-na-da"},{f:"erëzim",t:"Würzen",p:"e-rə-zim"},
+        {f:"shijim",t:"Abschmecken",p:"shi-jim"},{f:"salca",t:"Soße",p:"sal-ca"},
+      ],
+      "Shkenca & Kërkime": [
+        {f:"shkenca",t:"Wissenschaft",p:"shken-ca"},{f:"kërkimi",t:"Forschung",p:"kər-ki-mi"},
+        {f:"eksperimenti",t:"Experiment",p:"eks-pe-ri-men-ti"},{f:"teoria",t:"Theorie",p:"te-o-ria"},
+        {f:"hipoteza",t:"Hypothese",p:"hi-po-te-za"},{f:"dëshmia",t:"Beweis",p:"dəsh-mia"},
+        {f:"laboratori",t:"Labor",p:"la-bo-ra-to-ri"},{f:"mikroskopi",t:"Mikroskop",p:"mik-ros-ko-pi"},
+        {f:"molekula",t:"Molekül",p:"mo-le-ku-la"},{f:"atomi",t:"Atom",p:"a-to-mi"},
+        {f:"fizika",t:"Physik",p:"fi-zi-ka"},{f:"kimia",t:"Chemie",p:"ki-mia"},
+        {f:"biologjia",t:"Biologie",p:"bio-lo-gjia"},{f:"astronomia",t:"Astronomie",p:"as-tro-no-mia"},
+        {f:"evolucioni",t:"Evolution",p:"e-vo-lu-cio-ni"},{f:"gjenetika",t:"Genetik",p:"gje-ne-ti-ka"},
+        {f:"virusi",t:"Virus",p:"vi-ru-si"},{f:"bakteria",t:"Bakterie",p:"bak-te-ria"},
+        {f:"energjia",t:"Energie",p:"e-nerg-jia"},{f:"graviteti",t:"Schwerkraft",p:"gra-vi-te-ti"},
+      ],
+      "Politikë & Shoqëri": [
+        {f:"demokracia",t:"Demokratie",p:"de-mo-kra-cia"},{f:"republika",t:"Republik",p:"re-pub-li-ka"},
+        {f:"zgjedhjet",t:"Wahl",p:"zgje-dhjet"},{f:"kandidati",t:"Kandidat",p:"kan-di-da-ti"},
+        {f:"qeveria",t:"Regierung",p:"qe-ve-ria"},{f:"parlamenti",t:"Parlament",p:"par-la-men-ti"},
+        {f:"ligji",t:"Gesetz",p:"li-gji"},{f:"kushtetuta",t:"Verfassung",p:"kush-te-tu-ta"},
+        {f:"të drejtat e njeriut",t:"Menschenrechte",p:"tə dreyj-tat e nje-riut"},
+        {f:"barazia",t:"Gleichberechtigung",p:"ba-ra-zia"},{f:"shoqëria",t:"Gesellschaft",p:"shoqə-ria"},
+        {f:"komuniteti",t:"Gemeinschaft",p:"ko-mu-ni-te-ti"},{f:"integrimi",t:"Integration",p:"in-teg-ri-mi"},
+        {f:"diversiteti",t:"Vielfalt",p:"di-ver-si-te-ti"},{f:"diskriminimi",t:"Diskriminierung",p:"dis-kri-mi-ni-mi"},
+        {f:"protesta",t:"Protest",p:"pro-tes-ta"},{f:"manifestimi",t:"Demonstration",p:"ma-ni-fes-ti-mi"},
+        {f:"liria e shprehjes",t:"Meinungsfreiheit",p:"li-ria e shpre-hjes"},
+        {f:"solidariteti",t:"Solidarität",p:"so-li-da-ri-te-ti"},{f:"të drejtat civile",t:"Bürgerrechte",p:"tə dreyj-tat ci-vi-le"},
+      ],
+    },
+    da: {
+      "Madlavning & Opskrifter": [
+        {f:"opskriften",t:"Rezept",p:"op-skrif-ten"},{f:"ingrediensen",t:"Zutat",p:"in-gre-djen-sen"},
+        {f:"at hakke / skære",t:"Schneiden / Hacken",p:"a hak-ke"},{f:"at koge",t:"Kochen / Sieden",p:"a ko-e"},
+        {f:"at stege",t:"Braten",p:"a stai-e"},{f:"at bage",t:"Backen",p:"a ba-e"},
+        {f:"at simre",t:"Köcheln",p:"a sim-re"},{f:"at røre",t:"Umrühren",p:"a rö-re"},
+        {f:"panden",t:"Bratpfanne",p:"pa-nen"},{f:"gryden",t:"Kochtopf",p:"gry-den"},
+        {f:"ovnen",t:"Backofen",p:"ov-nen"},{f:"rivejernet",t:"Reibe",p:"ri-ve-yer-net"},
+        {f:"skærebrættet",t:"Schneidebrett",p:"skere-bret-et"},
+        {f:"piskerisen",t:"Schneebesen",p:"pis-ke-ri-sen"},{f:"stærk / krydret",t:"Scharf",p:"sterk"},
+        {f:"sød",t:"Süß",p:"söd"},{f:"sur",t:"Sauer",p:"sur"},
+        {f:"bitter",t:"Bitter",p:"bi-ter"},{f:"salt",t:"Salzig",p:"salt"},
+        {f:"marinaden",t:"Marinade",p:"ma-ri-na-den"},{f:"at krydre",t:"Würzen",p:"a kry-dre"},
+        {f:"at smage til",t:"Abschmecken",p:"a sma-e til"},{f:"saucen",t:"Soße",p:"so-sen"},
+      ],
+      "Videnskab & Forskning": [
+        {f:"videnskaben",t:"Wissenschaft",p:"vi-den-ska-ben"},{f:"forskningen",t:"Forschung",p:"forsk-ning-en"},
+        {f:"eksperimentet",t:"Experiment",p:"eks-pe-ri-men-tet"},{f:"teorien",t:"Theorie",p:"te-o-rien"},
+        {f:"hypotesen",t:"Hypothese",p:"hy-po-te-sen"},{f:"beviset",t:"Beweis",p:"be-vi-set"},
+        {f:"laboratoriet",t:"Labor",p:"la-bo-ra-to-ri-et"},{f:"mikroskopet",t:"Mikroskop",p:"mi-kro-sko-pet"},
+        {f:"molekylet",t:"Molekül",p:"mo-le-kü-let"},{f:"atomet",t:"Atom",p:"a-to-met"},
+        {f:"fysikken",t:"Physik",p:"fy-si-ken"},{f:"kemien",t:"Chemie",p:"ke-mien"},
+        {f:"biologien",t:"Biologie",p:"bio-lo-gien"},{f:"astronomien",t:"Astronomie",p:"as-tro-no-mien"},
+        {f:"evolutionen",t:"Evolution",p:"e-vo-lu-tio-nen"},{f:"genetikken",t:"Genetik",p:"ge-ne-ti-ken"},
+        {f:"virussen",t:"Virus",p:"vi-ru-sen"},{f:"bakterien",t:"Bakterie",p:"bak-te-rien"},
+        {f:"energien",t:"Energie",p:"e-ner-gien"},{f:"tyngdekraften",t:"Schwerkraft",p:"tyng-de-kraf-ten"},
+      ],
+      "Politik & Samfund": [
+        {f:"demokratiet",t:"Demokratie",p:"de-mo-kra-ti-et"},{f:"republikken",t:"Republik",p:"re-pub-li-ken"},
+        {f:"valget",t:"Wahl",p:"val-get"},{f:"kandidaten",t:"Kandidat",p:"kan-di-da-ten"},
+        {f:"regeringen",t:"Regierung",p:"re-ge-ring-en"},{f:"parlamentet",t:"Parlament",p:"par-la-men-tet"},
+        {f:"loven",t:"Gesetz",p:"lo-ven"},{f:"grundloven",t:"Verfassung",p:"grund-lo-ven"},
+        {f:"menneskerettigheder",t:"Menschenrechte",p:"men-neske-ret-tig-he-der"},
+        {f:"ligestilling",t:"Gleichberechtigung",p:"li-ge-stil-ing"},{f:"samfundet",t:"Gesellschaft",p:"sam-fun-det"},
+        {f:"fællesskabet",t:"Gemeinschaft",p:"fel-les-ska-bet"},{f:"integrationen",t:"Integration",p:"in-te-gra-sjo-nen"},
+        {f:"mangfoldighed",t:"Vielfalt",p:"mang-fol-dig-hed"},{f:"diskrimination",t:"Diskriminierung",p:"dis-kri-mi-na-sjon"},
+        {f:"protesten",t:"Protest",p:"pro-tes-ten"},{f:"demonstrationen",t:"Demonstration",p:"de-mons-tra-sjo-nen"},
+        {f:"ytringsfrihed",t:"Meinungsfreiheit",p:"yt-rings-fri-hed"},
+        {f:"solidariteten",t:"Solidarität",p:"so-li-da-ri-te-ten"},{f:"borgerrettigheder",t:"Bürgerrechte",p:"bor-ger-ret-tig-he-der"},
+      ],
+    },
+    th: {
+      "การทำอาหาร": [
+        {f:"สูตรอาหาร",t:"Rezept",p:"sut-a-han"},{f:"ส่วนผสม",t:"Zutat",p:"suan-pha-som"},
+        {f:"สับ / หั่น",t:"Hacken / Schneiden",p:"sap / han"},{f:"ต้ม",t:"Kochen / Sieden",p:"tom"},
+        {f:"ทอด",t:"Braten / Frittieren",p:"thot"},{f:"อบ",t:"Backen",p:"op"},
+        {f:"ตุ๋น",t:"Schmoren / Köcheln",p:"tun"},{f:"คน",t:"Umrühren",p:"khon"},
+        {f:"กระทะ",t:"Bratpfanne",p:"kra-tha"},{f:"หม้อ",t:"Kochtopf",p:"mo"},
+        {f:"เตาอบ",t:"Backofen",p:"tao-op"},{f:"ที่ขูด",t:"Reibe",p:"thi-khut"},
+        {f:"เขียง",t:"Schneidebrett",p:"khiang"},{f:"ที่ตีไข่",t:"Schneebesen",p:"thi-ti-khai"},
+        {f:"เผ็ด",t:"Scharf",p:"phet"},{f:"หวาน",t:"Süß",p:"wan"},
+        {f:"เปรี้ยว",t:"Sauer",p:"priao"},{f:"ขม",t:"Bitter",p:"khom"},
+        {f:"เค็ม",t:"Salzig",p:"khem"},{f:"น้ำดอง",t:"Marinade",p:"nam-dong"},
+        {f:"ใส่เครื่องเทศ",t:"Würzen",p:"sai-khrueang-thet"},{f:"ชิม",t:"Abschmecken / Kosten",p:"chim"},
+        {f:"ซอส",t:"Soße",p:"sot"},{f:"ปรุงรส",t:"Würzen / Abschmecken",p:"prung-rot"},
+      ],
+      "วิทยาศาสตร์": [
+        {f:"วิทยาศาสตร์",t:"Wissenschaft",p:"wit-tha-ya-sat"},{f:"การวิจัย",t:"Forschung",p:"kan-wi-chai"},
+        {f:"การทดลอง",t:"Experiment",p:"kan-thot-long"},{f:"ทฤษฎี",t:"Theorie",p:"thrit-sa-di"},
+        {f:"สมมติฐาน",t:"Hypothese",p:"som-mot-ti-than"},{f:"หลักฐาน",t:"Beweis",p:"lak-than"},
+        {f:"ห้องปฏิบัติการ",t:"Labor",p:"hong-pa-ti-bat-ti-kan"},{f:"กล้องจุลทรรศน์",t:"Mikroskop",p:"klong-chun-la-tat"},
+        {f:"โมเลกุล",t:"Molekül",p:"mo-le-kun"},{f:"อะตอม",t:"Atom",p:"a-tom"},
+        {f:"ฟิสิกส์",t:"Physik",p:"fi-sit"},{f:"เคมี",t:"Chemie",p:"khe-mi"},
+        {f:"ชีววิทยา",t:"Biologie",p:"chi-wo-wit-tha-ya"},{f:"ดาราศาสตร์",t:"Astronomie",p:"da-ra-sat"},
+        {f:"วิวัฒนาการ",t:"Evolution",p:"wi-wat-tha-na-kan"},{f:"พันธุศาสตร์",t:"Genetik",p:"phan-thu-sat"},
+        {f:"ไวรัส",t:"Virus",p:"wai-rat"},{f:"แบคทีเรีย",t:"Bakterie",p:"baek-thi-ria"},
+        {f:"พลังงาน",t:"Energie",p:"phalang-ngan"},{f:"แรงโน้มถ่วง",t:"Schwerkraft",p:"raeng-nom-thuang"},
+      ],
+      "การเมืองและสังคม": [
+        {f:"ประชาธิปไตย",t:"Demokratie",p:"pra-cha-thi-pa-tai"},{f:"สาธารณรัฐ",t:"Republik",p:"sa-tha-ra-na-rat"},
+        {f:"การเลือกตั้ง",t:"Wahl",p:"kan-lueaktang"},{f:"ผู้สมัคร",t:"Kandidat",p:"phu-sa-mak"},
+        {f:"รัฐบาล",t:"Regierung",p:"rat-tha-ban"},{f:"รัฐสภา",t:"Parlament",p:"rat-tha-sa-pha"},
+        {f:"กฎหมาย",t:"Gesetz",p:"kot-mai"},{f:"รัฐธรรมนูญ",t:"Verfassung",p:"rat-tha-tham-ma-nun"},
+        {f:"สิทธิมนุษยชน",t:"Menschenrechte",p:"sit-ma-nut-sa-ya-chon"},
+        {f:"ความเท่าเทียม",t:"Gleichberechtigung",p:"khwam-thao-thiam"},{f:"สังคม",t:"Gesellschaft",p:"sang-khom"},
+        {f:"ชุมชน",t:"Gemeinschaft",p:"chum-chon"},{f:"การบูรณาการ",t:"Integration",p:"kan-bu-ra-na-kan"},
+        {f:"ความหลากหลาย",t:"Vielfalt",p:"khwam-lak-lai"},{f:"การเลือกปฏิบัติ",t:"Diskriminierung",p:"kan-lueaktang-pa-ti-bat"},
+        {f:"การประท้วง",t:"Protest",p:"kan-pra-thuang"},{f:"การเดินขบวน",t:"Demonstration",p:"kan-doen-kha-buan"},
+        {f:"เสรีภาพในการแสดงออก",t:"Meinungsfreiheit",p:"se-ri-phap-nai-kan-sa-daeng-ok"},
+        {f:"ความสามัคคี",t:"Solidarität",p:"khwam-sa-mak-khi"},{f:"สิทธิพลเมือง",t:"Bürgerrechte",p:"sit-phon-la-mueang"},
+      ],
+    },
+  };
+
+  // Merge EXT3 into VOCAB
+  Object.keys(EXT3).forEach(function(lang) {
+    if (!VOCAB[lang]) VOCAB[lang] = {};
+    Object.keys(EXT3[lang]).forEach(function(topic) {
+      if (VOCAB[lang][topic]) {
+        VOCAB[lang][topic] = VOCAB[lang][topic].concat(EXT3[lang][topic]);
+      } else {
+        VOCAB[lang][topic] = EXT3[lang][topic];
+      }
+    });
+  });
+})();
+
 const LANG_NAMES = { sq:"Albanisch", da:"Dänisch", de:"Deutsch", en:"Englisch", fr:"Französisch", it:"Italienisch", ro:"Rumänisch", ru:"Russisch", sv:"Schwedisch", es:"Spanisch", th:"Thailändisch", tr:"Türkisch" };
 const LANG_VOICE = { sq:"sq-AL", da:"da-DK", de:"de-DE", en:"en-GB", fr:"fr-FR", it:"it-IT", ro:"ro-RO", ru:"ru-RU", sv:"sv-SE", es:"es-ES", th:"th-TH", tr:"tr-TR" };
 const LANG_EMOJI = { sq:"🇦🇱", da:"🇩🇰", de:"🇩🇪", en:"🇬🇧", fr:"🇫🇷", it:"🇮🇹", ro:"🇷🇴", ru:"🇷🇺", sv:"🇸🇪", es:"🇪🇸", th:"🇹🇭", tr:"🇹🇷" };
@@ -4381,21 +5045,25 @@ const LANG_EMOJI = { sq:"🇦🇱", da:"🇩🇰", de:"🇩🇪", en:"🇬🇧",
 // UI LANGUAGE SYSTEM
 // ============================================================
 const UI_LANGS = {
-  de:{code:'de',label:'🇩🇪 Deutsch'}, en:{code:'en',label:'🇬🇧 English'},
-  ru:{code:'ru',label:'🇷🇺 Русский'}, it:{code:'it',label:'🇮🇹 Italiano'},
-  es:{code:'es',label:'🇪🇸 Español'}, tr:{code:'tr',label:'🇹🇷 Türkçe'},
-  sq:{code:'sq',label:'🇦🇱 Shqip'},   th:{code:'th',label:'🇹🇭 ภาษาไทย'},
-  da:{code:'da',label:'🇩🇰 Dansk'},
+  sq:{code:'sq',label:'🇦🇱 Shqip'},       da:{code:'da',label:'🇩🇰 Dansk'},
+  de:{code:'de',label:'🇩🇪 Deutsch'},      en:{code:'en',label:'🇬🇧 English'},
+  fr:{code:'fr',label:'🇫🇷 Français'},     it:{code:'it',label:'🇮🇹 Italiano'},
+  ro:{code:'ro',label:'🇷🇴 Română'},       ru:{code:'ru',label:'🇷🇺 Русский'},
+  sv:{code:'sv',label:'🇸🇪 Svenska'},      es:{code:'es',label:'🇪🇸 Español'},
+  th:{code:'th',label:'🇹🇭 ภาษาไทย'},    tr:{code:'tr',label:'🇹🇷 Türkçe'},
 };
 const UI_STRINGS = {
-  de:{ nav_home:'Start',nav_vocab:'Vokabeln',nav_quiz:'Quiz',nav_free:'Freies Lernen',nav_gen:'KI-Generator',nav_myvocab:'Meine Vokabeln',nav_translate:'Übersetzer',nav_ai:'KI-Assistent',nav_srs:'🧠 SRS',nav_write:'✍ Schreiben',nav_stats:'📊 Statistiken',nav_badges:'🏆 Abzeichen',nav_path:'Lernpfad',welcome_back:'Willkommen zurück',learning:'Du lernst',change_lang:'🌍 Sprache wechseln',which_lang:'Welche Sprache möchtest du lernen?',choose_lang:'Wähle deine Lernsprache',stat_learned:'Gelernt',stat_streak:'Streak',stat_correct:'% Korrekt',stat_total:'Quiz Total',vocab_title:'Vokabeltraining',quiz_title:'Quiz',free_title:'Freies Lernen',gen_title:'KI-Vokabel-Generator',myvocab_title:'Meine Vokabeln',translate_title:'Übersetzer',ai_title:'KI-Sprachassistent',reveal:'Klicken zum Aufdecken',again:'✗ Nochmal',listen:'🔊 Anhören',skip:'→ Überspringen',knew:'✓ Gewusst',translate_btn:'Übersetzen',speak_out:'🔊 Vorlesen',copy:'⧉ Kopieren',input:'EINGABE',output:'AUSGABE',send:'Senden',new_quiz:'🔄 Neu starten',next:'Weiter →',correct:'✓ Richtig!',wrong:'✗ Falsch. Richtig:',enter_topic:'Thema eingeben',generate:'✨ Generieren',generating:'KI generiert Vokabeln...',save_all:'⭐ Alle speichern',to_training:'📚 Zum Training',add_word:'➕ Eigenes Wort hinzufügen',foreign_word:'FREMDWORT',translation_lbl:'DEUTSCH',phonetic:'AUSSPRACHE (optional)',add_btn:'+ Hinzufügen',train_mine:'📚 Meine Vokabeln trainieren',delete_all:'🗑 Alle löschen',no_vocab:'Noch keine eigenen Vokabeln. Füge Wörter hinzu oder generiere sie mit dem KI-Generator.',settings:'⚙ Einstellungen',save:'Speichern',delete:'Löschen',export:'⬇ Exportieren',reset:'🗑 Zurücksetzen',ai_welcome:'Hallo! Ich bin dein KI-Sprachassistent. Wähle eine Lernsprache und einen Modus, dann können wir loslegen!',mode_conv:'💬 Konversation',mode_grammar:'📝 Grammatik',mode_pron:'🎤 Aussprache',mode_corr:'✏️ Korrektur',quick_grammar:'📖 Grammatiktipp',quick_phrases:'💡 Sätze des Tages',quick_talk:'🗣 Gespräch starten',hc_vocab_desc:'Lerne neue Wörter mit Karteikarten und Sprachausgabe',hc_quiz_desc:'Teste dein Wissen mit Multiple-Choice-Fragen',hc_free_desc:'Wähle ein Thema und stöbere durch Vokabeln',hc_translate_desc:'Übersetze Begriffe und Sätze sofort',hc_ai_desc:'Übe Gespräche mit KI, Mikrofon & Sprachausgabe',hc_gen_desc:'Thema eingeben – KI generiert sofort 20 Vokabeln',hc_myvocab_desc:'Eigene Wörter speichern und gezielt trainieren',myvocab_desc:'Eigene Wörter hinzufügen, gespeicherte KI-Vokabeln verwalten und trainieren',gen_desc:'Gib ein Thema ein – die KI generiert passende Vokabeln für deine Lernsprache',footer_note:'Dein Fortschritt wird lokal gespeichert',chat_placeholder:'Nachricht eingeben oder 🎤 drücken...',},
-  en:{ nav_home:'Home',nav_vocab:'Vocabulary',nav_quiz:'Quiz',nav_free:'Free Learning',nav_gen:'AI Generator',nav_myvocab:'My Words',nav_translate:'Translator',nav_ai:'AI Assistant',welcome_back:'Welcome back',learning:'You are learning',change_lang:'🌍 Change language',which_lang:'Which language do you want to learn?',choose_lang:'Choose your learning language',stat_learned:'Learned',stat_streak:'Streak',stat_correct:'% Correct',stat_total:'Quiz Total',vocab_title:'Vocabulary Training',quiz_title:'Quiz',free_title:'Free Learning',gen_title:'✨ AI Vocabulary Generator',myvocab_title:'⭐ My Vocabulary',translate_title:'Translator',ai_title:'AI Language Assistant',reveal:'Tap to reveal',again:'✗ Again',listen:'🔊 Listen',skip:'→ Skip',knew:'✓ Got it',translate_btn:'Translate',speak_out:'🔊 Speak',copy:'⧉ Copy',input:'INPUT',output:'OUTPUT',send:'Send',new_quiz:'🔄 Restart',next:'Next →',correct:'✓ Correct!',wrong:'✗ Wrong. Correct:',enter_topic:'Enter topic',generate:'✨ Generate',generating:'AI is generating...',save_all:'⭐ Save all',to_training:'📚 To Training',add_word:'➕ Add custom word',foreign_word:'FOREIGN WORD',translation_lbl:'GERMAN',phonetic:'PRONUNCIATION (optional)',add_btn:'+ Add',train_mine:'📚 Train my vocabulary',delete_all:'🗑 Delete all',no_vocab:'No custom vocabulary yet. Add words or generate them with the AI Generator.',settings:'⚙ Settings',save:'Save',delete:'Delete',export:'⬇ Export',reset:'🗑 Reset',ai_welcome:'Hello! I am your AI language assistant. Choose a learning language and a mode to get started!',mode_conv:'💬 Conversation',mode_grammar:'📝 Grammar',mode_pron:'🎤 Pronunciation',mode_corr:'✏️ Correction',quick_grammar:'📖 Grammar tip',quick_phrases:'💡 Phrases of the day',quick_talk:'🗣 Start conversation',hc_vocab_desc:'Learn new words with flashcards and audio',hc_quiz_desc:'Test your knowledge with multiple choice questions',hc_free_desc:'Choose a topic and browse vocabulary',hc_translate_desc:'Translate words and sentences instantly',hc_ai_desc:'Practice conversations with AI and microphone',hc_gen_desc:'Enter a topic – AI generates 20 words instantly',hc_myvocab_desc:'Save custom words and train them',myvocab_desc:'Add words, manage AI vocabulary and train',gen_desc:'Enter a topic – the AI generates matching vocabulary',footer_note:'Your progress is saved locally',chat_placeholder:'Type a message or press 🎤...',},
-  ru:{ nav_home:'Главная',nav_vocab:'Словарь',nav_quiz:'Тест',nav_free:'Свободное обучение',nav_gen:'ИИ-Генератор',nav_myvocab:'Мои слова',nav_translate:'Переводчик',nav_ai:'ИИ-Ассистент',welcome_back:'С возвращением',learning:'Вы изучаете',change_lang:'🌍 Сменить язык',which_lang:'Какой язык вы хотите учить?',choose_lang:'Выберите язык',stat_learned:'Изучено',stat_streak:'Серия',stat_correct:'% Правильных',stat_total:'Всего тестов',vocab_title:'Тренировка слов',quiz_title:'Тест',free_title:'Свободное обучение',gen_title:'✨ ИИ-Генератор словаря',myvocab_title:'⭐ Мои слова',translate_title:'Переводчик',ai_title:'ИИ-Языковой ассистент',reveal:'Нажмите, чтобы открыть',again:'✗ Ещё раз',listen:'🔊 Слушать',skip:'→ Пропустить',knew:'✓ Знал',translate_btn:'Перевести',speak_out:'🔊 Озвучить',copy:'⧉ Копировать',input:'ВВОД',output:'ВЫВОД',send:'Отправить',new_quiz:'🔄 Заново',next:'Далее →',correct:'✓ Правильно!',wrong:'✗ Неверно. Правильно:',enter_topic:'Введите тему',generate:'✨ Генерировать',generating:'ИИ генерирует...',save_all:'⭐ Сохранить все',to_training:'📚 К тренировке',add_word:'➕ Добавить слово',foreign_word:'ИНОСТРАННОЕ СЛОВО',translation_lbl:'НЕМЕЦКИЙ',phonetic:'ПРОИЗНОШЕНИЕ (необязательно)',add_btn:'+ Добавить',train_mine:'📚 Тренировать мои слова',delete_all:'🗑 Удалить все',no_vocab:'Пока нет своих слов.',settings:'⚙ Настройки',save:'Сохранить',delete:'Удалить',export:'⬇ Экспорт',reset:'🗑 Сбросить',ai_welcome:'Привет! Я ваш ИИ-языковой ассистент. Выберите язык и режим для начала!',mode_conv:'💬 Разговор',mode_grammar:'📝 Грамматика',mode_pron:'🎤 Произношение',mode_corr:'✏️ Коррекция',quick_grammar:'📖 Совет по грамматике',quick_phrases:'💡 Фразы дня',quick_talk:'🗣 Начать разговор',hc_vocab_desc:'Учите новые слова с карточками и аудио',hc_quiz_desc:'Проверьте знания с тестами',hc_free_desc:'Выберите тему и просматривайте слова',hc_translate_desc:'Переводите слова и предложения мгновенно',hc_ai_desc:'Практикуйте разговор с ИИ и микрофоном',hc_gen_desc:'Введите тему – ИИ мгновенно создаёт 20 слов',hc_myvocab_desc:'Сохраняйте слова и тренируйте их',myvocab_desc:'Добавляйте слова, управляйте словарём ИИ и тренируйтесь',gen_desc:'Введите тему – ИИ создаёт подходящие слова',footer_note:'Ваш прогресс сохраняется локально',chat_placeholder:'Введите сообщение или нажмите 🎤...',},
-  it:{ nav_home:'Inizio',nav_vocab:'Vocaboli',nav_quiz:'Quiz',nav_free:'Studio libero',nav_gen:'Generatore IA',nav_myvocab:'Le mie parole',nav_translate:'Traduttore',nav_ai:'Assistente IA',welcome_back:'Bentornato',learning:'Stai imparando',change_lang:'🌍 Cambia lingua',which_lang:'Quale lingua vuoi imparare?',choose_lang:'Scegli la tua lingua',stat_learned:'Imparato',stat_streak:'Serie',stat_correct:'% Corretti',stat_total:'Quiz totali',vocab_title:'Allenamento vocaboli',quiz_title:'Quiz',free_title:'Studio libero',gen_title:'✨ Generatore vocaboli IA',myvocab_title:'⭐ I miei vocaboli',translate_title:'Traduttore',ai_title:'Assistente linguistico IA',reveal:'Clicca per rivelare',again:'✗ Di nuovo',listen:'🔊 Ascolta',skip:'→ Salta',knew:'✓ Lo sapevo',translate_btn:'Traduci',speak_out:'🔊 Leggi',copy:'⧉ Copia',input:'INGRESSO',output:'USCITA',send:'Invia',new_quiz:'🔄 Ricomincia',next:'Avanti →',correct:'✓ Corretto!',wrong:'✗ Sbagliato. Corretto:',enter_topic:'Inserisci argomento',generate:'✨ Genera',generating:'IA sta generando...',save_all:'⭐ Salva tutto',to_training:'📚 Allena',add_word:'➕ Aggiungi parola',foreign_word:'PAROLA STRANIERA',translation_lbl:'TEDESCO',phonetic:'PRONUNCIA (opzionale)',add_btn:'+ Aggiungi',train_mine:'📚 Allena i miei vocaboli',delete_all:'🗑 Elimina tutto',no_vocab:'Nessun vocabolo personale ancora.',settings:'⚙ Impostazioni',save:'Salva',delete:'Elimina',export:'⬇ Esporta',reset:'🗑 Reimposta',ai_welcome:'Ciao! Sono il tuo assistente linguistico IA. Scegli una lingua e una modalità per iniziare!',mode_conv:'💬 Conversazione',mode_grammar:'📝 Grammatica',mode_pron:'🎤 Pronuncia',mode_corr:'✏️ Correzione',quick_grammar:'📖 Consiglio grammaticale',quick_phrases:'💡 Frasi del giorno',quick_talk:'🗣 Inizia conversazione',hc_vocab_desc:'Impara nuove parole con flashcard e audio',hc_quiz_desc:'Testa la conoscenza con domande a scelta multipla',hc_free_desc:'Scegli un argomento e sfoglia il vocabolario',hc_translate_desc:'Traduci parole e frasi istantaneamente',hc_ai_desc:'Pratica conversazioni con IA e microfono',hc_gen_desc:'Inserisci un argomento – IA genera 20 parole',hc_myvocab_desc:'Salva parole personalizzate e allenale',myvocab_desc:'Aggiungi parole, gestisci il vocabolario IA e allenati',gen_desc:'Inserisci un argomento – IA genera vocaboli per la tua lingua',footer_note:'Il tuo progresso è salvato localmente',chat_placeholder:'Scrivi un messaggio o premi 🎤...',},
-  es:{ nav_home:'Inicio',nav_vocab:'Vocabulario',nav_quiz:'Quiz',nav_free:'Aprendizaje libre',nav_gen:'Generador IA',nav_myvocab:'Mis palabras',nav_translate:'Traductor',nav_ai:'Asistente IA',welcome_back:'Bienvenido de vuelta',learning:'Estás aprendiendo',change_lang:'🌍 Cambiar idioma',which_lang:'¿Qué idioma quieres aprender?',choose_lang:'Elige tu idioma',stat_learned:'Aprendido',stat_streak:'Racha',stat_correct:'% Correctas',stat_total:'Total quiz',vocab_title:'Entrenamiento de vocabulario',quiz_title:'Quiz',free_title:'Aprendizaje libre',gen_title:'✨ Generador de vocabulario IA',myvocab_title:'⭐ Mi vocabulario',translate_title:'Traductor',ai_title:'Asistente de idiomas IA',reveal:'Toca para revelar',again:'✗ Otra vez',listen:'🔊 Escuchar',skip:'→ Saltar',knew:'✓ Lo sabía',translate_btn:'Traducir',speak_out:'🔊 Leer',copy:'⧉ Copiar',input:'ENTRADA',output:'SALIDA',send:'Enviar',new_quiz:'🔄 Reiniciar',next:'Siguiente →',correct:'✓ ¡Correcto!',wrong:'✗ Incorrecto. Correcto:',enter_topic:'Introduce tema',generate:'✨ Generar',generating:'IA generando...',save_all:'⭐ Guardar todo',to_training:'📚 Entrenar',add_word:'➕ Añadir palabra',foreign_word:'PALABRA EXTRANJERA',translation_lbl:'ALEMÁN',phonetic:'PRONUNCIACIÓN (opcional)',add_btn:'+ Añadir',train_mine:'📚 Entrenar mi vocabulario',delete_all:'🗑 Eliminar todo',no_vocab:'Sin vocabulario propio todavía.',settings:'⚙ Ajustes',save:'Guardar',delete:'Eliminar',export:'⬇ Exportar',reset:'🗑 Restablecer',ai_welcome:'¡Hola! Soy tu asistente de idiomas IA. ¡Elige un idioma y un modo para comenzar!',mode_conv:'💬 Conversación',mode_grammar:'📝 Gramática',mode_pron:'🎤 Pronunciación',mode_corr:'✏️ Corrección',quick_grammar:'📖 Consejo gramatical',quick_phrases:'💡 Frases del día',quick_talk:'🗣 Iniciar conversación',hc_vocab_desc:'Aprende nuevas palabras con tarjetas y audio',hc_quiz_desc:'Pon a prueba tu conocimiento con preguntas de opción múltiple',hc_free_desc:'Elige un tema y navega por el vocabulario',hc_translate_desc:'Traduce palabras y frases al instante',hc_ai_desc:'Pratica conversaciones con IA y micrófono',hc_gen_desc:'Introduce un tema – IA genera 20 palabras',hc_myvocab_desc:'Guarda palabras personalizadas y entrénalas',myvocab_desc:'Añade palabras, gestiona vocabulario IA y entrena',gen_desc:'Introduce un tema – IA genera vocabulario para tu idioma',footer_note:'Tu progreso se guarda localmente',chat_placeholder:'Escribe un mensaje o pulsa 🎤...',},
-  tr:{ nav_home:'Ana Sayfa',nav_vocab:'Kelimeler',nav_quiz:'Test',nav_free:'Serbest Öğrenme',nav_gen:'YZ Üretici',nav_myvocab:'Kelimelerim',nav_translate:'Çevirmen',nav_ai:'YZ Asistan',welcome_back:'Tekrar hoş geldin',learning:'Öğreniyorsun',change_lang:'🌍 Dil değiştir',which_lang:'Hangi dili öğrenmek istiyorsun?',choose_lang:'Öğrenme dilini seç',stat_learned:'Öğrenildi',stat_streak:'Seri',stat_correct:'% Doğru',stat_total:'Test Toplam',vocab_title:'Kelime Antrenmanı',quiz_title:'Test',free_title:'Serbest Öğrenme',gen_title:'✨ YZ Kelime Üretici',myvocab_title:'⭐ Kelimelerim',translate_title:'Çevirmen',ai_title:'YZ Dil Asistanı',reveal:'Görmek için dokun',again:'✗ Tekrar',listen:'🔊 Dinle',skip:'→ Geç',knew:'✓ Bildim',translate_btn:'Çevir',speak_out:'🔊 Seslendir',copy:'⧉ Kopyala',input:'GİRİŞ',output:'ÇIKIŞ',send:'Gönder',new_quiz:'🔄 Yeniden başla',next:'İleri →',correct:'✓ Doğru!',wrong:'✗ Yanlış. Doğrusu:',enter_topic:'Konu girin',generate:'✨ Üret',generating:'YZ üretiyor...',save_all:'⭐ Hepsini kaydet',to_training:'📚 Antrenmana',add_word:'➕ Kelime ekle',foreign_word:'YABANCI KELİME',translation_lbl:'ALMANCA',phonetic:'OKUNUŞ (isteğe bağlı)',add_btn:'+ Ekle',train_mine:'📚 Kelimelerimi antrenman et',delete_all:'🗑 Hepsini sil',no_vocab:'Henüz kişisel kelime yok.',settings:'⚙ Ayarlar',save:'Kaydet',delete:'Sil',export:'⬇ Dışa aktar',reset:'🗑 Sıfırla',ai_welcome:'Merhaba! Ben senin YZ dil asistanınım. Başlamak için bir dil ve mod seç!',mode_conv:'💬 Konuşma',mode_grammar:'📝 Gramer',mode_pron:'🎤 Telaffuz',mode_corr:'✏️ Düzeltme',quick_grammar:'📖 Gramer ipucu',quick_phrases:'💡 Günün cümleleri',quick_talk:'🗣 Konuşma başlat',hc_vocab_desc:'Yeni kelimeleri kartlarla ve sesle öğren',hc_quiz_desc:'Bilgini çoktan seçmeli sorularla test et',hc_free_desc:'Bir konu seç ve kelimelere göz at',hc_translate_desc:'Kelimeleri ve cümleleri anında çevir',hc_ai_desc:'YZ ve mikrofon ile konuşma pratiği yap',hc_gen_desc:'Konu gir – YZ anında 20 kelime üretir',hc_myvocab_desc:'Kişisel kelimeleri kaydet ve antrenman yap',myvocab_desc:'Kelime ekle, YZ kelime haznesini yönet ve antrenman yap',gen_desc:'Konu gir – YZ öğrenme dilin için uygun kelimeler üretir',footer_note:'Gelişimin yerel olarak kaydedilir',chat_placeholder:'Mesaj yaz veya 🎤 düğmesine bas...',},
-  sq:{ nav_home:'Fillimi',nav_vocab:'Fjalor',nav_quiz:'Test',nav_free:'Mësim i lirë',nav_gen:'Gjenerator IA',nav_myvocab:'Fjalët e mia',nav_translate:'Përkthyes',nav_ai:'Asistent IA',welcome_back:'Mirë se u kthe',learning:'Po mëson',change_lang:'🌍 Ndrysho gjuhën',which_lang:'Çfarë gjuhe dëshiron të mësosh?',choose_lang:'Zgjedh gjuhën tuaj',stat_learned:'Mësuar',stat_streak:'Varg',stat_correct:'% Saktë',stat_total:'Total test',vocab_title:'Stërvitje fjalori',quiz_title:'Test',free_title:'Mësim i lirë',gen_title:'✨ Gjenerator fjalori IA',myvocab_title:'⭐ Fjalori im',translate_title:'Përkthyes',ai_title:'Asistent gjuhësor IA',reveal:'Kliko për të zbuluar',again:'✗ Sërish',listen:'🔊 Dëgjo',skip:'→ Kalo',knew:'✓ E dija',translate_btn:'Përkthe',speak_out:'🔊 Lexo',copy:'⧉ Kopjo',input:'HYRJE',output:'DALJE',send:'Dërgo',new_quiz:'🔄 Rifillo',next:'Tjetri →',correct:'✓ Saktë!',wrong:'✗ Gabim. Saktë:',enter_topic:'Shkruaj temën',generate:'✨ Gjenero',generating:'IA po gjeneron...',save_all:'⭐ Ruaj të gjitha',to_training:'📚 Tek stërvitja',add_word:'➕ Shto fjalë',foreign_word:'FJALË E HUAJ',translation_lbl:'GJERMANISHT',phonetic:'SHQIPTIM (opsional)',add_btn:'+ Shto',train_mine:'📚 Stërvit fjalësinë time',delete_all:'🗑 Fshi të gjitha',no_vocab:'Ende asnjë fjalë personale.',settings:'⚙ Cilësimet',save:'Ruaj',delete:'Fshi',export:'⬇ Eksporto',reset:'🗑 Rivendos',ai_welcome:'Përshëndetje! Jam asistenti juaj gjuhësor IA. Zgjedh gjuhën dhe modalitetin për të filluar!',mode_conv:'💬 Bisedë',mode_grammar:'📝 Gramatikë',mode_pron:'🎤 Shqiptim',mode_corr:'✏️ Korrigjim',quick_grammar:'📖 Këshillë gramatikore',quick_phrases:'💡 Frazat e ditës',quick_talk:'🗣 Fillo bisedën',hc_vocab_desc:'Mëso fjalë të reja me kartela dhe audio',hc_quiz_desc:'Testo njohuritë me pyetje me shumë zgjedhje',hc_free_desc:'Zgjedh temën dhe shfleto fjalët',hc_translate_desc:'Përkthe fjalë dhe fjali menjëherë',hc_ai_desc:'Praktiko bisedën me IA dhe mikrofon',hc_gen_desc:'Shkruaj temën – IA gjeneron 20 fjalë',hc_myvocab_desc:'Ruaj fjalë personale dhe stërviti',myvocab_desc:'Shto fjalë, menaxho fjalësinë IA dhe stërvitu',gen_desc:'Shkruaj temën – IA gjeneron fjalë për gjuhën tënde',footer_note:'Progresi juaj ruhet lokalisht',chat_placeholder:'Shkruaj mesazh ose shtyp 🎤...',},
-  th:{ nav_home:'หน้าหลัก',nav_vocab:'คำศัพท์',nav_quiz:'ทดสอบ',nav_free:'เรียนรู้อิสระ',nav_gen:'AI สร้างคำศัพท์',nav_myvocab:'คำศัพท์ของฉัน',nav_translate:'แปลภาษา',nav_ai:'AI ผู้ช่วย',welcome_back:'ยินดีต้อนรับกลับ',learning:'คุณกำลังเรียน',change_lang:'🌍 เปลี่ยนภาษา',which_lang:'คุณต้องการเรียนภาษาอะไร?',choose_lang:'เลือกภาษาที่ต้องการเรียน',stat_learned:'เรียนแล้ว',stat_streak:'ต่อเนื่อง',stat_correct:'% ถูก',stat_total:'ทำแบบทดสอบ',vocab_title:'ฝึกคำศัพท์',quiz_title:'ทดสอบ',free_title:'เรียนรู้อิสระ',gen_title:'✨ AI สร้างคำศัพท์',myvocab_title:'⭐ คำศัพท์ของฉัน',translate_title:'แปลภาษา',ai_title:'AI ผู้ช่วยภาษา',reveal:'แตะเพื่อดู',again:'✗ อีกครั้ง',listen:'🔊 ฟัง',skip:'→ ข้าม',knew:'✓ รู้แล้ว',translate_btn:'แปล',speak_out:'🔊 อ่านออกเสียง',copy:'⧉ คัดลอก',input:'ป้อนข้อความ',output:'ผลลัพธ์',send:'ส่ง',new_quiz:'🔄 เริ่มใหม่',next:'ถัดไป →',correct:'✓ ถูกต้อง!',wrong:'✗ ผิด. ถูกต้องคือ:',enter_topic:'ใส่หัวข้อ',generate:'✨ สร้าง',generating:'AI กำลังสร้าง...',save_all:'⭐ บันทึกทั้งหมด',to_training:'📚 ไปฝึก',add_word:'➕ เพิ่มคำ',foreign_word:'คำต่างประเทศ',translation_lbl:'ภาษาเยอรมัน',phonetic:'การออกเสียง (ไม่บังคับ)',add_btn:'+ เพิ่ม',train_mine:'📚 ฝึกคำศัพท์ของฉัน',delete_all:'🗑 ลบทั้งหมด',no_vocab:'ยังไม่มีคำศัพท์ส่วนตัว',settings:'⚙ ตั้งค่า',save:'บันทึก',delete:'ลบ',export:'⬇ ส่งออก',reset:'🗑 รีเซ็ต',ai_welcome:'สวัสดี! ฉันคือผู้ช่วย AI ด้านภาษาของคุณ เลือกภาษาและโหมดเพื่อเริ่มต้น!',mode_conv:'💬 สนทนา',mode_grammar:'📝 ไวยากรณ์',mode_pron:'🎤 การออกเสียง',mode_corr:'✏️ แก้ไข',quick_grammar:'📖 เคล็ดลับไวยากรณ์',quick_phrases:'💡 ประโยคประจำวัน',quick_talk:'🗣 เริ่มสนทนา',hc_vocab_desc:'เรียนคำศัพท์ใหม่ด้วยบัตรและเสียง',hc_quiz_desc:'ทดสอบความรู้ด้วยคำถามแบบตัวเลือก',hc_free_desc:'เลือกหัวข้อและดูคำศัพท์',hc_translate_desc:'แปลคำและประโยคได้ทันที',hc_ai_desc:'ฝึกสนทนากับ AI และไมโครโฟน',hc_gen_desc:'ใส่หัวข้อ – AI สร้าง 20 คำทันที',hc_myvocab_desc:'บันทึกคำส่วนตัวและฝึกอย่างเจาะจง',myvocab_desc:'เพิ่มคำ จัดการคำ AI และฝึก',gen_desc:'ใส่หัวข้อ – AI สร้างคำศัพท์สำหรับภาษาที่เรียน',footer_note:'ความก้าวหน้าของคุณถูกบันทึกในเครื่อง',chat_placeholder:'พิมพ์ข้อความหรือกด 🎤...',},
+  de:{ nav_home:'Start',nav_vocab:'Vokabeln',nav_quiz:'Quiz',nav_free:'Freies Lernen',nav_gen:'KI-Generator',nav_myvocab:'Meine Vokabeln',nav_translate:'Übersetzer',nav_ai:'KI-Assistent',nav_srs:'SRS',nav_write:'Schreiben',nav_stats:'Statistiken',nav_badges:'Abzeichen',nav_path:'Lernpfad',nav_search:'Suche',nav_conjugate:'Konjugation',welcome_back:'Willkommen zurück',learning:'Du lernst',change_lang:'🌍 Sprache wechseln',which_lang:'Welche Sprache möchtest du lernen?',choose_lang:'Wähle deine Lernsprache',stat_learned:'Gelernt',stat_streak:'Streak',stat_correct:'% Korrekt',stat_total:'Quiz Total',vocab_title:'Vokabeltraining',quiz_title:'Quiz',free_title:'Freies Lernen',gen_title:'KI-Vokabel-Generator',myvocab_title:'Meine Vokabeln',translate_title:'Übersetzer',ai_title:'KI-Sprachassistent',reveal:'Klicken zum Aufdecken',again:'✗ Nochmal',listen:'🔊 Anhören',skip:'→ Überspringen',knew:'✓ Gewusst',translate_btn:'Übersetzen',speak_out:'🔊 Vorlesen',copy:'⧉ Kopieren',input:'EINGABE',output:'AUSGABE',send:'Senden',new_quiz:'🔄 Neu starten',next:'Weiter →',correct:'✓ Richtig!',wrong:'✗ Falsch. Richtig:',enter_topic:'Thema eingeben',generate:'✨ Generieren',generating:'KI generiert Vokabeln...',save_all:'⭐ Alle speichern',to_training:'📚 Zum Training',add_word:'➕ Eigenes Wort hinzufügen',foreign_word:'FREMDWORT',translation_lbl:'DEUTSCH',phonetic:'AUSSPRACHE (optional)',add_btn:'+ Hinzufügen',train_mine:'📚 Meine Vokabeln trainieren',delete_all:'🗑 Alle löschen',no_vocab:'Noch keine eigenen Vokabeln. Füge Wörter hinzu oder generiere sie mit dem KI-Generator.',settings:'⚙ Einstellungen',save:'Speichern',delete:'Löschen',export:'⬇ Exportieren',reset:'🗑 Zurücksetzen',ai_welcome:'Hallo! Ich bin dein KI-Sprachassistent. Wähle eine Lernsprache und einen Modus, dann können wir loslegen!',mode_conv:'💬 Konversation',mode_grammar:'📝 Grammatik',mode_pron:'🎤 Aussprache',mode_corr:'✏️ Korrektur',quick_grammar:'📖 Grammatiktipp',quick_phrases:'💡 Sätze des Tages',quick_talk:'🗣 Gespräch starten',hc_vocab_desc:'Lerne neue Wörter mit Karteikarten und Sprachausgabe',hc_quiz_desc:'Teste dein Wissen mit Multiple-Choice-Fragen',hc_free_desc:'Wähle ein Thema und stöbere durch Vokabeln',hc_translate_desc:'Übersetze Begriffe und Sätze sofort',hc_ai_desc:'Übe Gespräche mit KI, Mikrofon & Sprachausgabe',hc_gen_desc:'Thema eingeben – KI generiert sofort 20 Vokabeln',hc_myvocab_desc:'Eigene Wörter speichern und gezielt trainieren',myvocab_desc:'Eigene Wörter hinzufügen, gespeicherte KI-Vokabeln verwalten und trainieren',gen_desc:'Gib ein Thema ein – die KI generiert passende Vokabeln für deine Lernsprache',footer_note:'Dein Fortschritt wird lokal gespeichert',chat_placeholder:'Nachricht eingeben oder 🎤 drücken...',},
+  en:{ nav_home:'Home',nav_vocab:'Vocabulary',nav_quiz:'Quiz',nav_free:'Free Learning',nav_gen:'AI Generator',nav_myvocab:'My Words',nav_translate:'Translator',nav_ai:'AI Assistant',nav_srs:'SRS',nav_write:'Writing',nav_stats:'Statistics',nav_badges:'Badges',nav_path:'Learning path',nav_search:'Search',nav_conjugate:'Conjugation',welcome_back:'Welcome back',learning:'You are learning',change_lang:'🌍 Change language',which_lang:'Which language do you want to learn?',choose_lang:'Choose your learning language',stat_learned:'Learned',stat_streak:'Streak',stat_correct:'% Correct',stat_total:'Quiz Total',vocab_title:'Vocabulary Training',quiz_title:'Quiz',free_title:'Free Learning',gen_title:'✨ AI Vocabulary Generator',myvocab_title:'⭐ My Vocabulary',translate_title:'Translator',ai_title:'AI Language Assistant',reveal:'Tap to reveal',again:'✗ Again',listen:'🔊 Listen',skip:'→ Skip',knew:'✓ Got it',translate_btn:'Translate',speak_out:'🔊 Speak',copy:'⧉ Copy',input:'INPUT',output:'OUTPUT',send:'Send',new_quiz:'🔄 Restart',next:'Next →',correct:'✓ Correct!',wrong:'✗ Wrong. Correct:',enter_topic:'Enter topic',generate:'✨ Generate',generating:'AI is generating...',save_all:'⭐ Save all',to_training:'📚 To Training',add_word:'➕ Add custom word',foreign_word:'FOREIGN WORD',translation_lbl:'GERMAN',phonetic:'PRONUNCIATION (optional)',add_btn:'+ Add',train_mine:'📚 Train my vocabulary',delete_all:'🗑 Delete all',no_vocab:'No custom vocabulary yet. Add words or generate them with the AI Generator.',settings:'⚙ Settings',save:'Save',delete:'Delete',export:'⬇ Export',reset:'🗑 Reset',ai_welcome:'Hello! I am your AI language assistant. Choose a learning language and a mode to get started!',mode_conv:'💬 Conversation',mode_grammar:'📝 Grammar',mode_pron:'🎤 Pronunciation',mode_corr:'✏️ Correction',quick_grammar:'📖 Grammar tip',quick_phrases:'💡 Phrases of the day',quick_talk:'🗣 Start conversation',hc_vocab_desc:'Learn new words with flashcards and audio',hc_quiz_desc:'Test your knowledge with multiple choice questions',hc_free_desc:'Choose a topic and browse vocabulary',hc_translate_desc:'Translate words and sentences instantly',hc_ai_desc:'Practice conversations with AI and microphone',hc_gen_desc:'Enter a topic – AI generates 20 words instantly',hc_myvocab_desc:'Save custom words and train them',myvocab_desc:'Add words, manage AI vocabulary and train',gen_desc:'Enter a topic – the AI generates matching vocabulary',footer_note:'Your progress is saved locally',chat_placeholder:'Type a message or press 🎤...',},
+  ru:{ nav_home:'Главная',nav_vocab:'Словарь',nav_quiz:'Тест',nav_free:'Свободное обучение',nav_gen:'ИИ-Генератор',nav_myvocab:'Мои слова',nav_translate:'Переводчик',nav_ai:'ИИ-Ассистент',nav_srs:'SRS',nav_write:'Письмо',nav_stats:'Статистика',nav_badges:'Значки',nav_path:'Учебный путь',nav_search:'Поиск',nav_conjugate:'Спряжение',welcome_back:'С возвращением',learning:'Вы изучаете',change_lang:'🌍 Сменить язык',which_lang:'Какой язык вы хотите учить?',choose_lang:'Выберите язык',stat_learned:'Изучено',stat_streak:'Серия',stat_correct:'% Правильных',stat_total:'Всего тестов',vocab_title:'Тренировка слов',quiz_title:'Тест',free_title:'Свободное обучение',gen_title:'✨ ИИ-Генератор словаря',myvocab_title:'⭐ Мои слова',translate_title:'Переводчик',ai_title:'ИИ-Языковой ассистент',reveal:'Нажмите, чтобы открыть',again:'✗ Ещё раз',listen:'🔊 Слушать',skip:'→ Пропустить',knew:'✓ Знал',translate_btn:'Перевести',speak_out:'🔊 Озвучить',copy:'⧉ Копировать',input:'ВВОД',output:'ВЫВОД',send:'Отправить',new_quiz:'🔄 Заново',next:'Далее →',correct:'✓ Правильно!',wrong:'✗ Неверно. Правильно:',enter_topic:'Введите тему',generate:'✨ Генерировать',generating:'ИИ генерирует...',save_all:'⭐ Сохранить все',to_training:'📚 К тренировке',add_word:'➕ Добавить слово',foreign_word:'ИНОСТРАННОЕ СЛОВО',translation_lbl:'НЕМЕЦКИЙ',phonetic:'ПРОИЗНОШЕНИЕ (необязательно)',add_btn:'+ Добавить',train_mine:'📚 Тренировать мои слова',delete_all:'🗑 Удалить все',no_vocab:'Пока нет своих слов.',settings:'⚙ Настройки',save:'Сохранить',delete:'Удалить',export:'⬇ Экспорт',reset:'🗑 Сбросить',ai_welcome:'Привет! Я ваш ИИ-языковой ассистент. Выберите язык и режим для начала!',mode_conv:'💬 Разговор',mode_grammar:'📝 Грамматика',mode_pron:'🎤 Произношение',mode_corr:'✏️ Коррекция',quick_grammar:'📖 Совет по грамматике',quick_phrases:'💡 Фразы дня',quick_talk:'🗣 Начать разговор',hc_vocab_desc:'Учите новые слова с карточками и аудио',hc_quiz_desc:'Проверьте знания с тестами',hc_free_desc:'Выберите тему и просматривайте слова',hc_translate_desc:'Переводите слова и предложения мгновенно',hc_ai_desc:'Практикуйте разговор с ИИ и микрофоном',hc_gen_desc:'Введите тему – ИИ мгновенно создаёт 20 слов',hc_myvocab_desc:'Сохраняйте слова и тренируйте их',myvocab_desc:'Добавляйте слова, управляйте словарём ИИ и тренируйтесь',gen_desc:'Введите тему – ИИ создаёт подходящие слова',footer_note:'Ваш прогресс сохраняется локально',chat_placeholder:'Введите сообщение или нажмите 🎤...',},
+  it:{ nav_home:'Inizio',nav_vocab:'Vocaboli',nav_quiz:'Quiz',nav_free:'Studio libero',nav_gen:'Generatore IA',nav_myvocab:'Le mie parole',nav_translate:'Traduttore',nav_ai:'Assistente IA',nav_srs:'SRS',nav_write:'Scrittura',nav_stats:'Statistiche',nav_badges:'Insegne',nav_path:'Percorso',nav_search:'Ricerca',nav_conjugate:'Coniugazione',welcome_back:'Bentornato',learning:'Stai imparando',change_lang:'🌍 Cambia lingua',which_lang:'Quale lingua vuoi imparare?',choose_lang:'Scegli la tua lingua',stat_learned:'Imparato',stat_streak:'Serie',stat_correct:'% Corretti',stat_total:'Quiz totali',vocab_title:'Allenamento vocaboli',quiz_title:'Quiz',free_title:'Studio libero',gen_title:'✨ Generatore vocaboli IA',myvocab_title:'⭐ I miei vocaboli',translate_title:'Traduttore',ai_title:'Assistente linguistico IA',reveal:'Clicca per rivelare',again:'✗ Di nuovo',listen:'🔊 Ascolta',skip:'→ Salta',knew:'✓ Lo sapevo',translate_btn:'Traduci',speak_out:'🔊 Leggi',copy:'⧉ Copia',input:'INGRESSO',output:'USCITA',send:'Invia',new_quiz:'🔄 Ricomincia',next:'Avanti →',correct:'✓ Corretto!',wrong:'✗ Sbagliato. Corretto:',enter_topic:'Inserisci argomento',generate:'✨ Genera',generating:'IA sta generando...',save_all:'⭐ Salva tutto',to_training:'📚 Allena',add_word:'➕ Aggiungi parola',foreign_word:'PAROLA STRANIERA',translation_lbl:'TEDESCO',phonetic:'PRONUNCIA (opzionale)',add_btn:'+ Aggiungi',train_mine:'📚 Allena i miei vocaboli',delete_all:'🗑 Elimina tutto',no_vocab:'Nessun vocabolo personale ancora.',settings:'⚙ Impostazioni',save:'Salva',delete:'Elimina',export:'⬇ Esporta',reset:'🗑 Reimposta',ai_welcome:'Ciao! Sono il tuo assistente linguistico IA. Scegli una lingua e una modalità per iniziare!',mode_conv:'💬 Conversazione',mode_grammar:'📝 Grammatica',mode_pron:'🎤 Pronuncia',mode_corr:'✏️ Correzione',quick_grammar:'📖 Consiglio grammaticale',quick_phrases:'💡 Frasi del giorno',quick_talk:'🗣 Inizia conversazione',hc_vocab_desc:'Impara nuove parole con flashcard e audio',hc_quiz_desc:'Testa la conoscenza con domande a scelta multipla',hc_free_desc:'Scegli un argomento e sfoglia il vocabolario',hc_translate_desc:'Traduci parole e frasi istantaneamente',hc_ai_desc:'Pratica conversazioni con IA e microfono',hc_gen_desc:'Inserisci un argomento – IA genera 20 parole',hc_myvocab_desc:'Salva parole personalizzate e allenale',myvocab_desc:'Aggiungi parole, gestisci il vocabolario IA e allenati',gen_desc:'Inserisci un argomento – IA genera vocaboli per la tua lingua',footer_note:'Il tuo progresso è salvato localmente',chat_placeholder:'Scrivi un messaggio o premi 🎤...',},
+  es:{ nav_home:'Inicio',nav_vocab:'Vocabulario',nav_quiz:'Quiz',nav_free:'Aprendizaje libre',nav_gen:'Generador IA',nav_myvocab:'Mis palabras',nav_translate:'Traductor',nav_ai:'Asistente IA',nav_srs:'SRS',nav_write:'Escritura',nav_stats:'Estadísticas',nav_badges:'Insignias',nav_path:'Ruta',nav_search:'Búsqueda',nav_conjugate:'Conjugación',welcome_back:'Bienvenido de vuelta',learning:'Estás aprendiendo',change_lang:'🌍 Cambiar idioma',which_lang:'¿Qué idioma quieres aprender?',choose_lang:'Elige tu idioma',stat_learned:'Aprendido',stat_streak:'Racha',stat_correct:'% Correctas',stat_total:'Total quiz',vocab_title:'Entrenamiento de vocabulario',quiz_title:'Quiz',free_title:'Aprendizaje libre',gen_title:'✨ Generador de vocabulario IA',myvocab_title:'⭐ Mi vocabulario',translate_title:'Traductor',ai_title:'Asistente de idiomas IA',reveal:'Toca para revelar',again:'✗ Otra vez',listen:'🔊 Escuchar',skip:'→ Saltar',knew:'✓ Lo sabía',translate_btn:'Traducir',speak_out:'🔊 Leer',copy:'⧉ Copiar',input:'ENTRADA',output:'SALIDA',send:'Enviar',new_quiz:'🔄 Reiniciar',next:'Siguiente →',correct:'✓ ¡Correcto!',wrong:'✗ Incorrecto. Correcto:',enter_topic:'Introduce tema',generate:'✨ Generar',generating:'IA generando...',save_all:'⭐ Guardar todo',to_training:'📚 Entrenar',add_word:'➕ Añadir palabra',foreign_word:'PALABRA EXTRANJERA',translation_lbl:'ALEMÁN',phonetic:'PRONUNCIACIÓN (opcional)',add_btn:'+ Añadir',train_mine:'📚 Entrenar mi vocabulario',delete_all:'🗑 Eliminar todo',no_vocab:'Sin vocabulario propio todavía.',settings:'⚙ Ajustes',save:'Guardar',delete:'Eliminar',export:'⬇ Exportar',reset:'🗑 Restablecer',ai_welcome:'¡Hola! Soy tu asistente de idiomas IA. ¡Elige un idioma y un modo para comenzar!',mode_conv:'💬 Conversación',mode_grammar:'📝 Gramática',mode_pron:'🎤 Pronunciación',mode_corr:'✏️ Corrección',quick_grammar:'📖 Consejo gramatical',quick_phrases:'💡 Frases del día',quick_talk:'🗣 Iniciar conversación',hc_vocab_desc:'Aprende nuevas palabras con tarjetas y audio',hc_quiz_desc:'Pon a prueba tu conocimiento con preguntas de opción múltiple',hc_free_desc:'Elige un tema y navega por el vocabulario',hc_translate_desc:'Traduce palabras y frases al instante',hc_ai_desc:'Pratica conversaciones con IA y micrófono',hc_gen_desc:'Introduce un tema – IA genera 20 palabras',hc_myvocab_desc:'Guarda palabras personalizadas y entrénalas',myvocab_desc:'Añade palabras, gestiona vocabulario IA y entrena',gen_desc:'Introduce un tema – IA genera vocabulario para tu idioma',footer_note:'Tu progreso se guarda localmente',chat_placeholder:'Escribe un mensaje o pulsa 🎤...',},
+  tr:{ nav_home:'Ana Sayfa',nav_vocab:'Kelimeler',nav_quiz:'Test',nav_free:'Serbest Öğrenme',nav_gen:'YZ Üretici',nav_myvocab:'Kelimelerim',nav_translate:'Çevirmen',nav_ai:'YZ Asistan',nav_srs:'SRS',nav_write:'Yazma',nav_stats:'İstatistikler',nav_badges:'Rozetler',nav_path:'Öğrenme yolu',nav_search:'Arama',nav_conjugate:'Çekim',welcome_back:'Tekrar hoş geldin',learning:'Öğreniyorsun',change_lang:'🌍 Dil değiştir',which_lang:'Hangi dili öğrenmek istiyorsun?',choose_lang:'Öğrenme dilini seç',stat_learned:'Öğrenildi',stat_streak:'Seri',stat_correct:'% Doğru',stat_total:'Test Toplam',vocab_title:'Kelime Antrenmanı',quiz_title:'Test',free_title:'Serbest Öğrenme',gen_title:'✨ YZ Kelime Üretici',myvocab_title:'⭐ Kelimelerim',translate_title:'Çevirmen',ai_title:'YZ Dil Asistanı',reveal:'Görmek için dokun',again:'✗ Tekrar',listen:'🔊 Dinle',skip:'→ Geç',knew:'✓ Bildim',translate_btn:'Çevir',speak_out:'🔊 Seslendir',copy:'⧉ Kopyala',input:'GİRİŞ',output:'ÇIKIŞ',send:'Gönder',new_quiz:'🔄 Yeniden başla',next:'İleri →',correct:'✓ Doğru!',wrong:'✗ Yanlış. Doğrusu:',enter_topic:'Konu girin',generate:'✨ Üret',generating:'YZ üretiyor...',save_all:'⭐ Hepsini kaydet',to_training:'📚 Antrenmana',add_word:'➕ Kelime ekle',foreign_word:'YABANCI KELİME',translation_lbl:'ALMANCA',phonetic:'OKUNUŞ (isteğe bağlı)',add_btn:'+ Ekle',train_mine:'📚 Kelimelerimi antrenman et',delete_all:'🗑 Hepsini sil',no_vocab:'Henüz kişisel kelime yok.',settings:'⚙ Ayarlar',save:'Kaydet',delete:'Sil',export:'⬇ Dışa aktar',reset:'🗑 Sıfırla',ai_welcome:'Merhaba! Ben senin YZ dil asistanınım. Başlamak için bir dil ve mod seç!',mode_conv:'💬 Konuşma',mode_grammar:'📝 Gramer',mode_pron:'🎤 Telaffuz',mode_corr:'✏️ Düzeltme',quick_grammar:'📖 Gramer ipucu',quick_phrases:'💡 Günün cümleleri',quick_talk:'🗣 Konuşma başlat',hc_vocab_desc:'Yeni kelimeleri kartlarla ve sesle öğren',hc_quiz_desc:'Bilgini çoktan seçmeli sorularla test et',hc_free_desc:'Bir konu seç ve kelimelere göz at',hc_translate_desc:'Kelimeleri ve cümleleri anında çevir',hc_ai_desc:'YZ ve mikrofon ile konuşma pratiği yap',hc_gen_desc:'Konu gir – YZ anında 20 kelime üretir',hc_myvocab_desc:'Kişisel kelimeleri kaydet ve antrenman yap',myvocab_desc:'Kelime ekle, YZ kelime haznesini yönet ve antrenman yap',gen_desc:'Konu gir – YZ öğrenme dilin için uygun kelimeler üretir',footer_note:'Gelişimin yerel olarak kaydedilir',chat_placeholder:'Mesaj yaz veya 🎤 düğmesine bas...',},
+  sq:{ nav_home:'Fillimi',nav_vocab:'Fjalor',nav_quiz:'Test',nav_free:'Mësim i lirë',nav_gen:'Gjenerator IA',nav_myvocab:'Fjalët e mia',nav_translate:'Përkthyes',nav_ai:'Asistent IA',nav_srs:'SRS',nav_write:'Shkrim',nav_stats:'Statistika',nav_badges:'Distinkcione',nav_path:'Rrugë mësimi',nav_search:'Kërkim',nav_conjugate:'Zgjedhim',welcome_back:'Mirë se u kthe',learning:'Po mëson',change_lang:'🌍 Ndrysho gjuhën',which_lang:'Çfarë gjuhe dëshiron të mësosh?',choose_lang:'Zgjedh gjuhën tuaj',stat_learned:'Mësuar',stat_streak:'Varg',stat_correct:'% Saktë',stat_total:'Total test',vocab_title:'Stërvitje fjalori',quiz_title:'Test',free_title:'Mësim i lirë',gen_title:'✨ Gjenerator fjalori IA',myvocab_title:'⭐ Fjalori im',translate_title:'Përkthyes',ai_title:'Asistent gjuhësor IA',reveal:'Kliko për të zbuluar',again:'✗ Sërish',listen:'🔊 Dëgjo',skip:'→ Kalo',knew:'✓ E dija',translate_btn:'Përkthe',speak_out:'🔊 Lexo',copy:'⧉ Kopjo',input:'HYRJE',output:'DALJE',send:'Dërgo',new_quiz:'🔄 Rifillo',next:'Tjetri →',correct:'✓ Saktë!',wrong:'✗ Gabim. Saktë:',enter_topic:'Shkruaj temën',generate:'✨ Gjenero',generating:'IA po gjeneron...',save_all:'⭐ Ruaj të gjitha',to_training:'📚 Tek stërvitja',add_word:'➕ Shto fjalë',foreign_word:'FJALË E HUAJ',translation_lbl:'GJERMANISHT',phonetic:'SHQIPTIM (opsional)',add_btn:'+ Shto',train_mine:'📚 Stërvit fjalësinë time',delete_all:'🗑 Fshi të gjitha',no_vocab:'Ende asnjë fjalë personale.',settings:'⚙ Cilësimet',save:'Ruaj',delete:'Fshi',export:'⬇ Eksporto',reset:'🗑 Rivendos',ai_welcome:'Përshëndetje! Jam asistenti juaj gjuhësor IA. Zgjedh gjuhën dhe modalitetin për të filluar!',mode_conv:'💬 Bisedë',mode_grammar:'📝 Gramatikë',mode_pron:'🎤 Shqiptim',mode_corr:'✏️ Korrigjim',quick_grammar:'📖 Këshillë gramatikore',quick_phrases:'💡 Frazat e ditës',quick_talk:'🗣 Fillo bisedën',hc_vocab_desc:'Mëso fjalë të reja me kartela dhe audio',hc_quiz_desc:'Testo njohuritë me pyetje me shumë zgjedhje',hc_free_desc:'Zgjedh temën dhe shfleto fjalët',hc_translate_desc:'Përkthe fjalë dhe fjali menjëherë',hc_ai_desc:'Praktiko bisedën me IA dhe mikrofon',hc_gen_desc:'Shkruaj temën – IA gjeneron 20 fjalë',hc_myvocab_desc:'Ruaj fjalë personale dhe stërviti',myvocab_desc:'Shto fjalë, menaxho fjalësinë IA dhe stërvitu',gen_desc:'Shkruaj temën – IA gjeneron fjalë për gjuhën tënde',footer_note:'Progresi juaj ruhet lokalisht',chat_placeholder:'Shkruaj mesazh ose shtyp 🎤...',},
+  th:{ nav_home:'หน้าหลัก',nav_vocab:'คำศัพท์',nav_quiz:'ทดสอบ',nav_free:'เรียนรู้อิสระ',nav_gen:'AI สร้างคำศัพท์',nav_myvocab:'คำศัพท์ของฉัน',nav_translate:'แปลภาษา',nav_ai:'AI ผู้ช่วย',nav_srs:'SRS',nav_write:'เขียน',nav_stats:'สถิติ',nav_badges:'รางวัล',nav_path:'เส้นทาง',nav_search:'ค้นหา',nav_conjugate:'คำกริยา',welcome_back:'ยินดีต้อนรับกลับ',learning:'คุณกำลังเรียน',change_lang:'🌍 เปลี่ยนภาษา',which_lang:'คุณต้องการเรียนภาษาอะไร?',choose_lang:'เลือกภาษาที่ต้องการเรียน',stat_learned:'เรียนแล้ว',stat_streak:'ต่อเนื่อง',stat_correct:'% ถูก',stat_total:'ทำแบบทดสอบ',vocab_title:'ฝึกคำศัพท์',quiz_title:'ทดสอบ',free_title:'เรียนรู้อิสระ',gen_title:'AI สร้างคำศัพท์',myvocab_title:'คำศัพท์ของฉัน',translate_title:'แปลภาษา',ai_title:'AI ผู้ช่วยภาษา',reveal:'แตะเพื่อดู',again:'✗ อีกครั้ง',listen:'🔊 ฟัง',skip:'→ ข้าม',knew:'✓ รู้แล้ว',translate_btn:'แปล',speak_out:'🔊 อ่านออกเสียง',copy:'⧉ คัดลอก',input:'ป้อนข้อความ',output:'ผลลัพธ์',send:'ส่ง',new_quiz:'🔄 เริ่มใหม่',next:'ถัดไป →',correct:'✓ ถูกต้อง!',wrong:'✗ ผิด. ถูกต้องคือ:',enter_topic:'ใส่หัวข้อ',generate:'สร้าง',generating:'AI กำลังสร้าง...',save_all:'บันทึกทั้งหมด',to_training:'ไปฝึก',add_word:'เพิ่มคำ',foreign_word:'คำต่างประเทศ',translation_lbl:'ภาษาเยอรมัน',phonetic:'การออกเสียง (ไม่บังคับ)',add_btn:'+ เพิ่ม',train_mine:'ฝึกคำศัพท์ของฉัน',delete_all:'ลบทั้งหมด',no_vocab:'ยังไม่มีคำศัพท์ส่วนตัว',settings:'ตั้งค่า',save:'บันทึก',delete:'ลบ',export:'ส่งออก',reset:'รีเซ็ต',ai_welcome:'สวัสดี! ฉันคือผู้ช่วย AI ด้านภาษาของคุณ เลือกภาษาและโหมดเพื่อเริ่มต้น!',mode_conv:'สนทนา',mode_grammar:'ไวยากรณ์',mode_pron:'การออกเสียง',mode_corr:'แก้ไข',quick_grammar:'เคล็ดลับไวยากรณ์',quick_phrases:'ประโยคประจำวัน',quick_talk:'เริ่มสนทนา',hc_vocab_desc:'เรียนคำศัพท์ใหม่ด้วยบัตรและเสียง',hc_quiz_desc:'ทดสอบความรู้ด้วยคำถามแบบตัวเลือก',hc_free_desc:'เลือกหัวข้อและดูคำศัพท์',hc_translate_desc:'แปลคำและประโยคได้ทันที',hc_ai_desc:'ฝึกสนทนากับ AI และไมโครโฟน',hc_gen_desc:'ใส่หัวข้อ – AI สร้าง 20 คำทันที',hc_myvocab_desc:'บันทึกคำส่วนตัวและฝึกอย่างเจาะจง',myvocab_desc:'เพิ่มคำ จัดการคำ AI และฝึก',gen_desc:'ใส่หัวข้อ – AI สร้างคำศัพท์สำหรับภาษาที่เรียน',footer_note:'ความก้าวหน้าของคุณถูกบันทึกในเครื่อง',chat_placeholder:'พิมพ์ข้อความหรือกด 🎤...',},
+  fr:{ nav_home:'Accueil',nav_vocab:'Vocabulaire',nav_quiz:'Quiz',nav_free:'Apprentissage libre',nav_gen:'Générateur IA',nav_myvocab:'Mes mots',nav_translate:'Traducteur',nav_ai:'Assistant IA',nav_srs:'SRS',nav_write:'Écriture',nav_stats:'Statistiques',nav_badges:'Badges',nav_path:'Parcours',nav_search:'Recherche',nav_conjugate:'Conjugaison',welcome_back:'Bon retour',learning:'Vous apprenez',change_lang:'🌍 Changer de langue',which_lang:'Quelle langue voulez-vous apprendre?',choose_lang:'Choisissez votre langue',stat_learned:'Appris',stat_streak:'Série',stat_correct:'% Correct',stat_total:'Quiz total',vocab_title:'Entraînement vocabulaire',quiz_title:'Quiz',free_title:'Apprentissage libre',gen_title:'Générateur IA',myvocab_title:'Mon vocabulaire',translate_title:'Traducteur',ai_title:'Assistant linguistique IA',reveal:'Cliquer pour révéler',again:'✗ Encore',listen:'🔊 Écouter',skip:'→ Passer',knew:'✓ Je savais',translate_btn:'Traduire',speak_out:'🔊 Lire',copy:'⧉ Copier',input:'ENTRÉE',output:'SORTIE',send:'Envoyer',new_quiz:'🔄 Recommencer',next:'Suivant →',correct:'✓ Correct!',wrong:'✗ Incorrect. Correct:',enter_topic:'Entrer un sujet',generate:'Générer',generating:'IA génère...',save_all:'Tout sauvegarder',to_training:'À l\'entraînement',add_word:'Ajouter un mot',foreign_word:'MOT ÉTRANGER',translation_lbl:'ALLEMAND',phonetic:'PRONONCIATION (optionnel)',add_btn:'+ Ajouter',train_mine:'Entraîner mon vocabulaire',delete_all:'Tout supprimer',no_vocab:'Pas encore de vocabulaire personnel.',settings:'⚙ Paramètres',save:'Sauvegarder',delete:'Supprimer',export:'⬇ Exporter',reset:'🗑 Réinitialiser',ai_welcome:'Bonjour! Je suis votre assistant linguistique IA. Choisissez une langue et un mode pour commencer!',mode_conv:'Conversation',mode_grammar:'Grammaire',mode_pron:'Prononciation',mode_corr:'Correction',quick_grammar:'Conseil grammatical',quick_phrases:'Phrases du jour',quick_talk:'Démarrer conversation',hc_vocab_desc:'Apprenez de nouveaux mots avec des fiches',hc_quiz_desc:'Testez vos connaissances en QCM',hc_free_desc:'Choisissez un thème et parcourez le vocabulaire',hc_translate_desc:'Traduisez mots et phrases instantanément',hc_ai_desc:'Pratiquez avec IA et microphone',hc_gen_desc:'Entrez un thème – IA génère 20 mots',hc_myvocab_desc:'Sauvegardez des mots personnalisés',myvocab_desc:'Ajoutez des mots et gérez votre vocabulaire',gen_desc:'Entrez un thème – IA génère du vocabulaire',footer_note:'Votre progression est sauvegardée localement',chat_placeholder:'Écrivez un message ou appuyez sur 🎤...',},
+  ro:{ nav_home:'Acasă',nav_vocab:'Vocabular',nav_quiz:'Quiz',nav_free:'Învățare liberă',nav_gen:'Generator IA',nav_myvocab:'Cuvintele mele',nav_translate:'Traducător',nav_ai:'Asistent IA',nav_srs:'SRS',nav_write:'Scriere',nav_stats:'Statistici',nav_badges:'Insigne',nav_path:'Traseu',nav_search:'Căutare',nav_conjugate:'Conjugare',welcome_back:'Bine ai revenit',learning:'Înveți',change_lang:'🌍 Schimbă limba',which_lang:'Ce limbă vrei să înveți?',choose_lang:'Alege limba ta',stat_learned:'Învățat',stat_streak:'Serie',stat_correct:'% Corect',stat_total:'Total quiz',vocab_title:'Antrenament vocabular',quiz_title:'Quiz',free_title:'Învățare liberă',gen_title:'Generator IA',myvocab_title:'Vocabularul meu',translate_title:'Traducător',ai_title:'Asistent lingvistic IA',reveal:'Click pentru a dezvălui',again:'✗ Din nou',listen:'🔊 Ascultă',skip:'→ Sari',knew:'✓ Știam',translate_btn:'Traduce',speak_out:'🔊 Citește',copy:'⧉ Copiază',input:'INTRARE',output:'IEȘIRE',send:'Trimite',new_quiz:'🔄 Reîncepe',next:'Următor →',correct:'✓ Corect!',wrong:'✗ Greșit. Corect:',enter_topic:'Introdu subiect',generate:'Generează',generating:'IA generează...',save_all:'Salvează tot',to_training:'La antrenament',add_word:'Adaugă cuvânt',foreign_word:'CUVÂNT STRĂIN',translation_lbl:'GERMANĂ',phonetic:'PRONUNȚIE (opțional)',add_btn:'+ Adaugă',train_mine:'Antrenează vocabularul meu',delete_all:'Șterge tot',no_vocab:'Niciun vocabular personal încă.',settings:'⚙ Setări',save:'Salvează',delete:'Șterge',export:'⬇ Exportă',reset:'🗑 Resetează',ai_welcome:'Bună! Sunt asistentul tău lingvistic IA. Alege o limbă și un mod pentru a începe!',mode_conv:'Conversație',mode_grammar:'Gramatică',mode_pron:'Pronunție',mode_corr:'Corecție',quick_grammar:'Sfat gramatical',quick_phrases:'Fraze ale zilei',quick_talk:'Începe conversație',hc_vocab_desc:'Învață cuvinte noi cu fișe',hc_quiz_desc:'Testează cunoștințele cu QCM',hc_free_desc:'Alege o temă și răsfoiește vocabularul',hc_translate_desc:'Traduce cuvinte și fraze instant',hc_ai_desc:'Exersează cu IA și microfon',hc_gen_desc:'Introdu temă – IA generează 20 cuvinte',hc_myvocab_desc:'Salvează cuvinte personalizate',myvocab_desc:'Adaugă cuvinte și gestionează vocabularul',gen_desc:'Introdu o temă – IA generează vocabular',footer_note:'Progresul tău este salvat local',chat_placeholder:'Scrie un mesaj sau apasă 🎤...',},
+  sv:{ nav_home:'Hem',nav_vocab:'Ordförråd',nav_quiz:'Quiz',nav_free:'Fri inlärning',nav_gen:'AI-generator',nav_myvocab:'Mina ord',nav_translate:'Översättare',nav_ai:'AI-assistent',nav_srs:'SRS',nav_write:'Skrivning',nav_stats:'Statistik',nav_badges:'Märken',nav_path:'Inlärningsväg',nav_search:'Sök',nav_conjugate:'Konjugation',welcome_back:'Välkommen tillbaka',learning:'Du lär dig',change_lang:'🌍 Byt språk',which_lang:'Vilket språk vill du lära dig?',choose_lang:'Välj ditt inlärningsspråk',stat_learned:'Inlärt',stat_streak:'Serie',stat_correct:'% Rätt',stat_total:'Quiz totalt',vocab_title:'Ordträning',quiz_title:'Quiz',free_title:'Fri inlärning',gen_title:'AI-ordgenerator',myvocab_title:'Mitt ordförråd',translate_title:'Översättare',ai_title:'AI språkassistent',reveal:'Klicka för att avslöja',again:'✗ Igen',listen:'🔊 Lyssna',skip:'→ Hoppa över',knew:'✓ Visste det',translate_btn:'Översätt',speak_out:'🔊 Läs upp',copy:'⧉ Kopiera',input:'INMATNING',output:'UTDATA',send:'Skicka',new_quiz:'🔄 Börja om',next:'Nästa →',correct:'✓ Rätt!',wrong:'✗ Fel. Rätt:',enter_topic:'Ange ämne',generate:'Generera',generating:'AI genererar...',save_all:'Spara alla',to_training:'Till träning',add_word:'Lägg till ord',foreign_word:'FRÄMMANDE ORD',translation_lbl:'TYSKA',phonetic:'UTTAL (valfritt)',add_btn:'+ Lägg till',train_mine:'Träna mitt ordförråd',delete_all:'Ta bort alla',no_vocab:'Inget personligt ordförråd ännu.',settings:'⚙ Inställningar',save:'Spara',delete:'Ta bort',export:'⬇ Exportera',reset:'🗑 Återställ',ai_welcome:'Hej! Jag är din AI-språkassistent. Välj ett inlärningsspråk och ett läge för att börja!',mode_conv:'Konversation',mode_grammar:'Grammatik',mode_pron:'Uttal',mode_corr:'Korrigering',quick_grammar:'Grammatiktips',quick_phrases:'Dagens fraser',quick_talk:'Starta konversation',hc_vocab_desc:'Lär dig nya ord med flashkort och ljud',hc_quiz_desc:'Testa dina kunskaper med flervalsfrågor',hc_free_desc:'Välj ett ämne och bläddra igenom ordförrådet',hc_translate_desc:'Översätt ord och meningar direkt',hc_ai_desc:'Öva konversationer med AI och mikrofon',hc_gen_desc:'Ange ett ämne – AI genererar 20 ord direkt',hc_myvocab_desc:'Spara anpassade ord och träna dem',myvocab_desc:'Lägg till ord och hantera AI-ordförråd',gen_desc:'Ange ett ämne – AI genererar ordförråd',footer_note:'Dina framsteg sparas lokalt',chat_placeholder:'Skriv ett meddelande eller tryck 🎤...',},
 };
 
 let uiLang = localStorage.getItem('lingua_ui_lang') || 'de';
@@ -4423,8 +5091,8 @@ function applyUILanguage() {
   uiLang = localStorage.getItem('lingua_ui_lang') || 'de';
   function setText(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
   // Nav
-  var navIcons = {home:'⌂',vocab:'📚',quiz:'❓',free:'🗂',generator:'✨',myvocab:'⭐',translate:'⇄',ai:'✦',srs:'🧠',write:'✍',stats:'📊',badges:'🏆',path:'🗺'};
-  var navKeys  = {home:'nav_home',vocab:'nav_vocab',quiz:'nav_quiz',free:'nav_free',generator:'nav_gen',myvocab:'nav_myvocab',translate:'nav_translate',ai:'nav_ai',srs:'nav_srs',write:'nav_write',stats:'nav_stats',badges:'nav_badges',path:'nav_path'};
+  var navIcons = {home:'⌂',vocab:'📚',quiz:'❓',free:'🗂',generator:'✨',myvocab:'⭐',translate:'⇄',ai:'✦',srs:'',write:'',stats:'',badges:'',path:'',search:'',conjugate:''};
+  var navKeys  = {home:'nav_home',vocab:'nav_vocab',quiz:'nav_quiz',free:'nav_free',generator:'nav_gen',myvocab:'nav_myvocab',translate:'nav_translate',ai:'nav_ai',srs:'nav_srs',write:'nav_write',stats:'nav_stats',badges:'nav_badges',path:'nav_path',search:'nav_search',conjugate:'nav_conjugate'};
   document.querySelectorAll('.nav-btn[data-section]').forEach(function(b) {
     var sec = b.dataset.section;
     if (navKeys[sec]) b.innerHTML = '<span class="nav-icon">' + (navIcons[sec]||'') + '</span> ' + t(navKeys[sec]);
@@ -6243,7 +6911,7 @@ checkQuiz = function(btn, correct, correctAnswer) {
 var ONBOARDING_STEPS = [
   {
     emoji:'👋',
-    title:'Willkommen bei LINGUA v2.3!',
+    title:'Willkommen bei LINGUA v2.4!',
     text:'Die KI-gestützte Sprachlern-App für 12 Sprachen. Lass uns die wichtigsten Features kurz vorstellen — dauert nur 1 Minute!',
     features:null,
     btnText:'Los geht\'s →'
@@ -6263,7 +6931,7 @@ var ONBOARDING_STEPS = [
   {
     emoji:'🔀',
     title:'Verben meistern',
-    text:'Neu in v2.3: Der Konjugationstrainer! Gib ein Verb ein — die KI erstellt eine vollständige Tabelle. Dann kannst du direkt üben.',
+    text:'Neu in v2.4: Der Konjugationstrainer! Gib ein Verb ein — die KI erstellt eine vollständige Tabelle. Dann kannst du direkt üben.',
     features:[
       {icon:'🔀', name:'Konjugationstabelle', desc:'KI-generiert, alle Zeiten'},
       {icon:'🎯', name:'Konjugations-Quiz', desc:'Lücken ausfüllen'},
@@ -6346,7 +7014,7 @@ function skipOnboarding() { finishOnboarding(); }
 
 function finishOnboarding() {
   localStorage.setItem('lingua_onboarded', '1');
-  localStorage.setItem('lingua_onboarded_version', '2.3');
+  localStorage.setItem('lingua_onboarded_version', CURRENT_VERSION);
   document.getElementById('onboarding-overlay').classList.add('hidden');
   updateOnboardingPrefBtn();
 }
@@ -6384,32 +7052,30 @@ function showOnboardingNow() {
 // ============================================================
 // UPDATE CHECK + CHANGELOG
 // ============================================================
-var CURRENT_VERSION = '2.3';
+var CURRENT_VERSION = '2.4';
 var CHANGELOG = {
-  '2.3': {
-    title: 'Was ist neu in v2.3?',
+  '2.4': {
+    title: 'Was ist neu in v2.4?',
     items: [
-      '🔍 Vokabelsuche — alle 4.000+ Wörter durchsuchbar',
+      '🌍 Interface: alle 12 Lernsprachen als App-Sprache wählbar',
+      '🇫🇷 Französisch · 🇸🇪 Schwedisch · 🇷🇴 Rumänisch als UI-Sprache neu',
+      '📚 +500 neue Vokabeln pro Sprache (Kochen, Sport, Wissenschaft, Politik…)',
+      '🔢 Gesamt: über 7.000 Vokabeleinträge in 12 Sprachen',
+      '✅ Doppelte Icons in Navigation entfernt (SRS, Schreiben, Statistiken, Abzeichen)',
+      '🔍 Suche & 🔀 Konjugation: vollständig mehrsprachig übersetzt',
+      '🔄 Update-Prüfung verbessert & Onboarding deaktivierbar',
+    ]
+  },
+  '2.3': {
+    title: 'Was war neu in v2.3?',
+    items: [
+      '🔍 Vokabelsuche — alle Wörter sofort durchsuchbar',
       '🔀 Konjugationstrainer — KI-Tabellen + Quiz-Modus',
       '👋 Einführungs-Onboarding — erklärt alle Features',
       '🎨 8 Farbpaletten + individuelle Farbanpassung',
-      '🇫🇷 Französisch & 🇸🇪 Schwedisch hinzugefügt',
-      '🇷🇴 Rumänisch hinzugefügt',
-      '🔄 Update-Prüfung im Einstellungsmenü',
-      '✨ Alphabetisch sortierte Sprachauswahl',
+      '🔄 Update-Prüfung & Onboarding-Toggle im Einstellungsmenü',
     ]
   },
-  '2.2': {
-    title: 'Was war neu in v2.2?',
-    items: [
-      '🧠 Spaced Repetition (SM-2 Algorithmus)',
-      '✍ Schreibübungen mit Tippfehler-Toleranz',
-      '📊 Statistiken, Streak-Kalender & Tagesziel',
-      '🏆 12 Abzeichen & Level-System (7 Stufen)',
-      '🗺 Lernpfad mit 12 strukturierten Lektionen',
-      '🎤 Aussprache-Bewertung mit Mikrofon',
-    ]
-  }
 };
 
 function checkForUpdate() {
@@ -6808,7 +7474,7 @@ switchSection = function(id) {
 };
 
 // ============================================================
-// INIT v2.3
+// INIT v2.4
 // ============================================================
 speechRate = parseFloat(localStorage.getItem('lingua_speed') || '0.9');
 autoSpeak = localStorage.getItem('lingua_autospeak') !== 'off';
