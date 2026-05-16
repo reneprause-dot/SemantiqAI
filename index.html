@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="description" content="LINGUA v2.5 – KI-gestützte Sprachlern-App von René Prause">
+<meta name="description" content="LINGUA v2.6 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v2.5 · by René Prause</title>
+<title>LINGUA v2.6 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -510,7 +510,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
    ============================================================ */
 
 /* ============================================================
-   NEUE FEATURES v2.5: ONBOARDING · SUCHE · KONJUGATION
+   NEUE FEATURES v2.6: ONBOARDING · SUCHE · KONJUGATION
    ============================================================ */
 
 /* ONBOARDING OVERLAY */
@@ -652,7 +652,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;">v2.5</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;">v2.6</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill active" data-lang="sq">🇦🇱 SQ</button>
@@ -1157,28 +1157,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
         <div class="translate-box">
           <div class="translate-label">
             <span id="ui-lbl-input">EINGABE</span>
-            <select class="lang-select" id="trans-from">
-              <option value="de">🇩🇪 Deutsch</option>
-              <option value="ru">🇷🇺 Russisch</option>
-              <option value="it">🇮🇹 Italienisch</option>
-              <option value="es">🇪🇸 Spanisch</option>
-              <option value="en">🇬🇧 Englisch</option>
-              <option value="tr">🇹🇷 Türkisch</option>
-              <option value="sq">🇦🇱 Albanisch</option>
-              <option value="th">🇹🇭 Thailändisch</option>
-              <option value="sq">🇦🇱 Albanisch</option>
-              <option value="da">🇩🇰 Dänisch</option>
-              <option value="de">🇩🇪 Deutsch</option>
-              <option value="en">🇬🇧 Englisch</option>
-              <option value="fr">🇫🇷 Französisch</option>
-              <option value="it">🇮🇹 Italienisch</option>
-              <option value="ro">🇷🇴 Rumänisch</option>
-              <option value="ru">🇷🇺 Russisch</option>
-              <option value="sv">🇸🇪 Schwedisch</option>
-              <option value="es">🇪🇸 Spanisch</option>
-              <option value="th">🇹🇭 Thailändisch</option>
-              <option value="tr">🇹🇷 Türkisch</option>
-            </select>
+            <select class="lang-select" id="trans-from"></select>
           </div>
           <textarea class="translate-textarea" id="trans-input" placeholder="Text eingeben..."></textarea>
         </div>
@@ -1191,28 +1170,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
         <div class="translate-box">
           <div class="translate-label">
             <span id="ui-lbl-output">AUSGABE</span>
-            <select class="lang-select" id="trans-to">
-              <option value="de">🇩🇪 Deutsch</option>
-              <option value="ru" selected>🇷🇺 Russisch</option>
-              <option value="it">🇮🇹 Italienisch</option>
-              <option value="es">🇪🇸 Spanisch</option>
-              <option value="en">🇬🇧 Englisch</option>
-              <option value="tr">🇹🇷 Türkisch</option>
-              <option value="sq">🇦🇱 Albanisch</option>
-              <option value="th">🇹🇭 Thailändisch</option>
-              <option value="sq">🇦🇱 Albanisch</option>
-              <option value="da">🇩🇰 Dänisch</option>
-              <option value="de">🇩🇪 Deutsch</option>
-              <option value="en">🇬🇧 Englisch</option>
-              <option value="fr">🇫🇷 Französisch</option>
-              <option value="it">🇮🇹 Italienisch</option>
-              <option value="ro">🇷🇴 Rumänisch</option>
-              <option value="ru" selected>🇷🇺 Russisch</option>
-              <option value="sv">🇸🇪 Schwedisch</option>
-              <option value="es">🇪🇸 Spanisch</option>
-              <option value="th">🇹🇭 Thailändisch</option>
-              <option value="tr">🇹🇷 Türkisch</option>
-            </select>
+            <select class="lang-select" id="trans-to"></select>
           </div>
           <textarea class="translate-textarea" id="trans-output" placeholder="Übersetzung erscheint hier..." readonly></textarea>
         </div>
@@ -1247,15 +1205,15 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
         <button class="btn primary" onclick="sendChat()" id="ui-btn-send">Senden</button>
       </div>
       <div style="margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap;">
-        <button class="btn" id="ui-btn-grammar-tip" onclick="quickPrompt('Erkläre mir eine häufige Grammatikregel auf Deutsch.')">📖 Grammatiktipp</button>
-        <button class="btn" id="ui-btn-phrases" onclick="quickPrompt('Gib mir 5 nützliche Alltagssätze in meiner Lernsprache.')">💡 Sätze des Tages</button>
-        <button class="btn" id="ui-btn-talk" onclick="quickPrompt('Starte ein einfaches Gespräch mit mir auf meiner Lernsprache.')">🗣 Gespräch starten</button>
+        <button class="btn" id="ui-btn-grammar-tip" onclick="quickPrompt(getGrammarPrompt())">📖 Grammatiktipp</button>
+        <button class="btn" id="ui-btn-phrases" onclick="quickPrompt(getPhrasesPrompt())">💡 Sätze des Tages</button>
+        <button class="btn" id="ui-btn-talk" onclick="quickPrompt(getTalkPrompt())">🗣 Gespräch starten</button>
       </div>
     </div>
   </main>
 
   <footer>
-    LINGUA v2.5 · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA v2.6 · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · 2026</span>
   </footer>
 </div>
@@ -1397,7 +1355,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA v2.5 · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA v2.6 · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · 2026</span>
     </div>
 
@@ -4374,7 +4332,7 @@ const VOCAB = {
 })();
 
 // ============================================================
-// VOCAB EXTENSION v2.5 — +500 Wörter pro Sprache
+// VOCAB EXTENSION v2.6 — +500 Wörter pro Sprache
 // ============================================================
 (function() {
   var EXT3 = {
@@ -5064,10 +5022,17 @@ const UI_STRINGS = {
   fr:{ nav_home:'Accueil',nav_vocab:'Vocabulaire',nav_quiz:'Quiz',nav_free:'Apprentissage libre',nav_gen:'Générateur IA',nav_myvocab:'Mes mots',nav_translate:'Traducteur',nav_ai:'Assistant IA',nav_srs:'SRS',nav_write:'Écriture',nav_stats:'Statistiques',nav_badges:'Badges',nav_path:'Parcours',nav_search:'Recherche',nav_conjugate:'Conjugaison',welcome_back:'Bon retour',learning:'Vous apprenez',change_lang:'🌍 Changer de langue',which_lang:'Quelle langue voulez-vous apprendre?',choose_lang:'Choisissez votre langue',stat_learned:'Appris',stat_streak:'Série',stat_correct:'% Correct',stat_total:'Quiz total',vocab_title:'Entraînement vocabulaire',quiz_title:'Quiz',free_title:'Apprentissage libre',gen_title:'Générateur IA',myvocab_title:'Mon vocabulaire',translate_title:'Traducteur',ai_title:'Assistant linguistique IA',reveal:'Cliquer pour révéler',again:'✗ Encore',listen:'🔊 Écouter',skip:'→ Passer',knew:'✓ Je savais',translate_btn:'Traduire',speak_out:'🔊 Lire',copy:'⧉ Copier',input:'ENTRÉE',output:'SORTIE',send:'Envoyer',new_quiz:'🔄 Recommencer',next:'Suivant →',correct:'✓ Correct!',wrong:'✗ Incorrect. Correct:',enter_topic:'Entrer un sujet',generate:'Générer',generating:'IA génère...',save_all:'Tout sauvegarder',to_training:'À l\'entraînement',add_word:'Ajouter un mot',foreign_word:'MOT ÉTRANGER',translation_lbl:'ALLEMAND',phonetic:'PRONONCIATION (optionnel)',add_btn:'+ Ajouter',train_mine:'Entraîner mon vocabulaire',delete_all:'Tout supprimer',no_vocab:'Pas encore de vocabulaire personnel.',settings:'⚙ Paramètres',save:'Sauvegarder',delete:'Supprimer',export:'⬇ Exporter',reset:'🗑 Réinitialiser',ai_welcome:'Bonjour! Je suis votre assistant linguistique IA. Choisissez une langue et un mode pour commencer!',mode_conv:'Conversation',mode_grammar:'Grammaire',mode_pron:'Prononciation',mode_corr:'Correction',quick_grammar:'Conseil grammatical',quick_phrases:'Phrases du jour',quick_talk:'Démarrer conversation',hc_vocab_desc:'Apprenez de nouveaux mots avec des fiches',hc_quiz_desc:'Testez vos connaissances en QCM',hc_free_desc:'Choisissez un thème et parcourez le vocabulaire',hc_translate_desc:'Traduisez mots et phrases instantanément',hc_ai_desc:'Pratiquez avec IA et microphone',hc_gen_desc:'Entrez un thème – IA génère 20 mots',hc_myvocab_desc:'Sauvegardez des mots personnalisés',myvocab_desc:'Ajoutez des mots et gérez votre vocabulaire',gen_desc:'Entrez un thème – IA génère du vocabulaire',footer_note:'Votre progression est sauvegardée localement',chat_placeholder:'Écrivez un message ou appuyez sur 🎤...',},
   ro:{ nav_home:'Acasă',nav_vocab:'Vocabular',nav_quiz:'Quiz',nav_free:'Învățare liberă',nav_gen:'Generator IA',nav_myvocab:'Cuvintele mele',nav_translate:'Traducător',nav_ai:'Asistent IA',nav_srs:'SRS',nav_write:'Scriere',nav_stats:'Statistici',nav_badges:'Insigne',nav_path:'Traseu',nav_search:'Căutare',nav_conjugate:'Conjugare',welcome_back:'Bine ai revenit',learning:'Înveți',change_lang:'🌍 Schimbă limba',which_lang:'Ce limbă vrei să înveți?',choose_lang:'Alege limba ta',stat_learned:'Învățat',stat_streak:'Serie',stat_correct:'% Corect',stat_total:'Total quiz',vocab_title:'Antrenament vocabular',quiz_title:'Quiz',free_title:'Învățare liberă',gen_title:'Generator IA',myvocab_title:'Vocabularul meu',translate_title:'Traducător',ai_title:'Asistent lingvistic IA',reveal:'Click pentru a dezvălui',again:'✗ Din nou',listen:'🔊 Ascultă',skip:'→ Sari',knew:'✓ Știam',translate_btn:'Traduce',speak_out:'🔊 Citește',copy:'⧉ Copiază',input:'INTRARE',output:'IEȘIRE',send:'Trimite',new_quiz:'🔄 Reîncepe',next:'Următor →',correct:'✓ Corect!',wrong:'✗ Greșit. Corect:',enter_topic:'Introdu subiect',generate:'Generează',generating:'IA generează...',save_all:'Salvează tot',to_training:'La antrenament',add_word:'Adaugă cuvânt',foreign_word:'CUVÂNT STRĂIN',translation_lbl:'GERMANĂ',phonetic:'PRONUNȚIE (opțional)',add_btn:'+ Adaugă',train_mine:'Antrenează vocabularul meu',delete_all:'Șterge tot',no_vocab:'Niciun vocabular personal încă.',settings:'⚙ Setări',save:'Salvează',delete:'Șterge',export:'⬇ Exportă',reset:'🗑 Resetează',ai_welcome:'Bună! Sunt asistentul tău lingvistic IA. Alege o limbă și un mod pentru a începe!',mode_conv:'Conversație',mode_grammar:'Gramatică',mode_pron:'Pronunție',mode_corr:'Corecție',quick_grammar:'Sfat gramatical',quick_phrases:'Fraze ale zilei',quick_talk:'Începe conversație',hc_vocab_desc:'Învață cuvinte noi cu fișe',hc_quiz_desc:'Testează cunoștințele cu QCM',hc_free_desc:'Alege o temă și răsfoiește vocabularul',hc_translate_desc:'Traduce cuvinte și fraze instant',hc_ai_desc:'Exersează cu IA și microfon',hc_gen_desc:'Introdu temă – IA generează 20 cuvinte',hc_myvocab_desc:'Salvează cuvinte personalizate',myvocab_desc:'Adaugă cuvinte și gestionează vocabularul',gen_desc:'Introdu o temă – IA generează vocabular',footer_note:'Progresul tău este salvat local',chat_placeholder:'Scrie un mesaj sau apasă 🎤...',},
   sv:{ nav_home:'Hem',nav_vocab:'Ordförråd',nav_quiz:'Quiz',nav_free:'Fri inlärning',nav_gen:'AI-generator',nav_myvocab:'Mina ord',nav_translate:'Översättare',nav_ai:'AI-assistent',nav_srs:'SRS',nav_write:'Skrivning',nav_stats:'Statistik',nav_badges:'Märken',nav_path:'Inlärningsväg',nav_search:'Sök',nav_conjugate:'Konjugation',welcome_back:'Välkommen tillbaka',learning:'Du lär dig',change_lang:'🌍 Byt språk',which_lang:'Vilket språk vill du lära dig?',choose_lang:'Välj ditt inlärningsspråk',stat_learned:'Inlärt',stat_streak:'Serie',stat_correct:'% Rätt',stat_total:'Quiz totalt',vocab_title:'Ordträning',quiz_title:'Quiz',free_title:'Fri inlärning',gen_title:'AI-ordgenerator',myvocab_title:'Mitt ordförråd',translate_title:'Översättare',ai_title:'AI språkassistent',reveal:'Klicka för att avslöja',again:'✗ Igen',listen:'🔊 Lyssna',skip:'→ Hoppa över',knew:'✓ Visste det',translate_btn:'Översätt',speak_out:'🔊 Läs upp',copy:'⧉ Kopiera',input:'INMATNING',output:'UTDATA',send:'Skicka',new_quiz:'🔄 Börja om',next:'Nästa →',correct:'✓ Rätt!',wrong:'✗ Fel. Rätt:',enter_topic:'Ange ämne',generate:'Generera',generating:'AI genererar...',save_all:'Spara alla',to_training:'Till träning',add_word:'Lägg till ord',foreign_word:'FRÄMMANDE ORD',translation_lbl:'TYSKA',phonetic:'UTTAL (valfritt)',add_btn:'+ Lägg till',train_mine:'Träna mitt ordförråd',delete_all:'Ta bort alla',no_vocab:'Inget personligt ordförråd ännu.',settings:'⚙ Inställningar',save:'Spara',delete:'Ta bort',export:'⬇ Exportera',reset:'🗑 Återställ',ai_welcome:'Hej! Jag är din AI-språkassistent. Välj ett inlärningsspråk och ett läge för att börja!',mode_conv:'Konversation',mode_grammar:'Grammatik',mode_pron:'Uttal',mode_corr:'Korrigering',quick_grammar:'Grammatiktips',quick_phrases:'Dagens fraser',quick_talk:'Starta konversation',hc_vocab_desc:'Lär dig nya ord med flashkort och ljud',hc_quiz_desc:'Testa dina kunskaper med flervalsfrågor',hc_free_desc:'Välj ett ämne och bläddra igenom ordförrådet',hc_translate_desc:'Översätt ord och meningar direkt',hc_ai_desc:'Öva konversationer med AI och mikrofon',hc_gen_desc:'Ange ett ämne – AI genererar 20 ord direkt',hc_myvocab_desc:'Spara anpassade ord och träna dem',myvocab_desc:'Lägg till ord och hantera AI-ordförråd',gen_desc:'Ange ett ämne – AI genererar ordförråd',footer_note:'Dina framsteg sparas lokalt',chat_placeholder:'Skriv ett meddelande eller tryck 🎤...',},
+  da:{ nav_home:'Start',nav_vocab:'Ordforråd',nav_quiz:'Quiz',nav_free:'Fri læring',nav_gen:'AI-generator',nav_myvocab:'Mine ord',nav_translate:'Oversætter',nav_ai:'AI-assistent',nav_srs:'SRS',nav_write:'Skrivning',nav_stats:'Statistik',nav_badges:'Badges',nav_path:'Læringssti',nav_search:'Søg',nav_conjugate:'Bøjning',welcome_back:'Velkommen tilbage',learning:'Du lærer',change_lang:'🌍 Skift sprog',which_lang:'Hvilket sprog vil du lære?',choose_lang:'Vælg dit lærersprog',stat_learned:'Lært',stat_streak:'Serie',stat_correct:'% Korrekt',stat_total:'Quiz i alt',vocab_title:'Ordtræning',quiz_title:'Quiz',free_title:'Fri læring',gen_title:'AI-ordgenerator',myvocab_title:'Mit ordforråd',translate_title:'Oversætter',ai_title:'AI sprogassistent',reveal:'Klik for at afsløre',again:'✗ Igen',listen:'🔊 Lyt',skip:'→ Spring over',knew:'✓ Vidste det',translate_btn:'Oversæt',speak_out:'🔊 Oplæs',copy:'⧉ Kopier',input:'INPUT',output:'OUTPUT',send:'Send',new_quiz:'🔄 Start forfra',next:'Næste →',correct:'✓ Korrekt!',wrong:'✗ Forkert. Korrekt:',enter_topic:'Indtast emne',generate:'Generer',generating:'AI genererer...',save_all:'Gem alle',to_training:'Til træning',add_word:'Tilføj ord',foreign_word:'FREMMEDORD',translation_lbl:'TYSK',phonetic:'UDTALE (valgfrit)',add_btn:'+ Tilføj',train_mine:'Træn mit ordforråd',delete_all:'Slet alle',no_vocab:'Intet personligt ordforråd endnu.',settings:'⚙ Indstillinger',save:'Gem',delete:'Slet',export:'⬇ Eksporter',reset:'🗑 Nulstil',ai_welcome:'Hej! Jeg er din AI-sprogassistent. Vælg et lærersprog og en tilstand for at begynde!',mode_conv:'Samtale',mode_grammar:'Grammatik',mode_pron:'Udtale',mode_corr:'Rettelse',quick_grammar:'Grammatiktip',quick_phrases:'Dagens sætninger',quick_talk:'Start samtale',hc_vocab_desc:'Lær nye ord med flashkort og lyd',hc_quiz_desc:'Test din viden med multiple choice',hc_free_desc:'Vælg et emne og gennemse ordforrådet',hc_translate_desc:'Oversæt ord og sætninger med det samme',hc_ai_desc:'Øv samtaler med AI og mikrofon',hc_gen_desc:'Indtast et emne – AI genererer 20 ord',hc_myvocab_desc:'Gem tilpassede ord og træn dem',myvocab_desc:'Tilføj ord og administrer AI-ordforråd',gen_desc:'Indtast et emne – AI genererer ordforråd',footer_note:'Dine fremskridt gemmes lokalt',chat_placeholder:'Skriv en besked eller tryk 🎤...',},
 };
 
 let uiLang = localStorage.getItem('lingua_ui_lang') || 'de';
 function t(key) { return (UI_STRINGS[uiLang] || UI_STRINGS.de)[key] || UI_STRINGS.de[key] || key; }
+
+// Returns the native language name (in German) for KI prompts based on UI language
+// e.g. uiLang='ru' → 'Russisch', uiLang='de' → 'Deutsch'
+function getNativeLang() {
+  return LANG_NAMES[uiLang] || 'Deutsch';
+}
 
 function renderUILangButtons() {
   var container = document.getElementById('ui-lang-buttons');
@@ -5084,6 +5049,48 @@ function renderUILangButtons() {
       showToast(l.label);
     };
     container.appendChild(btn);
+  });
+}
+
+// Returns the translation label for a vocab word.
+// The vocab DB uses German as base language.
+// If UI lang is not German, we show the German translation with a (DE) badge
+// so the user knows it's German. The Übersetzer can be used for further translation.
+function getWordTranslation(w) {
+  if (uiLang === 'de') return w.t;
+  // Show German translation with small DE indicator when interface is not German
+  return w.t + ' <span style="font-size:.65rem;opacity:.6;font-family:Syne,sans-serif;">(DE)</span>';
+}
+
+// Plain text version for input fields / comparisons
+function getWordTranslationPlain(w) { return w.t; }
+
+function populateTranslatorDropdowns() {
+  var fromSel = document.getElementById('trans-from');
+  var toSel   = document.getElementById('trans-to');
+  if (!fromSel || !toSel) return;
+
+  // Remember current selections
+  var prevFrom = fromSel.value || 'de';
+  var prevTo   = toSel.value   || 'ru';
+
+  // All 12 languages alphabetically (by German name = LANG_NAMES order)
+  var langs = Object.keys(LANG_NAMES).sort(function(a,b) {
+    return LANG_NAMES[a].localeCompare(LANG_NAMES[b], 'de');
+  });
+
+  [fromSel, toSel].forEach(function(sel, idx) {
+    var current = idx === 0 ? prevFrom : prevTo;
+    sel.innerHTML = '';
+    langs.forEach(function(code) {
+      var opt = document.createElement('option');
+      opt.value = code;
+      opt.textContent = LANG_EMOJI[code] + ' ' + LANG_NAMES[code];
+      if (code === current) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    // Fallback if current value not in list
+    if (!sel.value) sel.value = idx === 0 ? 'de' : 'ru';
   });
 }
 
@@ -5186,6 +5193,8 @@ function applyUILanguage() {
   setText('set-back-label', backLabel[uiLang] || 'Zurück');
   // Footer
   setText('footer-text', t('footer_note'));
+  // Translator dropdowns — always all 12 languages, alphabetically
+  populateTranslatorDropdowns();
   renderUILangButtons();
 }
 
@@ -5458,7 +5467,7 @@ async function generateVocab(append) {
     const result = await callClaude({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 3000,
-      system: 'Du bist ein Sprachlehrer. Generiere eine Vokabelliste zum Thema auf ' + langName + ' fuer deutschsprachige Lerner. Antworte NUR mit einem JSON-Array, kein Markdown, keine Erklaerungen. Format: [{"f":"Fremdwort","t":"Deutsch","p":"Aussprache"},...] Generiere genau 50 neue Eintraege.' + avoidHint + ' Aussprache ist eine vereinfachte phonetische Umschrift.',
+      system: 'Du bist ein Sprachlehrer. Generiere eine Vokabelliste zum Thema auf ' + langName + ' fuer ' + getNativeLang() + 'sprachige Lerner. Antworte NUR mit einem JSON-Array, kein Markdown, keine Erklaerungen. Format: [{"f":"Fremdwort","t":"' + getNativeLang() + '","p":"Aussprache"},...] Generiere genau 50 neue Eintraege.' + avoidHint + ' Aussprache ist eine vereinfachte phonetische Umschrift.',
       messages: [{ role: 'user', content: 'Thema: ' + topic }]
     });
 
@@ -5921,9 +5930,12 @@ async function doTranslate() {
   const text = document.getElementById('trans-input').value.trim();
   if (!text) return;
   const from = document.getElementById('trans-from').value;
-  const to = document.getElementById('trans-to').value;
-  const fromName = { sq:'Albanisch', da:'Dänisch', de:'Deutsch', en:'Englisch', fr:'Französisch', it:'Italienisch', ro:'Rumänisch', ru:'Russisch', sv:'Schwedisch', es:'Spanisch', th:'Thailändisch', tr:'Türkisch' }[from];
-  const toName   = { sq:'Albanisch', da:'Dänisch', de:'Deutsch', en:'Englisch', fr:'Französisch', it:'Italienisch', ro:'Rumänisch', ru:'Russisch', sv:'Schwedisch', es:'Spanisch', th:'Thailändisch', tr:'Türkisch' }[to];
+  const to   = document.getElementById('trans-to').value;
+  if (from === to) { showToast('Quell- und Zielsprache sind identisch.'); return; }
+
+  // Use LANG_NAMES for native language names, always up to date
+  const fromName = LANG_NAMES[from] || from;
+  const toName   = LANG_NAMES[to]   || to;
 
   document.getElementById('trans-loading').style.display = 'block';
   document.getElementById('trans-output').value = '';
@@ -5932,7 +5944,7 @@ async function doTranslate() {
     const result = await callClaude({
       model:'claude-sonnet-4-6',
       max_tokens:1000,
-      system:`Du bist ein präziser Übersetzer. Übersetze den gegebenen Text von ${fromName} nach ${toName}. Gib NUR die Übersetzung aus, ohne Erklärungen, Anmerkungen oder Formatierung.`,
+      system:'Du bist ein praeziser Uebersetzer. Uebersetze den gegebenen Text von ' + fromName + ' nach ' + toName + '. Gib NUR die Uebersetzung aus, ohne Erklaerungen, Anmerkungen oder Formatierung.',
       messages:[{role:'user',content:text}]
     });
     document.getElementById('trans-output').value = result;
@@ -5973,10 +5985,10 @@ let aiMode = 'conversation';
 let recognition = null;
 
 const MODE_PROMPTS = {
-  conversation: (lang) => `Du bist ein freundlicher ${LANG_NAMES[lang]}-Sprachassistent. Führe ein natürliches Gespräch auf ${LANG_NAMES[lang]}, korrigiere subtil Fehler des Lerners und erkläre auf Deutsch wenn nötig. Bleib motivierend und geduldig.`,
-  grammar: (lang) => `Du bist ein ${LANG_NAMES[lang]}-Grammatikexperte. Erkläre Grammatikregeln klar und mit Beispielen. Antworte auf Deutsch, zeige Beispiele auf ${LANG_NAMES[lang]}.`,
-  pronunciation: (lang) => `Du bist ein Aussprachecoach für ${LANG_NAMES[lang]}. Gib Aussprache-Tipps, erkläre Laute und typische Fehler. Antworte auf Deutsch.`,
-  correction: (lang) => `Du bist ein ${LANG_NAMES[lang]}-Korrekturhelfer. Der Nutzer schreibt Sätze auf ${LANG_NAMES[lang]}, du korrigierst sie und erklärst die Fehler auf Deutsch.`,
+  conversation: (lang) => 'Du bist ein freundlicher ' + LANG_NAMES[lang] + '-Sprachassistent. Fuehre ein natuerliches Gespraech auf ' + LANG_NAMES[lang] + ', korrigiere subtil Fehler des Lerners und erklaere auf ' + getNativeLang() + ' wenn noetig. Bleib motivierend und geduldig.',
+  grammar: (lang) => 'Du bist ein ' + LANG_NAMES[lang] + '-Grammatikexperte. Erklaere Grammatikregeln klar und mit Beispielen. Antworte auf ' + getNativeLang() + ', zeige Beispiele auf ' + LANG_NAMES[lang] + '.',
+  pronunciation: (lang) => 'Du bist ein Aussprachecoach fuer ' + LANG_NAMES[lang] + '. Gib Aussprache-Tipps, erklaere Laute und typische Fehler. Antworte auf ' + getNativeLang() + '.',
+  correction: (lang) => 'Du bist ein ' + LANG_NAMES[lang] + '-Korrekturhelfer. Der Nutzer schreibt Saetze auf ' + LANG_NAMES[lang] + ', du korrigierst sie und erklaerst die Fehler auf ' + getNativeLang() + '.',
 };
 
 document.querySelectorAll('.ai-chip').forEach(chip => {
@@ -6673,7 +6685,7 @@ async function fetchSentenceExample(word, lang, translation) {
     var result = await callClaude({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 200,
-      system: 'Gib einen kurzen natuerlichen Beispielsatz auf ' + LANG_NAMES[lang] + ' mit dem Wort "' + word + '" und darunter die deutsche Uebersetzung. Format: Satz auf Fremdsprache | Deutsche Uebersetzung. Nur diese zwei Zeilen, nichts sonst.',
+      system: 'Gib einen kurzen natuerlichen Beispielsatz auf ' + LANG_NAMES[lang] + ' mit dem Wort "' + word + '" und darunter die ' + getNativeLang() + 'e Uebersetzung. Format: Satz auf Fremdsprache | ' + getNativeLang() + 'e Uebersetzung. Nur diese zwei Zeilen, nichts sonst.',
       messages: [{role:'user', content: word}]
     });
     var parts = result.split('|');
@@ -6911,7 +6923,7 @@ checkQuiz = function(btn, correct, correctAnswer) {
 var ONBOARDING_STEPS = [
   {
     emoji:'👋',
-    title:'Willkommen bei LINGUA v2.5!',
+    title:'Willkommen bei LINGUA v2.6!',
     text:'Die KI-gestützte Sprachlern-App für 12 Sprachen. Lass uns die wichtigsten Features kurz vorstellen — dauert nur 1 Minute!',
     features:null,
     btnText:'Los geht\'s →'
@@ -6931,7 +6943,7 @@ var ONBOARDING_STEPS = [
   {
     emoji:'🔀',
     title:'Verben meistern',
-    text:'Neu in v2.5: Der Konjugationstrainer! Gib ein Verb ein — die KI erstellt eine vollständige Tabelle. Dann kannst du direkt üben.',
+    text:'Neu in v2.6: Der Konjugationstrainer! Gib ein Verb ein — die KI erstellt eine vollständige Tabelle. Dann kannst du direkt üben.',
     features:[
       {icon:'🔀', name:'Konjugationstabelle', desc:'KI-generiert, alle Zeiten'},
       {icon:'🎯', name:'Konjugations-Quiz', desc:'Lücken ausfüllen'},
@@ -7052,28 +7064,25 @@ function showOnboardingNow() {
 // ============================================================
 // UPDATE CHECK + CHANGELOG
 // ============================================================
-var CURRENT_VERSION = '2.5';
+var CURRENT_VERSION = '2.6';
 var CHANGELOG = {
-  '2.4': {
-    title: 'Was ist neu in v2.5?',
+  '2.6': {
+    title: 'Was ist neu in v2.6?',
     items: [
-      '🌍 Interface: alle 12 Lernsprachen als App-Sprache wählbar',
-      '🇫🇷 Französisch · 🇸🇪 Schwedisch · 🇷🇴 Rumänisch als UI-Sprache neu',
-      '📚 +500 neue Vokabeln pro Sprache (Kochen, Sport, Wissenschaft, Politik…)',
-      '🔢 Gesamt: über 7.000 Vokabeleinträge in 12 Sprachen',
-      '✅ Doppelte Icons in Navigation entfernt (SRS, Schreiben, Statistiken, Abzeichen)',
-      '🔍 Suche & 🔀 Konjugation: vollständig mehrsprachig übersetzt',
-      '🔄 Update-Prüfung verbessert & Onboarding deaktivierbar',
+      '⇄ Übersetzer: jetzt von jeder Sprache in jede andere (12×12)',
+      '🇩🇰 Dänisch als App-Interface-Sprache vollständig ergänzt',
+      '🌐 Navigation wird bei Sprachwechsel sofort korrekt übersetzt',
+      '🔧 Übersetzer-Dropdowns ohne Duplikate, dynamisch befüllt',
+      '✅ Alle 12 Sprachen vollständig in Navigation & Einstellungen',
     ]
   },
-  '2.3': {
-    title: 'Was war neu in v2.3?',
+  '2.5': {
+    title: 'Was war neu in v2.5?',
     items: [
-      '🔍 Vokabelsuche — alle Wörter sofort durchsuchbar',
-      '🔀 Konjugationstrainer — KI-Tabellen + Quiz-Modus',
-      '👋 Einführungs-Onboarding — erklärt alle Features',
-      '🎨 8 Farbpaletten + individuelle Farbanpassung',
-      '🔄 Update-Prüfung & Onboarding-Toggle im Einstellungsmenü',
+      '🌍 Interface: alle 12 Lernsprachen als App-Sprache wählbar',
+      '📚 +500 neue Vokabeln pro Sprache (Kochen, Sport, Wissenschaft, Politik)',
+      '✅ Doppelte Icons in Navigation entfernt',
+      '🔍 Suche & 🔀 Konjugation mehrsprachig übersetzt',
     ]
   },
 };
@@ -7282,7 +7291,7 @@ async function generateConjugation() {
     var result = await callClaude({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 2000,
-      system: 'Du bist ein Sprachexperte. Konjugiere das angegebene Verb auf ' + langName + ' in den wichtigsten Zeitformen. Antworte NUR mit einem JSON-Objekt ohne Markdown. Format: {"verb":"...", "language":"...", "tenses":{"Zeitform1":[{"pronoun":"...","form":"...","translation":"..."},...], "Zeitform2":[...]}}. Wichtige Zeitformen je nach Sprache: Praesens, Vergangenheit, Zukunft (und relevante weitere). Maximal 4 Zeitformen. Gib fuer jede Zeitform alle Personalformen (ich/du/er/wir/ihr/sie oder Aequivalente in der jeweiligen Sprache) an.',
+      system: 'Du bist ein Sprachexperte. Konjugiere das angegebene Verb auf ' + langName + ' in den wichtigsten Zeitformen. Antworte NUR mit einem JSON-Objekt ohne Markdown. Format: {"verb":"...", "language":"...", "tenses":{"Zeitform1":[{"pronoun":"...","form":"...","translation":"..."},...], "Zeitform2":[...]}}. Wichtige Zeitformen je nach Sprache: Praesens, Vergangenheit, Zukunft (und relevante weitere). Maximal 4 Zeitformen. Gib fuer jede Zeitform alle Personalformen an. Die "translation" soll die Bedeutung auf ' + getNativeLang() + ' angeben.',
       messages: [{role:'user', content: 'Verb: ' + verb + ' auf ' + langName}]
     });
     var clean = result.replace(/```json|```/g,'').trim();
@@ -7473,8 +7482,24 @@ switchSection = function(id) {
   if (id === 'conjugate') { initConjugation(); renderQuickVerbs(); }
 };
 
+// Dynamic quickPrompt helpers — use UI language as explanation language
+function getGrammarPrompt() {
+  var native = getNativeLang();
+  var learn  = LANG_NAMES[state.lang] || 'der Lernsprache';
+  return 'Erklaere mir eine haeufige Grammatikregel von ' + learn + ' auf ' + native + '.';
+}
+function getPhrasesPrompt() {
+  var native = getNativeLang();
+  var learn  = LANG_NAMES[state.lang] || 'der Lernsprache';
+  return 'Gib mir 5 nuetzliche Alltagssaetze auf ' + learn + ' mit Uebersetzung auf ' + native + '.';
+}
+function getTalkPrompt() {
+  var learn = LANG_NAMES[state.lang] || 'der Lernsprache';
+  return 'Starte ein einfaches Gespraech mit mir auf ' + learn + '.';
+}
+
 // ============================================================
-// INIT v2.5
+// INIT v2.6
 // ============================================================
 speechRate = parseFloat(localStorage.getItem('lingua_speed') || '0.9');
 autoSpeak = localStorage.getItem('lingua_autospeak') !== 'off';
@@ -7482,6 +7507,7 @@ uiLang = localStorage.getItem('lingua_ui_lang') || 'de';
 initVocab();
 updateApiDot();
 applyUILanguage();
+populateTranslatorDropdowns();
 initColorSystem();
 updateGoalRing();
 updateXPBar();
