@@ -5839,25 +5839,311 @@ initHome();
 // ============================================================
 let vocabQueue = [], vocabIndex = 0, vocabRevealed = false;
 
+// ============================================================
+// RUSSISCH-DEUTSCH VOKABELDATENBANK (1000 häufigste Wörter)
+// Format: {f:"Russisch", t:"Deutsch", p:"Aussprache"}
+// Wird genutzt wenn state.lang='de' und uiLang='ru'
+// ============================================================
+var VOCAB_RU_DE = {
+"Grundwortschatz": [
+  {f:"да",t:"ja",p:"da"},{f:"нет",t:"nein",p:"nyet"},{f:"я",t:"ich",p:"ya"},
+  {f:"ты",t:"du",p:"ty"},{f:"он",t:"er",p:"on"},{f:"она",t:"sie",p:"ana"},
+  {f:"мы",t:"wir",p:"my"},{f:"вы",t:"ihr/Sie",p:"vy"},{f:"они",t:"sie (Pl.)",p:"ani"},
+  {f:"это",t:"das/dies",p:"eta"},{f:"и",t:"und",p:"i"},{f:"в",t:"in",p:"v"},
+  {f:"не",t:"nicht",p:"nye"},{f:"на",t:"auf/an",p:"na"},{f:"что",t:"was",p:"shto"},
+  {f:"как",t:"wie",p:"kak"},{f:"где",t:"wo",p:"gdye"},{f:"когда",t:"wann",p:"kagda"},
+  {f:"почему",t:"warum",p:"pachemu"},{f:"кто",t:"wer",p:"kto"},
+  {f:"очень",t:"sehr",p:"ochin'"},{f:"ещё",t:"noch",p:"yeshcho"},
+  {f:"уже",t:"schon",p:"uzhe"},{f:"только",t:"nur",p:"tol'ka"},
+  {f:"все",t:"alle",p:"fsye"},{f:"также",t:"auch",p:"tazhe"},
+  {f:"можно",t:"man kann",p:"mozhna"},{f:"нельзя",t:"man darf nicht",p:"nel'zya"},
+  {f:"надо",t:"man muss",p:"nada"},{f:"здесь",t:"hier",p:"zdyes'"},
+  {f:"там",t:"dort",p:"tam"},{f:"потом",t:"dann/danach",p:"patom"},
+  {f:"сейчас",t:"jetzt",p:"seychas"},{f:"сегодня",t:"heute",p:"sivodnya"},
+  {f:"вчера",t:"gestern",p:"fchera"},{f:"завтра",t:"morgen",p:"zaftra"},
+  {f:"всегда",t:"immer",p:"fsigda"},{f:"никогда",t:"nie",p:"nikagda"},
+  {f:"иногда",t:"manchmal",p:"inagda"},{f:"часто",t:"oft",p:"chasta"},
+  {f:"хорошо",t:"gut",p:"kharasho"},{f:"плохо",t:"schlecht",p:"plokha"},
+  {f:"много",t:"viel",p:"mnoga"},{f:"мало",t:"wenig",p:"mala"},
+  {f:"быстро",t:"schnell",p:"bystra"},{f:"медленно",t:"langsam",p:"myedlina"},
+  {f:"большой",t:"groß",p:"bol'shoy"},{f:"маленький",t:"klein",p:"malen'kiy"},
+  {f:"новый",t:"neu",p:"novy"},{f:"старый",t:"alt",p:"stary"},
+],
+"Verben — häufigste": [
+  {f:"быть",t:"sein",p:"byt'"},{f:"иметь",t:"haben",p:"imyet'"},
+  {f:"делать",t:"machen",p:"dyelat'"},{f:"говорить",t:"sprechen/sagen",p:"gavarit'"},
+  {f:"идти",t:"gehen",p:"idti"},{f:"знать",t:"wissen/kennen",p:"znat'"},
+  {f:"видеть",t:"sehen",p:"vidyet'"},{f:"хотеть",t:"wollen",p:"khatyet'"},
+  {f:"мочь",t:"können",p:"moch'"},{f:"давать",t:"geben",p:"davat'"},
+  {f:"брать",t:"nehmen",p:"brat'"},{f:"думать",t:"denken",p:"dumat'"},
+  {f:"приходить",t:"kommen",p:"prikhadit'"},{f:"работать",t:"arbeiten",p:"rabotat'"},
+  {f:"играть",t:"spielen",p:"igrat'"},{f:"любить",t:"lieben/mögen",p:"lyubit'"},
+  {f:"понимать",t:"verstehen",p:"panimat'"},{f:"читать",t:"lesen",p:"chitat'"},
+  {f:"писать",t:"schreiben",p:"pisat'"},{f:"слушать",t:"zuhören",p:"slushat'"},
+  {f:"спрашивать",t:"fragen",p:"sprashivat'"},{f:"отвечать",t:"antworten",p:"atvichat'"},
+  {f:"покупать",t:"kaufen",p:"pakupat'"},{f:"ждать",t:"warten",p:"zhdat'"},
+  {f:"начинать",t:"beginnen",p:"nachinat'"},{f:"кончать",t:"beenden",p:"kanchat'"},
+  {f:"помогать",t:"helfen",p:"pamagat'"},{f:"учиться",t:"lernen",p:"uchitsya"},
+  {f:"жить",t:"leben/wohnen",p:"zhit'"},{f:"есть",t:"essen",p:"yest'"},
+  {f:"пить",t:"trinken",p:"pit'"},{f:"спать",t:"schlafen",p:"spat'"},
+  {f:"смотреть",t:"schauen",p:"smatryet'"},{f:"слышать",t:"hören",p:"slyshat'"},
+  {f:"открывать",t:"öffnen",p:"atkryvat'"},{f:"закрывать",t:"schließen",p:"zakryvat'"},
+  {f:"находить",t:"finden",p:"nakhadit'"},{f:"стоять",t:"stehen",p:"stayat'"},
+  {f:"сидеть",t:"sitzen",p:"sidyet'"},{f:"лежать",t:"liegen",p:"lyezhat'"},
+  {f:"бегать",t:"laufen",p:"byegat'"},{f:"ехать",t:"fahren",p:"yekhat'"},
+  {f:"летать",t:"fliegen",p:"lyetat'"},{f:"плавать",t:"schwimmen",p:"plavat'"},
+  {f:"рассказывать",t:"erzählen",p:"raskazyvat'"},{f:"решать",t:"entscheiden",p:"ryeshat'"},
+  {f:"забывать",t:"vergessen",p:"zabyvat'"},{f:"помнить",t:"sich erinnern",p:"pomnit'"},
+  {f:"выбирать",t:"wählen",p:"vybirat'"},{f:"объяснять",t:"erklären",p:"abyasnyat'"},
+  {f:"повторять",t:"wiederholen",p:"paftaryat'"},{f:"показывать",t:"zeigen",p:"pakazyvat'"},
+],
+"Substantive — Familie & Menschen": [
+  {f:"человек",t:"Mensch",p:"chilavyek"},{f:"мужчина",t:"Mann",p:"mush'china"},
+  {f:"женщина",t:"Frau",p:"zhenshchina"},{f:"ребёнок",t:"Kind",p:"ribyonok"},
+  {f:"мальчик",t:"Junge",p:"mal'chik"},{f:"девочка",t:"Mädchen",p:"dyevachka"},
+  {f:"семья",t:"Familie",p:"simya"},{f:"мать",t:"Mutter",p:"mat'"},
+  {f:"отец",t:"Vater",p:"atyets"},{f:"брат",t:"Bruder",p:"brat"},
+  {f:"сестра",t:"Schwester",p:"sestra"},{f:"дедушка",t:"Großvater",p:"dyedushka"},
+  {f:"бабушка",t:"Großmutter",p:"babushka"},{f:"муж",t:"Ehemann",p:"muzh"},
+  {f:"жена",t:"Ehefrau",p:"zhena"},{f:"друг",t:"Freund",p:"druk"},
+  {f:"подруга",t:"Freundin",p:"padruga"},{f:"коллега",t:"Kollege",p:"kalyega"},
+  {f:"сосед",t:"Nachbar",p:"sasyed"},{f:"учитель",t:"Lehrer",p:"uchityel'"},
+  {f:"врач",t:"Arzt",p:"vrach"},{f:"студент",t:"Student",p:"studyent"},
+],
+"Substantive — Körper": [
+  {f:"голова",t:"Kopf",p:"galava"},{f:"лицо",t:"Gesicht",p:"litso"},
+  {f:"глаз",t:"Auge",p:"glas"},{f:"ухо",t:"Ohr",p:"ukho"},
+  {f:"нос",t:"Nase",p:"nos"},{f:"рот",t:"Mund",p:"rot"},
+  {f:"зуб",t:"Zahn",p:"zup"},{f:"рука",t:"Hand/Arm",p:"ruka"},
+  {f:"нога",t:"Bein/Fuß",p:"noga"},{f:"спина",t:"Rücken",p:"spina"},
+  {f:"живот",t:"Bauch",p:"zhyvot"},{f:"сердце",t:"Herz",p:"syertse"},
+  {f:"кровь",t:"Blut",p:"krov'"},{f:"кожа",t:"Haut",p:"kozha"},
+  {f:"волосы",t:"Haare",p:"volasy"},{f:"палец",t:"Finger",p:"palyets"},
+],
+"Substantive — Alltag": [
+  {f:"дом",t:"Haus",p:"dom"},{f:"квартира",t:"Wohnung",p:"kvartira"},
+  {f:"комната",t:"Zimmer",p:"komnata"},{f:"стол",t:"Tisch",p:"stol"},
+  {f:"стул",t:"Stuhl",p:"stul"},{f:"кровать",t:"Bett",p:"kravat'"},
+  {f:"окно",t:"Fenster",p:"akno"},{f:"дверь",t:"Tür",p:"dvyer'"},
+  {f:"кухня",t:"Küche",p:"kukhnya"},{f:"ванная",t:"Badezimmer",p:"vannyaya"},
+  {f:"город",t:"Stadt",p:"gorat"},{f:"улица",t:"Straße",p:"ulitsa"},
+  {f:"магазин",t:"Geschäft/Laden",p:"magazin"},{f:"рынок",t:"Markt",p:"rynok"},
+  {f:"школа",t:"Schule",p:"shkola"},{f:"работа",t:"Arbeit",p:"rabota"},
+  {f:"машина",t:"Auto",p:"mashina"},{f:"поезд",t:"Zug",p:"poyist"},
+  {f:"самолёт",t:"Flugzeug",p:"samalyot"},{f:"деньги",t:"Geld",p:"dyen'gi"},
+  {f:"время",t:"Zeit",p:"vremya"},{f:"день",t:"Tag",p:"dyen'"},
+  {f:"ночь",t:"Nacht",p:"noch'"},{f:"неделя",t:"Woche",p:"nidyelya"},
+  {f:"месяц",t:"Monat",p:"myesats"},{f:"год",t:"Jahr",p:"got"},
+  {f:"слово",t:"Wort",p:"slova"},{f:"вопрос",t:"Frage",p:"vapros"},
+  {f:"ответ",t:"Antwort",p:"atvyet"},{f:"проблема",t:"Problem",p:"problema"},
+  {f:"книга",t:"Buch",p:"kniga"},{f:"письмо",t:"Brief",p:"pis'mo"},
+  {f:"телефон",t:"Telefon",p:"tilifon"},{f:"компьютер",t:"Computer",p:"kampyutir"},
+  {f:"интернет",t:"Internet",p:"internet"},{f:"сайт",t:"Webseite",p:"sayt"},
+],
+"Essen & Trinken": [
+  {f:"еда",t:"Essen",p:"yeda"},{f:"хлеб",t:"Brot",p:"khlyep"},
+  {f:"молоко",t:"Milch",p:"malako"},{f:"масло",t:"Butter/Öl",p:"masla"},
+  {f:"сыр",t:"Käse",p:"syr"},{f:"мясо",t:"Fleisch",p:"myasa"},
+  {f:"рыба",t:"Fisch",p:"ryba"},{f:"яйцо",t:"Ei",p:"yaytso"},
+  {f:"суп",t:"Suppe",p:"sup"},{f:"каша",t:"Brei/Grütze",p:"kasha"},
+  {f:"рис",t:"Reis",p:"ris"},{f:"картофель",t:"Kartoffel",p:"kartofel'"},
+  {f:"помидор",t:"Tomate",p:"pamidor"},{f:"огурец",t:"Gurke",p:"agurits"},
+  {f:"яблоко",t:"Apfel",p:"yablaka"},{f:"банан",t:"Banane",p:"banan"},
+  {f:"апельсин",t:"Orange",p:"apilsin"},{f:"сахар",t:"Zucker",p:"sakhar"},
+  {f:"соль",t:"Salz",p:"sol'"},{f:"вода",t:"Wasser",p:"vada"},
+  {f:"чай",t:"Tee",p:"chay"},{f:"кофе",t:"Kaffee",p:"kofe"},
+  {f:"сок",t:"Saft",p:"sok"},{f:"пиво",t:"Bier",p:"pivo"},
+  {f:"вино",t:"Wein",p:"vino"},{f:"борщ",t:"Borschtsch",p:"borshch"},
+  {f:"пельмени",t:"Pelmeni",p:"pil'myeni"},{f:"блины",t:"Blini",p:"bliny"},
+  {f:"торт",t:"Torte",p:"tort"},{f:"мороженое",t:"Eis (Speiseeis)",p:"marozhinaye"},
+],
+"Natur & Wetter": [
+  {f:"природа",t:"Natur",p:"priroda"},{f:"земля",t:"Erde",p:"zimlya"},
+  {f:"небо",t:"Himmel",p:"nyeba"},{f:"солнце",t:"Sonne",p:"sontse"},
+  {f:"луна",t:"Mond",p:"luna"},{f:"звезда",t:"Stern",p:"zvizda"},
+  {f:"вода",t:"Wasser",p:"vada"},{f:"огонь",t:"Feuer",p:"agon'"},
+  {f:"воздух",t:"Luft",p:"vozdukh"},{f:"лес",t:"Wald",p:"lyes"},
+  {f:"море",t:"Meer",p:"morye"},{f:"река",t:"Fluss",p:"ryeka"},
+  {f:"озеро",t:"See",p:"ozira"},{f:"гора",t:"Berg",p:"gara"},
+  {f:"погода",t:"Wetter",p:"pagoda"},{f:"дождь",t:"Regen",p:"dozhd'"},
+  {f:"снег",t:"Schnee",p:"snyek"},{f:"ветер",t:"Wind",p:"vyetir"},
+  {f:"гроза",t:"Gewitter",p:"graza"},{f:"туман",t:"Nebel",p:"tuman"},
+  {f:"мороз",t:"Frost",p:"maros"},{f:"жара",t:"Hitze",p:"zhara"},
+  {f:"весна",t:"Frühling",p:"visna"},{f:"лето",t:"Sommer",p:"lyeta"},
+  {f:"осень",t:"Herbst",p:"osen'"},{f:"зима",t:"Winter",p:"zima"},
+],
+"Zahlen & Zeit": [
+  {f:"один",t:"eins",p:"adin"},{f:"два",t:"zwei",p:"dva"},
+  {f:"три",t:"drei",p:"tri"},{f:"четыре",t:"vier",p:"chetyri"},
+  {f:"пять",t:"fünf",p:"pyat'"},{f:"шесть",t:"sechs",p:"shest'"},
+  {f:"семь",t:"sieben",p:"syem'"},{f:"восемь",t:"acht",p:"vosyem'"},
+  {f:"девять",t:"neun",p:"dyevyat'"},{f:"десять",t:"zehn",p:"dyesyat'"},
+  {f:"двадцать",t:"zwanzig",p:"dvadtsat'"},{f:"тридцать",t:"dreißig",p:"tritsat'"},
+  {f:"сто",t:"hundert",p:"sto"},{f:"тысяча",t:"tausend",p:"tysyacha"},
+  {f:"час",t:"Stunde/Uhr",p:"chas"},{f:"минута",t:"Minute",p:"minuta"},
+  {f:"утро",t:"Morgen",p:"utra"},{f:"вечер",t:"Abend",p:"vyechir"},
+  {f:"понедельник",t:"Montag",p:"panidyelnik"},{f:"вторник",t:"Dienstag",p:"ftornik"},
+  {f:"среда",t:"Mittwoch",p:"srida"},{f:"четверг",t:"Donnerstag",p:"chitvyrk"},
+  {f:"пятница",t:"Freitag",p:"pyatnitsa"},{f:"суббота",t:"Samstag",p:"subota"},
+  {f:"воскресенье",t:"Sonntag",p:"vaskrisyen'ye"},
+  {f:"январь",t:"Januar",p:"yanvar'"},{f:"февраль",t:"Februar",p:"fivral'"},
+  {f:"март",t:"März",p:"mart"},{f:"апрель",t:"April",p:"apryel'"},
+  {f:"май",t:"Mai",p:"may"},{f:"июнь",t:"Juni",p:"iyun'"},
+  {f:"июль",t:"Juli",p:"iyul'"},{f:"август",t:"August",p:"avgust"},
+  {f:"сентябрь",t:"September",p:"sintyabr'"},{f:"октябрь",t:"Oktober",p:"aktyabr'"},
+  {f:"ноябрь",t:"November",p:"noyabr'"},{f:"декабрь",t:"Dezember",p:"dikabr'"},
+],
+"Adjektive": [
+  {f:"красивый",t:"schön",p:"krasiviy"},{f:"некрасивый",t:"hässlich",p:"nikrasiviy"},
+  {f:"умный",t:"klug",p:"umny"},{f:"глупый",t:"dumm",p:"glupy"},
+  {f:"добрый",t:"freundlich/gut",p:"dobry"},{f:"злой",t:"böse",p:"zloy"},
+  {f:"весёлый",t:"fröhlich",p:"visyoly"},{f:"грустный",t:"traurig",p:"grusny"},
+  {f:"горячий",t:"heiß",p:"garyachy"},{f:"холодный",t:"kalt",p:"khalodny"},
+  {f:"тёплый",t:"warm",p:"tyoply"},{f:"прохладный",t:"kühl",p:"prakhladny"},
+  {f:"чистый",t:"sauber",p:"chisty"},{f:"грязный",t:"schmutzig",p:"gryazny"},
+  {f:"тяжёлый",t:"schwer",p:"tizholy"},{f:"лёгкий",t:"leicht",p:"lyokhky"},
+  {f:"длинный",t:"lang",p:"dlinny"},{f:"короткий",t:"kurz",p:"karotkiy"},
+  {f:"высокий",t:"hoch/groß",p:"vysokiy"},{f:"низкий",t:"niedrig/klein",p:"nizky"},
+  {f:"широкий",t:"breit",p:"shiroky"},{f:"узкий",t:"schmal",p:"uzky"},
+  {f:"дорогой",t:"teuer",p:"darogoy"},{f:"дешёвый",t:"billig",p:"dishovy"},
+  {f:"богатый",t:"reich",p:"bogatiy"},{f:"бедный",t:"arm",p:"byedny"},
+  {f:"счастливый",t:"glücklich",p:"shchaslivy"},{f:"несчастный",t:"unglücklich",p:"nishchasny"},
+  {f:"здоровый",t:"gesund",p:"zdorovy"},{f:"больной",t:"krank",p:"bol'noy"},
+  {f:"важный",t:"wichtig",p:"vazhny"},{f:"интересный",t:"interessant",p:"intirysny"},
+  {f:"скучный",t:"langweilig",p:"skuchny"},{f:"трудный",t:"schwierig",p:"trudny"},
+  {f:"лёгкий",t:"einfach/leicht",p:"lyokhky"},{f:"правильный",t:"richtig",p:"pravil'ny"},
+  {f:"неправильный",t:"falsch",p:"nipravil'ny"},{f:"молодой",t:"jung",p:"maladoy"},
+  {f:"красный",t:"rot",p:"krasny"},{f:"синий",t:"blau",p:"siniy"},
+  {f:"зелёный",t:"grün",p:"zilyony"},{f:"жёлтый",t:"gelb",p:"zholty"},
+  {f:"белый",t:"weiß",p:"byely"},{f:"чёрный",t:"schwarz",p:"chyorny"},
+  {f:"серый",t:"grau",p:"syery"},{f:"коричневый",t:"braun",p:"karichnevy"},
+],
+"Kleidung": [
+  {f:"одежда",t:"Kleidung",p:"adyezhda"},{f:"рубашка",t:"Hemd",p:"rubashka"},
+  {f:"футболка",t:"T-Shirt",p:"futbolka"},{f:"брюки",t:"Hose",p:"bryuki"},
+  {f:"джинсы",t:"Jeans",p:"dzhinsy"},{f:"юбка",t:"Rock",p:"yupka"},
+  {f:"платье",t:"Kleid",p:"plat'ye"},{f:"пальто",t:"Mantel",p:"pal'to"},
+  {f:"куртка",t:"Jacke",p:"kurtka"},{f:"свитер",t:"Pullover",p:"svitir"},
+  {f:"обувь",t:"Schuhe",p:"obuf'"},{f:"туфли",t:"Halbschuhe",p:"tufli"},
+  {f:"сапоги",t:"Stiefel",p:"sapagi"},{f:"шапка",t:"Mütze",p:"shapka"},
+  {f:"шарф",t:"Schal",p:"sharf"},{f:"перчатки",t:"Handschuhe",p:"pirchátki"},
+  {f:"сумка",t:"Tasche",p:"sumka"},{f:"рюкзак",t:"Rucksack",p:"ryukzak"},
+],
+"Schule & Bildung": [
+  {f:"школа",t:"Schule",p:"shkola"},{f:"университет",t:"Universität",p:"univirsityet"},
+  {f:"учитель",t:"Lehrer",p:"uchityel'"},{f:"ученик",t:"Schüler",p:"uchenik"},
+  {f:"урок",t:"Unterrichtsstunde",p:"urok"},{f:"учебник",t:"Lehrbuch",p:"uchibnik"},
+  {f:"тетрадь",t:"Heft",p:"titrat'"},{f:"ручка",t:"Stift",p:"ruchka"},
+  {f:"карандаш",t:"Bleistift",p:"karandash"},{f:"доска",t:"Tafel",p:"daska"},
+  {f:"экзамен",t:"Prüfung",p:"ekzamen"},{f:"оценка",t:"Note",p:"atsenka"},
+  {f:"язык",t:"Sprache",p:"yazyk"},{f:"слово",t:"Wort",p:"slova"},
+  {f:"грамматика",t:"Grammatik",p:"grammatika"},{f:"словарь",t:"Wörterbuch",p:"slavár'"},
+  {f:"математика",t:"Mathematik",p:"matimátika"},{f:"физика",t:"Physik",p:"fizika"},
+  {f:"история",t:"Geschichte",p:"istoriya"},{f:"география",t:"Geographie",p:"giagrafiya"},
+],
+"Berufe": [
+  {f:"врач",t:"Arzt",p:"vrach"},{f:"учитель",t:"Lehrer",p:"uchitil'"},
+  {f:"инженер",t:"Ingenieur",p:"inzhinyér"},{f:"юрист",t:"Jurist",p:"yurist"},
+  {f:"полицейский",t:"Polizist",p:"palitseysky"},{f:"пожарный",t:"Feuerwehrmann",p:"pazharny"},
+  {f:"повар",t:"Koch",p:"povar"},{f:"водитель",t:"Fahrer",p:"vaditil'"},
+  {f:"программист",t:"Programmierer",p:"programist"},{f:"художник",t:"Maler/Künstler",p:"khudozhnik"},
+  {f:"писатель",t:"Schriftsteller",p:"pisátil'"},{f:"журналист",t:"Journalist",p:"zhurnalist"},
+  {f:"актёр",t:"Schauspieler",p:"aktyoр"},{f:"певец",t:"Sänger",p:"pivyets"},
+  {f:"директор",t:"Direktor",p:"direktor"},{f:"менеджер",t:"Manager",p:"myenidzhir"},
+],
+"Reise & Transport": [
+  {f:"автобус",t:"Bus",p:"aftobus"},{f:"поезд",t:"Zug",p:"poyist"},
+  {f:"самолёт",t:"Flugzeug",p:"samalyot"},{f:"метро",t:"U-Bahn",p:"mitro"},
+  {f:"такси",t:"Taxi",p:"taksi"},{f:"велосипед",t:"Fahrrad",p:"vilasipyet"},
+  {f:"корабль",t:"Schiff",p:"karabl'"},{f:"аэропорт",t:"Flughafen",p:"aieraport"},
+  {f:"вокзал",t:"Bahnhof",p:"vagzal"},{f:"остановка",t:"Haltestelle",p:"astanovka"},
+  {f:"билет",t:"Ticket",p:"bilyét"},{f:"паспорт",t:"Reisepass",p:"paspart"},
+  {f:"гостиница",t:"Hotel",p:"gastinítsa"},{f:"карта",t:"Karte/Landkarte",p:"karta"},
+  {f:"дорога",t:"Straße/Weg",p:"daroga"},{f:"налево",t:"links",p:"naleva"},
+  {f:"направо",t:"rechts",p:"naprava"},{f:"прямо",t:"geradeaus",p:"pryama"},
+],
+"Gesundheit": [
+  {f:"здоровье",t:"Gesundheit",p:"zdorov'ye"},{f:"болезнь",t:"Krankheit",p:"balyezn'"},
+  {f:"боль",t:"Schmerz",p:"bol'"},{f:"больница",t:"Krankenhaus",p:"bal'nitsa"},
+  {f:"аптека",t:"Apotheke",p:"aptyeka"},{f:"лекарство",t:"Medikament",p:"lyekarstva"},
+  {f:"таблетка",t:"Tablette",p:"tablyetka"},{f:"укол",t:"Spritze",p:"ukol"},
+  {f:"температура",t:"Fieber",p:"timperatura"},{f:"кашель",t:"Husten",p:"kashil'"},
+  {f:"насморк",t:"Schnupfen",p:"nasmork"},{f:"аллергия",t:"Allergie",p:"allyergiya"},
+  {f:"операция",t:"Operation",p:"apiratsiya"},{f:"рецепт",t:"Rezept",p:"ritsept"},
+],
+"Gefühle & Eigenschaften": [
+  {f:"любовь",t:"Liebe",p:"lyubof'"},{f:"дружба",t:"Freundschaft",p:"druzhba"},
+  {f:"счастье",t:"Glück",p:"shchast'ye"},{f:"радость",t:"Freude",p:"radast'"},
+  {f:"грусть",t:"Traurigkeit",p:"grust'"},{f:"страх",t:"Angst",p:"strakh"},
+  {f:"надежда",t:"Hoffnung",p:"nadyezhda"},{f:"злость",t:"Wut",p:"zlost'"},
+  {f:"удивление",t:"Überraschung",p:"udivlyeniye"},{f:"стыд",t:"Scham",p:"styt"},
+  {f:"гордость",t:"Stolz",p:"gordast'"},{f:"зависть",t:"Neid",p:"zavest'"},
+  {f:"уважение",t:"Respekt",p:"uvazheniye"},{f:"доверие",t:"Vertrauen",p:"davyeriye"},
+  {f:"характер",t:"Charakter",p:"kharaktir"},{f:"терпение",t:"Geduld",p:"tirpyeniye"},
+],
+"Redewendungen": [
+  {f:"Привет!",t:"Hallo!",p:"Privyet!"},{f:"Здравствуйте!",t:"Guten Tag!",p:"Zdrastvuyte!"},
+  {f:"Доброе утро!",t:"Guten Morgen!",p:"Dobraye utra!"},
+  {f:"Добрый вечер!",t:"Guten Abend!",p:"Dobry vyechir!"},
+  {f:"Спокойной ночи!",t:"Gute Nacht!",p:"Spakoy-noy nochi!"},
+  {f:"До свидания!",t:"Auf Wiedersehen!",p:"Da svidaniya!"},
+  {f:"Пока!",t:"Tschüss!",p:"Paka!"},{f:"Спасибо!",t:"Danke!",p:"Spasiba!"},
+  {f:"Пожалуйста!",t:"Bitte!",p:"Pazhalusta!"},
+  {f:"Извините!",t:"Entschuldigung!",p:"Izvinite!"},
+  {f:"Как дела?",t:"Wie geht's?",p:"Kak dyela?"},
+  {f:"Хорошо!",t:"Gut!",p:"Khorasho!"},{f:"Отлично!",t:"Ausgezeichnet!",p:"Atlichna!"},
+  {f:"Я не понимаю.",t:"Ich verstehe nicht.",p:"Ya nye panimayu."},
+  {f:"Повторите, пожалуйста.",t:"Bitte wiederholen.",p:"Paftaritye, pazhalusta."},
+  {f:"Сколько стоит?",t:"Wie viel kostet das?",p:"Skolka stoit?"},
+  {f:"Где находится...?",t:"Wo befindet sich...?",p:"Gdye nakhoditsa...?"},
+  {f:"Меня зовут...",t:"Ich heiße...",p:"Minya zavut..."},
+  {f:"Я из Германии.",t:"Ich komme aus Deutschland.",p:"Ya iz Girmaniy."},
+  {f:"Говорите медленнее.",t:"Sprechen Sie langsamer.",p:"Gavaritye myedlinyye."},
+  {f:"Помогите!",t:"Hilfe!",p:"Pamagitye!"},
+],
+"Präpositionen & Strukturwörter": [
+  {f:"в",t:"in/nach",p:"v"},{f:"на",t:"auf/an",p:"na"},
+  {f:"из",t:"aus/von",p:"iz"},{f:"с",t:"mit/von",p:"s"},
+  {f:"к",t:"zu/nach",p:"k"},{f:"от",t:"von",p:"at"},
+  {f:"до",t:"bis/vor",p:"da"},{f:"после",t:"nach (zeitlich)",p:"posli"},
+  {f:"для",t:"für",p:"dlya"},{f:"без",t:"ohne",p:"biz"},
+  {f:"за",t:"hinter/für",p:"za"},{f:"под",t:"unter",p:"pot"},
+  {f:"над",t:"über",p:"nat"},{f:"перед",t:"vor",p:"pyered"},
+  {f:"между",t:"zwischen",p:"myezhdu"},{f:"через",t:"durch",p:"cheris"},
+  {f:"потому что",t:"weil",p:"patamu shto"},{f:"поэтому",t:"deshalb",p:"payetamu"},
+  {f:"хотя",t:"obwohl",p:"khatya"},{f:"если",t:"wenn/falls",p:"yesli"},
+  {f:"чтобы",t:"damit/um zu",p:"shtaby"},{f:"или",t:"oder",p:"ili"},
+  {f:"но",t:"aber",p:"no"},{f:"однако",t:"jedoch",p:"adnako"},
+],
+"Tiere": [
+  {f:"собака",t:"Hund",p:"sabaka"},{f:"кошка",t:"Katze",p:"koshka"},
+  {f:"лошадь",t:"Pferd",p:"loshat'"},{f:"корова",t:"Kuh",p:"korova"},
+  {f:"свинья",t:"Schwein",p:"svinyya"},{f:"овца",t:"Schaf",p:"avtsa"},
+  {f:"курица",t:"Huhn",p:"kuritsa"},{f:"рыба",t:"Fisch",p:"ryba"},
+  {f:"птица",t:"Vogel",p:"ptitsa"},{f:"медведь",t:"Bär",p:"midvyed'"},
+  {f:"волк",t:"Wolf",p:"volk"},{f:"лиса",t:"Fuchs",p:"lisa"},
+  {f:"заяц",t:"Hase",p:"zayats"},{f:"мышь",t:"Maus",p:"mysh'"},
+  {f:"змея",t:"Schlange",p:"zmiya"},{f:"лягушка",t:"Frosch",p:"lyagushka"},
+],
+"Technologie": [
+  {f:"компьютер",t:"Computer",p:"kampyutir"},{f:"телефон",t:"Telefon",p:"tilifon"},
+  {f:"смартфон",t:"Smartphone",p:"smartfon"},{f:"интернет",t:"Internet",p:"internet"},
+  {f:"сайт",t:"Webseite",p:"sayt"},{f:"приложение",t:"App",p:"prilozhéniye"},
+  {f:"пароль",t:"Passwort",p:"parol'"},{f:"экран",t:"Bildschirm",p:"ekran"},
+  {f:"клавиатура",t:"Tastatur",p:"klaviatura"},{f:"батарея",t:"Akku/Batterie",p:"batarya"},
+  {f:"зарядка",t:"Ladegerät",p:"zaryadka"},{f:"фотография",t:"Foto",p:"fatografia"},
+  {f:"видео",t:"Video",p:"video"},{f:"сеть",t:"Netzwerk/WLAN",p:"syet'"},
+  {f:"электронная почта",t:"E-Mail",p:"elektrónnaya pochta"},
+  {f:"социальные сети",t:"Soziale Netzwerke",p:"sotsial'nyye syeti"},
+],
+};
+
 function buildVocabDe() {
-  // VOCAB['de'] existiert nicht — baue es aus allen anderen Sprachen
-  // f = Deutsch (das zu lernende Wort), t = Deutsch (gleich, DeepL übersetzt in UI-Sprache)
-  if (VOCAB['de'] && Object.keys(VOCAB['de']).length > 0) return;
+  // VOCAB_RU_DE direkt als VOCAB['de'] einsetzen
+  if (VOCAB['de'] && Object.keys(VOCAB['de']).length > 50) return;
   VOCAB['de'] = {};
-  var sourceLangs = ['ru', 'en', 'fr', 'es', 'it', 'tr', 'sv', 'da', 'ro'];
-  var seen = {};
-  sourceLangs.forEach(function(lang) {
-    if (!VOCAB[lang]) return;
-    Object.keys(VOCAB[lang]).forEach(function(topic) {
-      if (!VOCAB['de'][topic]) VOCAB['de'][topic] = [];
-      VOCAB[lang][topic].forEach(function(w) {
-        // w.t ist immer Deutsch — als Fremdwort anzeigen
-        if (!seen[w.t]) {
-          seen[w.t] = true;
-          VOCAB['de'][topic].push({f: w.t, t: w.t, p: ''});
-        }
-      });
-    });
+  Object.keys(VOCAB_RU_DE).forEach(function(topic) {
+    VOCAB['de'][topic] = VOCAB_RU_DE[topic];
   });
 }
 
@@ -5983,22 +6269,19 @@ async function preloadDeeplBatch(words) {
 function setTranslationEl(elId, germanText) {
   var el = document.getElementById(elId);
   if (!el) return;
-  if (uiLang === 'de') { el.textContent = germanText; return; }
+  // Bei Lernsprache Deutsch (VOCAB_RU_DE): w.t ist bereits Deutsch — direkt anzeigen
+  if (state.lang === 'de' || uiLang === 'de') {
+    el.textContent = germanText;
+    return;
+  }
   var deeplLang = DEEPL_LANG_MAP[uiLang];
   if (!deeplLang) { el.textContent = germanText + ' (DE)'; return; }
   var cached = deeplCache[germanText + '|' + deeplLang];
-  if (cached) {
-    el.textContent = cached;
-    return;
-  }
-  // Nicht im Cache — direkt übersetzen (Preload hat nicht funktioniert)
+  if (cached) { el.textContent = cached; return; }
   el.textContent = '…';
   translateWithDeepl(germanText, deeplLang)
     .then(function(tr) { el.textContent = tr; })
-    .catch(function(e) {
-      el.textContent = germanText;
-      console.warn('DeepL Fehler:', e.message);
-    });
+    .catch(function() { el.textContent = germanText; });
 }
 
 // Gibt übersetzte Version zurück (async, für Quiz/Write-Vergleich)
@@ -7456,7 +7739,7 @@ function showOnboardingNow() {
 // ============================================================
 var CURRENT_VERSION = '3.2';
 // BUILD-COUNTER: Bei jedem Upload um 1 erhöhen → Changelog erscheint automatisch beim Nutzer
-var BUILD = 4;
+var BUILD = 5;
 
 var CHANGELOG = {
   '3.0': {
