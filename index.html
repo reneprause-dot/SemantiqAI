@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="description" content="LINGUA v3.0 – KI-gestützte Sprachlern-App von René Prause">
+<meta name="description" content="LINGUA v3.2 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v3.0 · by René Prause</title>
+<title>LINGUA v3.2 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -510,7 +510,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
    ============================================================ */
 
 /* ============================================================
-   NEUE FEATURES v3.0: ONBOARDING · SUCHE · KONJUGATION
+   NEUE FEATURES v3.2: ONBOARDING · SUCHE · KONJUGATION
    ============================================================ */
 
 /* ONBOARDING OVERLAY */
@@ -652,7 +652,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;">v3.0</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;">v3.2</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill active" data-lang="sq">🇦🇱 SQ</button>
@@ -1211,7 +1211,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   </main>
 
   <footer>
-    LINGUA v3.0 · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA v3.2 · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
   </footer>
 </div>
@@ -1378,7 +1378,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA v3.0 · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA v3.2 · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
     </div>
 
@@ -4355,7 +4355,7 @@ const VOCAB = {
 })();
 
 // ============================================================
-// VOCAB EXTENSION v3.0 — +500 Wörter pro Sprache
+// VOCAB EXTENSION v3.2 — +500 Wörter pro Sprache
 // ============================================================
 (function() {
   var EXT3 = {
@@ -5839,10 +5839,33 @@ initHome();
 // ============================================================
 let vocabQueue = [], vocabIndex = 0, vocabRevealed = false;
 
+function buildVocabDe() {
+  // VOCAB['de'] existiert nicht — baue es aus allen anderen Sprachen
+  // f = Deutsch (das zu lernende Wort), t = Deutsch (gleich, DeepL übersetzt in UI-Sprache)
+  if (VOCAB['de'] && Object.keys(VOCAB['de']).length > 0) return;
+  VOCAB['de'] = {};
+  var sourceLangs = ['ru', 'en', 'fr', 'es', 'it', 'tr', 'sv', 'da', 'ro'];
+  var seen = {};
+  sourceLangs.forEach(function(lang) {
+    if (!VOCAB[lang]) return;
+    Object.keys(VOCAB[lang]).forEach(function(topic) {
+      if (!VOCAB['de'][topic]) VOCAB['de'][topic] = [];
+      VOCAB[lang][topic].forEach(function(w) {
+        // w.t ist immer Deutsch — als Fremdwort anzeigen
+        if (!seen[w.t]) {
+          seen[w.t] = true;
+          VOCAB['de'][topic].push({f: w.t, t: w.t, p: ''});
+        }
+      });
+    });
+  });
+}
+
 function getAllWords(lang) {
+  if (lang === 'de') buildVocabDe();
+  if (!VOCAB[lang]) return [];
   const all = [];
   for (const topic of Object.values(VOCAB[lang])) all.push(...topic);
-  // Also include custom saved vocab
   const custom = getMyVocab(lang);
   custom.forEach(w => { if (!all.find(x => x.f === w.f)) all.push(w); });
   return all;
@@ -5966,13 +5989,16 @@ function setTranslationEl(elId, germanText) {
   var cached = deeplCache[germanText + '|' + deeplLang];
   if (cached) {
     el.textContent = cached;
-  } else {
-    // Fallback: async laden (sollte durch Preload selten nötig sein)
-    el.textContent = germanText;
-    translateWithDeepl(germanText, deeplLang)
-      .then(function(tr) { el.textContent = tr; })
-      .catch(function() {});
+    return;
   }
+  // Nicht im Cache — direkt übersetzen (Preload hat nicht funktioniert)
+  el.textContent = '…';
+  translateWithDeepl(germanText, deeplLang)
+    .then(function(tr) { el.textContent = tr; })
+    .catch(function(e) {
+      el.textContent = germanText;
+      console.warn('DeepL Fehler:', e.message);
+    });
 }
 
 // Gibt übersetzte Version zurück (async, für Quiz/Write-Vergleich)
@@ -7287,7 +7313,7 @@ checkQuiz = function(btn, correct, correctAnswer) {
 var ONBOARDING_STEPS = [
   {
     emoji:'👋',
-    title:'Willkommen bei LINGUA v3.0!',
+    title:'Willkommen bei LINGUA v3.2!',
     text:'Die KI-gestützte Sprachlern-App für 12 Sprachen. Lass uns die wichtigsten Features kurz vorstellen — dauert nur 1 Minute!',
     features:null,
     btnText:'Los geht\'s →'
@@ -7307,7 +7333,7 @@ var ONBOARDING_STEPS = [
   {
     emoji:'🔀',
     title:'Verben meistern',
-    text:'Neu in v3.0: Der Konjugationstrainer! Gib ein Verb ein — die KI erstellt eine vollständige Tabelle. Dann kannst du direkt üben.',
+    text:'Neu in v3.2: Der Konjugationstrainer! Gib ein Verb ein — die KI erstellt eine vollständige Tabelle. Dann kannst du direkt üben.',
     features:[
       {icon:'🔀', name:'Konjugationstabelle', desc:'KI-generiert, alle Zeiten'},
       {icon:'🎯', name:'Konjugations-Quiz', desc:'Lücken ausfüllen'},
@@ -7428,13 +7454,13 @@ function showOnboardingNow() {
 // ============================================================
 // UPDATE CHECK + CHANGELOG
 // ============================================================
-var CURRENT_VERSION = '3.0';
+var CURRENT_VERSION = '3.2';
 // BUILD-COUNTER: Bei jedem Upload um 1 erhöhen → Changelog erscheint automatisch beim Nutzer
-var BUILD = 3;
+var BUILD = 4;
 
 var CHANGELOG = {
   '3.0': {
-    title: 'Was ist neu in v3.0?',
+    title: 'Was ist neu in v3.2?',
     emoji: '🚀',
     items: [
       '🌍 DeepL-Integration — automatische Übersetzung in deine App-Sprache',
@@ -8083,7 +8109,7 @@ openSettings = function() {
 };
 
 // ============================================================
-// INIT v3.0
+// INIT v3.2
 // ============================================================
 speechRate = parseFloat(localStorage.getItem('lingua_speed') || '0.9');
 autoSpeak = localStorage.getItem('lingua_autospeak') !== 'off';
