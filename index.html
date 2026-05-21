@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="description" content="LINGUA v3.6 – KI-gestützte Sprachlern-App von René Prause">
+<meta name="description" content="LINGUA v4.1 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v3.6 · by René Prause</title>
+<title>LINGUA v4.1 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -87,6 +87,7 @@ header {
 .lang-pill[data-lang="da"] { --pill-color:var(--da); }
 .lang-pill[data-lang="ro"] { --pill-color:var(--ro); }
 .lang-pill[data-lang="fr"] { --pill-color:var(--fr); }
+,.lang-pill[data-lang="pl"] { --pill-color:#e63946; }
 .lang-pill[data-lang="sv"] { --pill-color:var(--sv); }
 .settings-btn {
   background:var(--surface2); border:1px solid var(--border); border-radius:8px;
@@ -510,7 +511,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
    ============================================================ */
 
 /* ============================================================
-   NEUE FEATURES v3.6: ONBOARDING · SUCHE · KONJUGATION
+   NEUE FEATURES v4.1: ONBOARDING · SUCHE · KONJUGATION
    ============================================================ */
 
 /* ONBOARDING OVERLAY */
@@ -652,15 +653,16 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;">v3.6</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;">v4.1</span></div>
     <div class="header-right">
       <div class="lang-pills">
-        <button class="lang-pill active" data-lang="sq">🇦🇱 SQ</button>
+        <button class="lang-pill" data-lang="sq">🇦🇱 SQ</button>
         <button class="lang-pill" data-lang="da">🇩🇰 DA</button>
         <button class="lang-pill" data-lang="de">🇩🇪 DE</button>
         <button class="lang-pill" data-lang="en">🇬🇧 EN</button>
         <button class="lang-pill" data-lang="fr">🇫🇷 FR</button>
         <button class="lang-pill" data-lang="it">🇮🇹 IT</button>
+        <button class="lang-pill" data-lang="pl">🇵🇱 PL</button>
         <button class="lang-pill" data-lang="ro">🇷🇴 RO</button>
         <button class="lang-pill" data-lang="ru">🇷🇺 RU</button>
         <button class="lang-pill" data-lang="sv">🇸🇪 SV</button>
@@ -706,7 +708,20 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
           <div style="font-size:.85rem;color:var(--muted);" id="ui-choose-lang">Wähle deine Lernsprache</div>
         </div>
         <div class="lang-select-grid">
+          <button class="lang-select-card" onclick="selectLanguage('sq')"><div class="lsc-flag">🇦🇱</div><div class="lsc-name">Albanisch</div><div class="lsc-sub">Shqip · Isolat</div></button>
+          <button class="lang-select-card" onclick="selectLanguage('da')"><div class="lsc-flag">🇩🇰</div><div class="lsc-name">Dänisch</div><div class="lsc-sub">Dansk · Germanisch</div></button>
+          <button class="lang-select-card" onclick="selectLanguage('de')"><div class="lsc-flag">🇩🇪</div><div class="lsc-name">Deutsch</div><div class="lsc-sub">Deutsch · Germanisch</div></button>
+          <button class="lang-select-card" onclick="selectLanguage('en')"><div class="lsc-flag">🇬🇧</div><div class="lsc-name">Englisch</div><div class="lsc-sub">English · Germanisch</div></button>
+          <button class="lang-select-card" onclick="selectLanguage('fr')"><div class="lsc-flag">🇫🇷</div><div class="lsc-name">Französisch</div><div class="lsc-sub">Français · Romanisch</div></button>
+          <button class="lang-select-card" onclick="selectLanguage('it')"><div class="lsc-flag">🇮🇹</div><div class="lsc-name">Italienisch</div><div class="lsc-sub">Italiano · Romanisch</div></button>
           <button class="lang-select-card" onclick="selectLanguage('pl')"><div class="lsc-flag">🇵🇱</div><div class="lsc-name">Polnisch</div><div class="lsc-sub">Polski · Slawisch</div></button>
+          <button class="lang-select-card" onclick="selectLanguage('ro')"><div class="lsc-flag">🇷🇴</div><div class="lsc-name">Rumänisch</div><div class="lsc-sub">Română · Romanisch</div></button>
+          <button class="lang-select-card" onclick="selectLanguage('ru')"><div class="lsc-flag">🇷🇺</div><div class="lsc-name">Russisch</div><div class="lsc-sub">Русский · Kyrillisch</div></button>
+          <button class="lang-select-card" onclick="selectLanguage('sv')"><div class="lsc-flag">🇸🇪</div><div class="lsc-name">Schwedisch</div><div class="lsc-sub">Svenska · Germanisch</div></button>
+          <button class="lang-select-card" onclick="selectLanguage('es')"><div class="lsc-flag">🇪🇸</div><div class="lsc-name">Spanisch</div><div class="lsc-sub">Español · Romanisch</div></button>
+          <button class="lang-select-card" onclick="selectLanguage('th')"><div class="lsc-flag">🇹🇭</div><div class="lsc-name">Thailändisch</div><div class="lsc-sub">ภาษาไทย · Tai-Kadai</div></button>
+          <button class="lang-select-card" onclick="selectLanguage('tr')"><div class="lsc-flag">🇹🇷</div><div class="lsc-name">Türkisch</div><div class="lsc-sub">Türkçe · Altaisch</div></button>
+        </div><div class="lsc-name">Polnisch</div><div class="lsc-sub">Polski · Slawisch</div></button>
           <button class="lang-select-card" onclick="selectLanguage('sq')"><div class="lsc-flag">🇦🇱</div><div class="lsc-name">Albanisch</div><div class="lsc-sub">Shqip · Isolat</div></button>
           <button class="lang-select-card" onclick="selectLanguage('da')"><div class="lsc-flag">🇩🇰</div><div class="lsc-name">Dänisch</div><div class="lsc-sub">Dansk · Germanisch</div></button>
           <button class="lang-select-card" onclick="selectLanguage('de')"><div class="lsc-flag">🇩🇪</div><div class="lsc-name">Deutsch</div><div class="lsc-sub">Deutsch · Germanisch</div></button>
@@ -1212,7 +1227,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   </main>
 
   <footer>
-    LINGUA v3.6 · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA v4.1 · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
   </footer>
 </div>
@@ -1311,13 +1326,13 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;">
       <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;margin-bottom:.75rem;" id="set-learn-lang-title">🎓 Lernsprache</div>
       <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
-        <button class="lang-pill" data-settings-lang="pl" onclick="setLangFromSettings('pl')">🇵🇱 Polnisch</button>
         <button class="lang-pill" data-settings-lang="sq" onclick="setLangFromSettings('sq')">🇦🇱 Albanisch</button>
         <button class="lang-pill" data-settings-lang="da" onclick="setLangFromSettings('da')">🇩🇰 Dänisch</button>
         <button class="lang-pill" data-settings-lang="de" onclick="setLangFromSettings('de')">🇩🇪 Deutsch</button>
         <button class="lang-pill" data-settings-lang="en" onclick="setLangFromSettings('en')">🇬🇧 Englisch</button>
         <button class="lang-pill" data-settings-lang="fr" onclick="setLangFromSettings('fr')">🇫🇷 Französisch</button>
         <button class="lang-pill" data-settings-lang="it" onclick="setLangFromSettings('it')">🇮🇹 Italienisch</button>
+        <button class="lang-pill" data-settings-lang="pl" onclick="setLangFromSettings('pl')">🇵🇱 Polnisch</button>
         <button class="lang-pill" data-settings-lang="ro" onclick="setLangFromSettings('ro')">🇷🇴 Rumänisch</button>
         <button class="lang-pill" data-settings-lang="ru" onclick="setLangFromSettings('ru')">🇷🇺 Russisch</button>
         <button class="lang-pill" data-settings-lang="sv" onclick="setLangFromSettings('sv')">🇸🇪 Schwedisch</button>
@@ -1380,7 +1395,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA v3.6 · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA v4.1 · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
     </div>
 
@@ -4541,7 +4556,7 @@ const VOCAB = {
 })();
 
 // ============================================================
-// VOCAB EXTENSION v3.6 — +500 Wörter pro Sprache
+// VOCAB EXTENSION v4.1 — +500 Wörter pro Sprache
 // ============================================================
 (function() {
   var EXT3 = {
@@ -5212,13 +5227,19 @@ const LANG_EMOJI = { sq:"🇦🇱", da:"🇩🇰", de:"🇩🇪", en:"🇬🇧",
 // UI LANGUAGE SYSTEM
 // ============================================================
 const UI_LANGS = {
-  sq:{code:'sq',label:'🇦🇱 Shqip'},       da:{code:'da',label:'🇩🇰 Dansk'},
-  de:{code:'de',label:'🇩🇪 Deutsch'},      en:{code:'en',label:'🇬🇧 English'},
-  fr:{code:'fr',label:'🇫🇷 Français'},     it:{code:'it',label:'🇮🇹 Italiano'},
-  ro:{code:'ro',label:'🇷🇴 Română'},       ru:{code:'ru',label:'🇷🇺 Русский'},
-  pl:{code:'pl',label:'🇵🇱 Polski'},        sv:{code:'sv',label:'🇸🇪 Svenska'},
+  sq:{code:'sq',label:'🇦🇱 Shqip'},
+  da:{code:'da',label:'🇩🇰 Dansk'},
+  de:{code:'de',label:'🇩🇪 Deutsch'},
+  en:{code:'en',label:'🇬🇧 English'},
+  fr:{code:'fr',label:'🇫🇷 Français'},
+  it:{code:'it',label:'🇮🇹 Italiano'},
+  pl:{code:'pl',label:'🇵🇱 Polski'},
+  ro:{code:'ro',label:'🇷🇴 Română'},
+  ru:{code:'ru',label:'🇷🇺 Русский'},
+  sv:{code:'sv',label:'🇸🇪 Svenska'},
   es:{code:'es',label:'🇪🇸 Español'},
-  th:{code:'th',label:'🇹🇭 ภาษาไทย'},    tr:{code:'tr',label:'🇹🇷 Türkçe'},
+  th:{code:'th',label:'🇹🇭 ภาษาไทย'},
+  tr:{code:'tr',label:'🇹🇷 Türkçe'},
 };
 const UI_STRINGS = {
   de:{ nav_home:'Start',nav_vocab:'Vokabeln',nav_quiz:'Quiz',nav_free:'Freies Lernen',nav_gen:'KI-Generator',nav_myvocab:'Meine Vokabeln',nav_translate:'Übersetzer',nav_ai:'KI-Assistent',nav_srs:'SRS',nav_write:'Schreiben',nav_stats:'Statistiken',nav_badges:'Abzeichen',nav_path:'Lernpfad',nav_search:'Suche',nav_conjugate:'Konjugation',welcome_back:'Willkommen zurück',learning:'Du lernst',change_lang:'🌍 Sprache wechseln',which_lang:'Welche Sprache möchtest du lernen?',choose_lang:'Wähle deine Lernsprache',stat_learned:'Gelernt',stat_streak:'Streak',stat_correct:'% Korrekt',stat_total:'Quiz Total',vocab_title:'Vokabeltraining',quiz_title:'Quiz',free_title:'Freies Lernen',gen_title:'KI-Vokabel-Generator',myvocab_title:'Meine Vokabeln',translate_title:'Übersetzer',ai_title:'KI-Sprachassistent',reveal:'Klicken zum Aufdecken',again:'✗ Nochmal',listen:'🔊 Anhören',skip:'→ Überspringen',knew:'✓ Gewusst',translate_btn:'Übersetzen',speak_out:'🔊 Vorlesen',copy:'⧉ Kopieren',input:'EINGABE',output:'AUSGABE',send:'Senden',new_quiz:'🔄 Neu starten',next:'Weiter →',correct:'✓ Richtig!',wrong:'✗ Falsch. Richtig:',enter_topic:'Thema eingeben',generate:'✨ Generieren',generating:'KI generiert Vokabeln...',save_all:'⭐ Alle speichern',to_training:'📚 Zum Training',add_word:'➕ Eigenes Wort hinzufügen',foreign_word:'FREMDWORT',translation_lbl:'DEUTSCH',phonetic:'AUSSPRACHE (optional)',add_btn:'+ Hinzufügen',train_mine:'📚 Meine Vokabeln trainieren',delete_all:'🗑 Alle löschen',no_vocab:'Noch keine eigenen Vokabeln. Füge Wörter hinzu oder generiere sie mit dem KI-Generator.',settings:'⚙ Einstellungen',save:'Speichern',delete:'Löschen',export:'⬇ Exportieren',reset:'🗑 Zurücksetzen',ai_welcome:'Hallo! Ich bin dein KI-Sprachassistent. Wähle eine Lernsprache und einen Modus, dann können wir loslegen!',mode_conv:'💬 Konversation',mode_grammar:'📝 Grammatik',mode_pron:'🎤 Aussprache',mode_corr:'✏️ Korrektur',quick_grammar:'📖 Grammatiktipp',quick_phrases:'💡 Sätze des Tages',quick_talk:'🗣 Gespräch starten',hc_vocab_desc:'Lerne neue Wörter mit Karteikarten und Sprachausgabe',hc_quiz_desc:'Teste dein Wissen mit Multiple-Choice-Fragen',hc_free_desc:'Wähle ein Thema und stöbere durch Vokabeln',hc_translate_desc:'Übersetze Begriffe und Sätze sofort',hc_ai_desc:'Übe Gespräche mit KI, Mikrofon & Sprachausgabe',hc_gen_desc:'Thema eingeben – KI generiert sofort 20 Vokabeln',hc_myvocab_desc:'Eigene Wörter speichern und gezielt trainieren',myvocab_desc:'Eigene Wörter hinzufügen, gespeicherte KI-Vokabeln verwalten und trainieren',gen_desc:'Gib ein Thema ein – die KI generiert passende Vokabeln für deine Lernsprache',footer_note:'Dein Fortschritt wird lokal gespeichert',chat_placeholder:'Nachricht eingeben oder 🎤 drücken...',pron_test:"🎤 Aussprache testen",srs_done:"Alle fälligen Karten erledigt!",srs_next:"Komm morgen wieder für neue Wiederholungen.",no_data:"Noch keine Daten",search_empty:"Kein Ergebnis gefunden.",search_hint:"Tippe um zu suchen — in allen Sprachen.",search_count_found:"Ergebnisse gefunden",search_count_more:"weitere Ergebnisse. Suche verfeinern.",quick_select:"Schnellauswahl:",gen_result:"Ergebnis",write_done:"Übung abgeschlossen!",write_correct:"✓ Richtig!",write_wrong:"✗ Richtig wäre: ",quiz_done:"🏆 Quiz abgeschlossen!",conj_quiz_done:"Quiz abgeschlossen!",conj_restart:"🔄 Wiederholen",conj_new_verb:"+ Neues Verb",conj_saved_verbs:"⭐ Gespeicherte Verben",conj_loading:"KI erstellt Konjugationstabelle...",conj_pronoun:"Pronomen",conj_tab_table:"📋 Tabelle",conj_tab_quiz:"🎯 Quiz",conj_gen_btn:"Konjugieren",conj_save:"⭐ Speichern",conj_start_quiz:"🎯 Quiz starten",srs_flip:"Klicken zum Aufdecken",srs_not_at_all:"😰 Gar nicht",srs_hard:"😐 Schwer",srs_ok:"🙂 Ok",srs_easy:"😊 Leicht",srs_perfect:"🚀 Perfekt",check_btn:"✓ Prüfen",hint_btn:"💡 Hinweis",write_skip:"→ Überspringen",back_lbl:"Zurück",mv_empty_detail:"Füge Wörter hinzu oder generiere sie mit dem KI-Generator."},
@@ -11117,11 +11138,27 @@ switchSection = function(id) {
 // OVERRIDE vocabAnswer to award XP & daily progress
 // ============================================================
 var _origVocabAnswer = vocabAnswer;
+var vocabPronunciationVerified = false; // true wenn Aussprache gehört wurde
+
+// Wird gesetzt wenn der Nutzer auf 🔊 gedrückt hat
+var _origSpeakCurrent = speakCurrent;
+speakCurrent = function() {
+  vocabPronunciationVerified = true;
+  _origSpeakCurrent();
+};
+
 vocabAnswer = function(result) {
   if (result === true) {
-    addXP(1);
-    incrementDailyLearned();
+    if (vocabPronunciationVerified) {
+      // Aussprache wurde gehört → voller Punkt
+      addXP(1);
+      incrementDailyLearned();
+    } else {
+      // Nur 'Gewusst' ohne Aussprache → kein Punkt, nur Fortschritt
+      showToast('🔊 Tipp: Hör dir die Aussprache an für +1 XP!');
+    }
   }
+  vocabPronunciationVerified = false; // Reset für nächste Karte
   _origVocabAnswer(result);
 };
 
@@ -11186,7 +11223,7 @@ checkQuiz = function(btn, correct, correctAnswer) {
 var ONBOARDING_STEPS = [
   {
     emoji:'👋',
-    title:'Willkommen bei LINGUA v3.6!',
+    title:'Willkommen bei LINGUA v4.1!',
     text:'Die KI-gestützte Sprachlern-App für 12 Sprachen. Lass uns die wichtigsten Features kurz vorstellen — dauert nur 1 Minute!',
     features:null,
     btnText:'Los geht\'s →'
@@ -11206,7 +11243,7 @@ var ONBOARDING_STEPS = [
   {
     emoji:'🔀',
     title:'Verben meistern',
-    text:'Neu in v3.6: Der Konjugationstrainer! Gib ein Verb ein — die KI erstellt eine vollständige Tabelle. Dann kannst du direkt üben.',
+    text:'Neu in v4.1: Der Konjugationstrainer! Gib ein Verb ein — die KI erstellt eine vollständige Tabelle. Dann kannst du direkt üben.',
     features:[
       {icon:'🔀', name:'Konjugationstabelle', desc:'KI-generiert, alle Zeiten'},
       {icon:'🎯', name:'Konjugations-Quiz', desc:'Lücken ausfüllen'},
@@ -11335,14 +11372,14 @@ function showOnboardingNow() {
 // ============================================================
 // UPDATE CHECK + CHANGELOG
 // ============================================================
-var CURRENT_VERSION = '4.0';
+var CURRENT_VERSION = '4.1';
 // BUILD wird bei jedem Update automatisch erhöht
 // Version wird automatisch um 0.1 hochgezählt: 3.7→3.8→3.9→4.0→4.1...
-var BUILD = 31;
+var BUILD = 37;
 
 var CHANGELOG = {
   '3.0': {
-    title: 'Was ist neu in v3.6?',
+    title: 'Was ist neu in v4.1?',
     emoji: '🚀',
     items: [
       '🌍 DeepL-Integration — automatische Übersetzung in deine App-Sprache',
@@ -11801,8 +11838,7 @@ var deeplCache = (function() {
 
 // DeepL Sprachcodes
 var DEEPL_LANG_MAP = {
-  de:'DE', en:'EN', fr:'FR', es:'ES', it:'IT', pl:'PL', ru:'RU',
-  sv:'SV', da:'DA', ro:'RO', tr:'TR', sq:null, th:null
+  sq:null, da:'DA', de:'DE', en:'EN', fr:'FR', it:'IT', pl:'PL', ro:'RO', ru:'RU', sv:'SV', es:'ES', th:null, tr:'TR'
 };
 
 function getDeeplKey() {
@@ -11996,7 +12032,7 @@ openSettings = function() {
 };
 
 // ============================================================
-// INIT v3.6
+// INIT v4.1
 // ============================================================
 speechRate = parseFloat(localStorage.getItem('lingua_speed') || '0.9');
 autoSpeak = localStorage.getItem('lingua_autospeak') !== 'off';
