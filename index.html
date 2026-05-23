@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="description" id="meta-description" content="LINGUA v4.7 – KI-gestützte Sprachlern-App von René Prause">
+<meta name="description" id="meta-description" content="LINGUA v4.8 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v4.7 · by René Prause</title>
+<title>LINGUA v4.8 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -659,7 +659,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v4.7</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v4.8</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill" data-lang="sq">🇦🇱 SQ</button>
@@ -824,6 +824,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
         <button class="btn danger" onclick="vocabAnswer(false)" id="ui-btn-again">✗ Nochmal</button>
         <button class="btn" onclick="speakCurrent()" id="ui-btn-listen">🔊 Anhören</button>
         <button class="btn warn" onclick="vocabAnswer('skip')" id="ui-btn-skip">→ Überspringen</button>
+        <button class="btn primary" onclick="vocabAnswer('next')" id="ui-btn-next" style="display:none;">→ Weiter</button>
         <button class="btn success" onclick="vocabAnswer(true)" id="ui-btn-knew">✓ Gewusst</button>
       </div>
     </div>
@@ -1240,6 +1241,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
       <span style="font-size:.72rem;color:var(--muted);flex-shrink:0;">Übersetzung:</span>
       <button class="btn primary" id="nlang-ru" onclick="setNiveauLang('ru')" style="flex:1;">🇷🇺 Russisch</button>
       <button class="btn" id="nlang-tr" onclick="setNiveauLang('tr')" style="flex:1;">🇹🇷 Türkisch</button>
+      <button class="btn" id="nlang-en" onclick="setNiveauLang('en')" style="flex:1;">🇬🇧 Englisch</button>
     </div>
 
     <!-- Level Tabs -->
@@ -1315,6 +1317,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
         <div style="display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap;" id="nex-vocab-btns" style="display:none;">
           <button class="btn" onclick="niveauVocabAnswer(false)" style="flex:1;background:rgba(239,68,68,.15);color:#ef4444;">✗ Nochmal</button>
           <button class="btn" onclick="niveauSpeakWord()" style="flex:1;">🔊 Hören</button>
+          <button class="btn" onclick="niveauVocabAnswer('next')" style="flex:1;">→ Weiter</button>
           <button class="btn primary" onclick="niveauVocabAnswer(true)" style="flex:1;">✓ Gewusst</button>
         </div>
         <div style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;" id="nex-vocab-counter"></div>
@@ -1395,7 +1398,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   </div>
 
   <footer>
-    LINGUA <span id="footer-version">v4.7</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA <span id="footer-version">v4.8</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
   </footer>
 </div>
@@ -1563,7 +1566,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA <span id="settings-version">v4.7</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA <span id="settings-version">v4.8</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
     </div>
 
@@ -9971,13 +9974,25 @@ function showVocabCard() {
 function revealVocab() {
   document.getElementById('vocab-card').classList.add('revealed');
   vocabRevealed = true;
+  // Weiter-Button zeigen, Gewusst ausblenden
+  var nextBtn = document.getElementById('ui-btn-next');
+  var knewBtn = document.getElementById('ui-btn-knew');
+  if (nextBtn) nextBtn.style.display = 'inline-flex';
+  if (knewBtn) knewBtn.style.display = 'none';
 }
 
 function vocabAnswer(result) {
-  if (!vocabRevealed && result !== 'skip') { revealVocab(); return; }
+  // Weiter-Button wieder ausblenden, Gewusst zeigen
+  var nextBtn = document.getElementById('ui-btn-next');
+  var knewBtn = document.getElementById('ui-btn-knew');
+  if (nextBtn) nextBtn.style.display = 'none';
+  if (knewBtn) knewBtn.style.display = 'inline-flex';
+
+  if (!vocabRevealed && result !== 'skip' && result !== 'next') { revealVocab(); return; }
   const card = vocabQueue[vocabIndex];
   if (!state.learned[state.lang]) state.learned[state.lang] = {};
   if (result === true) state.learned[state.lang][card.f] = true;
+  // 'next' = Weiter ohne als gewusst zu markieren
   vocabIndex++;
   saveState();
   showVocabCard();
@@ -11301,121 +11316,121 @@ var NIVEAU_DATA = {
     topics: [
       { id:'a1-gruss',     icon:'👋', title:'Begrüßung & Abschied',
         vocab:[
-          {de:'Hallo',ru:'Привет',tr:'Merhaba',ph:'halo'},
-          {de:'Guten Morgen',ru:'Доброе утро',tr:'Günaydın',ph:'guutn morgn'},
-          {de:'Guten Tag',ru:'Добрый день',tr:'İyi günler',ph:'guutn taak'},
-          {de:'Guten Abend',ru:'Добрый вечер',tr:'İyi akşamlar',ph:'guutn aabnt'},
-          {de:'Gute Nacht',ru:'Спокойной ночи',tr:'İyi geceler',ph:'guutn nakht'},
-          {de:'Auf Wiedersehen',ru:'До свидания',tr:'Güle güle',ph:'auf viiderzeen'},
-          {de:'Tschüss',ru:'Пока',tr:'Hoşça kal',ph:'chyus'},
-          {de:'Bis bald',ru:'До скорого',tr:'Görüşürüz',ph:'bis balt'},
-          {de:'Wie geht es Ihnen?',ru:'Как вы поживаете?',tr:'Nasılsınız?',ph:'vii geet es iinan'},
+          {de:'Hallo',ru:'Привет',tr:'Merhaba',en:'Hello',ph:'halo'},
+          {de:'Guten Morgen',ru:'Доброе утро',tr:'Günaydın',en:'Good morning',ph:'guutn morgn'},
+          {de:'Guten Tag',ru:'Добрый день',tr:'İyi günler',en:'Good afternoon',ph:'guutn taak'},
+          {de:'Guten Abend',ru:'Добрый вечер',tr:'İyi akşamlar',en:'Good evening',ph:'guutn aabnt'},
+          {de:'Gute Nacht',ru:'Спокойной ночи',tr:'İyi geceler',en:'Good night',ph:'guutn nakht'},
+          {de:'Auf Wiedersehen',ru:'До свидания',tr:'Güle güle',en:'Goodbye',ph:'auf viiderzeen'},
+          {de:'Tschüss',ru:'Пока',tr:'Hoşça kal',en:'Bye',ph:'chyus'},
+          {de:'Bis bald',ru:'До скорого',tr:'Görüşürüz',en:'See you soon',ph:'bis balt'},
+          {de:'Wie geht es Ihnen?',ru:'Как вы поживаете?',tr:'Nasılsınız?',en:'How are you?',ph:'vii geet es iinan'},
           {de:'Wie geht\'s?',ru:'Как дела?',ph:'vii geets'},
-          {de:'Danke, gut.',ru:'Спасибо, хорошо.',tr:'Teşekkürler, iyiyim.',ph:'danke gut'},
-          {de:'Und Ihnen?',ru:'А вам?',tr:'Ya siz?',ph:'unt iinan'},
+          {de:'Danke, gut.',ru:'Спасибо, хорошо.',tr:'Teşekkürler, iyiyim.',en:'Thanks, fine.',ph:'danke gut'},
+          {de:'Und Ihnen?',ru:'А вам?',tr:'Ya siz?',en:'And you?',ph:'unt iinan'},
         ],
         grammar:[
           {title:'Sie vs. du', text:'Im Deutschen gibt es zwei Anredeformen:\n• <b>du</b> — informell, für Freunde und Familie\n• <b>Sie</b> — formell, für Unbekannte, Vorgesetzte\n\nRussisch: «ты» = du / «Вы» = Sie', examples:['Wie heißt <b>du</b>? (Freund)', 'Wie heißen <b>Sie</b>? (Chef)']},
           {title:'Satzstellung', text:'Im deutschen Hauptsatz steht das Verb immer an <b>zweiter Stelle</b>.\n\nRussisch: Wortstellung viel freier!\n\nSchema: <b>Subjekt — Verb — Rest</b>', examples:['<b>Ich</b> heiße Anna.', '<b>Sie</b> kommt aus Moskau.','<b>Heute</b> gehe ich einkaufen.']},
         ],
         sentences:[
-          {de:'Hallo, ich heiße Anna.',ru:'Привет, меня зовут Анна.',tr:'Merhaba, benim adım Anna.'},
-          {de:'Wie heißen Sie?',ru:'Как вас зовут?',tr:'Adınız ne?'},
-          {de:'Woher kommen Sie?',ru:'Откуда вы?',tr:'Nerelisiniz?'},
-          {de:'Ich komme aus Russland.',ru:'Я из России.',tr:'Rusya\u2019dan geliyorum.'},
-          {de:'Schön, Sie kennenzulernen!',ru:'Приятно познакомиться!',tr:'Tanıştığımıza memnun oldum!'},
+          {de:'Hallo, ich heiße Anna.',ru:'Привет, меня зовут Анна.',tr:'Merhaba, benim adım Anna.',en:'Hello, my name is Anna.'},
+          {de:'Wie heißen Sie?',ru:'Как вас зовут?',tr:'Adınız ne?',en:'What is your name?'},
+          {de:'Woher kommen Sie?',ru:'Откуда вы?',tr:'Nerelisiniz?',en:'Where are you from?'},
+          {de:'Ich komme aus Russland.',ru:'Я из России.',tr:'Rusya\u2019dan geliyorum.',en:'I come from Russia.'},
+          {de:'Schön, Sie kennenzulernen!',ru:'Приятно познакомиться!',tr:'Tanıştığımıza memnun oldum!',en:'Nice to meet you!'},
         ]
       },
       { id:'a1-zahlen',    icon:'🔢', title:'Zahlen 1–100',
         vocab:[
-          {de:'eins',ru:'один',tr:'bir',ph:'ayns'},{de:'zwei',ru:'два',tr:'iki',ph:'tsvay'},
-          {de:'drei',ru:'три',tr:'üç',ph:'dray'},{de:'vier',ru:'четыре',tr:'dört',ph:'feer'},
-          {de:'fünf',ru:'пять',tr:'beş',ph:'fuenf'},{de:'sechs',ru:'шесть',tr:'altı',ph:'zeks'},
-          {de:'sieben',ru:'семь',tr:'yedi',ph:'zibn'},{de:'acht',ru:'восемь',tr:'sekiz',ph:'akht'},
-          {de:'neun',ru:'девять',tr:'dokuz',ph:'noyn'},{de:'zehn',ru:'десять',tr:'on',ph:'tseen'},
-          {de:'zwanzig',ru:'двадцать',tr:'yirmi',ph:'tsvantsikh'},{de:'dreißig',ru:'тридцать',tr:'otuz',ph:'draysikh'},
-          {de:'vierzig',ru:'сорок',tr:'kırk',ph:'feertsikh'},{de:'fünfzig',ru:'пятьдесят',tr:'elli',ph:'fuenftsikh'},
-          {de:'hundert',ru:'сто',tr:'yüz',ph:'hundert'},{de:'tausend',ru:'тысяча',tr:'bin',ph:'tauznt'},
+          {de:'eins',ru:'один',tr:'bir',en:'one',ph:'ayns'},{de:'zwei',ru:'два',tr:'iki',en:'two',ph:'tsvay'},
+          {de:'drei',ru:'три',tr:'üç',en:'three',ph:'dray'},{de:'vier',ru:'четыре',tr:'dört',en:'four',ph:'feer'},
+          {de:'fünf',ru:'пять',tr:'beş',en:'five',ph:'fuenf'},{de:'sechs',ru:'шесть',tr:'altı',en:'six',ph:'zeks'},
+          {de:'sieben',ru:'семь',tr:'yedi',en:'seven',ph:'zibn'},{de:'acht',ru:'восемь',tr:'sekiz',en:'eight',ph:'akht'},
+          {de:'neun',ru:'девять',tr:'dokuz',en:'nine',ph:'noyn'},{de:'zehn',ru:'десять',tr:'on',en:'ten',ph:'tseen'},
+          {de:'zwanzig',ru:'двадцать',tr:'yirmi',en:'twenty',ph:'tsvantsikh'},{de:'dreißig',ru:'тридцать',tr:'otuz',en:'thirty',ph:'draysikh'},
+          {de:'vierzig',ru:'сорок',tr:'kırk',en:'forty',ph:'feertsikh'},{de:'fünfzig',ru:'пятьдесят',tr:'elli',en:'fifty',ph:'fuenftsikh'},
+          {de:'hundert',ru:'сто',tr:'yüz',en:'hundred',ph:'hundert'},{de:'tausend',ru:'тысяча',tr:'bin',en:'thousand',ph:'tauznt'},
         ],
         grammar:[
           {title:'Artikel: der/die/das', text:'Deutsch hat 3 Artikel — anders als Russisch!\n• <b>der</b> — männlich (maskulin)\n• <b>die</b> — weiblich (feminin)\n• <b>das</b> — sächlich (neutral)\n\n⚠️ Muss auswendig gelernt werden!', examples:['<b>der</b> Mann','<b>die</b> Frau','<b>das</b> Kind']},
           {title:'Plural-Formen', text:'Pluralbildung im Deutschen ist unregelmäßig:\n• -e: der Tag → die Tag<b>e</b>\n• -er: das Kind → die Kind<b>er</b>\n• -en: die Frau → die Frau<b>en</b>\n• -s: das Auto → die Auto<b>s</b>\n• Umlaut: der Mann → die M<b>ä</b>nner', examples:['der Hund → die Hunde','das Buch → die Bücher','die Mutter → die Mütter']},
         ],
         sentences:[
-          {de:'Ich bin 25 Jahre alt.',ru:'Мне 25 лет.',tr:'25 yaşındayım.'},{de:'Das kostet fünf Euro.',ru:'Это стоит пять евро.',tr:'Bu beş Euro tutar.'},
-          {de:'Ich wohne in der zweiten Etage.',ru:'Я живу на втором этаже.',tr:'İkinci katta oturuyorum.'},{de:'Meine Nummer ist 0176 12345.',ru:'Мой номер 0176 12345.',tr:'Numaram 0176 12345.'},
+          {de:'Ich bin 25 Jahre alt.',ru:'Мне 25 лет.',tr:'25 yaşındayım.',en:'I am 25 years old.'},{de:'Das kostet fünf Euro.',ru:'Это стоит пять евро.',tr:'Bu beş Euro tutar.',en:'That costs five euros.'},
+          {de:'Ich wohne in der zweiten Etage.',ru:'Я живу на втором этаже.',tr:'İkinci katta oturuyorum.',en:'I live on the second floor.'},{de:'Meine Nummer ist 0176 12345.',ru:'Мой номер 0176 12345.',tr:'Numaram 0176 12345.',en:'My number is 0176 12345.'},
         ]
       },
       { id:'a1-familie',   icon:'👨‍👩‍👧', title:'Familie',
         vocab:[
-          {de:'die Mutter',ru:'мать',tr:'anne',ph:'muter'},{de:'der Vater',ru:'отец',tr:'baba',ph:'faater'},
-          {de:'die Eltern',ru:'родители',tr:'ebeveynler',ph:'eltern'},{de:'der Bruder',ru:'брат',tr:'erkek kardeş',ph:'bruuder'},
-          {de:'die Schwester',ru:'сестра',tr:'kız kardeş',ph:'shvester'},{de:'der Sohn',ru:'сын',tr:'oğul',ph:'zon'},
-          {de:'die Tochter',ru:'дочь',tr:'kız',ph:'tokhter'},{de:'die Großmutter',ru:'бабушка',tr:'büyükanne',ph:'grosmuter'},
-          {de:'der Großvater',ru:'дедушка',tr:'büyükbaba',ph:'grosfaater'},{de:'der Mann',ru:'муж',tr:'koca/erkek',ph:'man'},
-          {de:'die Frau',ru:'жена',tr:'eş/kadın',ph:'frau'},{de:'das Kind',ru:'ребёнок',tr:'çocuk',ph:'kint'},
-          {de:'der Onkel',ru:'дядя',tr:'amca/dayı',ph:'onkl'},{de:'die Tante',ru:'тётя',tr:'teyze/hala',ph:'tante'},
+          {de:'die Mutter',ru:'мать',tr:'anne',en:'mother',ph:'muter'},{de:'der Vater',ru:'отец',tr:'baba',en:'father',ph:'faater'},
+          {de:'die Eltern',ru:'родители',tr:'ebeveynler',en:'parents',ph:'eltern'},{de:'der Bruder',ru:'брат',tr:'erkek kardeş',en:'brother',ph:'bruuder'},
+          {de:'die Schwester',ru:'сестра',tr:'kız kardeş',en:'sister',ph:'shvester'},{de:'der Sohn',ru:'сын',tr:'oğul',en:'son',ph:'zon'},
+          {de:'die Tochter',ru:'дочь',tr:'kız',en:'daughter',ph:'tokhter'},{de:'die Großmutter',ru:'бабушка',tr:'büyükanne',en:'grandmother',ph:'grosmuter'},
+          {de:'der Großvater',ru:'дедушка',tr:'büyükbaba',en:'grandfather',ph:'grosfaater'},{de:'der Mann',ru:'муж',tr:'koca/erkek',en:'husband/man',ph:'man'},
+          {de:'die Frau',ru:'жена',tr:'eş/kadın',en:'wife/woman',ph:'frau'},{de:'das Kind',ru:'ребёнок',tr:'çocuk',en:'child',ph:'kint'},
+          {de:'der Onkel',ru:'дядя',tr:'amca/dayı',en:'uncle',ph:'onkl'},{de:'die Tante',ru:'тётя',tr:'teyze/hala',en:'aunt',ph:'tante'},
         ],
         grammar:[
           {title:'Possessivpronomen: mein/meine', text:'Wie "мой/моя/моё" im Russischen, aber mit Artikel-Endung:\n• mein (masc/neutr): <b>mein</b> Vater, <b>mein</b> Kind\n• meine (fem/plural): <b>meine</b> Mutter, <b>meine</b> Eltern', examples:['Das ist <b>mein</b> Bruder.','Das ist <b>meine</b> Schwester.','Das sind <b>meine</b> Kinder.']},
         ],
         sentences:[
-          {de:'Meine Familie ist groß.',ru:'Моя семья большая.',tr:'Ailem büyük.'},{de:'Ich habe zwei Schwestern.',ru:'У меня две сестры.',tr:'İki kız kardeşim var.'},
-          {de:'Meine Mutter heißt Maria.',ru:'Мою маму зовут Мария.',tr:'Annemin adı Maria.'},{de:'Wir wohnen zusammen.',ru:'Мы живём вместе.',tr:'Birlikte yaşıyoruz.'},
+          {de:'Meine Familie ist groß.',ru:'Моя семья большая.',tr:'Ailem büyük.',en:'My family is large.'},{de:'Ich habe zwei Schwestern.',ru:'У меня две сестры.',tr:'İki kız kardeşim var.',en:'I have two sisters.'},
+          {de:'Meine Mutter heißt Maria.',ru:'Мою маму зовут Мария.',tr:'Annemin adı Maria.',en:'My mothers name is Maria.'},{de:'Wir wohnen zusammen.',ru:'Мы живём вместе.',tr:'Birlikte yaşıyoruz.',en:'We live together.'},
         ]
       },
       { id:'a1-farben',    icon:'🎨', title:'Farben & Formen',
         vocab:[
-          {de:'rot',ru:'красный',tr:'kırmızı',ph:'rot'},{de:'blau',ru:'синий',tr:'mavi',ph:'blau'},
-          {de:'grün',ru:'зелёный',tr:'yeşil',ph:'gruen'},{de:'gelb',ru:'жёлтый',tr:'sarı',ph:'gelp'},
-          {de:'schwarz',ru:'чёрный',tr:'siyah',ph:'shvarts'},{de:'weiß',ru:'белый',tr:'beyaz',ph:'vays'},
-          {de:'grau',ru:'серый',tr:'gri',ph:'grau'},{de:'braun',ru:'коричневый',tr:'kahverengi',ph:'braun'},
-          {de:'orange',ru:'оранжевый',tr:'turuncu',ph:'orange'},{de:'lila',ru:'фиолетовый',tr:'mor',ph:'liila'},
-          {de:'rund',ru:'круглый',tr:'yuvarlak',ph:'runt'},{de:'eckig',ru:'угловатый',tr:'köşeli',ph:'ekikh'},
-          {de:'groß',ru:'большой',tr:'büyük',ph:'gros'},{de:'klein',ru:'маленький',tr:'küçük',ph:'klayn'},
+          {de:'rot',ru:'красный',tr:'kırmızı',en:'red',ph:'rot'},{de:'blau',ru:'синий',tr:'mavi',en:'blue',ph:'blau'},
+          {de:'grün',ru:'зелёный',tr:'yeşil',en:'green',ph:'gruen'},{de:'gelb',ru:'жёлтый',tr:'sarı',en:'yellow',ph:'gelp'},
+          {de:'schwarz',ru:'чёрный',tr:'siyah',en:'black',ph:'shvarts'},{de:'weiß',ru:'белый',tr:'beyaz',en:'white',ph:'vays'},
+          {de:'grau',ru:'серый',tr:'gri',en:'grey',ph:'grau'},{de:'braun',ru:'коричневый',tr:'kahverengi',en:'brown',ph:'braun'},
+          {de:'orange',ru:'оранжевый',tr:'turuncu',en:'orange',ph:'orange'},{de:'lila',ru:'фиолетовый',tr:'mor',en:'purple',ph:'liila'},
+          {de:'rund',ru:'круглый',tr:'yuvarlak',en:'round',ph:'runt'},{de:'eckig',ru:'угловатый',tr:'köşeli',en:'angular',ph:'ekikh'},
+          {de:'groß',ru:'большой',tr:'büyük',en:'big',ph:'gros'},{de:'klein',ru:'маленький',tr:'küçük',en:'small',ph:'klayn'},
         ],
         grammar:[
           {title:'Adjektivdeklination (Nominativ)', text:'Adjektive ändern ihre Endung je nach Artikel und Genus:\n\n<b>Mit definitem Artikel:</b>\nder rot<b>e</b> Ball · die grün<b>e</b> Pflanze · das blaue Buch\n\n<b>Ohne Artikel:</b>\nrot<b>er</b> Wein · grün<b>e</b> Wiese · blaues Wasser', examples:['Das ist ein <b>roter</b> Apfel.','Sie trägt ein <b>grünes</b> Kleid.']},
         ],
         sentences:[
-          {de:'Der Himmel ist blau.',ru:'Небо синее.',tr:'Gökyüzü mavi.'},{de:'Das Auto ist rot.',ru:'Машина красная.',tr:'Araba kırmızı.'},
-          {de:'Meine Lieblingsfarbe ist grün.',ru:'Мой любимый цвет — зелёный.',tr:'En sevdiğim renk yeşil.'},{de:'Das Haus ist groß und weiß.',ru:'Дом большой и белый.',tr:'Ev büyük ve beyaz.'},
+          {de:'Der Himmel ist blau.',ru:'Небо синее.',tr:'Gökyüzü mavi.',en:'The sky is blue.'},{de:'Das Auto ist rot.',ru:'Машина красная.',tr:'Araba kırmızı.',en:'The car is red.'},
+          {de:'Meine Lieblingsfarbe ist grün.',ru:'Мой любимый цвет — зелёный.',tr:'En sevdiğim renk yeşil.',en:'My favourite colour is green.'},{de:'Das Haus ist groß und weiß.',ru:'Дом большой и белый.',tr:'Ev büyük ve beyaz.',en:'The house is big and white.'},
         ]
       },
       { id:'a1-alltag',    icon:'🏠', title:'Alltag & Wohnen',
         vocab:[
-          {de:'das Haus',ru:'дом',tr:'ev',ph:'haus'},{de:'die Wohnung',ru:'квартира',tr:'daire',ph:'vonung'},
-          {de:'das Zimmer',ru:'комната',tr:'oda',ph:'tsimer'},{de:'die Küche',ru:'кухня',tr:'mutfak',ph:'kyukhe'},
-          {de:'das Badezimmer',ru:'ванная',tr:'banyo',ph:'baadetsimer'},{de:'das Bett',ru:'кровать',tr:'yatak',ph:'bet'},
-          {de:'der Tisch',ru:'стол',tr:'masa',ph:'tish'},{de:'der Stuhl',ru:'стул',tr:'sandalye',ph:'shtul'},
-          {de:'das Fenster',ru:'окно',tr:'pencere',ph:'fenster'},{de:'die Tür',ru:'дверь',tr:'kapı',ph:'tuer'},
-          {de:'schlafen',ru:'спать',tr:'uyumak',ph:'shlaafen'},{de:'essen',ru:'есть',tr:'yemek yemek',ph:'esn'},
-          {de:'trinken',ru:'пить',tr:'içmek',ph:'trinken'},{de:'kochen',ru:'готовить',tr:'yemek pişirmek',ph:'kokhn'},
+          {de:'das Haus',ru:'дом',tr:'ev',en:'house',ph:'haus'},{de:'die Wohnung',ru:'квартира',tr:'daire',en:'apartment',ph:'vonung'},
+          {de:'das Zimmer',ru:'комната',tr:'oda',en:'room',ph:'tsimer'},{de:'die Küche',ru:'кухня',tr:'mutfak',en:'kitchen',ph:'kyukhe'},
+          {de:'das Badezimmer',ru:'ванная',tr:'banyo',en:'bathroom',ph:'baadetsimer'},{de:'das Bett',ru:'кровать',tr:'yatak',en:'bed',ph:'bet'},
+          {de:'der Tisch',ru:'стол',tr:'masa',en:'table',ph:'tish'},{de:'der Stuhl',ru:'стул',tr:'sandalye',en:'chair',ph:'shtul'},
+          {de:'das Fenster',ru:'окно',tr:'pencere',en:'window',ph:'fenster'},{de:'die Tür',ru:'дверь',tr:'kapı',en:'door',ph:'tuer'},
+          {de:'schlafen',ru:'спать',tr:'uyumak',en:'to sleep',ph:'shlaafen'},{de:'essen',ru:'есть',tr:'yemek yemek',en:'to eat',ph:'esn'},
+          {de:'trinken',ru:'пить',tr:'içmek',en:'to drink',ph:'trinken'},{de:'kochen',ru:'готовить',tr:'yemek pişirmek',en:'to cook',ph:'kokhn'},
         ],
         grammar:[
           {title:'Trennbare Verben', text:'Viele deutsche Verben haben ein abtrennbares Präfix:\n<b>aufstehen → ich stehe auf</b>\n\nDas Präfix wandert ans Satzende!\n\nVergleich Russisch: встаю — kein getrenntes Präfix', examples:['Ich <b>stehe</b> um 7 Uhr <b>auf</b>.','Er <b>räumt</b> das Zimmer <b>auf</b>.','Wir <b>rufen</b> dich <b>an</b>.']},
         ],
         sentences:[
-          {de:'Ich wohne in einer kleinen Wohnung.',ru:'Я живу в маленькой квартире.',tr:'Küçük bir dairede yaşıyorum.'},{de:'Das Schlafzimmer ist rechts.',ru:'Спальня справа.',tr:'Yatak odası sağda.'},
-          {de:'Wir essen zusammen am Tisch.',ru:'Мы едим вместе за столом.',tr:'Masada birlikte yiyoruz.'},{de:'Ich stehe um 7 Uhr auf.',ru:'Я встаю в 7 часов.',tr:'Saat 7de kalkıyorum.'},
+          {de:'Ich wohne in einer kleinen Wohnung.',ru:'Я живу в маленькой квартире.',tr:'Küçük bir dairede yaşıyorum.',en:'I live in a small apartment.'},{de:'Das Schlafzimmer ist rechts.',ru:'Спальня справа.',tr:'Yatak odası sağda.',en:'The bedroom is on the right.'},
+          {de:'Wir essen zusammen am Tisch.',ru:'Мы едим вместе за столом.',tr:'Masada birlikte yiyoruz.',en:'We eat together at the table.'},{de:'Ich stehe um 7 Uhr auf.',ru:'Я встаю в 7 часов.',tr:'Saat 7de kalkıyorum.',en:'I get up at 7 oclock.'},
         ]
       },
       { id:'a1-essen',     icon:'🍽️', title:'Essen & Trinken',
         vocab:[
-          {de:'das Brot',ru:'хлеб',tr:'ekmek',ph:'brot'},{de:'die Butter',ru:'масло',tr:'tereyağı',ph:'buter'},
-          {de:'der Käse',ru:'сыр',tr:'peynir',ph:'keeze'},{de:'das Fleisch',ru:'мясо',tr:'et',ph:'flaysh'},
-          {de:'der Fisch',ru:'рыба',tr:'balık',ph:'fish'},{de:'das Gemüse',ru:'овощи',tr:'sebze',ph:'gemiize'},
-          {de:'das Obst',ru:'фрукты',tr:'meyve',ph:'opst'},{de:'die Milch',ru:'молоко',tr:'süt',ph:'milkh'},
-          {de:'das Wasser',ru:'вода',tr:'su',ph:'vaser'},{de:'der Tee',ru:'чай',tr:'çay',ph:'tee'},
-          {de:'der Kaffee',ru:'кофе',tr:'kahve',ph:'kafe'},{de:'das Bier',ru:'пиво',tr:'bira',ph:'beer'},
-          {de:'lecker',ru:'вкусный',tr:'lezzetli',ph:'leker'},{de:'Hunger haben',ru:'быть голодным',tr:'acıkmak',ph:'hunger habn'},
+          {de:'das Brot',ru:'хлеб',tr:'ekmek',en:'bread',ph:'brot'},{de:'die Butter',ru:'масло',tr:'tereyağı',en:'butter',ph:'buter'},
+          {de:'der Käse',ru:'сыр',tr:'peynir',en:'cheese',ph:'keeze'},{de:'das Fleisch',ru:'мясо',tr:'et',en:'meat',ph:'flaysh'},
+          {de:'der Fisch',ru:'рыба',tr:'balık',en:'fish',ph:'fish'},{de:'das Gemüse',ru:'овощи',tr:'sebze',en:'vegetables',ph:'gemiize'},
+          {de:'das Obst',ru:'фрукты',tr:'meyve',en:'fruit',ph:'opst'},{de:'die Milch',ru:'молоко',tr:'süt',en:'milk',ph:'milkh'},
+          {de:'das Wasser',ru:'вода',tr:'su',en:'water',ph:'vaser'},{de:'der Tee',ru:'чай',tr:'çay',en:'tea',ph:'tee'},
+          {de:'der Kaffee',ru:'кофе',tr:'kahve',en:'coffee',ph:'kafe'},{de:'das Bier',ru:'пиво',tr:'bira',en:'beer',ph:'beer'},
+          {de:'lecker',ru:'вкусный',tr:'lezzetli',en:'delicious',ph:'leker'},{de:'Hunger haben',ru:'быть голодным',tr:'acıkmak',en:'to be hungry',ph:'hunger habn'},
         ],
         grammar:[
           {title:'Modalverb: möchten', text:'«möchten» = хотеть (höfliche Form)\n\nKonjugation:\nych möchte · du möchtest · er/sie möchte\nwir möchten · ihr möchtet · Sie möchten\n\nVerwendung: Bestellung im Restaurant, Wunsch', examples:['Ich <b>möchte</b> einen Kaffee, bitte.','Was <b>möchten</b> Sie essen?','Wir <b>möchten</b> zahlen.']},
         ],
         sentences:[
-          {de:'Ich möchte bitte einen Tee.',ru:'Я бы хотел чай, пожалуйста.',tr:'Bir çay istiyorum lütfen.'},{de:'Das Brot ist frisch und lecker.',ru:'Хлеб свежий и вкусный.',tr:'Ekmek taze ve lezzetli.'},
-          {de:'Haben Sie Hunger?',ru:'Вы голодны?',tr:'Acıktınız mı?'},{de:'Was kostet das Mittagessen?',ru:'Сколько стоит обед?',tr:'Öğle yemeği ne kadar?'},
+          {de:'Ich möchte bitte einen Tee.',ru:'Я бы хотел чай, пожалуйста.',tr:'Bir çay istiyorum lütfen.',en:'I would like a tea, please.'},{de:'Das Brot ist frisch und lecker.',ru:'Хлеб свежий и вкусный.',tr:'Ekmek taze ve lezzetli.',en:'The bread is fresh and delicious.'},
+          {de:'Haben Sie Hunger?',ru:'Вы голодны?',tr:'Acıktınız mı?',en:'Are you hungry?'},{de:'Was kostet das Mittagessen?',ru:'Сколько стоит обед?',tr:'Öğle yemeği ne kadar?',en:'How much does lunch cost?'},
         ]
       },
     ]
@@ -11426,111 +11441,111 @@ var NIVEAU_DATA = {
     topics: [
       { id:'a2-einkauf',   icon:'🛒', title:'Einkaufen',
         vocab:[
-          {de:'der Supermarkt',ru:'супермаркет',tr:'süpermarket',ph:'zupermarkt'},{de:'der Markt',ru:'рынок',tr:'pazar',ph:'markt'},
-          {de:'die Kasse',ru:'касса',tr:'kasa',ph:'kase'},{de:'der Preis',ru:'цена',tr:'fiyat',ph:'prays'},
-          {de:'teuer',ru:'дорогой',tr:'pahalı',ph:'toyer'},{de:'billig',ru:'дешёвый',tr:'ucuz',ph:'bilikH'},
-          {de:'bezahlen',ru:'платить',tr:'ödemek',ph:'betsalen'},{de:'der Rabatt',ru:'скидка',tr:'indirim',ph:'rabat'},
-          {de:'das Angebot',ru:'предложение',tr:'teklif/kampanya',ph:'angebot'},{de:'die Tüte',ru:'пакет',tr:'torba',ph:'tyute'},
-          {de:'Haben Sie…?',ru:'У вас есть…?',tr:'... var mı?',ph:'habn zi'},{de:'Was kostet…?',ru:'Сколько стоит…?',tr:'... ne kadar?',ph:'vas kostet'},
-          {de:'Ich nehme…',ru:'Я возьму…',tr:'... alıyorum.',ph:'ikh neeme'},{de:'der Wechselgeld',ru:'сдача',tr:'para üstü',ph:'vekshelgelt'},
+          {de:'der Supermarkt',ru:'супермаркет',tr:'süpermarket',en:'supermarket',ph:'zupermarkt'},{de:'der Markt',ru:'рынок',tr:'pazar',en:'market',ph:'markt'},
+          {de:'die Kasse',ru:'касса',tr:'kasa',en:'checkout',ph:'kase'},{de:'der Preis',ru:'цена',tr:'fiyat',en:'price',ph:'prays'},
+          {de:'teuer',ru:'дорогой',tr:'pahalı',en:'expensive',ph:'toyer'},{de:'billig',ru:'дешёвый',tr:'ucuz',en:'cheap',ph:'bilikH'},
+          {de:'bezahlen',ru:'платить',tr:'ödemek',en:'to pay',ph:'betsalen'},{de:'der Rabatt',ru:'скидка',tr:'indirim',en:'discount',ph:'rabat'},
+          {de:'das Angebot',ru:'предложение',tr:'teklif/kampanya',en:'offer',ph:'angebot'},{de:'die Tüte',ru:'пакет',tr:'torba',en:'bag',ph:'tyute'},
+          {de:'Haben Sie…?',ru:'У вас есть…?',tr:'... var mı?',en:'Do you have...?',ph:'habn zi'},{de:'Was kostet…?',ru:'Сколько стоит…?',tr:'... ne kadar?',en:'How much is...?',ph:'vas kostet'},
+          {de:'Ich nehme…',ru:'Я возьму…',tr:'... alıyorum.',en:'I will take...',ph:'ikh neeme'},{de:'der Wechselgeld',ru:'сдача',tr:'para üstü',en:'change (money)',ph:'vekshelgelt'},
         ],
         grammar:[
           {title:'Akkusativ — direkte Objekte', text:'Im Deutschen gibt es 4 Fälle (Kasus).\nAkkusativ = Wen oder Was? (= объект действия)\n\n• der → <b>den</b> (maskulin)\n• die → die (feminin)\n• das → das (neutral)\n\nRussisch: Vinitel\'nyy padezh', examples:['Ich kaufe <b>den</b> Apfel.','Ich nehme <b>die</b> Tasche.','Ich sehe <b>das</b> Kind.']},
           {title:'Imperativ', text:'Befehle / Bitten auf Deutsch:\n\n<b>du:</b> Kauf! (kauf + Stamm)\n<b>ihr:</b> Kauft!\n<b>Sie:</b> Kaufen Sie!\n\nOft mit «bitte» höflicher.', examples:['<b>Gib</b> mir den Apfel, bitte.','<b>Kommen</b> Sie bitte hierher.','<b>Zeig</b> mir das!']},
         ],
         sentences:[
-          {de:'Wo ist die Kasse, bitte?',ru:'Где касса, пожалуйста?',tr:'Kasa nerede, lütfen?'},{de:'Das ist zu teuer.',ru:'Это слишком дорого.',tr:'Bu çok pahalı.'},
-          {de:'Haben Sie das auch in Größe M?',ru:'Есть ли это в размере M?',tr:'Bunun M bedeni de var mı?'},{de:'Ich zahle mit Karte.',ru:'Я плачу картой.',tr:'Kartla ödüyorum.'},
+          {de:'Wo ist die Kasse, bitte?',ru:'Где касса, пожалуйста?',tr:'Kasa nerede, lütfen?',en:'Where is the checkout, please?'},{de:'Das ist zu teuer.',ru:'Это слишком дорого.',tr:'Bu çok pahalı.',en:'That is too expensive.'},
+          {de:'Haben Sie das auch in Größe M?',ru:'Есть ли это в размере M?',tr:'Bunun M bedeni de var mı?',en:'Do you have this in size M?'},{de:'Ich zahle mit Karte.',ru:'Я плачу картой.',tr:'Kartla ödüyorum.',en:'I will pay by card.'},
         ]
       },
       { id:'a2-verkehr',   icon:'🚌', title:'Verkehr & Wege',
         vocab:[
-          {de:'der Bus',ru:'автобус',tr:'otobüs',ph:'bus'},{de:'die U-Bahn',ru:'метро',tr:'metro',ph:'u-baan'},
-          {de:'der Zug',ru:'поезд',tr:'tren',ph:'tsuk'},{de:'das Taxi',ru:'такси',tr:'taksi',ph:'taksi'},
-          {de:'die Straße',ru:'улица',tr:'cadde/yol',ph:'shtrasse'},{de:'die Haltestelle',ru:'остановка',tr:'durak',ph:'haltestele'},
-          {de:'links',ru:'налево',tr:'sol',ph:'links'},{de:'rechts',ru:'направо',tr:'sağ',ph:'rekhts'},
-          {de:'geradeaus',ru:'прямо',tr:'düz git',ph:'geraadeaus'},{de:'die Kreuzung',ru:'перекрёсток',tr:'kavşak',ph:'kroytsung'},
-          {de:'weit',ru:'далеко',tr:'uzak',ph:'vayt'},{de:'nah',ru:'близко',tr:'yakın',ph:'naa'},
-          {de:'der Bahnhof',ru:'вокзал',tr:'istasyon',ph:'baanhof'},{de:'abfahren',ru:'отправляться',tr:'kalkmak/hareket etmek',ph:'apfaarn'},
+          {de:'der Bus',ru:'автобус',tr:'otobüs',en:'bus',ph:'bus'},{de:'die U-Bahn',ru:'метро',tr:'metro',en:'underground/subway',ph:'u-baan'},
+          {de:'der Zug',ru:'поезд',tr:'tren',en:'train',ph:'tsuk'},{de:'das Taxi',ru:'такси',tr:'taksi',en:'taxi',ph:'taksi'},
+          {de:'die Straße',ru:'улица',tr:'cadde/yol',en:'street',ph:'shtrasse'},{de:'die Haltestelle',ru:'остановка',tr:'durak',en:'stop',ph:'haltestele'},
+          {de:'links',ru:'налево',tr:'sol',en:'left',ph:'links'},{de:'rechts',ru:'направо',tr:'sağ',en:'right',ph:'rekhts'},
+          {de:'geradeaus',ru:'прямо',tr:'düz git',en:'straight ahead',ph:'geraadeaus'},{de:'die Kreuzung',ru:'перекрёсток',tr:'kavşak',en:'intersection',ph:'kroytsung'},
+          {de:'weit',ru:'далеко',tr:'uzak',en:'far',ph:'vayt'},{de:'nah',ru:'близко',tr:'yakın',en:'near',ph:'naa'},
+          {de:'der Bahnhof',ru:'вокзал',tr:'istasyon',en:'train station',ph:'baanhof'},{de:'abfahren',ru:'отправляться',tr:'kalkmak/hareket etmek',en:'to depart',ph:'apfaarn'},
         ],
         grammar:[
           {title:'Lokale Präpositionen + Dativ', text:'Ortsangaben mit Dativ:\n• in + Dat: <b>im</b> Bus (in dem)\n• an + Dat: <b>am</b> Bahnhof (an dem)\n• auf + Dat: <b>auf</b> der Straße\n• bei + Dat: <b>beim</b> Markt (bei dem)\n\nRussisch: Predlozhny padezh', examples:['Ich warte <b>an der</b> Haltestelle.','Das Café ist <b>auf der</b> linken Seite.','Wir treffen uns <b>am</b> Bahnhof.']},
         ],
         sentences:[
-          {de:'Wie komme ich zum Bahnhof?',ru:'Как добраться до вокзала?',tr:'İstasyona nasıl gidebilirim?'},{de:'Der Bus fährt in 5 Minuten ab.',ru:'Автобус отправляется через 5 минут.',tr:'Otobüs 5 dakika sonra kalkıyor.'},
-          {de:'Biegen Sie an der Kreuzung links ab.',ru:'На перекрёстке поверните налево.',tr:'Kavşakta sola dönün.'},{de:'Ist es weit von hier?',ru:'Это далеко отсюда?',tr:'Buradan uzak mı?'},
+          {de:'Wie komme ich zum Bahnhof?',ru:'Как добраться до вокзала?',tr:'İstasyona nasıl gidebilirim?',en:'How do I get to the station?'},{de:'Der Bus fährt in 5 Minuten ab.',ru:'Автобус отправляется через 5 минут.',tr:'Otobüs 5 dakika sonra kalkıyor.',en:'The bus leaves in 5 minutes.'},
+          {de:'Biegen Sie an der Kreuzung links ab.',ru:'На перекрёстке поверните налево.',tr:'Kavşakta sola dönün.',en:'Turn left at the intersection.'},{de:'Ist es weit von hier?',ru:'Это далеко отсюда?',tr:'Buradan uzak mı?',en:'Is it far from here?'},
         ]
       },
       { id:'a2-arbeit',    icon:'💼', title:'Beruf & Arbeit',
         vocab:[
-          {de:'der Arzt / die Ärztin',ru:'врач',tr:'doktor',ph:'artst'},{de:'der Lehrer / die Lehrerin',ru:'учитель',tr:'öğretmen',ph:'leerer'},
-          {de:'der Ingenieur',ru:'инженер',tr:'mühendis',ph:'inzheniör'},{de:'der Koch / die Köchin',ru:'повар',tr:'aşçı',ph:'kokh'},
-          {de:'arbeiten',ru:'работать',tr:'çalışmak',ph:'arbaytn'},{de:'der Beruf',ru:'профессия',tr:'meslek',ph:'beruf'},
-          {de:'die Stelle',ru:'должность',tr:'pozisyon',ph:'shtele'},{de:'das Büro',ru:'офис',tr:'ofis',ph:'byuro'},
-          {de:'der Kollege',ru:'коллега',tr:'meslektaş',ph:'kolege'},{de:'die Firma',ru:'фирма',tr:'şirket',ph:'firma'},
-          {de:'das Gehalt',ru:'зарплата',tr:'maaş',ph:'gehalt'},{de:'der Chef',ru:'начальник',tr:'patron/müdür',ph:'shef'},
-          {de:'kündigen',ru:'увольняться',tr:'istifa etmek',ph:'kyndign'},{de:'einstellen',ru:'принимать на работу',tr:'işe almak',ph:'aynshteln'},
+          {de:'der Arzt / die Ärztin',ru:'врач',tr:'doktor',en:'doctor',ph:'artst'},{de:'der Lehrer / die Lehrerin',ru:'учитель',tr:'öğretmen',en:'teacher',ph:'leerer'},
+          {de:'der Ingenieur',ru:'инженер',tr:'mühendis',en:'engineer',ph:'inzheniör'},{de:'der Koch / die Köchin',ru:'повар',tr:'aşçı',en:'cook/chef',ph:'kokh'},
+          {de:'arbeiten',ru:'работать',tr:'çalışmak',en:'to work',ph:'arbaytn'},{de:'der Beruf',ru:'профессия',tr:'meslek',en:'profession',ph:'beruf'},
+          {de:'die Stelle',ru:'должность',tr:'pozisyon',en:'position',ph:'shtele'},{de:'das Büro',ru:'офис',tr:'ofis',en:'office',ph:'byuro'},
+          {de:'der Kollege',ru:'коллега',tr:'meslektaş',en:'colleague',ph:'kolege'},{de:'die Firma',ru:'фирма',tr:'şirket',en:'company',ph:'firma'},
+          {de:'das Gehalt',ru:'зарплата',tr:'maaş',en:'salary',ph:'gehalt'},{de:'der Chef',ru:'начальник',tr:'patron/müdür',en:'boss',ph:'shef'},
+          {de:'kündigen',ru:'увольняться',tr:'istifa etmek',en:'to quit',ph:'kyndign'},{de:'einstellen',ru:'принимать на работу',tr:'işe almak',en:'to hire',ph:'aynshteln'},
         ],
         grammar:[
           {title:'Perfekt — Vergangenheit', text:'Im Deutschen nutzt man Perfekt für abgeschlossene Handlungen im Gespräch:\n\n<b>haben/sein + Partizip II</b>\n\n• gearbeitet: ich <b>habe</b> gearbeitet\n• gegangen: ich <b>bin</b> gegangen\n\nRussisch: прошедшее время проще!', examples:['Ich <b>habe</b> heute 8 Stunden <b>gearbeitet</b>.','Er <b>ist</b> um 9 Uhr <b>gekommen</b>.','Wir <b>haben</b> viel <b>gelernt</b>.']},
         ],
         sentences:[
-          {de:'Was sind Sie von Beruf?',ru:'Кем вы работаете?',tr:'Mesleğiniz ne?'},{de:'Ich arbeite als Ingenieur.',ru:'Я работаю инженером.',tr:'Mühendis olarak çalışıyorum.'},
-          {de:'Mein Büro ist in der Innenstadt.',ru:'Мой офис в центре города.',tr:'Ofisim şehir merkezinde.'},{de:'Ich fange um 8 Uhr an.',ru:'Я начинаю в 8 часов.',tr:'Saat 8de başlıyorum.'},
+          {de:'Was sind Sie von Beruf?',ru:'Кем вы работаете?',tr:'Mesleğiniz ne?',en:'What is your profession?'},{de:'Ich arbeite als Ingenieur.',ru:'Я работаю инженером.',tr:'Mühendis olarak çalışıyorum.',en:'I work as an engineer.'},
+          {de:'Mein Büro ist in der Innenstadt.',ru:'Мой офис в центре города.',tr:'Ofisim şehir merkezinde.',en:'My office is in the city centre.'},{de:'Ich fange um 8 Uhr an.',ru:'Я начинаю в 8 часов.',tr:'Saat 8de başlıyorum.',en:'I start at 8 oclock.'},
         ]
       },
       { id:'a2-freizeit',  icon:'🎭', title:'Freizeit & Hobbys',
         vocab:[
-          {de:'das Hobby',ru:'хобби',tr:'hobi',ph:'hobi'},{de:'Sport treiben',ru:'заниматься спортом',tr:'spor yapmak',ph:'shport traybn'},
-          {de:'lesen',ru:'читать',tr:'okumak',ph:'leezn'},{de:'reisen',ru:'путешествовать',tr:'seyahat etmek',ph:'rayzn'},
-          {de:'Musik hören',ru:'слушать музыку',tr:'müzik dinlemek',ph:'muzik hörn'},{de:'tanzen',ru:'танцевать',tr:'dans etmek',ph:'tantsn'},
-          {de:'zeichnen',ru:'рисовать',tr:'çizmek',ph:'tsaykhn'},{de:'kochen',ru:'готовить',tr:'yemek pişirmek',ph:'kokhn'},
-          {de:'schwimmen',ru:'плавать',tr:'yüzmek',ph:'shvimn'},{de:'wandern',ru:'ходить в походы',tr:'yürüyüş yapmak',ph:'vandern'},
-          {de:'das Konzert',ru:'концерт',tr:'konser',ph:'kontsert'},{de:'das Museum',ru:'музей',tr:'müze',ph:'muzeum'},
-          {de:'gern',ru:'охотно/с удовольствием',tr:'memnuniyetle',ph:'gern'},{de:'lieber',ru:'лучше/предпочтительно',tr:'daha çok',ph:'liber'},
+          {de:'das Hobby',ru:'хобби',tr:'hobi',en:'hobby',ph:'hobi'},{de:'Sport treiben',ru:'заниматься спортом',tr:'spor yapmak',en:'to do sports',ph:'shport traybn'},
+          {de:'lesen',ru:'читать',tr:'okumak',en:'to read',ph:'leezn'},{de:'reisen',ru:'путешествовать',tr:'seyahat etmek',en:'to travel',ph:'rayzn'},
+          {de:'Musik hören',ru:'слушать музыку',tr:'müzik dinlemek',en:'to listen to music',ph:'muzik hörn'},{de:'tanzen',ru:'танцевать',tr:'dans etmek',en:'to dance',ph:'tantsn'},
+          {de:'zeichnen',ru:'рисовать',tr:'çizmek',en:'to draw',ph:'tsaykhn'},{de:'kochen',ru:'готовить',tr:'yemek pişirmek',en:'to cook',ph:'kokhn'},
+          {de:'schwimmen',ru:'плавать',tr:'yüzmek',en:'to swim',ph:'shvimn'},{de:'wandern',ru:'ходить в походы',tr:'yürüyüş yapmak',en:'to hike',ph:'vandern'},
+          {de:'das Konzert',ru:'концерт',tr:'konser',en:'concert',ph:'kontsert'},{de:'das Museum',ru:'музей',tr:'müze',en:'museum',ph:'muzeum'},
+          {de:'gern',ru:'охотно/с удовольствием',tr:'memnuniyetle',en:'gladly',ph:'gern'},{de:'lieber',ru:'лучше/предпочтительно',tr:'daha çok',en:'preferably',ph:'liber'},
         ],
         grammar:[
           {title:'Modalverb: können / mögen', text:'Können = мочь (способность/возможность)\nMögen = нравиться (предпочтение)\n\nKönnen: ich <b>kann</b> · du <b>kannst</b> · er <b>kann</b>\nMögen: ich <b>mag</b> · du <b>magst</b> · er <b>mag</b>', examples:['Ich <b>kann</b> gut schwimmen.','<b>Kannst</b> du morgen kommen?','Ich <b>mag</b> Musik sehr gern.']},
         ],
         sentences:[
-          {de:'In meiner Freizeit lese ich gern.',ru:'В свободное время я люблю читать.',tr:'Boş zamanlarımda okumayı severim.'},{de:'Ich treibe dreimal pro Woche Sport.',ru:'Я занимаюсь спортом три раза в неделю.',tr:'Haftada üç kez spor yapıyorum.'},
-          {de:'Mein Hobby ist Fotografieren.',ru:'Моё хобби — фотография.',tr:'Hobim fotoğraf çekmek.'},{de:'Magst du Kino?',ru:'Ты любишь кино?',tr:'Sinemayı sever misin?'},
+          {de:'In meiner Freizeit lese ich gern.',ru:'В свободное время я люблю читать.',tr:'Boş zamanlarımda okumayı severim.',en:'In my free time I like to read.'},{de:'Ich treibe dreimal pro Woche Sport.',ru:'Я занимаюсь спортом три раза в неделю.',tr:'Haftada üç kez spor yapıyorum.',en:'I do sport three times a week.'},
+          {de:'Mein Hobby ist Fotografieren.',ru:'Моё хобби — фотография.',tr:'Hobim fotoğraf çekmek.',en:'My hobby is photography.'},{de:'Magst du Kino?',ru:'Ты любишь кино?',tr:'Sinemayı sever misin?',en:'Do you like cinema?'},
         ]
       },
       { id:'a2-gesundheit',icon:'🏥', title:'Gesundheit & Körper',
         vocab:[
-          {de:'der Kopf',ru:'голова',tr:'baş',ph:'kopf'},{de:'der Rücken',ru:'спина',tr:'sırt',ph:'ryukn'},
-          {de:'der Bauch',ru:'живот',tr:'karın',ph:'baukh'},{de:'krank',ru:'больной',tr:'hasta',ph:'krank'},
-          {de:'Schmerzen haben',ru:'болеть',tr:'ağrısı olmak',ph:'shmertsen habn'},{de:'der Arzt',ru:'врач',tr:'doktor',ph:'artst'},
-          {de:'die Apotheke',ru:'аптека',tr:'eczane',ph:'apoteeke'},{de:'das Medikament',ru:'лекарство',tr:'ilaç',ph:'medikament'},
-          {de:'Fieber haben',ru:'иметь температуру',tr:'ateşi olmak',ph:'fiber habn'},{de:'der Husten',ru:'кашель',tr:'öksürük',ph:'hustn'},
-          {de:'der Schnupfen',ru:'насморк',tr:'nezle',ph:'shnupfn'},{de:'sich erholen',ru:'выздоравливать',tr:'iyileşmek',ph:'zikh erhooln'},
-          {de:'der Termin',ru:'приём/запись',tr:'randevu',ph:'termin'},{de:'die Krankenversicherung',ru:'медицинская страховка',tr:'sağlık sigortası',ph:'krankenferzikherung'},
+          {de:'der Kopf',ru:'голова',tr:'baş',en:'head',ph:'kopf'},{de:'der Rücken',ru:'спина',tr:'sırt',en:'back',ph:'ryukn'},
+          {de:'der Bauch',ru:'живот',tr:'karın',en:'stomach',ph:'baukh'},{de:'krank',ru:'больной',tr:'hasta',en:'sick',ph:'krank'},
+          {de:'Schmerzen haben',ru:'болеть',tr:'ağrısı olmak',en:'to be in pain',ph:'shmertsen habn'},{de:'der Arzt',ru:'врач',tr:'doktor',en:'doctor',ph:'artst'},
+          {de:'die Apotheke',ru:'аптека',tr:'eczane',en:'pharmacy',ph:'apoteeke'},{de:'das Medikament',ru:'лекарство',tr:'ilaç',en:'medication',ph:'medikament'},
+          {de:'Fieber haben',ru:'иметь температуру',tr:'ateşi olmak',en:'to have a fever',ph:'fiber habn'},{de:'der Husten',ru:'кашель',tr:'öksürük',en:'cough',ph:'hustn'},
+          {de:'der Schnupfen',ru:'насморк',tr:'nezle',en:'cold/runny nose',ph:'shnupfn'},{de:'sich erholen',ru:'выздоравливать',tr:'iyileşmek',en:'to recover',ph:'zikh erhooln'},
+          {de:'der Termin',ru:'приём/запись',tr:'randevu',en:'appointment',ph:'termin'},{de:'die Krankenversicherung',ru:'медицинская страховка',tr:'sağlık sigortası',en:'health insurance',ph:'krankenferzikherung'},
         ],
         grammar:[
           {title:'Reflexive Verben', text:'Viele Verben mit «sich» — Reflexivpronomen:\nsich fühlen, sich erholen, sich waschen...\n\nRussisch: возвратные глаголы (-ся/-сь)\n\nKonjugation:\nych fühle <b>mich</b> · du fühlst <b>dich</b> · er fühlt <b>sich</b>', examples:['Ich fühle <b>mich</b> nicht gut.','Er erholt <b>sich</b> im Urlaub.','Wir freuen <b>uns</b> auf die Reise.']},
         ],
         sentences:[
-          {de:'Ich fühle mich nicht wohl.',ru:'Я чувствую себя нехорошо.',tr:'Kendimi iyi hissetmiyorum.'},{de:'Ich habe Kopfschmerzen.',ru:'У меня болит голова.',tr:'Başım ağrıyor.'},
-          {de:'Ich brauche einen Arzttermin.',ru:'Мне нужна запись к врачу.',tr:'Doktora randevu almam gerekiyor.'},{de:'Nehmen Sie dieses Medikament.',ru:'Принимайте это лекарство.',tr:'Bu ilacı alın.'},
+          {de:'Ich fühle mich nicht wohl.',ru:'Я чувствую себя нехорошо.',tr:'Kendimi iyi hissetmiyorum.',en:'I do not feel well.'},{de:'Ich habe Kopfschmerzen.',ru:'У меня болит голова.',tr:'Başım ağrıyor.',en:'I have a headache.'},
+          {de:'Ich brauche einen Arzttermin.',ru:'Мне нужна запись к врачу.',tr:'Doktora randevu almam gerekiyor.',en:'I need a doctors appointment.'},{de:'Nehmen Sie dieses Medikament.',ru:'Принимайте это лекарство.',tr:'Bu ilacı alın.',en:'Take this medication.'},
         ]
       },
       { id:'a2-wetter',    icon:'☀️', title:'Wetter & Jahreszeiten',
         vocab:[
-          {de:'das Wetter',ru:'погода',tr:'hava',ph:'veter'},{de:'die Sonne',ru:'солнце',tr:'güneş',ph:'zone'},
-          {de:'der Regen',ru:'дождь',tr:'yağmur',ph:'reegn'},{de:'der Schnee',ru:'снег',tr:'kar',ph:'shnee'},
-          {de:'der Wind',ru:'ветер',tr:'rüzgar',ph:'vint'},{de:'warm',ru:'тёплый',tr:'sıcak',ph:'varm'},
-          {de:'kalt',ru:'холодный',tr:'soğuk',ph:'kalt'},{de:'heiß',ru:'жаркий',tr:'kavurucu sıcak',ph:'hays'},
-          {de:'der Frühling',ru:'весна',tr:'ilkbahar',ph:'frylinkh'},{de:'der Sommer',ru:'лето',tr:'yaz',ph:'zomer'},
-          {de:'der Herbst',ru:'осень',tr:'sonbahar',ph:'herpst'},{de:'der Winter',ru:'зима',tr:'kış',ph:'vinter'},
-          {de:'Es regnet.',ru:'Идёт дождь.',tr:'Yağmur yağıyor.',ph:'es reegnet'},{de:'Es schneit.',ru:'Идёт снег.',tr:'Kar yağıyor.',ph:'es shnayt'},
+          {de:'das Wetter',ru:'погода',tr:'hava',en:'weather',ph:'veter'},{de:'die Sonne',ru:'солнце',tr:'güneş',en:'sun',ph:'zone'},
+          {de:'der Regen',ru:'дождь',tr:'yağmur',en:'rain',ph:'reegn'},{de:'der Schnee',ru:'снег',tr:'kar',en:'snow',ph:'shnee'},
+          {de:'der Wind',ru:'ветер',tr:'rüzgar',en:'wind',ph:'vint'},{de:'warm',ru:'тёплый',tr:'sıcak',en:'warm',ph:'varm'},
+          {de:'kalt',ru:'холодный',tr:'soğuk',en:'cold',ph:'kalt'},{de:'heiß',ru:'жаркий',tr:'kavurucu sıcak',en:'hot',ph:'hays'},
+          {de:'der Frühling',ru:'весна',tr:'ilkbahar',en:'spring',ph:'frylinkh'},{de:'der Sommer',ru:'лето',tr:'yaz',en:'summer',ph:'zomer'},
+          {de:'der Herbst',ru:'осень',tr:'sonbahar',en:'autumn',ph:'herpst'},{de:'der Winter',ru:'зима',tr:'kış',en:'winter',ph:'vinter'},
+          {de:'Es regnet.',ru:'Идёт дождь.',tr:'Yağmur yağıyor.',en:'It is raining.',ph:'es reegnet'},{de:'Es schneit.',ru:'Идёт снег.',tr:'Kar yağıyor.',en:'It is snowing.',ph:'es shnayt'},
         ],
         grammar:[
           {title:'Es + Wetter-Verben', text:'Wetter beschreibt man mit «es» als Subjekt:\n\n<b>Es regnet.</b> — Идёт дождь.\n<b>Es schneit.</b> — Идёт снег.\n<b>Es ist kalt.</b> — Холодно.\n<b>Es gibt Gewitter.</b> — Есть гроза.\n\nKein echtes Subjekt — unpersönliche Konstruktion!', examples:['<b>Es</b> ist heute sehr warm.','<b>Es</b> regnet seit Stunden.','<b>Es</b> gibt morgen Gewitter.']},
         ],
         sentences:[
-          {de:'Wie ist das Wetter heute?',ru:'Какая сегодня погода?',tr:'Bugün hava nasıl?'},{de:'Es ist bewölkt und kalt.',ru:'Облачно и холодно.',tr:'Bulutlu ve soğuk.'},
-          {de:'Im Sommer fahre ich ans Meer.',ru:'Летом я еду к морю.',tr:'Yazın denize gidiyorum.'},{de:'Der Winter in Deutschland ist mild.',ru:'Зима в Германии мягкая.',tr:'Almanyada kış ılımandır.'},
+          {de:'Wie ist das Wetter heute?',ru:'Какая сегодня погода?',tr:'Bugün hava nasıl?',en:'What is the weather like today?'},{de:'Es ist bewölkt und kalt.',ru:'Облачно и холодно.',tr:'Bulutlu ve soğuk.',en:'It is cloudy and cold.'},
+          {de:'Im Sommer fahre ich ans Meer.',ru:'Летом я еду к морю.',tr:'Yazın denize gidiyorum.',en:'In summer I go to the sea.'},{de:'Der Winter in Deutschland ist mild.',ru:'Зима в Германии мягкая.',tr:'Almanyada kış ılımandır.',en:'Winter in Germany is mild.'},
         ]
       },
     ]
@@ -11541,78 +11556,78 @@ var NIVEAU_DATA = {
     topics: [
       { id:'b1-reise',     icon:'✈️', title:'Reisen & Tourismus',
         vocab:[
-          {de:'die Unterkunft',ru:'жильё/проживание',tr:'konaklama',ph:'unterkunft'},{de:'buchen',ru:'бронировать',tr:'rezervasyon yaptırmak',ph:'bukhn'},
-          {de:'der Flughafen',ru:'аэропорт',tr:'havalimanı',ph:'flukhafen'},{de:'das Gepäck',ru:'багаж',tr:'bagaj',ph:'gepek'},
-          {de:'der Reisepass',ru:'загранпаспорт',tr:'pasaport',ph:'rayzepas'},{de:'das Visum',ru:'виза',tr:'vize',ph:'vizum'},
-          {de:'die Sehenswürdigkeit',ru:'достопримечательность',tr:'turistik yer',ph:'zeensvyrdikhayt'},
-          {de:'die Stadtführung',ru:'экскурсия по городу',tr:'şehir turu',ph:'shtatfyrung'},
-          {de:'einreisen',ru:'въезжать',tr:'giriş yapmak',ph:'aynrayzn'},{de:'ausreisen',ru:'выезжать',tr:'çıkış yapmak',ph:'ausrayzn'},
-          {de:'umsteigen',ru:'делать пересадку',tr:'aktarma yapmak',ph:'umshtaygn'},{de:'verspätet',ru:'с опозданием',tr:'gecikmeli',ph:'fershpetet'},
-          {de:'die Pension',ru:'пансион',tr:'pansiyon',ph:'penzion'},{de:'das Einzelzimmer',ru:'одноместный номер',tr:'tek kişilik oda',ph:'ayntseltsimer'},
+          {de:'die Unterkunft',ru:'жильё/проживание',tr:'konaklama',en:'accommodation',ph:'unterkunft'},{de:'buchen',ru:'бронировать',tr:'rezervasyon yaptırmak',en:'to book',ph:'bukhn'},
+          {de:'der Flughafen',ru:'аэропорт',tr:'havalimanı',en:'airport',ph:'flukhafen'},{de:'das Gepäck',ru:'багаж',tr:'bagaj',en:'luggage',ph:'gepek'},
+          {de:'der Reisepass',ru:'загранпаспорт',tr:'pasaport',en:'passport',ph:'rayzepas'},{de:'das Visum',ru:'виза',tr:'vize',en:'visa',ph:'vizum'},
+          {de:'die Sehenswürdigkeit',ru:'достопримечательность',tr:'turistik yer',en:'sight/attraction',ph:'zeensvyrdikhayt'},
+          {de:'die Stadtführung',ru:'экскурсия по городу',tr:'şehir turu',en:'city tour',ph:'shtatfyrung'},
+          {de:'einreisen',ru:'въезжать',tr:'giriş yapmak',en:'to enter (a country)',ph:'aynrayzn'},{de:'ausreisen',ru:'выезжать',tr:'çıkış yapmak',en:'to exit (a country)',ph:'ausrayzn'},
+          {de:'umsteigen',ru:'делать пересадку',tr:'aktarma yapmak',en:'to transfer',ph:'umshtaygn'},{de:'verspätet',ru:'с опозданием',tr:'gecikmeli',en:'delayed',ph:'fershpetet'},
+          {de:'die Pension',ru:'пансион',tr:'pansiyon',en:'guesthouse',ph:'penzion'},{de:'das Einzelzimmer',ru:'одноместный номер',tr:'tek kişilik oda',en:'single room',ph:'ayntseltsimer'},
         ],
         grammar:[
           {title:'Nebensätze mit weil & dass', text:'Verbindung zweier Sätze:\n\n<b>weil</b> (потому что) — Verb geht ans Ende!\n<b>dass</b> (что) — Verb geht ans Ende!\n\nRussisch: «потому что», «что» — Verb bleibt in Mitte', examples:['Ich reise gern, <b>weil</b> ich neue Kulturen kennenlernen <b>möchte</b>.','Ich glaube, <b>dass</b> das Ticket teuer <b>ist</b>.',]},
           {title:'Konjunktiv II — höfliche Bitten', text:'Für Bitten und Wünsche:\n\n<b>ich hätte gern</b> — я бы хотел\n<b>könnten Sie</b> — не могли бы вы\n<b>ich würde gern</b> — я бы с удовольствием', examples:['<b>Hätten</b> Sie ein Zimmer frei?','<b>Könnten</b> Sie mir helfen?','Ich <b>würde</b> gern ein Ticket <b>kaufen</b>.']},
         ],
         sentences:[
-          {de:'Ich würde gern ein Einzelzimmer buchen.',ru:'Я хотел бы забронировать одноместный номер.',tr:'Tek kişilik oda rezervasyonu yapmak istiyorum.'},{de:'Unser Flug hat zwei Stunden Verspätung.',ru:'Наш рейс задержан на два часа.',tr:'Uçuşumuz iki saat gecikiyor.'},
-          {de:'Könnten Sie mir eine Stadtführung empfehlen?',ru:'Не могли бы вы порекомендовать экскурсию?',tr:'Bir şehir turu önerir misiniz?'},{de:'Ich reise, weil ich die Welt sehen möchte.',ru:'Я путешествую, потому что хочу видеть мир.',tr:'Seyahat ediyorum çünkü dünyayı görmek istiyorum.'},
+          {de:'Ich würde gern ein Einzelzimmer buchen.',ru:'Я хотел бы забронировать одноместный номер.',tr:'Tek kişilik oda rezervasyonu yapmak istiyorum.',en:'I would like to book a single room.'},{de:'Unser Flug hat zwei Stunden Verspätung.',ru:'Наш рейс задержан на два часа.',tr:'Uçuşumuz iki saat gecikiyor.',en:'Our flight is two hours delayed.'},
+          {de:'Könnten Sie mir eine Stadtführung empfehlen?',ru:'Не могли бы вы порекомендовать экскурсию?',tr:'Bir şehir turu önerir misiniz?',en:'Could you recommend a city tour?'},{de:'Ich reise, weil ich die Welt sehen möchte.',ru:'Я путешествую, потому что хочу видеть мир.',tr:'Seyahat ediyorum çünkü dünyayı görmek istiyorum.',en:'I travel because I want to see the world.'},
         ]
       },
       { id:'b1-medien',    icon:'📱', title:'Medien & Kommunikation',
         vocab:[
-          {de:'die Nachricht',ru:'сообщение/новость',tr:'haber/mesaj',ph:'nakhrikt'},{de:'die Zeitung',ru:'газета',tr:'gazete',ph:'tsaytung'},
-          {de:'der Beitrag',ru:'публикация/статья',tr:'gönderi/makale',ph:'baytrak'},{de:'teilen',ru:'делиться',tr:'paylaşmak',ph:'tayln'},
-          {de:'folgen',ru:'подписываться',tr:'takip etmek',ph:'folgn'},{de:'kommentieren',ru:'комментировать',tr:'yorum yapmak',ph:'komentiirn'},
-          {de:'das soziale Netzwerk',ru:'социальная сеть',tr:'sosyal ağ',ph:'zotsiale netsverk'},
-          {de:'streamen',ru:'стримить',tr:'yayın yapmak',ph:'shtrimen'},{de:'herunterladen',ru:'скачивать',tr:'indirmek',ph:'herunterlaadn'},
-          {de:'der Datenschutz',ru:'защита данных',tr:'veri koruma',ph:'daatnshhuts'},{de:'die Privatsphäre',ru:'приватность',tr:'mahremiyet',ph:'privatsfeere'},
-          {de:'viral gehen',ru:'стать вирусным',tr:'viral olmak',ph:'viral geehn'},{de:'bearbeiten',ru:'редактировать',tr:'düzenlemek',ph:'bearbaytn'},
-          {de:'die Falschmeldung',ru:'фейковая новость',tr:'yanlış haber/dezenformasyon',ph:'falshmelddung'},
+          {de:'die Nachricht',ru:'сообщение/новость',tr:'haber/mesaj',en:'message/news',ph:'nakhrikt'},{de:'die Zeitung',ru:'газета',tr:'gazete',en:'newspaper',ph:'tsaytung'},
+          {de:'der Beitrag',ru:'публикация/статья',tr:'gönderi/makale',en:'post/article',ph:'baytrak'},{de:'teilen',ru:'делиться',tr:'paylaşmak',en:'to share',ph:'tayln'},
+          {de:'folgen',ru:'подписываться',tr:'takip etmek',en:'to follow',ph:'folgn'},{de:'kommentieren',ru:'комментировать',tr:'yorum yapmak',en:'to comment',ph:'komentiirn'},
+          {de:'das soziale Netzwerk',ru:'социальная сеть',tr:'sosyal ağ',en:'social network',ph:'zotsiale netsverk'},
+          {de:'streamen',ru:'стримить',tr:'yayın yapmak',en:'to stream',ph:'shtrimen'},{de:'herunterladen',ru:'скачивать',tr:'indirmek',en:'to download',ph:'herunterlaadn'},
+          {de:'der Datenschutz',ru:'защита данных',tr:'veri koruma',en:'data protection',ph:'daatnshhuts'},{de:'die Privatsphäre',ru:'приватность',tr:'mahremiyet',en:'privacy',ph:'privatsfeere'},
+          {de:'viral gehen',ru:'стать вирусным',tr:'viral olmak',en:'to go viral',ph:'viral geehn'},{de:'bearbeiten',ru:'редактировать',tr:'düzenlemek',en:'to edit',ph:'bearbaytn'},
+          {de:'die Falschmeldung',ru:'фейковая новость',tr:'yanlış haber/dezenformasyon',en:'fake news',ph:'falshmelddung'},
         ],
         grammar:[
           {title:'Relativsätze', text:'Beschreibung von Personen/Dingen im Satz:\n\nDas ist der Mann, <b>der</b> mir geholfen hat.\n(Relative Pronomen = Artikel mit Kasusform)\n\nRussisch: который/которая/которое', examples:['Das ist die App, <b>die</b> ich benutze.','Er liest einen Artikel, <b>der</b> sehr interessant ist.','Das Foto, <b>das</b> du gepostet hast, ist toll.']},
           {title:'Passiv', text:'Passiv = Vorgangspassiv\n<b>werden + Partizip II</b>\n\nAktiv: Man schreibt den Artikel.\nPassiv: Der Artikel <b>wird</b> geschrieben.\n\nRussisch: страдательный залог', examples:['Das Bild <b>wird</b> gepostet.','Die Daten <b>werden</b> gespeichert.','Der Fehler <b>wurde</b> entdeckt.']},
         ],
         sentences:[
-          {de:'Ich lese täglich online Nachrichten.',ru:'Я ежедневно читаю новости онлайн.',tr:'Her gün çevrimiçi haber okuyorum.'},{de:'Das Video wurde millionenfach geteilt.',ru:'Видео было поделено миллионы раз.',tr:'Video milyonlarca kez paylaşıldı.'},
-          {de:'Man sollte Falschmeldungen kritisch prüfen.',ru:'Нужно критически проверять фейки.',tr:'Sahte haberleri eleştirel gözle incelemelisiniz.'},{de:'Ich folge diesem Kanal seit Jahren.',ru:'Я подписан на этот канал уже несколько лет.',tr:'Bu kanalı yıllardır takip ediyorum.'},
+          {de:'Ich lese täglich online Nachrichten.',ru:'Я ежедневно читаю новости онлайн.',tr:'Her gün çevrimiçi haber okuyorum.',en:'I read news online every day.'},{de:'Das Video wurde millionenfach geteilt.',ru:'Видео было поделено миллионы раз.',tr:'Video milyonlarca kez paylaşıldı.',en:'The video was shared millions of times.'},
+          {de:'Man sollte Falschmeldungen kritisch prüfen.',ru:'Нужно критически проверять фейки.',tr:'Sahte haberleri eleştirel gözle incelemelisiniz.',en:'One should critically examine fake news.'},{de:'Ich folge diesem Kanal seit Jahren.',ru:'Я подписан на этот канал уже несколько лет.',tr:'Bu kanalı yıllardır takip ediyorum.',en:'I have been following this channel for years.'},
         ]
       },
       { id:'b1-umwelt',    icon:'🌿', title:'Umwelt & Nachhaltigkeit',
         vocab:[
-          {de:'der Klimawandel',ru:'изменение климата',tr:'iklim değişikliği',ph:'klimavanddel'},{de:'nachhaltig',ru:'устойчивый/экологичный',tr:'sürdürülebilir',ph:'nakhhalttikh'},
-          {de:'recyceln',ru:'перерабатывать',tr:'geri dönüştürmek',ph:'retsykeln'},{de:'die Energie',ru:'энергия',tr:'enerji',ph:'energi'},
-          {de:'erneuerbar',ru:'возобновляемый',tr:'yenilenebilir',ph:'ernöyerbaar'},{de:'der Müll',ru:'мусор',tr:'çöp',ph:'myl'},
-          {de:'schützen',ru:'защищать',tr:'korumak',ph:'shuttsn'},{de:'die Treibhausgase',ru:'парниковые газы',tr:'sera gazları',ph:'traybhausgaaze'},
-          {de:'der Fußabdruck',ru:'след/отпечаток',tr:'ayak izi',ph:'fuusapdrukk'},{de:'verzichten auf',ru:'отказываться от',tr:'vazgeçmek',ph:'fertsiktn auf'},
-          {de:'umweltfreundlich',ru:'экологически чистый',tr:'çevre dostu',ph:'umveltfroyndlikh'},{de:'der öffentliche Verkehr',ru:'общественный транспорт',tr:'toplu taşıma',ph:'öfntlikhe ferkeehr'},
-          {de:'das Elektroauto',ru:'электромобиль',tr:'elektrikli araba',ph:'elektroauto'},{de:'die Solarenergie',ru:'солнечная энергия',tr:'güneş enerjisi',ph:'zoolarenergi'},
+          {de:'der Klimawandel',ru:'изменение климата',tr:'iklim değişikliği',en:'climate change',ph:'klimavanddel'},{de:'nachhaltig',ru:'устойчивый/экологичный',tr:'sürdürülebilir',en:'sustainable',ph:'nakhhalttikh'},
+          {de:'recyceln',ru:'перерабатывать',tr:'geri dönüştürmek',en:'to recycle',ph:'retsykeln'},{de:'die Energie',ru:'энергия',tr:'enerji',en:'energy',ph:'energi'},
+          {de:'erneuerbar',ru:'возобновляемый',tr:'yenilenebilir',en:'renewable',ph:'ernöyerbaar'},{de:'der Müll',ru:'мусор',tr:'çöp',en:'rubbish/trash',ph:'myl'},
+          {de:'schützen',ru:'защищать',tr:'korumak',en:'to protect',ph:'shuttsn'},{de:'die Treibhausgase',ru:'парниковые газы',tr:'sera gazları',en:'greenhouse gases',ph:'traybhausgaaze'},
+          {de:'der Fußabdruck',ru:'след/отпечаток',tr:'ayak izi',en:'footprint',ph:'fuusapdrukk'},{de:'verzichten auf',ru:'отказываться от',tr:'vazgeçmek',en:'to give up',ph:'fertsiktn auf'},
+          {de:'umweltfreundlich',ru:'экологически чистый',tr:'çevre dostu',en:'eco-friendly',ph:'umveltfroyndlikh'},{de:'der öffentliche Verkehr',ru:'общественный транспорт',tr:'toplu taşıma',en:'public transport',ph:'öfntlikhe ferkeehr'},
+          {de:'das Elektroauto',ru:'электромобиль',tr:'elektrikli araba',en:'electric car',ph:'elektroauto'},{de:'die Solarenergie',ru:'солнечная энергия',tr:'güneş enerjisi',en:'solar energy',ph:'zoolarenergi'},
         ],
         grammar:[
           {title:'Finalsätze mit um…zu / damit', text:'Zweck/Ziel ausdrücken:\n\n<b>um…zu</b> — чтобы (одно Subjekt)\n<b>damit</b> — чтобы (разные субъекты)\n\nUm…zu: Infinitiv am Ende', examples:['Ich fahre Fahrrad, <b>um</b> die Umwelt <b>zu</b> schonen.','Wir sparen Energie, <b>damit</b> die Kinder eine bessere Zukunft <b>haben</b>.']},
         ],
         sentences:[
-          {de:'Der Klimawandel ist eine globale Herausforderung.',ru:'Изменение климата — глобальная проблема.',tr:'İklim değişikliği küresel bir zorluktur.'},{de:'Ich versuche, weniger Plastik zu verwenden.',ru:'Я стараюсь использовать меньше пластика.',tr:'Daha az plastik kullanmaya çalışıyorum.'},
-          {de:'Erneuerbare Energien sind die Zukunft.',ru:'Возобновляемые источники энергии — это будущее.',tr:'Yenilenebilir enerji geleceğimizdir.'},{de:'Wir alle können zum Klimaschutz beitragen.',ru:'Все мы можем внести вклад в защиту климата.',tr:'Hepimiz iklim korumaya katkıda bulunabiliriz.'},
+          {de:'Der Klimawandel ist eine globale Herausforderung.',ru:'Изменение климата — глобальная проблема.',tr:'İklim değişikliği küresel bir zorluktur.',en:'Climate change is a global challenge.'},{de:'Ich versuche, weniger Plastik zu verwenden.',ru:'Я стараюсь использовать меньше пластика.',tr:'Daha az plastik kullanmaya çalışıyorum.',en:'I try to use less plastic.'},
+          {de:'Erneuerbare Energien sind die Zukunft.',ru:'Возобновляемые источники энергии — это будущее.',tr:'Yenilenebilir enerji geleceğimizdir.',en:'Renewable energies are the future.'},{de:'Wir alle können zum Klimaschutz beitragen.',ru:'Все мы можем внести вклад в защиту климата.',tr:'Hepimiz iklim korumaya katkıda bulunabiliriz.',en:'We can all contribute to climate protection.'},
         ]
       },
       { id:'b1-bildung',   icon:'🎓', title:'Bildung & Schule',
         vocab:[
-          {de:'das Abitur',ru:'аттестат зрелости',tr:'lise diploması',ph:'abituur'},{de:'das Studium',ru:'учёба/обучение',tr:'üniversite eğitimi',ph:'shtuudium'},
-          {de:'die Universität',ru:'университет',tr:'üniversite',ph:'univerzi'},{de:'der Abschluss',ru:'диплом/окончание',tr:'diploma/mezuniyet',ph:'apshluus'},
-          {de:'die Ausbildung',ru:'профессиональное образование',tr:'mesleki eğitim',ph:'ausbilddung'},{de:'die Note',ru:'оценка',tr:'not',ph:'note'},
-          {de:'das Fach',ru:'предмет/специальность',tr:'ders/alan',ph:'fakh'},{de:'forschen',ru:'исследовать',tr:'araştırmak',ph:'forsshn'},
-          {de:'die Prüfung',ru:'экзамен',tr:'sınav',ph:'pryfung'},{de:'bestehen',ru:'сдать (экзамен)',tr:'geçmek (sınav)',ph:'beshteehn'},
-          {de:'durchfallen',ru:'провалиться',tr:'kalmak (sınav)',ph:'durkhfaln'},{de:'das Stipendium',ru:'стипендия',tr:'burs',ph:'shtipendium'},
-          {de:'das Praktikum',ru:'практика',tr:'staj',ph:'praktikum'},{de:'die Hausarbeit',ru:'реферат/домашняя работа',tr:'ödev/bitirme tezi',ph:'hausarbyt'},
+          {de:'das Abitur',ru:'аттестат зрелости',tr:'lise diploması',en:'A-levels',ph:'abituur'},{de:'das Studium',ru:'учёба/обучение',tr:'üniversite eğitimi',en:'university studies',ph:'shtuudium'},
+          {de:'die Universität',ru:'университет',tr:'üniversite',en:'university',ph:'univerzi'},{de:'der Abschluss',ru:'диплом/окончание',tr:'diploma/mezuniyet',en:'degree/graduation',ph:'apshluus'},
+          {de:'die Ausbildung',ru:'профессиональное образование',tr:'mesleki eğitim',en:'vocational training',ph:'ausbilddung'},{de:'die Note',ru:'оценка',tr:'not',en:'grade',ph:'note'},
+          {de:'das Fach',ru:'предмет/специальность',tr:'ders/alan',en:'subject',ph:'fakh'},{de:'forschen',ru:'исследовать',tr:'araştırmak',en:'to research',ph:'forsshn'},
+          {de:'die Prüfung',ru:'экзамен',tr:'sınav',en:'exam',ph:'pryfung'},{de:'bestehen',ru:'сдать (экзамен)',tr:'geçmek (sınav)',en:'to pass',ph:'beshteehn'},
+          {de:'durchfallen',ru:'провалиться',tr:'kalmak (sınav)',en:'to fail',ph:'durkhfaln'},{de:'das Stipendium',ru:'стипендия',tr:'burs',en:'scholarship',ph:'shtipendium'},
+          {de:'das Praktikum',ru:'практика',tr:'staj',en:'internship',ph:'praktikum'},{de:'die Hausarbeit',ru:'реферат/домашняя работа',tr:'ödev/bitirme tezi',en:'essay/assignment',ph:'hausarbyt'},
         ],
         grammar:[
           {title:'Konjunktionen: obwohl / trotzdem', text:'Gegensatz ausdrücken:\n\n<b>obwohl</b> (хотя) — Nebensatz, Verb am Ende\n<b>trotzdem</b> (тем не менее) — Hauptsatz, Verb Position 2 nach trotzdem\n\nRussisch: «хотя», «тем не менее»', examples:['<b>Obwohl</b> das Studium schwer <b>ist</b>, macht es Spaß.','Es war schwer; <b>trotzdem</b> habe ich bestanden.']},
         ],
         sentences:[
-          {de:'Ich studiere Informatik an der Universität Berlin.',ru:'Я изучаю информатику в Берлинском университете.',tr:'Berlin Üniversitesinde bilgisayar bilimleri okuyorum.'},{de:'Obwohl die Prüfung schwer war, habe ich bestanden.',ru:'Хотя экзамен был трудным, я сдал его.',tr:'Sınav zor olmasına rağmen geçtim.'},
-          {de:'Das Praktikum hat mir viel gebracht.',ru:'Практика дала мне многое.',tr:'Staj bana çok şey kattı.'},{de:'Ich bewerbe mich um ein Stipendium.',ru:'Я подаю заявку на стипендию.',tr:'Burs için başvuruyorum.'},
+          {de:'Ich studiere Informatik an der Universität Berlin.',ru:'Я изучаю информатику в Берлинском университете.',tr:'Berlin Üniversitesinde bilgisayar bilimleri okuyorum.',en:'I study computer science at Berlin University.'},{de:'Obwohl die Prüfung schwer war, habe ich bestanden.',ru:'Хотя экзамен был трудным, я сдал его.',tr:'Sınav zor olmasına rağmen geçtim.',en:'Although the exam was difficult, I passed.'},
+          {de:'Das Praktikum hat mir viel gebracht.',ru:'Практика дала мне многое.',tr:'Staj bana çok şey kattı.',en:'The internship gave me a lot.'},{de:'Ich bewerbe mich um ein Stipendium.',ru:'Я подаю заявку на стипендию.',tr:'Burs için başvuruyorum.',en:'I am applying for a scholarship.'},
         ]
       },
     ]
@@ -11623,32 +11638,32 @@ var NIVEAU_DATA = {
     topics: [
       { id:'b2-beruf',     icon:'📊', title:'Berufsleben & Karriere',
         vocab:[
-          {de:'die Bewerbung',ru:'заявление о приёме на работу',tr:'iş başvurusu',ph:'beverbung'},{de:'das Vorstellungsgespräch',ru:'собеседование',tr:'iş görüşmesi',ph:'forshttelungsgeshprekh'},
-          {de:'der Lebenslauf',ru:'резюме',tr:'özgeçmiş',ph:'lebenslaauf'},{de:'die Qualifikation',ru:'квалификация',tr:'nitelik',ph:'kvalifikatsion'},
-          {de:'befördern',ru:'продвигать по службе',tr:'terfi ettirmek',ph:'beförddern'},{de:'die Gehaltserhöhung',ru:'повышение зарплаты',tr:'maaş artışı',ph:'gehaltserhoyhung'},
-          {de:'das Netzwerk',ru:'профессиональная сеть',tr:'ağ/network',ph:'netsverk'},{de:'selbstständig',ru:'самозанятый',tr:'serbest çalışan',ph:'zelpsshtendikh'},
-          {de:'kündigen',ru:'увольняться',tr:'istifa etmek',ph:'kyndign'},{de:'entlassen',ru:'увольнять',tr:'işten çıkarmak',ph:'entlaasn'},
-          {de:'das Burnout',ru:'выгорание',tr:'tükenmişlik',ph:'burnout'},{de:'die Work-Life-Balance',ru:'баланс работы и жизни',tr:'iş-yaşam dengesi',ph:'vork-layf-balans'},
-          {de:'die Unternehmenskultur',ru:'корпоративная культура',tr:'şirket kültürü',ph:'unterneemenzkultuur'},{de:'agil arbeiten',ru:'работать гибко',tr:'çevik çalışmak',ph:'agiil arbaytn'},
+          {de:'die Bewerbung',ru:'заявление о приёме на работу',tr:'iş başvurusu',en:'job application',ph:'beverbung'},{de:'das Vorstellungsgespräch',ru:'собеседование',tr:'iş görüşmesi',en:'job interview',ph:'forshttelungsgeshprekh'},
+          {de:'der Lebenslauf',ru:'резюме',tr:'özgeçmiş',en:'CV/résumé',ph:'lebenslaauf'},{de:'die Qualifikation',ru:'квалификация',tr:'nitelik',en:'qualification',ph:'kvalifikatsion'},
+          {de:'befördern',ru:'продвигать по службе',tr:'terfi ettirmek',en:'to promote',ph:'beförddern'},{de:'die Gehaltserhöhung',ru:'повышение зарплаты',tr:'maaş artışı',en:'salary increase',ph:'gehaltserhoyhung'},
+          {de:'das Netzwerk',ru:'профессиональная сеть',tr:'ağ/network',en:'network',ph:'netsverk'},{de:'selbstständig',ru:'самозанятый',tr:'serbest çalışan',en:'self-employed',ph:'zelpsshtendikh'},
+          {de:'kündigen',ru:'увольняться',tr:'istifa etmek',en:'to quit',ph:'kyndign'},{de:'entlassen',ru:'увольнять',tr:'işten çıkarmak',en:'to dismiss/fire',ph:'entlaasn'},
+          {de:'das Burnout',ru:'выгорание',tr:'tükenmişlik',en:'burnout',ph:'burnout'},{de:'die Work-Life-Balance',ru:'баланс работы и жизни',tr:'iş-yaşam dengesi',en:'work-life balance',ph:'vork-layf-balans'},
+          {de:'die Unternehmenskultur',ru:'корпоративная культура',tr:'şirket kültürü',en:'company culture',ph:'unterneemenzkultuur'},{de:'agil arbeiten',ru:'работать гибко',tr:'çevik çalışmak',en:'to work agile',ph:'agiil arbaytn'},
         ],
         grammar:[
           {title:'Genitiv', text:'4. Kasus: Zugehörigkeit, Besitz\n\n<b>des/der/des + (e)s</b>\n\n• der Vertrag des Mitarbeiters\n• die Meinung der Chefin\n• wegen des Problems\n\nRussisch: родительный падеж', examples:['Das Büro <b>des Direktors</b> ist oben.','Trotz <b>des Stresses</b> arbeite ich gern.','Wegen <b>der Kündigung</b> bin ich nervös.']},
           {title:'Infinitivkonstruktionen', text:'ohne…zu / anstatt…zu / um…zu\n\n<b>ohne…zu</b> — не + инфинитив\n<b>anstatt…zu</b> — вместо того чтобы', examples:['Er geht, <b>ohne</b> zu <b>grüßen</b>.','<b>Anstatt</b> zu <b>arbeiten</b>, schläft er.','Ich lerne, <b>um</b> Karriere <b>zu machen</b>.']},
         ],
         sentences:[
-          {de:'Mein Vorstellungsgespräch war gestern sehr gut.',ru:'Вчера моё собеседование прошло очень хорошо.',tr:'Dünkü iş görüşmem çok iyiydi.'},{de:'Trotz des Stresses liebe ich meinen Beruf.',ru:'Несмотря на стресс, я люблю свою работу.',tr:'Strese rağmen mesleğimi seviyorum.'},
-          {de:'Ich bewerbe mich um eine Stelle als Projektmanager.',ru:'Я претендую на должность менеджера проекта.',tr:'Proje yöneticisi pozisyonuna başvuruyorum.'},{de:'Die Unternehmenskultur beeinflusst die Mitarbeiterzufriedenheit.',ru:'Корпоративная культура влияет на удовлетворённость сотрудников.',tr:'Şirket kültürü çalışan memnuniyetini etkiler.'},
+          {de:'Mein Vorstellungsgespräch war gestern sehr gut.',ru:'Вчера моё собеседование прошло очень хорошо.',tr:'Dünkü iş görüşmem çok iyiydi.',en:'My job interview yesterday went very well.'},{de:'Trotz des Stresses liebe ich meinen Beruf.',ru:'Несмотря на стресс, я люблю свою работу.',tr:'Strese rağmen mesleğimi seviyorum.',en:'Despite the stress, I love my job.'},
+          {de:'Ich bewerbe mich um eine Stelle als Projektmanager.',ru:'Я претендую на должность менеджера проекта.',tr:'Proje yöneticisi pozisyonuna başvuruyorum.',en:'I am applying for a position as project manager.'},{de:'Die Unternehmenskultur beeinflusst die Mitarbeiterzufriedenheit.',ru:'Корпоративная культура влияет на удовлетворённость сотрудников.',tr:'Şirket kültürü çalışan memnuniyetini etkiler.',en:'Company culture influences employee satisfaction.'},
         ]
       },
       { id:'b2-kultur',    icon:'🎭', title:'Kultur & Gesellschaft',
         vocab:[
-          {de:'die Vielfalt',ru:'многообразие',ph:'fiilfalt'},{de:'die Integration',ru:'интеграция',ph:'integratsion'},
-          {de:'tolerant',ru:'терпимый',ph:'tolerant'},{de:'das Vorurteil',ru:'предрассудок',ph:'forurtayl'},
-          {de:'die Diskriminierung',ru:'дискриминация',ph:'diskriminirung'},{de:'der Dialekt',ru:'диалект',ph:'dialekt'},
-          {de:'das Brauchtum',ru:'обычай/традиция',ph:'braaukhtum'},{de:'die Tradition',ru:'традиция',ph:'traditsion'},
-          {de:'geprägt von',ru:'формируемый',ph:'gepregt fon'},{de:'der Zeitgeist',ru:'дух времени',ph:'tsaytgayst'},
-          {de:'die Leitkultur',ru:'ведущая культура',ph:'laytkultuur'},{de:'das Zusammenleben',ru:'совместная жизнь',ph:'tsuzammenleben'},
-          {de:'interkulturell',ru:'межкультурный',ph:'interkulturel'},{de:'die Globalisierung',ru:'глобализация',ph:'globalizirung'},
+          {de:'die Vielfalt',ru:'многообразие',en:'diversity',ph:'fiilfalt'},{de:'die Integration',ru:'интеграция',en:'integration',ph:'integratsion'},
+          {de:'tolerant',ru:'терпимый',en:'tolerant',ph:'tolerant'},{de:'das Vorurteil',ru:'предрассудок',en:'prejudice',ph:'forurtayl'},
+          {de:'die Diskriminierung',ru:'дискриминация',en:'discrimination',ph:'diskriminirung'},{de:'der Dialekt',ru:'диалект',en:'dialect',ph:'dialekt'},
+          {de:'das Brauchtum',ru:'обычай/традиция',en:'tradition/custom',ph:'braaukhtum'},{de:'die Tradition',ru:'традиция',en:'tradition',ph:'traditsion'},
+          {de:'geprägt von',ru:'формируемый',en:'shaped by',ph:'gepregt fon'},{de:'der Zeitgeist',ru:'дух времени',en:'spirit of the age',ph:'tsaytgayst'},
+          {de:'die Leitkultur',ru:'ведущая культура',en:'leading culture',ph:'laytkultuur'},{de:'das Zusammenleben',ru:'совместная жизнь',en:'coexistence',ph:'tsuzammenleben'},
+          {de:'interkulturell',ru:'межкультурный',en:'intercultural',ph:'interkulturel'},{de:'die Globalisierung',ru:'глобализация',en:'globalisation',ph:'globalizirung'},
         ],
         grammar:[
           {title:'Partizip I als Attribut', text:'Partizip I = Verb + d\nDrückt gleichzeitige Handlung aus:\n\n<b>der lesende Student</b> — студент, который читает\n<b>die steigende Zahl</b> — растущее число\n\nRussisch: Причастие настоящего времени', examples:['Die <b>wachsende</b> Vielfalt bereichert die Gesellschaft.','Ein <b>lächelndes</b> Kind kam herein.','Das <b>steigende</b> Interesse ist erfreulich.']},
@@ -11660,13 +11675,13 @@ var NIVEAU_DATA = {
       },
       { id:'b2-wirtschaft',icon:'📈', title:'Wirtschaft & Finanzen',
         vocab:[
-          {de:'die Inflation',ru:'инфляция',ph:'inflatsion'},{de:'die Rezession',ru:'рецессия',ph:'retsesion'},
-          {de:'das Bruttoinlandsprodukt',ru:'ВВП',ph:'bruttoilandsprodukt'},{de:'investieren',ru:'инвестировать',ph:'investirn'},
-          {de:'die Aktie',ru:'акция',ph:'aktsie'},{de:'die Steuer',ru:'налог',ph:'shtöyer'},
-          {de:'das Budget',ru:'бюджет',ph:'budzhet'},{de:'die Schulden',ru:'долги',ph:'shuldddn'},
-          {de:'der Haushalt',ru:'бюджет/хозяйство',ph:'haushalt'},{de:'sparen',ru:'экономить',ph:'shaarn'},
-          {de:'die Rente',ru:'пенсия',ph:'rente'},{de:'der Kredit',ru:'кредит',ph:'kredit'},
-          {de:'die Börse',ru:'биржа',ph:'borse'},{de:'der Marktanteil',ru:'доля рынка',ph:'markttantayl'},
+          {de:'die Inflation',ru:'инфляция',en:'inflation',ph:'inflatsion'},{de:'die Rezession',ru:'рецессия',en:'recession',ph:'retsesion'},
+          {de:'das Bruttoinlandsprodukt',ru:'ВВП',en:'gross domestic product',ph:'bruttoilandsprodukt'},{de:'investieren',ru:'инвестировать',en:'to invest',ph:'investirn'},
+          {de:'die Aktie',ru:'акция',en:'share/stock',ph:'aktsie'},{de:'die Steuer',ru:'налог',en:'tax',ph:'shtöyer'},
+          {de:'das Budget',ru:'бюджет',en:'budget',ph:'budzhet'},{de:'die Schulden',ru:'долги',en:'debts',ph:'shuldddn'},
+          {de:'der Haushalt',ru:'бюджет/хозяйство',en:'budget/household',ph:'haushalt'},{de:'sparen',ru:'экономить',en:'to save',ph:'shaarn'},
+          {de:'die Rente',ru:'пенсия',en:'pension',ph:'rente'},{de:'der Kredit',ru:'кредит',en:'loan/credit',ph:'kredit'},
+          {de:'die Börse',ru:'биржа',en:'stock exchange',ph:'borse'},{de:'der Marktanteil',ru:'доля рынка',en:'market share',ph:'markttantayl'},
         ],
         grammar:[
           {title:'Modalverben im Konjunktiv II', text:'Für Ratschläge und Hypothesen:\n\n<b>sollte</b> — должен был бы\n<b>könnte</b> — мог бы\n<b>dürfte</b> — возможно\n<b>müsste</b> — должен был бы (необходимость)', examples:['Man <b>sollte</b> früh für die Rente sparen.','Die Inflation <b>könnte</b> weiter steigen.','Das <b>dürfte</b> schwierig werden.']},
@@ -11684,10 +11699,10 @@ var NIVEAU_DATA = {
     topics: [
       { id:'c1-rhetorik',  icon:'🎤', title:'Rhetorik & Argumentation',
         vocab:[
-          {de:'die These',ru:'тезис',tr:'tez',ph:'teeze'},{de:'das Argument',ru:'аргумент',tr:'argüman',ph:'argument'},
-          {de:'widerlegen',ru:'опровергать',tr:'çürütmek',ph:'vidderlegn'},{de:'bekräftigen',ru:'подкреплять',tr:'pekiştirmek',ph:'bekreftighn'},
+          {de:'die These',ru:'тезис',tr:'tez',en:'thesis',ph:'teeze'},{de:'das Argument',ru:'аргумент',tr:'argüman',en:'argument',ph:'argument'},
+          {de:'widerlegen',ru:'опровергать',tr:'çürütmek',en:'to refute',ph:'vidderlegn'},{de:'bekräftigen',ru:'подкреплять',tr:'pekiştirmek',en:'to reinforce',ph:'bekreftighn'},
           {de:'die Prämisse',ru:'предпосылка',ph:'premeese'},{de:'schlüssig',ru:'убедительный',ph:'shlysikh'},
-          {de:'überzeugend',ru:'убедительный',tr:'ikna edici',ph:'ybertsöygnd'},{de:'das Gegenargument',ru:'контраргумент',ph:'geegnargoment'},
+          {de:'überzeugend',ru:'убедительный',tr:'ikna edici',en:'convincing',ph:'ybertsöygnd'},{de:'das Gegenargument',ru:'контраргумент',ph:'geegnargoment'},
           {de:'differenzieren',ru:'дифференцировать',ph:'diferentsirn'},{de:'hinterfragen',ru:'ставить под сомнение',ph:'hinterfraagn'},
           {de:'pointiert',ru:'меткий',ph:'poantiirt'},{de:'nachvollziehen',ru:'понять/проследовать',ph:'nakhfoltsiin'},
           {de:'die Schlussfolgerung',ru:'вывод',ph:'shlusfolgderung'},{de:'der Einwand',ru:'возражение',ph:'aynvant'},
@@ -11727,12 +11742,12 @@ var NIVEAU_DATA = {
     topics: [
       { id:'c2-stilistik', icon:'✍️', title:'Stilistik & Literatur',
         vocab:[
-          {de:'die Metapher',ru:'метафора',tr:'metafor',ph:'metafer'},{de:'die Ironie',ru:'ирония',tr:'ironi',ph:'ironie'},
-          {de:'der Sarkasmus',ru:'сарказм',tr:'sarkasm',ph:'zarkasmus'},{de:'die Allegorie',ru:'аллегория',ph:'alegorie'},
+          {de:'die Metapher',ru:'метафора',tr:'metafor',en:'metaphor',ph:'metafer'},{de:'die Ironie',ru:'ирония',tr:'ironi',en:'irony',ph:'ironie'},
+          {de:'der Sarkasmus',ru:'сарказм',tr:'sarkasm',en:'sarcasm',ph:'zarkasmus'},{de:'die Allegorie',ru:'аллегория',ph:'alegorie'},
           {de:'das Stilmittel',ru:'стилистический приём',ph:'shtiilmitl'},{de:'die Konnotation',ru:'коннотация',ph:'konotatsion'},
           {de:'das Leitmotiv',ru:'лейтмотив',ph:'laytmotiif'},{de:'die Ambiguität',ru:'двусмысленность',ph:'ambiguitet'},
           {de:'subversiv',ru:'подрывной',ph:'subverziif'},{de:'die Pointe',ru:'изюминка/соль',ph:'poante'},
-          {de:'nuanciert',ru:'нюансированный',tr:'nüanslı',ph:'nuansiirt'},{de:'der Subtext',ru:'подтекст',ph:'zuptext'},
+          {de:'nuanciert',ru:'нюансированный',tr:'nüanslı',en:'nuanced',ph:'nuansiirt'},{de:'der Subtext',ru:'подтекст',ph:'zuptext'},
           {de:'rhetorisch',ru:'риторический',ph:'retorissh'},{de:'die Parabel',ru:'притча',ph:'parabel'},
         ],
         grammar:[
@@ -11783,8 +11798,10 @@ var niveauState = {
 
 function setNiveauLang(lang) {
   niveauState.lang = lang;
-  document.getElementById('nlang-ru').className = 'btn'+(lang==='ru'?' primary':'');
-  document.getElementById('nlang-tr').className = 'btn'+(lang==='tr'?' primary':'');
+  ['ru','tr','en'].forEach(function(l) {
+    var btn = document.getElementById('nlang-'+l);
+    if (btn) btn.className = 'btn'+(lang===l?' primary':'');
+  });
   if (niveauState.topic) renderNiveauVocab();
 }
 
@@ -11864,7 +11881,7 @@ function renderNiveauVocab() {
   var w = t.vocab[idx];
   document.getElementById('nex-word').textContent = w.de;
   document.getElementById('nex-phonetic').textContent = '['+w.ph+']';
-  var trans = niveauState.lang === 'tr' ? (w.tr || w.ru) : w.ru;
+  var trans = niveauState.lang === 'tr' ? (w.tr || w.ru) : niveauState.lang === 'en' ? (w.en || w.ru) : w.ru;
   document.getElementById('nex-translation').textContent = trans;
   document.getElementById('nex-translation').style.opacity = '0';
   niveauState.revealed = false;
@@ -11886,11 +11903,12 @@ function niveauSpeakWord() {
 
 function niveauVocabAnswer(knew) {
   var t = niveauState.topic;
-  if (knew) {
+  if (knew === true) {
     if (!niveauState.progress[t.id]) niveauState.progress[t.id] = {vocab:0};
     niveauState.progress[t.id].vocab = Math.min(t.vocab.length, (niveauState.progress[t.id].vocab||0)+1);
     addXP(1);
   }
+  // 'next' = weiter ohne Wertung
   niveauState.vocabIdx++;
   if (niveauState.vocabIdx >= t.vocab.length) {
     niveauState.vocabIdx = 0;
@@ -11929,7 +11947,7 @@ function renderNiveauSentence() {
   if (!sentences.length) { document.getElementById('nex-sentence-de').textContent='Keine Sätze verfügbar.'; return; }
   var s = sentences[niveauState.sentenceIdx % sentences.length];
   document.getElementById('nex-sentence-de').textContent = s.de;
-  var sTranslation = niveauState.lang === 'tr' ? (s.tr||s.ru) : s.ru;
+  var sTranslation = niveauState.lang === 'tr' ? (s.tr||s.ru) : niveauState.lang === 'en' ? (s.en||s.ru) : s.ru;
   document.getElementById('nex-sentence-ru').textContent = sTranslation;
   document.getElementById('nex-sentence-counter').textContent = (niveauState.sentenceIdx%sentences.length+1)+' / '+sentences.length;
 }
@@ -11962,8 +11980,8 @@ function renderNiveauQuiz() {
   }
   var w = vocab[niveauState.quizIdx];
   document.getElementById('nex-quiz-counter').textContent='Frage '+(niveauState.quizIdx+1)+' / '+vocab.length;
-  var qLang = niveauState.lang === 'tr' ? (w.tr||w.ru) : w.ru;
-  var qFlag = niveauState.lang === 'tr' ? '🇹🇷' : '🇷🇺';
+  var qLang = niveauState.lang === 'tr' ? (w.tr||w.ru) : niveauState.lang === 'en' ? (w.en||w.ru) : w.ru;
+  var qFlag = niveauState.lang === 'tr' ? '🇹🇷' : niveauState.lang === 'en' ? '🇬🇧' : '🇷🇺';
   document.getElementById('nex-quiz-question').textContent=qFlag+' '+qLang+' = ?';
   document.getElementById('nex-quiz-feedback').textContent='';
   document.getElementById('nex-quiz-next').style.display='none';
@@ -12409,8 +12427,8 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 50;
-var BUILD_VERSION = '4.7'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
+var BUILD = 51;
+var BUILD_VERSION = '4.8'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
 (function() {
@@ -12516,6 +12534,18 @@ function updateAllVersionDisplays() {
 // Bei jedem Deploy: neuen Eintrag mit aktuellem BUILD hinzufügen
 // ============================================================
 var CHANGELOG = {
+  51: {
+    emoji: '🇬🇧',
+    title: 'Englisch Sprachniveau + Weiter-Button',
+    items: [
+      '🇬🇧 Englisch als dritte Übersetzungssprache im Sprachniveau',
+      '274 englische Vokabelübersetzungen eingebaut (A1–C2)',
+      '69 englische Satzübersetzungen eingebaut',
+      '→ Weiter-Button im Vokabeltraining — nächste Karte ohne Wertung',
+      '→ Weiter-Button im Niveau Vokabeltraining hinzugefügt',
+      '🔑 Neuer DeepL API-Key eingebettet (e5b8f6d1...)',
+    ]
+  },
   // BUILD → {emoji, title, items[]}
   49: {
     emoji: '📋',
@@ -13045,7 +13075,7 @@ function getTalkPrompt() {
 // ============================================================
 // DEEPL ÜBERSETZUNGSSYSTEM
 // ============================================================
-var DEEPL_DEFAULT_KEY = '6e4904b4-bf62-4785-829f-1abdce255680:fx';
+var DEEPL_DEFAULT_KEY = 'e5b8f6d1-e5ca-4481-a83f-a1762fe3f6d9:fx';
 var DEEPL_API_URL = 'https://api-free.deepl.com/v2/translate';
 var DEEPL_PROXY_URL = 'https://corsproxy.io/?' + encodeURIComponent('https://api-free.deepl.com/v2/translate');
 
