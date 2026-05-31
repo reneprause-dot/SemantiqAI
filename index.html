@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="description" id="meta-description" content="LINGUA v6.2 – KI-gestützte Sprachlern-App von René Prause">
+<meta name="description" id="meta-description" content="LINGUA v6.3 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v6.2 · by René Prause</title>
+<title>LINGUA v6.3 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -659,7 +659,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v6.2</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v6.3</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill" data-lang="sq">🇦🇱 SQ</button>
@@ -1882,7 +1882,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   </div>
 
   <footer>
-    LINGUA <span id="footer-version">v6.2</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA <span id="footer-version">v6.3</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
   </footer>
 </div>
@@ -2038,10 +2038,10 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
       </div>
       <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
         <button class="btn" onclick="showOnboardingNow()" id="set-show-onboarding" style="flex:1;">
-          👋 Einführung jetzt anzeigen
+          👋 Einführung
         </button>
-        <button class="btn" onclick="showChangelog(CURRENT_VERSION)" style="flex:1;">
-          🎉 Was ist neu?
+        <button class="btn" onclick="showFullChangelog()" style="flex:1;">
+          📋 Changelog
         </button>
         <button class="btn" onclick="runLinguaTests()" style="width:100%;margin-bottom:.5rem;font-size:.78rem;">🧪 Tests ausführen</button>
         <button class="btn primary" onclick="checkForUpdate()" id="set-update-btn" style="width:100%;">
@@ -2051,7 +2051,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA <span id="settings-version">v6.2</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA <span id="settings-version">v6.3</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
     </div>
 
@@ -14828,8 +14828,8 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 65;
-var BUILD_VERSION = '6.2'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
+var BUILD = 67;
+var BUILD_VERSION = '6.3'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
 (function() {
@@ -14935,6 +14935,26 @@ function updateAllVersionDisplays() {
 // Bei jedem Deploy: neuen Eintrag mit aktuellem BUILD hinzufügen
 // ============================================================
 var CHANGELOG = {
+  67: {
+    emoji: '📋',
+    title: 'Vollständiger Changelog in der App',
+    items: [
+      '📋 Einstellungen → Changelog: alle Builds als scrollbare Liste',
+      '🏷️ Aktueller Build wird farbig hervorgehoben',
+      '🔧 Syntax-Fehler in showFullChangelog() behoben (fehlender Funktions-Header)',
+      '📊 Jeder Eintrag zeigt Emoji, Titel, Build-Nummer und alle Änderungen',
+    ]
+  },
+  66: {
+    emoji: '📋',
+    title: 'Vollständiger Changelog in der App',
+    items: [
+      '📋 Einstellungen → Changelog: alle Builds als scrollbare Liste',
+      '🏷️ Aktueller Build wird farbig hervorgehoben',
+      '📊 Jeder Eintrag zeigt Emoji, Titel, Build-Nummer und alle Änderungen',
+      '🔍 Älteste bis neueste Einträge — vollständige Versionshistorie',
+    ]
+  },
   65: {
     emoji: '📋',
     title: 'Vollständiges Changelog-Protokoll',
@@ -15210,6 +15230,74 @@ function getChangelogEntry(build) {
       '🇩🇪 Deutsch Sprachniveau A1–C2',
     ]
   };
+}
+
+function showFullChangelog() {
+  var keys = Object.keys(CHANGELOG).map(Number).sort(function(a,b){return b-a;});
+  var currentV = 'v' + (window.CURRENT_VERSION || BUILD_VERSION);
+
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9000;display:flex;flex-direction:column;backdrop-filter:blur(12px);';
+
+  // Header
+  var header = document.createElement('div');
+  header.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--border);flex-shrink:0;';
+  header.innerHTML = '<div><div style="font-family:Syne,sans-serif;font-weight:800;font-size:1rem;">📋 Vollständiges Changelog</div>' +
+    '<div style="font-size:.7rem;color:var(--muted);">LINGUA ' + currentV + ' · Build ' + BUILD + ' · ' + keys.length + ' Einträge</div></div>';
+  var closeBtn = document.createElement('button');
+  closeBtn.textContent = '✕ Schließen';
+  closeBtn.style.cssText = 'background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:.4rem .75rem;cursor:pointer;font-size:.82rem;';
+  closeBtn.onclick = function(){ overlay.remove(); };
+  header.appendChild(closeBtn);
+  overlay.appendChild(header);
+
+  // Scroll container
+  var scroll = document.createElement('div');
+  scroll.style.cssText = 'overflow-y:auto;flex:1;padding:1rem;';
+
+  keys.forEach(function(build) {
+    var log = CHANGELOG[build];
+    var isCurrent = build === BUILD;
+
+    var entry = document.createElement('div');
+    entry.style.cssText = 'margin-bottom:1rem;border-radius:12px;overflow:hidden;border:1px solid ' + (isCurrent ? 'var(--accent)' : 'var(--border)') + ';';
+
+    // Entry header
+    var entryHead = document.createElement('div');
+    entryHead.style.cssText = 'background:' + (isCurrent ? 'rgba(99,102,241,.15)' : 'var(--surface2)') + ';padding:.65rem .9rem;display:flex;align-items:center;gap:.6rem;justify-content:space-between;';
+    var headLeft = document.createElement('div');
+    headLeft.style.cssText = 'display:flex;align-items:center;gap:.6rem;';
+    headLeft.innerHTML = '<span style="font-size:1.2rem;">' + log.emoji + '</span>' +
+      '<div><div style="font-weight:700;font-size:.82rem;">' + log.title + '</div>' +
+      '<div style="font-size:.65rem;color:var(--muted);">Build ' + build + '</div></div>';
+    entryHead.appendChild(headLeft);
+    if (isCurrent) {
+      var badge = document.createElement('div');
+      badge.textContent = 'AKTUELL';
+      badge.style.cssText = 'font-size:.65rem;background:var(--accent);color:#fff;padding:.15rem .45rem;border-radius:99px;font-weight:700;';
+      entryHead.appendChild(badge);
+    }
+    entry.appendChild(entryHead);
+
+    // Items
+    var itemsDiv = document.createElement('div');
+    itemsDiv.style.cssText = 'padding:.5rem .9rem;';
+    log.items.forEach(function(item) {
+      var parts = item.match(/^(\S+)\s(.*)/);
+      var emoji = parts ? parts[1] : '•';
+      var text  = parts ? parts[2] : item;
+      var row = document.createElement('div');
+      row.style.cssText = 'display:flex;gap:.5rem;padding:.3rem 0;border-bottom:1px solid rgba(128,128,128,.15);font-size:.75rem;';
+      row.innerHTML = '<span style="flex-shrink:0;">' + emoji + '</span><span style="color:var(--muted);line-height:1.5;">' + text + '</span>';
+      itemsDiv.appendChild(row);
+    });
+    entry.appendChild(itemsDiv);
+    scroll.appendChild(entry);
+  });
+
+  overlay.appendChild(scroll);
+  overlay.onclick = function(e){ if(e.target===overlay) overlay.remove(); };
+  document.body.appendChild(overlay);
 }
 
 function checkForUpdate() {
