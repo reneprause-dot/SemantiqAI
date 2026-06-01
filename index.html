@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="description" id="meta-description" content="LINGUA v6.3 – KI-gestützte Sprachlern-App von René Prause">
+<meta name="description" id="meta-description" content="LINGUA v6.4 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v6.3 · by René Prause</title>
+<title>LINGUA v6.4 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -659,7 +659,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v6.3</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v6.4</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill" data-lang="sq">🇦🇱 SQ</button>
@@ -1608,7 +1608,21 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
       <span style="font-size:1.1rem;">💬</span>
       <span class="section-title">Dialoge lernen</span>
     </div>
-    <p style="font-size:.78rem;color:var(--muted);margin-bottom:1rem;">Alltagsgespräche interaktiv üben — Situation auswählen und mitsprechen.</p>
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem;">Alltagsgespräche interaktiv üben — Situation auswählen und mitsprechen.</p>
+
+    <!-- Dialog-Sprache -->
+    <div style="display:flex;gap:.4rem;margin-bottom:.75rem;">
+      <button class="btn primary" id="dlang-de" onclick="setDialogLang('de')" style="flex:1;">🇩🇪 Deutsch</button>
+      <button class="btn" id="dlang-en" onclick="setDialogLang('en')" style="flex:1;">🇬🇧 Englisch</button>
+    </div>
+
+    <!-- Übersetzungssprache -->
+    <div style="display:flex;gap:.4rem;margin-bottom:1rem;align-items:center;" id="dialog-trans-row">
+      <span style="font-size:.72rem;color:var(--muted);flex-shrink:0;">Übersetzung:</span>
+      <button class="btn primary" id="dtrans-ru" onclick="setDialogTrans('ru')" style="flex:1;font-size:.75rem;">🇷🇺 RU</button>
+      <button class="btn" id="dtrans-tr" onclick="setDialogTrans('tr')" style="flex:1;font-size:.75rem;">🇹🇷 TR</button>
+      <button class="btn" id="dtrans-de" onclick="setDialogTrans('de')" style="flex:1;font-size:.75rem;display:none;">🇩🇪 DE</button>
+    </div>
 
     <!-- Kategorie-Auswahl -->
     <div style="display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap;" id="dialog-cat-tabs">
@@ -1737,7 +1751,13 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
       <span style="font-size:1.1rem;">🧩</span>
       <span class="section-title">Lückentexte</span>
     </div>
-    <p style="font-size:.78rem;color:var(--muted);margin-bottom:1rem;">Fülle die fehlenden Wörter ein — trainiere Vokabeln im Kontext.</p>
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem;">Fülle die fehlenden Wörter ein — trainiere Vokabeln im Kontext.</p>
+
+    <!-- Sprach-Auswahl -->
+    <div style="display:flex;gap:.4rem;margin-bottom:.75rem;">
+      <button class="btn primary" id="gf-lang-de" onclick="setGapLang('de')" style="flex:1;">🇩🇪 Deutsch</button>
+      <button class="btn" id="gf-lang-en" onclick="setGapLang('en')" style="flex:1;">🇬🇧 Englisch</button>
+    </div>
 
     <!-- Schwierigkeitsauswahl -->
     <div style="display:flex;gap:.4rem;margin-bottom:1rem;">
@@ -1882,7 +1902,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   </div>
 
   <footer>
-    LINGUA <span id="footer-version">v6.3</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA <span id="footer-version">v6.4</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
   </footer>
 </div>
@@ -2051,7 +2071,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA <span id="settings-version">v6.3</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA <span id="settings-version">v6.4</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
     </div>
 
@@ -13301,7 +13321,267 @@ function updateNiveauWriteProgress() {
 }
 
 // ============================================================
-// 💬 DIALOGE LERNEN
+// ENGLISCHE DIALOGE
+// ============================================================
+var DIALOG_DATA_EN = {
+  alltag: [
+    { id:'en-d-shop', title:'At the Supermarket', situation:'You are shopping and need help finding items.',
+      lines:[
+        {speaker:'Customer', en:'Excuse me, where can I find the milk?',           de:'Entschuldigung, wo finde ich die Milch?',         ru:'Извините, где молоко?'},
+        {speaker:'Staff',    en:'The milk is in the refrigerated aisle, number three.', de:'Die Milch steht im Kühlregal, Gang drei.',    ru:'Молоко в холодильнике, третий ряд.'},
+        {speaker:'Customer', en:'Thank you. Do you also have oat milk?',            de:'Danke. Haben Sie auch Hafermilch?',               ru:'Спасибо. Есть ли у вас овсяное молоко?'},
+        {speaker:'Staff',    en:'Yes, it is right next to the regular milk.',       de:'Ja, direkt daneben.',                             ru:'Да, прямо рядом.'},
+        {speaker:'Customer', en:'Great. How much is this bread?',                   de:'Super. Was kostet dieses Brot?',                  ru:'Отлично. Сколько стоит этот хлеб?'},
+        {speaker:'Staff',    en:'That wholegrain loaf is two pounds forty-nine.',   de:'Das Vollkornbrot kostet 2,49 Euro.',              ru:'Цельнозерновой хлеб стоит 2,49.'},
+        {speaker:'Customer', en:'Perfect, I will take both. Where is the checkout?', de:'Gut, dann nehme ich beides. Wo ist die Kasse?', ru:'Отлично, возьму оба. Где касса?'},
+        {speaker:'Staff',    en:'The checkout is at the front on the right. Have a nice day!', de:'Die Kasse ist vorne rechts. Schönen Tag!', ru:'Касса спереди справа. Хорошего дня!'},
+      ]
+    },
+    { id:'en-d-doctor', title:'At the Doctor\'s', situation:'You have a headache and make an appointment.',
+      lines:[
+        {speaker:'Patient',  en:'Good morning. I have an appointment — Smith, my name.', de:'Guten Morgen. Ich habe einen Termin — Smith.', ru:'Доброе утро. У меня запись — Смит.'},
+        {speaker:'Doctor',   en:'Good morning, Mr Smith. What brings you in today?', de:'Guten Morgen. Was führt Sie zu mir?',             ru:'Доброе утро. Что вас привело?'},
+        {speaker:'Patient',  en:'I have had a severe headache for three days.',      de:'Ich habe seit drei Tagen starke Kopfschmerzen.',  ru:'У меня три дня сильные головные боли.'},
+        {speaker:'Doctor',   en:'Do you also have a fever or dizziness?',            de:'Haben Sie auch Fieber oder Schwindel?',           ru:'Есть ли температура или головокружение?'},
+        {speaker:'Patient',  en:'No fever, but I sometimes feel dizzy.',             de:'Kein Fieber, aber manchmal ist mir schwindelig.', ru:'Температуры нет, но иногда кружится голова.'},
+        {speaker:'Doctor',   en:'I will examine you briefly. Please lie down.',      de:'Ich untersuche Sie kurz. Bitte legen Sie sich hin.', ru:'Осмотрю вас. Пожалуйста, лягте.'},
+        {speaker:'Doctor',   en:'I will prescribe you something for the pain.',      de:'Ich schreibe Ihnen ein Mittel gegen den Schmerz auf.', ru:'Выпишу вам средство от боли.'},
+        {speaker:'Patient',  en:'Do I need a sick note as well?',                    de:'Muss ich auch krankgeschrieben werden?',          ru:'Мне нужен больничный лист?'},
+        {speaker:'Doctor',   en:'I will sign you off for two days. Get well soon!',  de:'Ich schreibe Sie für zwei Tage krank. Gute Besserung!', ru:'Выписываю вас на два дня. Поправляйтесь!'},
+      ]
+    },
+    { id:'en-d-restaurant', title:'At the Restaurant', situation:'You order food and pay the bill.',
+      lines:[
+        {speaker:'Waiter',   en:'Good evening! Do you have a reservation?',         de:'Guten Abend! Haben Sie reserviert?',              ru:'Добрый вечер! Вы бронировали?'},
+        {speaker:'Guest',    en:'No, I am afraid not. Do you have a free table?',   de:'Nein, leider nicht. Haben Sie noch einen Tisch frei?', ru:'Нет, к сожалению. Есть свободный столик?'},
+        {speaker:'Waiter',   en:'Yes, of course. For how many people?',             de:'Ja, für wie viele Personen?',                     ru:'Да, на сколько человек?'},
+        {speaker:'Guest',    en:'For two, please.',                                  de:'Für zwei Personen, bitte.',                       ru:'На двоих, пожалуйста.'},
+        {speaker:'Waiter',   en:'Please follow me. Here is your menu.',             de:'Bitte folgen Sie mir. Hier ist Ihre Speisekarte.', ru:'Следуйте за мной. Вот ваше меню.'},
+        {speaker:'Guest',    en:'Thank you. I would like the steak with chips, please.', de:'Danke. Ich hätte gern das Steak mit Pommes.', ru:'Спасибо. Я бы хотел стейк с картошкой фри.'},
+        {speaker:'Waiter',   en:'And what would you like to drink?',                de:'Und was möchten Sie trinken?',                    ru:'А что вы будете пить?'},
+        {speaker:'Guest',    en:'A sparkling water and a glass of red wine, please. Could we get the bill afterwards?', de:'Ein Wasser und ein Glas Rotwein, bitte. Können wir danach zahlen?', ru:'Воду и бокал красного вина. Можем потом расплатиться?'},
+        {speaker:'Waiter',   en:'Of course. Together or separately?',               de:'Natürlich. Zusammen oder getrennt?',               ru:'Конечно. Вместе или раздельно?'},
+        {speaker:'Guest',    en:'Separately please. I will pay by card.',           de:'Getrennt, bitte. Ich zahle mit Karte.',            ru:'Раздельно. Я плачу картой.'},
+      ]
+    },
+  ],
+  reise: [
+    { id:'en-d-station', title:'At the Train Station', situation:'You buy a ticket and ask about the train.',
+      lines:[
+        {speaker:'You',      en:'A return ticket to Manchester, please.',            de:'Eine Rückfahrkarte nach Manchester, bitte.',      ru:'Один билет туда и обратно до Манчестера.'},
+        {speaker:'Clerk',    en:'Single or return?',                                 de:'Einfach oder hin und zurück?',                    ru:'В одну сторону или туда-обратно?'},
+        {speaker:'You',      en:'Return please. When is the next train?',            de:'Hin und zurück. Wann fährt der nächste Zug?',     ru:'Туда и обратно. Когда следующий поезд?'},
+        {speaker:'Clerk',    en:'At 14:23 from platform 4. You have twelve minutes.', de:'Um 14:23, Gleis 4. Sie haben noch 12 Minuten.',  ru:'В 14:23 с платформы 4. У вас 12 минут.'},
+        {speaker:'You',      en:'Do I need to change trains?',                       de:'Muss ich umsteigen?',                             ru:'Мне нужно делать пересадку?'},
+        {speaker:'Clerk',    en:'No, it is a direct service.',                       de:'Nein, es ist ein direkter Zug.',                  ru:'Нет, это прямой поезд.'},
+        {speaker:'You',      en:'How much is that?',                                 de:'Was kostet das?',                                 ru:'Сколько это стоит?'},
+        {speaker:'Clerk',    en:'Forty-six pounds. Do you have a railcard?',         de:'46 Pfund. Haben Sie eine Bahncard?',               ru:'46 фунтов. У вас есть проездная карта?'},
+      ]
+    },
+    { id:'en-d-hotel', title:'At the Hotel', situation:'You check in and report a problem with your room.',
+      lines:[
+        {speaker:'Guest',    en:'Good afternoon. I have a reservation — Johnson.',   de:'Guten Tag. Ich habe eine Reservierung. Johnson.', ru:'Добрый день. У меня бронь. Джонсон.'},
+        {speaker:'Reception',en:'Welcome! One moment... Yes, room 214, single.',     de:'Willkommen! Ein Moment... Ja, Zimmer 214, Einzelzimmer.', ru:'Добро пожаловать! Номер 214, одноместный.'},
+        {speaker:'Guest',    en:'Thank you. Is breakfast included?',                 de:'Danke. Ist Frühstück inklusive?',                 ru:'Спасибо. Завтрак включён?'},
+        {speaker:'Reception',en:'Yes, breakfast is served from 7 to 10 in the dining room.', de:'Ja, Frühstück von 7 bis 10 im Speisesaal.', ru:'Да, завтрак с 7 до 10 в столовой.'},
+        {speaker:'Guest',    en:'I have a small problem — the air conditioning is not working.', de:'Ich habe ein Problem — die Klimaanlage funktioniert nicht.', ru:'Небольшая проблема — кондиционер не работает.'},
+        {speaker:'Reception',en:'I am sorry about that! I will send someone up straight away.', de:'Es tut mir leid! Ich schicke sofort jemanden.', ru:'Извините! Я сразу кого-нибудь пришлю.'},
+        {speaker:'Guest',    en:'Thank you. And what is the Wi-Fi password?',        de:'Danke. Und wo ist der WLAN-Code?',                ru:'Спасибо. А что такое пароль Wi-Fi?'},
+        {speaker:'Reception',en:'The password is on this card. Enjoy your stay!',   de:'Das Passwort steht auf dieser Karte. Gute Nacht!', ru:'Пароль на этой карточке. Приятного пребывания!'},
+      ]
+    },
+    { id:'en-d-directions', title:'Asking for Directions', situation:'You are in an unfamiliar city and need directions.',
+      lines:[
+        {speaker:'You',      en:'Excuse me, could you help me? I am looking for the central station.', de:'Entschuldigung, können Sie mir helfen? Ich suche den Hauptbahnhof.', ru:'Извините, не могли бы вы помочь? Я ищу главный вокзал.'},
+        {speaker:'Passer-by',en:'Yes, of course. Go straight on until you reach the traffic lights.',  de:'Ja, natürlich. Gehen Sie geradeaus bis zur Ampel.',               ru:'Да, конечно. Идите прямо до светофора.'},
+        {speaker:'You',      en:'And then?',                                         de:'Und dann?',                                       ru:'А потом?'},
+        {speaker:'Passer-by',en:'Turn left, and after about two hundred metres you will see the station.', de:'Dann biegen Sie links ab, und nach 200 Metern sehen Sie den Bahnhof.', ru:'Затем поверните налево, через 200 метров увидите вокзал.'},
+        {speaker:'You',      en:'Is it far on foot?',                                de:'Ist es weit zu Fuß?',                             ru:'Это далеко пешком?'},
+        {speaker:'Passer-by',en:'No, about ten minutes. You could also take bus number 12.',           de:'Nein, etwa 10 Minuten. Sie können auch Bus 12 nehmen.',          ru:'Нет, около 10 минут. Можно и на автобусе 12.'},
+        {speaker:'You',      en:'Thank you very much, you have been very helpful!',  de:'Vielen Dank, Sie haben mir sehr geholfen!',       ru:'Большое спасибо, вы мне очень помогли!'},
+        {speaker:'Passer-by',en:'My pleasure! Have a good trip!',                    de:'Gern geschehen! Gute Reise!',                     ru:'Пожалуйста! Счастливого пути!'},
+      ]
+    },
+  ],
+  arbeit: [
+    { id:'en-d-interview', title:'Job Interview', situation:'You apply for a developer position.',
+      lines:[
+        {speaker:'HR',       en:'Good morning. Please take a seat.',                 de:'Guten Morgen. Bitte nehmen Sie Platz.',           ru:'Доброе утро. Присаживайтесь.'},
+        {speaker:'Applicant',en:'Thank you! I am really pleased to be here.',       de:'Danke! Ich freue mich sehr über die Einladung.',  ru:'Спасибо! Очень рад этому приглашению.'},
+        {speaker:'HR',       en:'Could you tell me a little about yourself?',       de:'Erzählen Sie mir kurz von sich.',                 ru:'Расскажите мне о себе.'},
+        {speaker:'Applicant',en:'I have been working as a software developer for five years.', de:'Ich bin seit fünf Jahren als Softwareentwickler tätig.', ru:'Я работаю разработчиком ПО уже пять лет.'},
+        {speaker:'HR',       en:'Which programming languages do you know?',         de:'Welche Programmiersprachen beherrschen Sie?',     ru:'Какими языками программирования вы владеете?'},
+        {speaker:'Applicant',en:'Python, JavaScript and some Java. I am currently learning Rust.', de:'Python, JavaScript und etwas Java. Ich lerne gerade Rust.', ru:'Python, JavaScript и немного Java. Изучаю Rust.'},
+        {speaker:'HR',       en:'Very good. Why do you want to join our company?',  de:'Sehr gut. Warum möchten Sie zu uns wechseln?',   ru:'Очень хорошо. Почему вы хотите перейти к нам?'},
+        {speaker:'Applicant',en:'I admire your innovative projects and the international team.', de:'Ich schätze Ihre innovativen Projekte und das internationale Team.', ru:'Я ценю ваши инновационные проекты и международную команду.'},
+        {speaker:'HR',       en:'Do you have any questions for us?',                de:'Haben Sie noch Fragen an uns?',                   ru:'Есть ли у вас вопросы к нам?'},
+        {speaker:'Applicant',en:'Yes — what does the onboarding process look like for new employees?', de:'Ja, wie sieht das Onboarding für neue Mitarbeiter aus?', ru:'Да — как выглядит онбординг для новых сотрудников?'},
+      ]
+    },
+    { id:'en-d-meeting', title:'In a Meeting', situation:'You present results and discuss solutions.',
+      lines:[
+        {speaker:'You',      en:'I would like to briefly present last week\'s results.', de:'Ich möchte kurz die Ergebnisse der letzten Woche vorstellen.', ru:'Хочу кратко представить результаты прошлой недели.'},
+        {speaker:'Colleague',en:'Go ahead. We still have twenty minutes.',           de:'Bitte. Wir haben noch 20 Minuten.',               ru:'Пожалуйста. У нас ещё 20 минут.'},
+        {speaker:'You',      en:'We have reached eighty percent of the project target. Here are the figures.', de:'Wir haben das Projektziel zu 80% erreicht.', ru:'Мы выполнили цель на 80%. Вот показатели.'},
+        {speaker:'Manager',  en:'Good. Why did we not hit one hundred percent?',    de:'Gut. Warum haben wir die 100% nicht geschafft?', ru:'Хорошо. Почему мы не достигли 100%?'},
+        {speaker:'You',      en:'There were technical delays with the database upgrade.', de:'Es gab technische Verzögerungen beim Datenbankupgrade.', ru:'Были технические задержки с обновлением базы данных.'},
+        {speaker:'Colleague',en:'What are the next steps?',                         de:'Was sind die nächsten Schritte?',                 ru:'Каковы следующие шаги?'},
+        {speaker:'You',      en:'We will prioritise the upgrade this week. I need two more developers.', de:'Wir priorisieren das Upgrade für diese Woche. Ich brauche zwei weitere Entwickler.', ru:'Приоритизируем апгрейд на этой неделе. Нужны ещё два разработчика.'},
+        {speaker:'Manager',  en:'Agreed. I will inform the other teams. Thank you!', de:'Abgemacht. Ich informiere die anderen Teams. Danke!', ru:'Договорились. Сообщу другим командам. Спасибо!'},
+      ]
+    },
+  ],
+  sozial: [
+    { id:'en-d-meeting-someone', title:'Meeting Someone New', situation:'You are at a party and meet someone new.',
+      lines:[
+        {speaker:'You',      en:'Hi! I am new here. My name is Alex.',              de:'Hallo! Ich bin neu hier. Ich heiße Alex.',        ru:'Привет! Я здесь новый. Меня зовут Алекс.'},
+        {speaker:'Person',   en:'Hi Alex! I am Jana. How do you know the host?',    de:'Hallo Alex! Ich bin Jana. Woher kennst du den Gastgeber?', ru:'Привет, Алекс! Я Яна. Откуда ты знаешь хозяина?'},
+        {speaker:'You',      en:'We work together. And you?',                       de:'Wir arbeiten zusammen. Und du?',                  ru:'Мы вместе работаем. А ты?'},
+        {speaker:'Person',   en:'We are old school friends. What do you do for work?', de:'Wir sind alte Schulfreunde. Was machst du beruflich?', ru:'Мы старые школьные друзья. Чем ты занимаешься?'},
+        {speaker:'You',      en:'I am a graphic designer. And you are a teacher, if I am not mistaken?', de:'Ich bin Grafikdesigner. Und du bist Lehrerin?', ru:'Я графический дизайнер. А ты учительница?'},
+        {speaker:'Person',   en:'Yes, exactly! You were paying attention. Do you like music?', de:'Ja, genau! Du hast gut zugehört. Magst du Musik?', ru:'Да, именно! Ты внимательно слушал. Ты любишь музыку?'},
+        {speaker:'You',      en:'Very much! I play guitar myself. What about you?',  de:'Sehr! Ich spiele selbst Gitarre. Du?',            ru:'Очень! Я сам играю на гитаре. А ты?'},
+        {speaker:'Person',   en:'I sing in a choir. We should meet up to play some music sometime!', de:'Ich singe im Chor. Wir sollten uns mal zum Musizieren treffen!', ru:'Я пою в хоре. Нам стоит встретиться и поиграть!'},
+      ]
+    },
+    { id:'en-d-conflict', title:'Resolving a Conflict', situation:'You address a problem with a flatmate.',
+      lines:[
+        {speaker:'You',      en:'Could I have a word with you? It is about something important.', de:'Darf ich kurz mit dir reden? Es geht um etwas Wichtiges.', ru:'Могу я с тобой поговорить? Это важно.'},
+        {speaker:'Flatmate', en:'Of course, what is it?',                            de:'Klar, was ist los?',                              ru:'Конечно, что случилось?'},
+        {speaker:'You',      en:'It is about the kitchen. It is often not clean when I come home.', de:'Es geht um die Küche. Sie ist oft nicht sauber.', ru:'Речь о кухне. Когда я прихожу, она часто грязная.'},
+        {speaker:'Flatmate', en:'Oh, I am sorry. I had not realised that.',          de:'Oh, das tut mir leid. Ich habe das nicht so wahrgenommen.', ru:'О, извини. Я не замечал этого.'},
+        {speaker:'You',      en:'I suggest we draw up a cleaning rota.',             de:'Ich schlage vor, dass wir einen Putzplan erstellen.', ru:'Предлагаю составить график уборки.'},
+        {speaker:'Flatmate', en:'That is a good idea. What would that look like?',   de:'Das ist eine gute Idee. Wie soll das aussehen?', ru:'Это хорошая идея. Как это должно выглядеть?'},
+        {speaker:'You',      en:'You clean on Mondays, I clean on Fridays. We do the rest together.', de:'Du putzt montags, ich freitags. Den Rest machen wir zusammen.', ru:'Ты убираешь по понедельникам, я по пятницам.'},
+        {speaker:'Flatmate', en:'Agreed. Thank you for bringing this up.',           de:'Einverstanden. Danke, dass du das angesprochen hast.', ru:'Согласен. Спасибо, что поднял эту тему.'},
+      ]
+    },
+  ],
+};
+
+// English gap fill data
+var gapFillDataEN = [
+  // Easy
+  { level:'easy', sentence:'___ are you from?', answer:'Where', options:['Where','Who','What','When'], translation:'Where are you from? — Woher kommst du?' },
+  { level:'easy', sentence:'I ___ a student.', answer:'am', options:['am','is','are','be'], translation:'I am a student. — Ich bin Student.' },
+  { level:'easy', sentence:'She ___ to school every day.', answer:'goes', options:['goes','go','went','gone'], translation:'She goes to school every day. — Sie geht jeden Tag zur Schule.' },
+  { level:'easy', sentence:'___ is your name?', answer:'What', options:['What','Where','Who','How'], translation:'What is your name? — Wie heißt du?' },
+  { level:'easy', sentence:'I would ___ a coffee, please.', answer:'like', options:['like','want','have','take'], translation:'I would like a coffee, please. — Ich möchte bitte einen Kaffee.' },
+  { level:'easy', sentence:'The cat is ___ the table.', answer:'on', options:['on','in','at','under'], translation:'The cat is on the table. — Die Katze ist auf dem Tisch.' },
+  { level:'easy', sentence:'They ___ watching TV right now.', answer:'are', options:['are','is','am','be'], translation:'They are watching TV right now. — Sie sehen gerade fern.' },
+  { level:'easy', sentence:'I ___ not like spicy food.', answer:'do', options:['do','am','have','did'], translation:'I do not like spicy food. — Ich mag kein scharfes Essen.' },
+  { level:'easy', sentence:'___ does the bus leave?', answer:'When', options:['When','Where','What','How'], translation:'When does the bus leave? — Wann fährt der Bus ab?' },
+  { level:'easy', sentence:'She has ___ brothers and one sister.', answer:'two', options:['two','to','too','three'], translation:'She has two brothers. — Sie hat zwei Brüder.' },
+  // Medium
+  { level:'medium', sentence:'If it rains, we ___ stay inside.', answer:'will', options:['will','would','shall','can'], translation:'If it rains, we will stay inside. — Wenn es regnet, bleiben wir drinnen.' },
+  { level:'medium', sentence:'By the time she arrived, he ___ already left.', answer:'had', options:['had','has','was','did'], translation:'By the time she arrived, he had already left. — Als sie ankam, war er schon gegangen.' },
+  { level:'medium', sentence:'She ___ been working here for ten years.', answer:'has', options:['has','have','had','is'], translation:'She has been working here for ten years. — Sie arbeitet hier seit zehn Jahren.' },
+  { level:'medium', sentence:'The report must ___ submitted by Friday.', answer:'be', options:['be','been','being','have'], translation:'The report must be submitted by Friday. — Der Bericht muss bis Freitag eingereicht werden.' },
+  { level:'medium', sentence:'Despite the rain, they ___ the match.', answer:'won', options:['won','win','winning','wins'], translation:'Despite the rain, they won the match. — Trotz des Regens gewannen sie das Spiel.' },
+  { level:'medium', sentence:'I suggested ___ the meeting earlier.', answer:'moving', options:['moving','to move','move','moved'], translation:'I suggested moving the meeting earlier. — Ich schlug vor, das Meeting früher zu verlegen.' },
+  { level:'medium', sentence:'___ he known the answer, he would have spoken.', answer:'Had', options:['Had','Has','Have','Did'], translation:'Had he known the answer, he would have spoken. — Hätte er die Antwort gewusst, hätte er gesprochen.' },
+  { level:'medium', sentence:'She is used to ___ alone.', answer:'working', options:['working','work','worked','works'], translation:'She is used to working alone. — Sie ist es gewohnt, allein zu arbeiten.' },
+  { level:'medium', sentence:'The company is reported ___ lost millions.', answer:'to have', options:['to have','having','to had','have'], translation:'The company is reported to have lost millions. — Dem Unternehmen sollen Millionen verloren gegangen sein.' },
+  { level:'medium', sentence:'I wish I ___ more time to study.', answer:'had', options:['had','have','would','could'], translation:'I wish I had more time to study. — Ich wünschte, ich hätte mehr Zeit zum Lernen.' },
+  // Hard
+  { level:'hard', sentence:'___ the circumstances, her decision was understandable.', answer:'Given', options:['Given','Considering','Although','Despite'], translation:'Given the circumstances, her decision was understandable. — Angesichts der Umstände war ihre Entscheidung verständlich.' },
+  { level:'hard', sentence:'Not only did he refuse to help, ___ he made things worse.', answer:'but', options:['but','and','yet','nor'], translation:'Not only did he refuse to help, but he made things worse. — Er weigerte sich nicht nur zu helfen, er verschlimmerte die Lage auch noch.' },
+  { level:'hard', sentence:'The data ___ that there is a strong correlation.', answer:'suggests', options:['suggests','tells','says','implies'], translation:'The data suggests that there is a strong correlation. — Die Daten legen eine starke Korrelation nahe.' },
+  { level:'hard', sentence:'Rarely ___ such a convincing argument been made.', answer:'has', options:['has','have','had','was'], translation:'Rarely has such a convincing argument been made. — Selten wurde ein so überzeugendes Argument vorgebracht.' },
+  { level:'hard', sentence:'It is essential that the report ___ reviewed immediately.', answer:'be', options:['be','is','was','were'], translation:'It is essential that the report be reviewed immediately. — Es ist unerlässlich, dass der Bericht sofort überprüft wird.' },
+  { level:'hard', sentence:'She spoke in a ___ that left no room for ambiguity.', answer:'manner', options:['manner','way','form','style'], translation:'She spoke in a manner that left no room for ambiguity. — Sie sprach auf eine Weise, die keinen Raum für Mehrdeutigkeiten ließ.' },
+  { level:'hard', sentence:'___ one may argue, the evidence speaks for itself.', answer:'Whatever', options:['Whatever','However','Whoever','Whenever'], translation:'Whatever one may argue, the evidence speaks for itself. — Was auch immer man argumentieren mag, die Beweise sprechen für sich.' },
+];
+
+// ============================================================
+// DIALOG LANGUAGE LOGIC
+// ============================================================
+var dialogState = {
+  cat: 'alltag', dialogId: null, dialog: null,
+  lineIdx: 0, showTrans: false,
+  lang: 'de',      // 'de' = Deutsch lernen, 'en' = Englisch lernen
+  transLang: 'ru'  // Übersetzungssprache: ru / tr / de
+};
+
+function setDialogLang(lang) {
+  dialogState.lang = lang;
+  ['de','en'].forEach(function(l) {
+    document.getElementById('dlang-'+l).className = 'btn'+(l===lang?' primary':'');
+  });
+  // Übersetzungssprache anpassen
+  var deBtn = document.getElementById('dtrans-de');
+  var ruBtn = document.getElementById('dtrans-ru');
+  if (lang === 'en') {
+    if (deBtn) deBtn.style.display = '';
+    if (ruBtn) ruBtn.style.display = '';
+    // EN lernen → DE als Standard-Übersetzung
+    setDialogTrans('de');
+  } else {
+    if (deBtn) deBtn.style.display = 'none';
+    if (ruBtn) ruBtn.style.display = '';
+    setDialogTrans('ru');
+  }
+  // Kategorie-Labels anpassen
+  var cats = dialogState.lang === 'en'
+    ? {alltag:'🏙️ Daily Life', reise:'✈️ Travel', arbeit:'💼 Work', sozial:'🤝 Social'}
+    : {alltag:'🏙️ Alltag', reise:'✈️ Reise', arbeit:'💼 Arbeit', sozial:'🤝 Sozial'};
+  Object.keys(cats).forEach(function(cat) {
+    var btn = document.getElementById('dcat-'+cat);
+    if (btn) btn.textContent = cats[cat];
+  });
+  renderDialogList();
+}
+
+function setDialogTrans(lang) {
+  dialogState.transLang = lang;
+  ['ru','tr','de'].forEach(function(l) {
+    var btn = document.getElementById('dtrans-'+l);
+    if (btn) btn.className = 'btn'+(l===lang?' primary':'');
+  });
+  if (dialogState.dialog) renderDialogLine();
+}
+
+function getDialogData() {
+  return dialogState.lang === 'en' ? DIALOG_DATA_EN : DIALOG_DATA;
+}
+
+function getDialogLine(line) {
+  // Returns the text to display and translation based on language setting
+  if (dialogState.lang === 'en') {
+    var text = line.en || line.de;
+    var trans = dialogState.transLang === 'de' ? (line.de||'') :
+                dialogState.transLang === 'tr' ? (line.tr||line.ru||'') : (line.ru||'');
+    return { text: text, trans: trans };
+  } else {
+    var text2 = line.de;
+    var trans2 = dialogState.transLang === 'tr' ? (line.tr||line.ru||'') : (line.ru||'');
+    return { text: text2, trans: trans2 };
+  }
+}
+
+// GAP FILL LANGUAGE LOGIC
+var gapState = {
+  diff: 'easy', idx: 0, score: 0,
+  queue: [], answered: false, hintUsed: false,
+  lang: 'de' // 'de' or 'en'
+};
+
+function setGapLang(lang) {
+  gapState.lang = lang;
+  ['de','en'].forEach(function(l) {
+    document.getElementById('gf-lang-'+l).className = 'btn'+(l===lang?' primary':'');
+  });
+  // Label für Prompt anpassen
+  var promptLabel = lang === 'en' ? 'TYPE IN ENGLISH:' : 'TIPPE AUF DEUTSCH:';
+  initGapFill();
+}
+
+function getGapData() {
+  return gapState.lang === 'en' ? gapFillDataEN : gapFillData;
+}
+
+// ============================================================
+// 💬 DIALOGE LERNEN — Deutsche Dialoge
 // ============================================================
 var DIALOG_DATA = {
   alltag: [
@@ -13439,10 +13719,7 @@ var DIALOG_DATA = {
   ],
 };
 
-var dialogState = {
-  cat: 'alltag', dialogId: null, dialog: null,
-  lineIdx: 0, showTrans: false
-};
+// dialogState wird weiter oben im neuen Code definiert
 
 function setDialogCat(cat) {
   dialogState.cat = cat;
@@ -13457,22 +13734,26 @@ function initDialogs() {
   document.getElementById('dialog-player').style.display = 'none';
   document.getElementById('dialog-list').style.display = '';
   document.getElementById('dialog-cat-tabs').style.display = '';
-  renderDialogList();
+  var deB=document.getElementById('dlang-de'), enB=document.getElementById('dlang-en');
+  if(deB) deB.className='btn'+(dialogState.lang==='de'?' primary':'');
+  if(enB) enB.className='btn'+(dialogState.lang==='en'?' primary':'');
+  setDialogLang(dialogState.lang);
 }
 
 function renderDialogList() {
-  var dialogs = DIALOG_DATA[dialogState.cat] || [];
+  var isEN = dialogState.lang === 'en';
+  var dialogs = (getDialogData()[dialogState.cat]) || [];
   document.getElementById('dialog-list').innerHTML = dialogs.map(function(d) {
     return '<div class="card" style="margin-bottom:.6rem;cursor:pointer;" onclick="openDialog(\''+dialogState.cat+'\',\''+d.id+'\')">'+
       '<div style="display:flex;justify-content:space-between;align-items:center;">'+
       '<div><div style="font-weight:700;font-size:.9rem;">💬 '+d.title+'</div>'+
       '<div style="font-size:.72rem;color:var(--muted);margin-top:.2rem;">'+d.situation+'</div></div>'+
-      '<div style="font-size:.72rem;color:var(--muted);">'+d.lines.length+' Zeilen →</div></div></div>';
+      '<div style="font-size:.72rem;color:var(--muted);">'+d.lines.length+(isEN?' lines →':' Zeilen →')+'</div></div></div>';
   }).join('');
 }
 
 function openDialog(cat, id) {
-  var dialog = (DIALOG_DATA[cat]||[]).find(function(d){return d.id===id;});
+  var dialog = (getDialogData()[cat]||[]).find(function(d){return d.id===id;});
   if (!dialog) return;
   dialogState.dialog = dialog; dialogState.dialogId = id;
   dialogState.lineIdx = 0; dialogState.showTrans = false;
@@ -13498,8 +13779,8 @@ function renderDialogLine() {
     // Fertig
     document.getElementById('dialog-current-card').innerHTML =
       '<div style="text-align:center;padding:.75rem;"><div style="font-size:2rem;">🎉</div>'+
-      '<div style="font-weight:700;margin-top:.4rem;">Dialog abgeschlossen!</div>'+
-      '<button class="btn primary" onclick="closeDialogPlayer()" style="margin-top:.75rem;width:100%;">← Zurück zu Dialogen</button></div>';
+      '<div style="font-weight:700;margin-top:.4rem;">'+(dialogState.lang==='en'?'Dialogue complete!':'Dialog abgeschlossen!')+'</div>'+
+      '<button class="btn primary" onclick="closeDialogPlayer()" style="margin-top:.75rem;width:100%;">← '+(dialogState.lang==='en'?'Back':'Zurück zu Dialogen')+'</button></div>';
     document.getElementById('dialog-next-btn').style.display = 'none';
     document.getElementById('dialog-trans-btn').style.display = 'none';
     var speakBtn = document.querySelector('[onclick="dialogSpeak()"]');
@@ -13511,12 +13792,14 @@ function renderDialogLine() {
   var lang = niveauState.lang || 'ru';
   var trans = lang==='tr'?(line.tr||line.ru):(line.ru||'');
 
-  document.getElementById('dialog-speaker').textContent =
-    (line.speaker === 'Du' ? '👤 ' : '🗣️ ') + line.speaker;
-  document.getElementById('dialog-line-de').textContent = line.de;
+  var _si={'You':'👤','Du':'👤','Customer':'👤','Kunde':'👤','Patient':'👤','Guest':'👤','Gast':'👤','Applicant':'👤','Bewerber':'👤'};
+  document.getElementById('dialog-speaker').textContent = (_si[line.speaker]||'🗣️')+' '+line.speaker;
+  var _lc = getDialogLine(line);
+  document.getElementById('dialog-line-de').textContent = _lc.text;
   document.getElementById('dialog-line-trans').textContent = '';
   dialogState.showTrans = false;
-  document.getElementById('dialog-trans-btn').textContent = '👁 Übersetzung';
+  document.getElementById('dialog-trans-btn').textContent = dialogState.lang==='en'?'👁 Translation':'👁 Übersetzung';
+  document.getElementById('dialog-next-btn').textContent = dialogState.lang==='en'?'Next →':'Weiter →';
 
   // Fortschritt
   var pct = Math.round((idx/d.lines.length)*100);
@@ -13529,7 +13812,8 @@ function renderDialogLine() {
     var prev = d.lines[idx-1];
     var histEl = document.createElement('div');
     histEl.style.cssText = 'background:var(--surface2);border-radius:8px;padding:.4rem .6rem;font-size:.75rem;';
-    histEl.innerHTML = '<span style="font-weight:700;color:var(--muted);">'+prev.speaker+':</span> '+prev.de;
+    var _pc=getDialogLine(prev);
+    histEl.innerHTML = '<span style="font-weight:700;color:var(--muted);">'+prev.speaker+':</span> '+_pc.text;
     document.getElementById('dialog-history').appendChild(histEl);
     document.getElementById('dialog-history').scrollTop = 9999;
   }
@@ -13538,16 +13822,16 @@ function renderDialogLine() {
 function dialogShowTrans() {
   var d = dialogState.dialog;
   var line = d.lines[dialogState.lineIdx];
-  var lang = niveauState.lang || 'ru';
-  var trans = lang==='tr'?(line.tr||line.ru):(line.ru||'');
+  var _dlc=getDialogLine(line);
   dialogState.showTrans = !dialogState.showTrans;
-  document.getElementById('dialog-line-trans').textContent = dialogState.showTrans ? trans : '';
-  document.getElementById('dialog-trans-btn').textContent = dialogState.showTrans ? '👁 Ausblenden' : '👁 Übersetzung';
+  document.getElementById('dialog-line-trans').textContent = dialogState.showTrans ? _dlc.trans : '';
+  var _isEN=dialogState.lang==='en';
+  document.getElementById('dialog-trans-btn').textContent = dialogState.showTrans?(_isEN?'👁 Hide':'👁 Ausblenden'):(_isEN?'👁 Translation':'👁 Übersetzung');
 }
 
 function dialogSpeak() {
   var line = dialogState.dialog.lines[dialogState.lineIdx];
-  if (line) speak(line.de, 'de');
+  if (line) speak(dialogState.lang==='en'?(line.en||line.de):line.de, dialogState.lang==='en'?'en':'de');
 }
 
 function dialogNext() {
@@ -13905,7 +14189,7 @@ function setGapDiff(diff) {
 }
 
 function initGapFill() {
-  var pool = gapFillData.filter(function(g){ return g.level === gapState.diff; });
+  var pool = getGapData().filter(function(g){ return g.level === gapState.diff; });
   gapState.queue = pool.slice().sort(function(){ return Math.random()-.5; });
   gapState.idx = 0; gapState.score = 0;
   renderGapFill();
@@ -14828,8 +15112,8 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 67;
-var BUILD_VERSION = '6.3'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
+var BUILD = 68;
+var BUILD_VERSION = '6.4'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
 (function() {
@@ -14935,6 +15219,18 @@ function updateAllVersionDisplays() {
 // Bei jedem Deploy: neuen Eintrag mit aktuellem BUILD hinzufügen
 // ============================================================
 var CHANGELOG = {
+  68: {
+    emoji: '🇬🇧',
+    title: 'Englische Dialoge & Lückentexte',
+    items: [
+      '🇬🇧 11 englische Dialoge in 4 Kategorien (Daily/Travel/Work/Social)',
+      '🧩 27 englische Lückentexte (Easy/Medium/Hard)',
+      '🔄 Dialoge: Sprach-Toggle 🇩🇪 Deutsch / 🇬🇧 Englisch',
+      '🔄 Lückentexte: Sprach-Toggle 🇩🇪 Deutsch / 🇬🇧 Englisch',
+      '🗣️ Übersetzungssprachen: RU / TR / DE (je nach Lernsprache)',
+      '🔊 Aussprache wechselt automatisch auf korrekte Sprache',
+    ]
+  },
   67: {
     emoji: '📋',
     title: 'Vollständiger Changelog in der App',
