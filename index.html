@@ -5,9 +5,9 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%236366f1'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>L</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="description" id="meta-description" content="LINGUA v7.9 – KI-gestützte Sprachlern-App von René Prause">
+<meta name="description" id="meta-description" content="LINGUA v8.1 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v7.9 · by René Prause</title>
+<title>LINGUA v8.1 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -72,7 +72,8 @@ header {
   letter-spacing:-.02em; color:var(--text); flex-shrink:0;
 }
 .logo span { color:var(--accent); }
-.header-right { display:flex; align-items:center; gap:.4rem; flex:1; overflow:hidden; min-width:0; }
+.header-right { display:flex; align-items:center; gap:.4rem; flex:1; overflow:visible; min-width:0; }
+.header-controls { display:flex; align-items:center; gap:.4rem; flex-shrink:0; }
 .lang-pills { display:flex; gap:.35rem; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
 .lang-pills::-webkit-scrollbar { display:none; }
 .lang-pill {
@@ -685,7 +686,7 @@ if (window.caches) {
 <div id="app">
   <div class="topbar-sticky">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v7.9</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v8.1</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill" data-lang="sq">🇦🇱 SQ</button>
@@ -702,10 +703,12 @@ if (window.caches) {
         <button class="lang-pill" data-lang="th">🇹🇭 TH</button>
         <button class="lang-pill" data-lang="tr">🇹🇷 TR</button>
       </div>
-      <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Hell/Dunkel">🌙</button>
-      <button class="settings-btn" onclick="openSettings()" title="Einstellungen">
-        <span class="api-dot-inline" id="api-dot"></span>⚙
-      </button>
+      <div class="header-controls">
+        <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Hell/Dunkel">🌙</button>
+        <button class="settings-btn" onclick="openSettings()" title="Einstellungen">
+          <span class="api-dot-inline" id="api-dot"></span>⚙
+        </button>
+      </div>
     </div>
   </header>
 
@@ -1998,7 +2001,7 @@ if (window.caches) {
   </div>
 
   <footer>
-    LINGUA <span id="footer-version">v7.9</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA <span id="footer-version">v8.1</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
   </footer>
 </div>
@@ -2167,7 +2170,7 @@ if (window.caches) {
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA <span id="settings-version">v7.9</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA <span id="settings-version">v8.1</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
     </div>
 
@@ -15606,16 +15609,13 @@ var ONBOARDING_STEPS = [
 var onboardingStep = 0;
 
 function showOnboarding() {
-  // Nur zeigen wenn: noch nie gesehen ODER neue Version
+  // Nur beim allerersten Start zeigen
   if (localStorage.getItem('lingua_onboarding_disabled') === '1') return;
-  var seenVersion = localStorage.getItem('lingua_onboarded_version') || '0.0';
-  var currentVersion = window.CURRENT_VERSION || BUILD_VERSION;
-  var alreadySeen = localStorage.getItem('lingua_onboarded') === '1';
-  // Zeige Tutorial wenn: erstmals ODER Version hat sich geändert
-  if (alreadySeen && seenVersion === currentVersion) return;
+  if (localStorage.getItem('lingua_onboarded') === '1') return;
   onboardingStep = 0;
   renderOnboardingStep();
   document.getElementById('onboarding-overlay').classList.remove('hidden');
+}
 }
 
 function renderOnboardingStep() {
@@ -15722,8 +15722,8 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 80;
-var BUILD_VERSION = '7.9'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
+var BUILD = 82;
+var BUILD_VERSION = '8.1'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
 (function() {
@@ -15829,6 +15829,24 @@ function updateAllVersionDisplays() {
 // Bei jedem Deploy: neuen Eintrag mit aktuellem BUILD hinzufügen
 // ============================================================
 var CHANGELOG = {
+  82: {
+    emoji: '⚙️',
+    title: 'v8.1 – Settings-Button immer sichtbar',
+    items: [
+      'overflow:hidden auf header-right entfernt - Settings-Button war abgeschnitten',
+      'Theme-Toggle und Settings-Btn in flex-shrink:0 Container',
+      'Settings-Button jetzt immer klickbar unabhaengig von Sprachpillen-Breite',
+    ]
+  },
+  81: {
+    emoji: '⚙️',
+    title: 'v8.0 – Konfig-Menü Fix',
+    items: [
+      'Onboarding blockierte das Konfig-Menü bei jedem Versions-Update',
+      'Onboarding erscheint jetzt nur noch beim allerersten Start',
+      'Einstellungen per Zahnrad-Button jederzeit erreichbar',
+    ]
+  },
   80: {
     emoji: '🔄',
     title: 'v7.9 - Rollback Build77 + Layout-Fix',
