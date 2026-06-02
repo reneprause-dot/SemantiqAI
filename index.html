@@ -59,26 +59,27 @@ body::before {
 /* HEADER */
 header {
   display:flex; align-items:center; justify-content:space-between;
-  padding:.9rem 1.25rem; border-bottom:1px solid var(--border);
+  padding:.5rem .75rem; border-bottom:1px solid var(--border);
   background:rgba(7,7,13,.92); backdrop-filter:blur(20px);
-  flex-wrap:wrap; gap:.5rem;
+  flex-wrap:nowrap; gap:.4rem;
 }
 .topbar-sticky {
   position:sticky; top:0; z-index:100;
   background:var(--bg);
 }
 .logo {
-  font-family:'Syne', sans-serif; font-weight:800; font-size:1.4rem;
+  font-family:'Syne', sans-serif; font-weight:800; font-size:1.2rem;
   letter-spacing:-.02em; color:var(--text); flex-shrink:0;
 }
 .logo span { color:var(--accent); }
-.header-right { display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; }
-.lang-pills { display:flex; gap:.35rem; flex-wrap:wrap; }
+.header-right { display:flex; align-items:center; gap:.4rem; flex:1; overflow:hidden; min-width:0; }
+.lang-pills { display:flex; gap:.35rem; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+.lang-pills::-webkit-scrollbar { display:none; }
 .lang-pill {
-  padding:.28rem .6rem; border-radius:100px; border:1px solid var(--border);
-  font-size:.68rem; font-family:'Syne',sans-serif; font-weight:600; letter-spacing:.04em;
+  padding:.22rem .45rem; border-radius:100px; border:1px solid var(--border);
+  font-size:.62rem; font-family:'Syne',sans-serif; font-weight:600; letter-spacing:.03em;
   cursor:pointer; transition:all .2s; background:transparent; color:var(--muted);
-  -webkit-tap-highlight-color:transparent;
+  -webkit-tap-highlight-color:transparent; flex-shrink:0; white-space:nowrap;
 }
 .lang-pill.active { border-color:var(--pill-color,var(--accent)); color:var(--pill-color,var(--accent)); background:rgba(108,99,255,.1); }
 .lang-pill[data-lang="ru"] { --pill-color:var(--ru); }
@@ -96,9 +97,9 @@ header {
 .lang-pill[data-lang="sv"] { --pill-color:var(--sv); }
 .settings-btn {
   background:var(--surface2); border:1px solid var(--border); border-radius:8px;
-  padding:.35rem .6rem; cursor:pointer; font-size:1rem; color:var(--muted);
+  padding:.3rem .5rem; cursor:pointer; font-size:.9rem; color:var(--muted);
   transition:all .2s; display:flex; align-items:center; gap:.3rem;
-  -webkit-tap-highlight-color:transparent;
+  -webkit-tap-highlight-color:transparent; flex-shrink:0;
 }
 .settings-btn:hover { border-color:var(--accent); color:var(--accent); }
 .api-dot-inline { width:7px; height:7px; border-radius:50%; background:var(--accent2); display:inline-block; }
@@ -585,7 +586,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 }
 :root.light body::before { opacity:.04; }
 :root.light .vocab-card, :root.light .card { box-shadow:0 2px 12px rgba(0,0,0,.08); }
-.theme-toggle { background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:.3rem .65rem; cursor:pointer; font-size:.8rem; transition:all .2s; }
+.theme-toggle { background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:.3rem .55rem; cursor:pointer; font-size:.8rem; transition:all .2s; flex-shrink:0; }
 
 /* STATS CHARTS */
 .chart-bar-wrap { display:flex; flex-direction:column; gap:.5rem; }
@@ -15718,7 +15719,7 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 74;
+var BUILD = 75;
 var BUILD_VERSION = '6.5'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
