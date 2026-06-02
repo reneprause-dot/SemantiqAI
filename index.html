@@ -656,16 +656,16 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 .psb-new { background:rgba(108,99,255,.2); color:var(--accent); }
 </style>
 <script>
-// Cache-Cleaner - laeuft sofort beim Laden
+// SW + Cache entfernen
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.getRegistrations().then(function(regs) {
     regs.forEach(function(r) { r.unregister(); });
   });
-  if ('caches' in window) {
-    caches.keys().then(function(names) {
-      names.forEach(function(name) { caches.delete(name); });
-    });
-  }
+}
+if (window.caches) {
+  caches.keys().then(function(names) {
+    names.forEach(function(n) { caches.delete(n); });
+  });
 }
 </script>
 </head>
@@ -11018,9 +11018,7 @@ function showToast(msg) {
 // ============================================================
 // PWA SERVICE WORKER
 // ============================================================
-if ('serviceWorker' in navigator) {
-  // Zuerst alle alten Service Worker loeschen (verhindert Cache-Probleme)
-  navigator.serviceWorker.register('sw.js?v=65').catch(function() {});
+// Service Worker deaktiviert);
 }
 
 // ============================================================
@@ -11528,17 +11526,6 @@ function updateAllStats() {
   renderWeakTopics();
   renderBadges();
   var tl = document.getElementById('stats-total-learned');
-  if (tl) tl.textContent = Object.values(state.learned||{}).reduce(function(a,b){return a+Object.keys(b).length;},0);
-  var tq = document.getElementById('stats-total-quiz');
-  if (tq) tq.textContent = state.quizTotal || 0;
-  var bs = document.getElementById('stats-best-streak');
-  if (bs) bs.textContent = state.bestStreak || state.streak || 0;
-  var xpEl = document.getElementById('stats-xp');
-  if (xpEl) xpEl.textContent = getXP();
-}
-
-// ============================================================
-// SRS - SPACED REPETITION
   if (tl) tl.textContent = Object.values(state.learned||{}).reduce(function(a,b){return a+Object.keys(b).length;},0);
   var tq = document.getElementById('stats-total-quiz');
   if (tq) tq.textContent = state.quizTotal || 0;
@@ -15719,7 +15706,7 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 69;
+var BUILD = 70;
 var BUILD_VERSION = '6.5'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
