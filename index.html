@@ -2,11 +2,12 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%236366f1'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='white'%3EL%3C/text%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
 <meta name="description" id="meta-description" content="LINGUA v5.1 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v5.1 · by René Prause</title>
+<title>LINGUA v8.5 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -655,11 +656,18 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 .psb-lock { background:var(--border); color:var(--muted); }
 .psb-new { background:rgba(108,99,255,.2); color:var(--accent); }
 </style>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function(regs) { regs.forEach(function(r){r.unregister();}); });
+}
+if (window.caches) { caches.keys().then(function(ns){ns.forEach(function(n){caches.delete(n);});}); }
+</script>
 </head>
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v5.1</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v8.5</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill" data-lang="sq">🇦🇱 SQ</button>
@@ -1565,7 +1573,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   </div>
 
   <footer>
-    LINGUA <span id="footer-version">v5.1</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA <span id="footer-version">v8.5</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
   </footer>
 </div>
@@ -1733,7 +1741,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA <span id="settings-version">v5.1</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA <span id="settings-version">v8.5</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
     </div>
 
@@ -5559,25 +5567,25 @@ const VOCAB = {
 
 const LANG_NAMES = { sq:"Albanisch", da:"Dänisch", de:"Deutsch", en:"Englisch", fr:"Französisch", it:"Italienisch", pl:"Polnisch", ro:"Rumänisch", ru:"Russisch", sv:"Schwedisch", es:"Spanisch", th:"Thailändisch", tr:"Türkisch" };
 const LANG_VOICE = { sq:"sq-AL", da:"da-DK", de:"de-DE", en:"en-GB", fr:"fr-FR", it:"it-IT", pl:"pl-PL", ro:"ro-RO", ru:"ru-RU", sv:"sv-SE", es:"es-ES", th:"th-TH", tr:"tr-TR" };
-const LANG_EMOJI = { sq:"🇦🇱", da:"🇩🇰", de:"🇩🇪", en:"🇬🇧", fr:"🇫🇷", it:"🇮🇹", pl:"🇵🇱", ro:"🇷🇴", ru:"🇷🇺", sv:"🇸🇪", es:"🇪🇸", th:"🇹🇭", tr:"🇹🇷" };
+const LANG_EMOJI = { sq:"\uD83C\uDDE6\uD83C\uDDF1", da:"\uD83C\uDDE9\uD83C\uDDF0", de:"\uD83C\uDDE9\uD83C\uDDEA", en:"\uD83C\uDDEC\uD83C\uDDE7", fr:"\uD83C\uDDEB\uD83C\uDDF7", it:"\uD83C\uDDEE\uD83C\uDDF9", pl:"\uD83C\uDDF5\uD83C\uDDF1", ro:"\uD83C\uDDF7\uD83C\uDDF4", ru:"\uD83C\uDDF7\uD83C\uDDFA", sv:"\uD83C\uDDF8\uD83C\uDDEA", es:"\uD83C\uDDEA\uD83C\uDDF8", th:"\uD83C\uDDF9\uD83C\uDDED", tr:"\uD83C\uDDF9\uD83C\uDDF7" };
 
 // ============================================================
 // UI LANGUAGE SYSTEM
 // ============================================================
 const UI_LANGS = {
-  sq:{code:'sq',label:'🇦🇱 Shqip'},
-  da:{code:'da',label:'🇩🇰 Dansk'},
-  de:{code:'de',label:'🇩🇪 Deutsch'},
-  en:{code:'en',label:'🇬🇧 English'},
-  fr:{code:'fr',label:'🇫🇷 Français'},
-  it:{code:'it',label:'🇮🇹 Italiano'},
-  pl:{code:'pl',label:'🇵🇱 Polski'},
-  ro:{code:'ro',label:'🇷🇴 Română'},
-  ru:{code:'ru',label:'🇷🇺 Русский'},
-  sv:{code:'sv',label:'🇸🇪 Svenska'},
-  es:{code:'es',label:'🇪🇸 Español'},
-  th:{code:'th',label:'🇹🇭 ภาษาไทย'},
-  tr:{code:'tr',label:'🇹🇷 Türkçe'},
+  sq:{code:'sq',label:'\uD83C\uDDE6\uD83C\uDDF1 Shqip'},
+  da:{code:'da',label:'\uD83C\uDDE9\uD83C\uDDF0 Dansk'},
+  de:{code:'de',label:'\uD83C\uDDE9\uD83C\uDDEA Deutsch'},
+  en:{code:'en',label:'\uD83C\uDDEC\uD83C\uDDE7 English'},
+  fr:{code:'fr',label:'\uD83C\uDDEB\uD83C\uDDF7 Français'},
+  it:{code:'it',label:'\uD83C\uDDEE\uD83C\uDDF9 Italiano'},
+  pl:{code:'pl',label:'\uD83C\uDDF5\uD83C\uDDF1 Polski'},
+  ro:{code:'ro',label:'\uD83C\uDDF7\uD83C\uDDF4 Română'},
+  ru:{code:'ru',label:'\uD83C\uDDF7\uD83C\uDDFA Русский'},
+  sv:{code:'sv',label:'\uD83C\uDDF8\uD83C\uDDEA Svenska'},
+  es:{code:'es',label:'\uD83C\uDDEA\uD83C\uDDF8 Español'},
+  th:{code:'th',label:'\uD83C\uDDF9\uD83C\uDDED ภาษาไทย'},
+  tr:{code:'tr',label:'\uD83C\uDDF9\uD83C\uDDF7 Türkçe'},
 };
 const UI_STRINGS = {
   de:{ nav_home:'Start',nav_vocab:'Vokabeln',nav_quiz:'Quiz',nav_free:'Freies Lernen',nav_gen:'KI-Generator',nav_myvocab:'Meine Vokabeln',nav_translate:'Übersetzer',nav_ai:'KI-Assistent',nav_srs:'SRS',nav_write:'Schreiben',nav_stats:'Statistiken',nav_badges:'Abzeichen',nav_path:'Lernpfad',nav_deniveau:'DE Niveau',nav_search:'Suche',nav_conjugate:'Konjugation',welcome_back:'Willkommen zurück',learning:'Du lernst',change_lang:'🌍 Sprache wechseln',which_lang:'Welche Sprache möchtest du lernen?',choose_lang:'Wähle deine Lernsprache',stat_learned:'Gelernt',stat_streak:'Streak',stat_correct:'% Korrekt',stat_total:'Quiz Total',vocab_title:'Vokabeltraining',quiz_title:'Quiz',free_title:'Freies Lernen',gen_title:'KI-Vokabel-Generator',myvocab_title:'Meine Vokabeln',translate_title:'Übersetzer',ai_title:'KI-Sprachassistent',reveal:'Klicken zum Aufdecken',again:'✗ Nochmal',listen:'🔊 Anhören',skip:'→ Überspringen',knew:'✓ Gewusst',translate_btn:'Übersetzen',speak_out:'🔊 Vorlesen',copy:'⧉ Kopieren',input:'EINGABE',output:'AUSGABE',send:'Senden',new_quiz:'🔄 Neu starten',next:'Weiter →',correct:'✓ Richtig!',wrong:'✗ Falsch. Richtig:',enter_topic:'Thema eingeben',generate:'✨ Generieren',generating:'KI generiert Vokabeln...',save_all:'⭐ Alle speichern',to_training:'📚 Zum Training',add_word:'➕ Eigenes Wort hinzufügen',foreign_word:'FREMDWORT',translation_lbl:'DEUTSCH',phonetic:'AUSSPRACHE (optional)',add_btn:'+ Hinzufügen',train_mine:'📚 Meine Vokabeln trainieren',delete_all:'🗑 Alle löschen',no_vocab:'Noch keine eigenen Vokabeln. Füge Wörter hinzu oder generiere sie mit dem KI-Generator.',settings:'⚙ Einstellungen',save:'Speichern',delete:'Löschen',export:'⬇ Exportieren',reset:'🗑 Zurücksetzen',ai_welcome:'Hallo! Ich bin dein KI-Sprachassistent. Wähle eine Lernsprache und einen Modus, dann können wir loslegen!',mode_conv:'💬 Konversation',mode_grammar:'📝 Grammatik',mode_pron:'🎤 Aussprache',mode_corr:'✏️ Korrektur',quick_grammar:'📖 Grammatiktipp',quick_phrases:'💡 Sätze des Tages',quick_talk:'🗣 Gespräch starten',hc_vocab_desc:'Lerne neue Wörter mit Karteikarten und Sprachausgabe',hc_quiz_desc:'Teste dein Wissen mit Multiple-Choice-Fragen',hc_free_desc:'Wähle ein Thema und stöbere durch Vokabeln',hc_translate_desc:'Übersetze Begriffe und Sätze sofort',hc_ai_desc:'Übe Gespräche mit KI, Mikrofon & Sprachausgabe',hc_gen_desc:'Thema eingeben – KI generiert sofort 20 Vokabeln',hc_myvocab_desc:'Eigene Wörter speichern und gezielt trainieren',myvocab_desc:'Eigene Wörter hinzufügen, gespeicherte KI-Vokabeln verwalten und trainieren',gen_desc:'Gib ein Thema ein – die KI generiert passende Vokabeln für deine Lernsprache',footer_note:'Dein Fortschritt wird lokal gespeichert',chat_placeholder:'Nachricht eingeben oder 🎤 drücken...',pron_test:"🎤 Aussprache testen",srs_done:"Alle fälligen Karten erledigt!",srs_next:"Komm morgen wieder für neue Wiederholungen.",no_data:"Noch keine Daten",search_empty:"Kein Ergebnis gefunden.",search_hint:"Tippe um zu suchen — in allen Sprachen.",search_count_found:"Ergebnisse gefunden",search_count_more:"weitere Ergebnisse. Suche verfeinern.",quick_select:"Schnellauswahl:",gen_result:"Ergebnis",write_done:"Übung abgeschlossen!",write_correct:"✓ Richtig!",write_wrong:"✗ Richtig wäre: ",quiz_done:"🏆 Quiz abgeschlossen!",conj_quiz_done:"Quiz abgeschlossen!",conj_restart:"🔄 Wiederholen",conj_new_verb:"+ Neues Verb",conj_saved_verbs:"⭐ Gespeicherte Verben",conj_loading:"KI erstellt Konjugationstabelle...",conj_pronoun:"Pronomen",conj_tab_table:"📋 Tabelle",conj_tab_quiz:"🎯 Quiz",conj_gen_btn:"Konjugieren",conj_save:"⭐ Speichern",conj_start_quiz:"🎯 Quiz starten",srs_flip:"Klicken zum Aufdecken",srs_not_at_all:"😰 Gar nicht",srs_hard:"😐 Schwer",srs_ok:"🙂 Ok",srs_easy:"😊 Leicht",srs_perfect:"🚀 Perfekt",check_btn:"✓ Prüfen",hint_btn:"💡 Hinweis",write_skip:"→ Überspringen",back_lbl:"Zurück",mv_empty_detail:"Füge Wörter hinzu oder generiere sie mit dem KI-Generator."},
@@ -5668,7 +5676,7 @@ function applyUILanguage() {
   uiLang = localStorage.getItem('lingua_ui_lang') || 'de';
   function setText(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
   // Nav
-  var navIcons = {home:'⌂',vocab:'📚',quiz:'❓',free:'🗂',generator:'✨',myvocab:'⭐',translate:'⇄',ai:'✦',srs:'🧠',write:'✍',stats:'📊',badges:'🏆',path:'🗺',search:'🔍',conjugate:'🔀',deniveau:'🇩🇪',enniveau:'🇬🇧'};
+  var navIcons = {home:'⌂',vocab:'📚',quiz:'❓',free:'🗂',generator:'✨',myvocab:'⭐',translate:'⇄',ai:'✦',srs:'🧠',write:'✍',stats:'📊',badges:'🏆',path:'🗺',search:'🔍',conjugate:'🔀',deniveau:'\uD83C\uDDE9\uD83C\uDDEA',enniveau:'\uD83C\uDDEC\uD83C\uDDE7'};
   var navKeys  = {home:'nav_home',vocab:'nav_vocab',quiz:'nav_quiz',free:'nav_free',generator:'nav_gen',myvocab:'nav_myvocab',translate:'nav_translate',ai:'nav_ai',srs:'nav_srs',write:'nav_write',stats:'nav_stats',badges:'nav_badges',path:'nav_path',search:'nav_search',conjugate:'nav_conjugate'};
   document.querySelectorAll('.nav-btn[data-section]').forEach(function(b) {
     var sec = b.dataset.section;
@@ -11284,7 +11292,7 @@ async function fetchSentenceExample(word, lang, translation) {
     });
     var parts = result.split('|');
     if (parts.length >= 2) {
-      exBox.innerHTML = '<div class="example-box">' + parts[0].trim() + '<div class="example-de">🇩🇪 ' + parts[1].trim() + '</div></div>';
+      exBox.innerHTML = '<div class="example-box">' + parts[0].trim() + '<div class="example-de">\uD83C\uDDE9\uD83C\uDDEA ' + parts[1].trim() + '</div></div>';
     } else {
       exBox.innerHTML = '<div class="example-box">' + result.trim() + '</div>';
     }
@@ -12140,7 +12148,7 @@ function renderNiveauQuiz() {
   var w = vocab[niveauState.quizIdx];
   document.getElementById('nex-quiz-counter').textContent='Frage '+(niveauState.quizIdx+1)+' / '+vocab.length;
   var qLang = niveauState.lang === 'tr' ? (w.tr||w.ru) : niveauState.lang === 'en' ? (w.en||w.ru) : w.ru;
-  var qFlag = niveauState.lang === 'tr' ? '🇹🇷' : niveauState.lang === 'en' ? '🇬🇧' : '🇷🇺';
+  var qFlag = niveauState.lang === 'tr' ? '\uD83C\uDDF9\uD83C\uDDF7' : niveauState.lang === 'en' ? '\uD83C\uDDEC\uD83C\uDDE7' : '\uD83C\uDDF7\uD83C\uDDFA';
   document.getElementById('nex-quiz-question').textContent=qFlag+' '+qLang+' = ?';
   document.getElementById('nex-quiz-feedback').textContent='';
   document.getElementById('nex-quiz-next').style.display='none';
@@ -12541,7 +12549,7 @@ function renderNiveauWrite() {
   // Zeige Übersetzung als Aufgabe, Nutzer soll Deutsch tippen
   var lang = niveauState.lang;
   var translation = lang === 'tr' ? (w.tr || w.ru) : w.ru;
-  var flag = lang === 'tr' ? '🇹🇷' : '🇷🇺';
+  var flag = lang === 'tr' ? '\uD83C\uDDF9\uD83C\uDDF7' : '\uD83C\uDDF7\uD83C\uDDFA';
 
   document.getElementById('nex-write-prompt').textContent = translation;
   document.getElementById('nex-write-prompt-lang').textContent = flag + ' Tippe das deutsche Wort';
@@ -12855,7 +12863,7 @@ function enRenderQuiz() {
   var w = vocab[enNiveauState.quizIdx];
   var lang = enNiveauState.lang;
   var trans = lang==='ru'?(w.ru||w.t):lang==='tr'?(w.tr||w.t):w.t;
-  var flag  = lang==='ru'?'🇷🇺':lang==='tr'?'🇹🇷':'🇩🇪';
+  var flag  = lang==='ru'?'\uD83C\uDDF7\uD83C\uDDFA':lang==='tr'?'\uD83C\uDDF9\uD83C\uDDF7':'\uD83C\uDDE9\uD83C\uDDEA';
   document.getElementById('en-nex-quiz-counter').textContent = 'Question '+(enNiveauState.quizIdx+1)+' / '+vocab.length;
   document.getElementById('en-nex-quiz-question').textContent = flag+' '+trans+' = ?';
   document.getElementById('en-nex-quiz-feedback').textContent = '';
@@ -12909,7 +12917,7 @@ function enRenderWrite() {
   var w = ws.words[ws.idx]; ws.hintCount=0; ws.checked=false;
   var lang=enNiveauState.lang;
   var trans=lang==='ru'?(w.ru||w.t):lang==='tr'?(w.tr||w.t):w.t;
-  var flag=lang==='ru'?'🇷🇺':lang==='tr'?'🇹🇷':'🇩🇪';
+  var flag=lang==='ru'?'\uD83C\uDDF7\uD83C\uDDFA':lang==='tr'?'\uD83C\uDDF9\uD83C\uDDF7':'\uD83C\uDDE9\uD83C\uDDEA';
   document.getElementById('en-nex-write-prompt').textContent = trans;
   document.getElementById('en-nex-write-prompt-lang').textContent = flag+' Type the English word';
   document.getElementById('en-nex-write-input').value = '';
@@ -13118,11 +13126,12 @@ var ONBOARDING_STEPS = [
 var onboardingStep = 0;
 
 function showOnboarding() {
-  // Immer anzeigen bei jedem Seitenstart — außer Nutzer hat "Nicht mehr zeigen" gewählt
   if (localStorage.getItem('lingua_onboarding_disabled') === '1') return;
-  onboardingStep = 0;
-  renderOnboardingStep();
-  document.getElementById('onboarding-overlay').classList.remove('hidden');
+  if (localStorage.getItem('lingua_onboarded') === '1') return;
+  if (typeof onboardingStep !== 'undefined') onboardingStep = 0;
+  if (typeof renderOnboardingStep === 'function') renderOnboardingStep();
+  var ov = document.getElementById('onboarding-overlay');
+  if (ov) ov.classList.remove('hidden');
 }
 
 function renderOnboardingStep() {
@@ -13229,8 +13238,8 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 56;
-var BUILD_VERSION = '5.3'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
+var BUILD = 85;
+var BUILD_VERSION = '8.5'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
 (function() {
@@ -13368,23 +13377,23 @@ var CHANGELOG = {
     ]
   },
   53: {
-    emoji: '🇬🇧',
+    emoji: '\uD83C\uDDEC\uD83C\uDDE7',
     title: 'Englisch Sprachniveau — eigene Sektion',
     items: [
-      '🇬🇧 Englisch Sprachniveau als eigenständige Sektion (id=enniveau)',
-      '🗺 Nav-Button 🇬🇧 EN Niveau in der Navigationsleiste',
+      '\uD83C\uDDEC\uD83C\uDDE7 Englisch Sprachniveau als eigenständige Sektion (id=enniveau)',
+      '🗺 Nav-Button \uD83C\uDDEC\uD83C\uDDE7 EN Niveau in der Navigationsleiste',
       '🏠 Home-Card Englisch Sprachniveau ergänzt',
-      '🇩🇪 Übersetzungssprache DE/RU/TR für Englisch Niveau wählbar',
+      '\uD83C\uDDE9\uD83C\uDDEA Übersetzungssprache DE/RU/TR für Englisch Niveau wählbar',
       '✍️ Alle 5 Modi: Vokabeln, Grammatik, Sätze, Quiz, Schreiben',
-      '🇩🇪 Deutsch Niveau: Übersetzung nur RU/TR (EN nicht mehr nötig)',
+      '\uD83C\uDDE9\uD83C\uDDEA Deutsch Niveau: Übersetzung nur RU/TR (EN nicht mehr nötig)',
     ]
   },
   52: {
-    emoji: '🇬🇧',
+    emoji: '\uD83C\uDDEC\uD83C\uDDE7',
     title: 'Englisch Sprachniveau A1–C2',
     items: [
-      '🇬🇧 Englisch Sprachniveau A1–C2 komplett eingebaut — Englisch LERNEN',
-      '🔄 Lernsprache wählbar oben in der Sektion: 🇩🇪 Deutsch oder 🇬🇧 Englisch',
+      '\uD83C\uDDEC\uD83C\uDDE7 Englisch Sprachniveau A1–C2 komplett eingebaut — Englisch LERNEN',
+      '🔄 Lernsprache wählbar oben in der Sektion: \uD83C\uDDE9\uD83C\uDDEA Deutsch oder \uD83C\uDDEC\uD83C\uDDE7 Englisch',
       '📚 6 A1-Themen, 4 A2, 3 B1, 1 B2, C1, C2 mit Vokabeln/Grammatik/Sätzen/Quiz',
       '🔑 Neuer DeepL Key eingebettet (e5b8f6d1...)',
       '🔧 DeepL: 4 Proxy-Fallbacks, Authorization-Header, JSON-Body',
@@ -13392,10 +13401,10 @@ var CHANGELOG = {
     ]
   },
   51: {
-    emoji: '🇬🇧',
+    emoji: '\uD83C\uDDEC\uD83C\uDDE7',
     title: 'Englisch Sprachniveau + Weiter-Button',
     items: [
-      '🇬🇧 Englisch als dritte Übersetzungssprache im Sprachniveau',
+      '\uD83C\uDDEC\uD83C\uDDE7 Englisch als dritte Übersetzungssprache im Sprachniveau',
       '274 englische Vokabelübersetzungen eingebaut (A1–C2)',
       '69 englische Satzübersetzungen eingebaut',
       '→ Weiter-Button im Vokabeltraining — nächste Karte ohne Wertung',
@@ -13429,10 +13438,10 @@ var CHANGELOG = {
     ]
   },
   47: {
-    emoji: '🇩🇪🇹🇷',
+    emoji: '\uD83C\uDDE9\uD83C\uDDEA\uD83C\uDDF9\uD83C\uDDF7',
     title: 'Türkisch im Sprachniveau + Navigationsleiste',
     items: [
-      '🇹🇷 Türkisch als zweite Übersetzungssprache im Sprachniveau wählbar',
+      '\uD83C\uDDF9\uD83C\uDDF7 Türkisch als zweite Übersetzungssprache im Sprachniveau wählbar',
       '246 türkische Vokabelübersetzungen eingebaut (A1–C2)',
       '69 türkische Satzübersetzungen eingebaut',
       '🗺 Deutsch Sprachniveau in der Navigationsleiste ergänzt',
@@ -13440,24 +13449,24 @@ var CHANGELOG = {
     ]
   },
   46: {
-    emoji: '🇩🇪',
+    emoji: '\uD83C\uDDE9\uD83C\uDDEA',
     title: 'Deutsch Sprachniveau A1–C2',
     items: [
-      '🇩🇪 Neues Modul: Deutsch Sprachniveau mit 6 Leveln (A1/A2/B1/B2/C1/C2)',
+      '\uD83C\uDDE9\uD83C\uDDEA Neues Modul: Deutsch Sprachniveau mit 6 Leveln (A1/A2/B1/B2/C1/C2)',
       '📚 23 Themen mit Vokabeln, Grammatik, Sätzen und Quiz',
       '🏠 Home-Card und Navigationsleiste ergänzt',
-      '🇷🇺 Übersetzungssprache Russisch mit Grammatik-Vergleichen',
+      '\uD83C\uDDF7\uD83C\uDDFA Übersetzungssprache Russisch mit Grammatik-Vergleichen',
       '🎯 Fortschrittsanzeige pro Thema in % ',
     ]
   },
   45: {
-    emoji: '🇵🇱',
+    emoji: '\uD83C\uDDF5\uD83C\uDDF1',
     title: 'Polnisch vollständig integriert',
     items: [
-      '🇵🇱 Polnisch als Lern- UND App-Sprache komplett eingebaut',
+      '\uD83C\uDDF5\uD83C\uDDF1 Polnisch als Lern- UND App-Sprache komplett eingebaut',
       '📚 150+ polnische Vokabelpaare in 5 Themen',
       '🌍 Vollständige polnische UI-Übersetzung aller Strings',
-      '🔤 Header-Pill 🇵🇱 PL in der Sprachleiste ergänzt',
+      '🔤 Header-Pill \uD83C\uDDF5\uD83C\uDDF1 PL in der Sprachleiste ergänzt',
       '🔗 DeepL-Unterstützung für Polnisch (PL) hinzugefügt',
     ]
   },
@@ -13487,7 +13496,7 @@ var CHANGELOG = {
     title: '5.005 Russisch-Deutsch Wörter',
     items: [
       '📚 5.005 russisch-deutsche Wortpaare in 100+ Themen eingebaut',
-      '🇩🇪 Deutsch als Lernsprache aus dem Russischen vollständig',
+      '\uD83C\uDDE9\uD83C\uDDEA Deutsch als Lernsprache aus dem Russischen vollständig',
       '⏱ Tagesziel: Wörter ODER Zeit wählbar (5/10/15/30 Min.)',
       '🔥 Streak zählt nur bei erfülltem Tagesziel',
       '🌍 DeepL-Integration mit eingebettetem Key + Proxy-Fallback',
@@ -13511,7 +13520,7 @@ function getChangelogEntry(build) {
       '✅ Neue Funktionen und Verbesserungen',
       '⚡ Performance optimiert',
       '🔧 Stabilität verbessert',
-      '🇩🇪 Deutsch Sprachniveau A1–C2',
+      '\uD83C\uDDE9\uD83C\uDDEA Deutsch Sprachniveau A1–C2',
     ]
   };
 }
