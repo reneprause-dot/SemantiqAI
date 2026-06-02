@@ -61,7 +61,11 @@ header {
   display:flex; align-items:center; justify-content:space-between;
   padding:.9rem 1.25rem; border-bottom:1px solid var(--border);
   background:rgba(7,7,13,.92); backdrop-filter:blur(20px);
-  position:sticky; top:0; z-index:100; flex-wrap:wrap; gap:.5rem;
+  flex-wrap:wrap; gap:.5rem;
+}
+.topbar-sticky {
+  position:sticky; top:0; z-index:100;
+  background:var(--bg);
 }
 .logo {
   font-family:'Syne', sans-serif; font-weight:800; font-size:1.4rem;
@@ -119,6 +123,8 @@ nav::-webkit-scrollbar { display:none; }
 .nav-icon { font-size:.9rem; }
 
 /* Light mode nav fix */
+:root.light .topbar-sticky { background:var(--bg); }
+:root.light header { background:rgba(240,240,248,.97); }
 :root.light nav { background:var(--nav-bg, rgba(220,220,235,.95)); }
 :root.light .nav-btn { color:var(--nav-text, #444466); }
 :root.light .nav-btn:hover { color:var(--text); background:rgba(0,0,0,.06); }
@@ -672,6 +678,7 @@ if (window.caches) {
 </head>
 <body>
 <div id="app">
+  <div class="topbar-sticky">
   <header>
     <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v6.5</span></div>
     <div class="header-right">
@@ -722,6 +729,7 @@ if (window.caches) {
     <button class="nav-btn" data-section="translate"><span class="nav-icon">⇄</span> Übersetzer</button>
     <button class="nav-btn" data-section="ai"><span class="nav-icon">✦</span> KI-Assistent</button>
   </nav>
+  </div><!-- /topbar-sticky -->
 
   <main>
     <!-- HOME -->
@@ -15710,7 +15718,7 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 73;
+var BUILD = 74;
 var BUILD_VERSION = '6.5'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
