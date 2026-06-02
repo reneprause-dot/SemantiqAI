@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="description" id="meta-description" content="LINGUA v6.5 – KI-gestützte Sprachlern-App von René Prause">
+<meta name="description" id="meta-description" content="LINGUA v7.0 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v6.5 · by René Prause</title>
+<title>LINGUA v7.0 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -659,7 +659,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v6.5</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v7.0</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill" data-lang="sq">🇦🇱 SQ</button>
@@ -1902,7 +1902,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   </div>
 
   <footer>
-    LINGUA <span id="footer-version">v6.5</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA <span id="footer-version">v7.0</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
   </footer>
 </div>
@@ -2071,7 +2071,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA <span id="settings-version">v6.5</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA <span id="settings-version">v7.0</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
     </div>
 
@@ -12448,6 +12448,34 @@ var NIVEAU_DATA = {
           {de:'Kritisches Sprachbewusstsein schützt vor Manipulation.',ru:'Критическое языковое сознание защищает от манипуляций.',tr:'Eleştirel dil bilinci manipülasyona karşı korur.',en:'Critical language awareness protects against manipulation.'},
         ]
       },
+      { id:'c2-sprachenlernen', icon:'🌐', title:'Mehrsprachigkeit & Sprachenlernen',
+        vocab:[
+          {de:'die Fremdsprache',ru:'иностранный язык',tr:'yabancı dil',en:'foreign language',ph:'fremdshprakhe'},
+          {de:'die Muttersprache',ru:'родной язык',tr:'ana dil',en:'mother tongue',ph:'mutershprakhe'},
+          {de:'zweisprachig',ru:'двуязычный',tr:'iki dilli',en:'bilingual',ph:'tsvayshprakhig'},
+          {de:'mehrsprachig',ru:'многоязычный',tr:'çok dilli',en:'multilingual',ph:'meershprakhig'},
+          {de:'der Spracherwerb',ru:'усвоение языка',tr:'dil edinimi',en:'language acquisition',ph:'shprakhervzerp'},
+          {de:'der Akzent',ru:'акцент',tr:'aksan',en:'accent',ph:'aktsent'},
+          {de:'der Dialekt',ru:'диалект',tr:'ağız',en:'dialect',ph:'dialekt'},
+          {de:'interferieren',ru:'создавать помехи/интерферировать',tr:'müdahale etmek',en:'to interfere',ph:'interfetirn'},
+          {de:'die Immersion',ru:'языковое погружение',tr:'dil daldırma',en:'immersion',ph:'imerzion'},
+          {de:'der Sprachschatz',ru:'словарный запас',tr:'söz varlığı',en:'vocabulary/lexicon',ph:'shprakhshats'},
+          {de:'übertragen',ru:'переносить/применять',tr:'aktarmak',en:'to transfer',ph:'ybertraan'},
+          {de:'die Interlanguage',ru:'интерязык',tr:'aralık dil',en:'interlanguage',ph:'interlangveydsh'},
+          {de:'flüssig',ru:'свободно/бегло',tr:'akıcı',en:'fluent',ph:'flyussig'},
+          {de:'die Aussprache',ru:'произношение',tr:'telaffuz',en:'pronunciation',ph:'aushprakhe'},
+        ],
+        grammar:[
+          {title:'Fremdwörter & Lehnwörter erkennen', text:'Deutsche Sprache nimmt viele Wörter auf:\n\n<b>Anglizismen:</b> der Computer, das Meeting\n<b>Gallizismen:</b> das Restaurant, die Chaussee\n<b>Latinismen:</b> die Struktur, der Autor\n\nFremdwörter oft erkennbar an Endung:\n-tion, -ismus, -ist, -ität', examples:['die Kommunikation (lat.)', 'der Manager (engl.)', 'das Niveau (frz.)']},
+          {title:'Sprachliche Interferenz', text:'Wenn Sprache A die Sprache B beeinflusst:\n\n<b>Positiver Transfer:</b> Ähnlichkeiten helfen\nDeutsch „Haus" ↔ Englisch „house"\n\n<b>Negativer Transfer (Interferenz):</b>\nRussisch „kontrol" ≠ Deutsch „Kontrolle" (false friends)\n\nBewusstsein für Interferenz hilft beim Lernen!', examples:['„Ich werde ihn besuchen" ≠ „I will visit him" (Futur)', 'Russisch: „симпатичный" ≠ „sympathisch"']},
+        ],
+        sentences:[
+          {de:'Mehrsprachige Menschen denken flexibler und kreativer.',ru:'Многоязычные люди мыслят гибче и креативнее.',tr:'Çok dilli insanlar daha esnek ve yaratıcı düşünür.',en:'Multilingual people think more flexibly and creatively.'},
+          {de:'Der frühe Spracherwerb in der Kindheit verläuft unbewusst.',ru:'Раннее усвоение языка в детстве происходит неосознанно.',tr:'Çocuklukta erken dil edinimi bilinçsiz gerçekleşir.',en:'Early language acquisition in childhood is an unconscious process.'},
+          {de:'Sprachliche Interferenz ist ein normales Phänomen beim Sprachenlernen.',ru:'Языковая интерференция — нормальное явление при изучении языков.',tr:'Dil müdahalesi dil öğreniminde normal bir olgudur.',en:'Linguistic interference is a normal phenomenon in language learning.'},
+          {de:'Immersion gilt als eine der effektivsten Methoden zum Spracherwerb.',ru:'Погружение считается одним из наиболее эффективных методов усвоения языка.',tr:'Daldırma, dil ediniminde en etkili yöntemlerden biri olarak kabul edilir.',en:'Immersion is considered one of the most effective methods of language acquisition.'},
+        ]
+      },
     ]
   },
 };
@@ -12912,6 +12940,45 @@ var NIVEAU_DATA_EN = {
         {f:'I need a doctor\'s appointment.',t:'Ich brauche einen Arzttermin.'},{f:'Take this medicine.',t:'Nehmen Sie dieses Medikament.'},
       ]
     },
+    { id:'en-a2-routines', icon:'⏰', title:'Daily Routines & Time',
+      vocab:[
+        {f:'alarm clock',t:'Wecker',p:'əˈlɑːrm klɒk'},{f:'to get dressed',t:'sich anziehen',p:'tə ɡɛt drɛst'},
+        {f:'shower',t:'Dusche',p:'ˈʃaʊər'},{f:'breakfast',t:'Frühstück',p:'ˈbrɛkfəst'},
+        {f:'commute',t:'Pendelfahrt',p:'kəˈmjuːt'},{f:'lunch break',t:'Mittagspause',p:'lʌntʃ breɪk'},
+        {f:'appointment',t:'Termin',p:'əˈpɔɪntmənt'},{f:'evening',t:'Abend',p:'ˈiːvnɪŋ'},
+        {f:'midnight',t:'Mitternacht',p:'ˈmɪdnaɪt'},{f:'on time',t:'pünktlich',p:'ɒn taɪm'},
+        {f:'late',t:'spät/zu spät',p:'leɪt'},{f:'early',t:'früh',p:'ˈɜːrli'},
+        {f:'weekly',t:'wöchentlich',p:'ˈwiːkli'},{f:'monthly',t:'monatlich',p:'ˈmʌnθli'},
+        {f:'schedule',t:'Zeitplan',p:'ˈʃɛdjuːl'},{f:'habit',t:'Gewohnheit',p:'ˈhæbɪt'},
+      ],
+      grammar:[
+        {title:'Adverbs of Frequency', text:'Häufigkeitsadverbien:\n\n<b>always</b> — immer (100%)\n<b>usually</b> — meistens\n<b>often</b> — oft\n<b>sometimes</b> — manchmal\n<b>rarely</b> — selten\n<b>never</b> — nie (0%)\n\nStellung: vor dem Hauptverb, nach "to be"!', examples:['I <b>always</b> have breakfast.','She <b>is usually</b> on time.','He <b>never</b> forgets his keys.']},
+        {title:'Telling the Time', text:'Uhrzeiten auf Englisch:\n\n3:00 → three o\'clock\n3:15 → quarter past three\n3:30 → half past three\n3:45 → quarter to four\n\nAmericanisch: 3:15 = three fifteen', examples:['The train leaves at <b>quarter past</b> seven.','I wake up at <b>half past</b> six.','Meet me at <b>a quarter to</b> nine.']},
+      ],
+      sentences:[
+        {f:'I always wake up at half past six.',t:'Ich wache immer um halb sieben auf.'},{f:'She is usually on time for work.',t:'Sie ist normalerweise pünktlich zur Arbeit.'},
+        {f:'My commute takes about forty minutes.',t:'Mein Arbeitsweg dauert ungefähr vierzig Minuten.'},{f:'I rarely skip breakfast.',t:'Ich lasse selten das Frühstück aus.'},
+      ]
+    },
+    { id:'en-a2-school', icon:'🎒', title:'School & Learning',
+      vocab:[
+        {f:'classroom',t:'Klassenzimmer',p:'ˈklɑːsruːm'},{f:'homework',t:'Hausaufgaben',p:'ˈhoʊmwɜːrk'},
+        {f:'exam',t:'Prüfung',p:'ɪɡˈzæm'},{f:'grade',t:'Note',p:'ɡreɪd'},
+        {f:'teacher',t:'Lehrer/in',p:'ˈtiːtʃər'},{f:'subject',t:'Fach',p:'ˈsʌbdʒɪkt'},
+        {f:'timetable',t:'Stundenplan',p:'ˈtaɪmteɪbəl'},{f:'term',t:'Semester/Schuljahresabschnitt',p:'tɜːrm'},
+        {f:'to revise',t:'wiederholen/lernen',p:'tə rɪˈvaɪz'},{f:'to pass',t:'bestehen',p:'tə pɑːs'},
+        {f:'to fail',t:'durchfallen',p:'tə feɪl'},{f:'library',t:'Bibliothek',p:'ˈlaɪbrɛri'},
+        {f:'essay',t:'Aufsatz',p:'ˈɛseɪ'},{f:'project',t:'Projekt',p:'ˈprɒdʒɛkt'},
+        {f:'to understand',t:'verstehen',p:'tə ˌʌndəˈstænd'},{f:'clever',t:'klug/schlau',p:'ˈklɛvər'},
+      ],
+      grammar:[
+        {title:'Have to / Must — Obligation', text:'Verpflichtung ausdrücken:\n\n<b>have to</b> — externe Verpflichtung\n"I <b>have to</b> do my homework." (Lehrer verlangt es)\n\n<b>must</b> — persönliche Verpflichtung\n"I <b>must</b> revise." (eigene Entscheidung)\n\n<b>don\'t have to</b> — keine Pflicht (nicht "must not"!)', examples:['You <b>have to</b> wear a uniform.','I <b>must</b> study harder.','We <b>don\'t have to</b> come on Saturday.']},
+      ],
+      sentences:[
+        {f:'I have to do my homework before dinner.',t:'Ich muss meine Hausaufgaben vor dem Abendessen machen.'},{f:'The exam is on Friday — I must revise tonight.',t:'Die Prüfung ist am Freitag — ich muss heute Abend lernen.'},
+        {f:'My favourite subject is maths.',t:'Mein Lieblingsfach ist Mathematik.'},{f:'She passed her exam with a very good grade.',t:'Sie hat ihre Prüfung mit einer sehr guten Note bestanden.'},
+      ]
+    },
   ]},
   b1: { label:'B1', topics: [
     { id:'en-b1-travel', icon:'✈️', title:'Travel',
@@ -12969,6 +13036,43 @@ var NIVEAU_DATA_EN = {
       sentences:[
         {f:'Climate change is a global challenge.',t:'Klimawandel ist eine globale Herausforderung.'},{f:'I try to use less plastic.',t:'Ich versuche, weniger Plastik zu verwenden.'},
         {f:'Renewable energy is the future.',t:'Erneuerbare Energie ist die Zukunft.'},{f:'We can all contribute to protecting the environment.',t:'Wir alle können zum Umweltschutz beitragen.'},
+      ]
+    },
+    { id:'en-b1-education', icon:'🎓', title:'Education & Study Skills',
+      vocab:[
+        {f:'degree',t:'Abschluss',p:'dɪˈɡriː'},{f:'university',t:'Universität',p:'ˌjuːnɪˈvɜːrsɪti'},
+        {f:'lecture',t:'Vorlesung',p:'ˈlɛktʃər'},{f:'seminar',t:'Seminar',p:'ˈsɛmɪnɑːr'},
+        {f:'tuition',t:'Unterricht/Studiengebühr',p:'tjuːˈɪʃən'},{f:'scholarship',t:'Stipendium',p:'ˈskɒləʃɪp'},
+        {f:'deadline',t:'Abgabefrist',p:'ˈdɛdlaɪn'},{f:'to submit',t:'einreichen',p:'tə səbˈmɪt'},
+        {f:'coursework',t:'Kursarbeit',p:'ˈkɔːrswɜːrk'},{f:'to graduate',t:'einen Abschluss machen',p:'tə ˈɡrædʒueɪt'},
+        {f:'internship',t:'Praktikum',p:'ˈɪntɜːrnʃɪp'},{f:'gap year',t:'Auszeit nach Schule',p:'ɡæp jɪər'},
+        {f:'critical thinking',t:'kritisches Denken',p:'ˈkrɪtɪkəl ˈθɪŋkɪŋ'},{f:'to take notes',t:'Notizen machen',p:'tə teɪk noʊts'},
+      ],
+      grammar:[
+        {title:'Expressing Purpose: in order to / so as to / so that', text:'Zweck ausdrücken (formeller als "to"):\n\n<b>in order to</b> + Infinitiv\n<b>so as to</b> + Infinitiv (formell, negativ: "so as not to")\n<b>so that</b> + Subjekt + Verb\n\nDeutsch: damit / um … zu', examples:['I take notes <b>in order to</b> remember key points.','She studied hard <b>so that</b> she could graduate.','<b>So as not to</b> miss the deadline, he worked overnight.']},
+        {title:'-ing clauses for simultaneous actions', text:'Zwei gleichzeitige Handlungen komprimieren:\n\n"<b>Studying</b> in a library, she found it easier to focus."\n= While she was studying...\n\n"<b>Having submitted</b> her essay, she felt relieved."\n= After she had submitted...\n\nDeutsch: Partizipialkonstruktion', examples:['<b>Listening</b> carefully, he took detailed notes.','<b>Having passed</b> her exams, she celebrated.']},
+      ],
+      sentences:[
+        {f:'I need to submit my essay before the deadline.',t:'Ich muss meinen Aufsatz vor der Abgabefrist einreichen.'},{f:'She is applying for a scholarship to study abroad.',t:'Sie bewirbt sich um ein Stipendium, um im Ausland zu studieren.'},
+        {f:'Critical thinking is one of the most important skills at university.',t:'Kritisches Denken ist eine der wichtigsten Fähigkeiten an der Universität.'},{f:'Having graduated, he started looking for a job.',t:'Nachdem er seinen Abschluss gemacht hatte, begann er, Arbeit zu suchen.'},
+      ]
+    },
+    { id:'en-b1-emotions', icon:'💭', title:'Emotions & Relationships',
+      vocab:[
+        {f:'to feel',t:'fühlen',p:'tə fiːl'},{f:'anxious',t:'ängstlich',p:'ˈæŋkʃəs'},
+        {f:'confident',t:'selbstsicher',p:'ˈkɒnfɪdənt'},{f:'overwhelmed',t:'überwältigt',p:'ˌoʊvərˈwɛlmd'},
+        {f:'relieved',t:'erleichtert',p:'rɪˈliːvd'},{f:'jealous',t:'eifersüchtig',p:'ˈdʒɛləs'},
+        {f:'grateful',t:'dankbar',p:'ˈɡreɪtfəl'},{f:'lonely',t:'einsam',p:'ˈloʊnli'},
+        {f:'to support',t:'unterstützen',p:'tə səˈpɔːrt'},{f:'relationship',t:'Beziehung',p:'rɪˈleɪʃənʃɪp'},
+        {f:'to argue',t:'streiten',p:'tə ˈɑːrɡjuː'},{f:'to make up',t:'sich versöhnen',p:'tə meɪk ʌp'},
+        {f:'empathy',t:'Empathie',p:'ˈɛmpəθi'},{f:'trust',t:'Vertrauen',p:'trʌst'},
+      ],
+      grammar:[
+        {title:'Verbs followed by -ing or infinitive (with meaning change)', text:'Manche Verben ändern die Bedeutung:\n\n<b>remember + -ing</b> = sich erinnern dass man tat\n"I remember <b>meeting</b> her." (ich erinnere mich)\n\n<b>remember + to</b> = daran denken zu tun\n"Remember <b>to call</b> him." (vergiss nicht)\n\nGleich für: stop, try, forget, regret', examples:['I <b>stopped smoking</b>. (hörte auf)\nvs. I stopped <b>to smoke</b>. (hielt an, um zu rauchen)','She <b>tried calling</b> him. (versuchte)\nvs. She tried <b>to call</b> him. (bemühte sich)']},
+      ],
+      sentences:[
+        {f:'I feel overwhelmed with all the work I have to do.',t:'Ich fühle mich von der ganzen Arbeit, die ich erledigen muss, überwältigt.'},{f:'It is important to talk about your feelings with someone you trust.',t:'Es ist wichtig, mit jemandem, dem du vertraust, über deine Gefühle zu sprechen.'},
+        {f:'They argued but made up the next day.',t:'Sie stritten sich, aber versöhnten sich am nächsten Tag.'},{f:'Showing empathy helps build stronger relationships.',t:'Empathie zu zeigen hilft, stärkere Beziehungen aufzubauen.'},
       ]
     },
   ]},
@@ -13111,6 +13215,25 @@ var NIVEAU_DATA_EN = {
         {f:'Rarely does a novel capture the human experience so vividly.',t:'Selten fängt ein Roman die menschliche Erfahrung so lebendig ein.'},{f:'The subtext reveals more than the explicit narrative.',t:'Der Subtext offenbart mehr als die explizite Erzählung.'},
       ]
     },
+    { id:'en-c1-psychology-lang', icon:'🧠', title:'Psychology of Language',
+      vocab:[
+        {f:'cognitive load',t:'kognitive Belastung',p:'ˈkɒɡnɪtɪv loʊd'},{f:'priming',t:'Bahnung/Priming',p:'ˈpraɪmɪŋ'},
+        {f:'framing effect',t:'Framing-Effekt',p:'ˈfreɪmɪŋ ɪˈfɛkt'},{f:'linguistic relativity',t:'Sprachrelativität',p:'lɪŋˈɡwɪstɪk rɛləˈtɪvɪti'},
+        {f:'inner speech',t:'innere Sprache',p:'ˈɪnər spiːtʃ'},{f:'to encode',t:'enkodieren',p:'tə ɪnˈkoʊd'},
+        {f:'to decode',t:'dekodieren',p:'tə diːˈkoʊd'},{f:'prototype',t:'Prototyp',p:'ˈproʊtəˌtaɪp'},
+        {f:'schema',t:'Schema',p:'ˈskiːmə'},{f:'working memory',t:'Arbeitsgedächtnis',p:'ˈwɜːrkɪŋ ˈmɛməri'},
+        {f:'embodied cognition',t:'verkörperte Kognition',p:'ɪmˈbɒdid kɒɡˈnɪʃən'},{f:'metalinguistic',t:'metasprachlich',p:'ˌmɛtəlɪŋˈɡwɪstɪk'},
+        {f:'Sapir-Whorf hypothesis',t:'Sapir-Whorf-Hypothese',p:'səˈpɪər wɔːrf haɪˈpɒθɪsɪs'},{f:'neuroplasticity',t:'Neuroplastizität',p:'ˌnjʊəroʊplæˈstɪsɪti'},
+      ],
+      grammar:[
+        {title:'Nominalization in Academic English', text:'Verben und Adjektive zu Nomen machen:\n\n<b>acquire</b> → <b>acquisition</b>\n<b>develop</b> → <b>development</b>\n<b>relative</b> → <b>relativity</b>\n\nMacht Texte formeller und kompakter.\nDeutsch: similar — Nominalisierung', examples:['The <b>acquisition</b> of language...','<b>Development</b> of new frameworks...','Research on linguistic <b>relativity</b>...']},
+        {title:'Stance Adverbials', text:'Einstellung zur Aussage signalisieren:\n\n<b>Evidential:</b> Apparently, evidently, clearly\n<b>Attitudinal:</b> Fortunately, surprisingly, rightly\n<b>Epistemic:</b> Possibly, probably, certainly\n\nGeben dem Leser Hinweise zur Haltung des Autors!', examples:['<b>Surprisingly</b>, bilinguals show enhanced cognitive control.','<b>Apparently</b>, the Sapir-Whorf hypothesis remains contested.','This <b>clearly</b> has implications for education.']},
+      ],
+      sentences:[
+        {f:'The Sapir-Whorf hypothesis suggests that language shapes thought.',t:'Die Sapir-Whorf-Hypothese legt nahe, dass Sprache das Denken prägt.'},{f:'Framing effects demonstrate how word choice influences perception.',t:'Framing-Effekte zeigen, wie die Wortwahl die Wahrnehmung beeinflusst.'},
+        {f:'Neuroplasticity explains why adults can still acquire new languages.',t:'Neuroplastizität erklärt, warum Erwachsene noch neue Sprachen erwerben können.'},{f:'Inner speech plays a crucial role in self-regulation and problem-solving.',t:'Innere Sprache spielt eine entscheidende Rolle bei Selbstregulation und Problemlösung.'},
+      ]
+    },
   ]},
   c2: { label:'C2', topics: [
     { id:'en-c2-idioms', icon:'💡', title:'Idioms & Expressions',
@@ -13154,6 +13277,25 @@ var NIVEAU_DATA_EN = {
       sentences:[
         {f:'The choice of register profoundly affects the reader.',t:'Die Wahl des Sprachregisters beeinflusst den Leser tiefgreifend.'},{f:'His use of understatement creates a powerful comic effect.',t:'Sein Einsatz der Untertreibung erzeugt einen starken komischen Effekt.'},
         {f:'All things considered, the novel is a masterpiece of irony.',t:'Alles in allem ist der Roman ein Meisterwerk der Ironie.'},{f:'She juxtaposed formal and colloquial language to great effect.',t:'Sie stellte gehobene und umgangssprachliche Sprache wirkungsvoll gegenüber.'},
+      ]
+    },
+    { id:'en-c2-lang-power', icon:'🔑', title:'Language & Power',
+      vocab:[
+        {f:'hegemony',t:'Hegemonie',p:'hɪˈɡɛməni'},{f:'discourse analysis',t:'Diskursanalyse',p:'ˈdɪskɔːrs əˈnæləsɪs'},
+        {f:'ideological',t:'ideologisch',p:'ˌaɪdɪəˈlɒdʒɪkəl'},{f:'to perpetuate',t:'aufrechterhalten',p:'tə pəˈpɛtʃueɪt'},
+        {f:'implicit bias',t:'implizite Voreingenommenheit',p:'ɪmˈplɪsɪt ˈbaɪəs'},{f:'to normalise',t:'normalisieren',p:'tə ˈnɔːrməlaɪz'},
+        {f:'gatekeeping',t:'Zugangssteuerung',p:'ˈɡeɪtkiːpɪŋ'},{f:'counter-narrative',t:'Gegenerzählung',p:'ˈkaʊntər ˈnærətɪv'},
+        {f:'to reclaim',t:'zurückgewinnen/umdefinieren',p:'tə rɪˈkleɪm'},{f:'epistemic',t:'epistemisch',p:'ˌɛpɪˈstiːmɪk'},
+        {f:'euphemism',t:'Euphemismus',p:'ˈjuːfəmɪzəm'},{f:'dysphemism',t:'Dysphemismus',p:'ˈdɪsfəmɪzəm'},
+        {f:'dog whistle',t:'verklausulierte Botschaft',p:'dɒɡ ˈwɪsəl'},{f:'othering',t:'Ausgrenzung/Othering',p:'ˈʌðərɪŋ'},
+      ],
+      grammar:[
+        {title:'Passive and Agency in Critical Discourse', text:'Passiv kann Verantwortung verschleiern:\n\n"Mistakes <b>were made</b>." → Wer? Unklar!\n"The law <b>was passed</b>." → Verantwortung diffus\n\nKritische Frage: <b>Who benefits from this framing?</b>\n\nAktiv nennt Handelnde — Passiv versteckt sie.', examples:['"Protesters <b>were dispersed</b>." vs. "Police <b>dispersed</b> protesters."','<b>Agency</b> reveals ideology: who acts, who is acted upon.']},
+        {title:'Euphemism & Dysphemism', text:'Zwei Seiten der Sprachmanipulation:\n\n<b>Euphemism</b>: abschwächend\n"collateral damage" = Zivilopfer\n"downsizing" = Entlassungen\n\n<b>Dysphemism</b>: absichtlich hart\n"propaganda" vs. "public messaging"\n\nSprache ist nie neutral!', examples:['"Enhanced interrogation" (Euphemismus)','<b>Lexical choice</b> encodes the speaker\'s ideology.','To <b>reclaim</b> a slur is an act of empowerment.']},
+      ],
+      sentences:[
+        {f:'Language both reflects and reproduces social power structures.',t:'Sprache spiegelt soziale Machtstrukturen wider und reproduziert sie.'},{f:'Discourse analysis reveals how ideology is embedded in everyday language.',t:'Diskursanalyse zeigt, wie Ideologie in der Alltagssprache eingebettet ist.'},
+        {f:'The passive voice can be used strategically to conceal agency.',t:'Das Passiv kann strategisch eingesetzt werden, um Handelnde zu verschleiern.'},{f:'Critical reading requires awareness of framing and implicit assumptions.',t:'Kritisches Lesen erfordert Bewusstsein für Framing und implizite Annahmen.'},
       ]
     },
   ]},
@@ -13717,6 +13859,33 @@ var DIALOG_DATA = {
       ]
     },
   ],
+  alltag_extra: [
+    { id:'d-bank', title:'Bei der Bank', situation:'Du eröffnest ein Konto und fragst nach Gebühren.',
+      lines:[
+        {speaker:'Du',        de:'Guten Tag. Ich möchte gern ein Girokonto eröffnen.',    ru:'Добрый день. Я хотел бы открыть расчётный счёт.',tr:'Merhaba. Bir cari hesap açmak istiyorum.'},
+        {speaker:'Beraterin', de:'Gern. Haben Sie Ihren Ausweis dabei?',                  ru:'Конечно. У вас с собой паспорт?',               tr:'Tabii. Kimliğiniz yanınızda mı?'},
+        {speaker:'Du',        de:'Ja, hier bitte. Was kostet das Konto monatlich?',        ru:'Да, вот пожалуйста. Сколько стоит счёт в месяц?',tr:'Evet, buyurun. Hesap ayda kaça mal olur?'},
+        {speaker:'Beraterin', de:'Das Basiskonto ist kostenlos bei monatlichem Eingang von 700 Euro.',ru:'Базовый счёт бесплатный при поступлении 700 евро в месяц.',tr:'Aylık 700 Euro girişte temel hesap ücretsizdir.'},
+        {speaker:'Du',        de:'Das passt. Bekomme ich auch eine EC-Karte?',             ru:'Это подходит. Я также получу карту?',          tr:'Uygun. Bir de banka kartı alır mıyım?'},
+        {speaker:'Beraterin', de:'Ja, die Karte kommt in etwa fünf Werktagen per Post.',  ru:'Да, карту получите по почте через пять рабочих дней.',tr:'Evet, kart yaklaşık beş iş günü içinde postayla gelir.'},
+        {speaker:'Du',        de:'Kann ich das Online-Banking direkt einrichten?',          ru:'Можно ли сразу настроить онлайн-банкинг?',    tr:'Online bankacılığı hemen kurabilir miyim?'},
+        {speaker:'Beraterin', de:'Natürlich, das zeige ich Ihnen nach der Kontoeröffnung.',ru:'Конечно, покажу вам после открытия счёта.',   tr:'Tabii, hesap açtıktan sonra göstereceğim.'},
+      ]
+    },
+    { id:'d-telefon', title:'Telefonieren', situation:'Du rufst eine Firma an und wirst weitergeleitet.',
+      lines:[
+        {speaker:'Zentrale',  de:'Müller GmbH, guten Tag. Was kann ich für Sie tun?',     ru:'Мюллер ГмбХ, добрый день. Чем могу помочь?', tr:'Müller GmbH, iyi günler. Ne yapabilirim?'},
+        {speaker:'Du',        de:'Guten Tag. Ich würde gern Frau Schäfer sprechen, bitte.',ru:'Добрый день. Хотел бы поговорить с госпожой Шефер.',tr:'İyi günler. Bayan Schäfer ile görüşmek istiyorum.'},
+        {speaker:'Zentrale',  de:'Einen Moment, ich verbinde Sie.',                        ru:'Минутку, соединяю вас.',                       tr:'Bir saniye, bağlıyorum.'},
+        {speaker:'Schäfer',   de:'Schäfer, guten Tag. Womit kann ich Ihnen helfen?',      ru:'Шефер, добрый день. Чем могу помочь?',         tr:'Schäfer, iyi günler. Ne yapabilirim?'},
+        {speaker:'Du',        de:'Hallo Frau Schäfer. Es geht um meine Bestellung vom letzten Montag.',ru:'Здравствуйте, госпожа Шефер. Речь о моём заказе в прошлый понедельник.',tr:'Merhaba Bayan Schäfer. Geçen Pazartesi yaptığım sipariş için arıyorum.'},
+        {speaker:'Schäfer',   de:'Können Sie mir Ihre Bestellnummer nennen?',              ru:'Можете назвать номер заказа?',                 tr:'Sipariş numaranızı söyler misiniz?'},
+        {speaker:'Du',        de:'Ja, die Nummer ist B-4-7-1-2.',                          ru:'Да, номер Б-4-7-1-2.',                         tr:'Evet, numara B-4-7-1-2.'},
+        {speaker:'Schäfer',   de:'Ich sehe das — Ihre Bestellung wird morgen geliefert.', ru:'Вижу — ваш заказ будет доставлен завтра.',   tr:'Görüyorum — siparişiniz yarın teslim edilecek.'},
+        {speaker:'Du',        de:'Wunderbar, vielen Dank für die schnelle Auskunft!',      ru:'Замечательно, спасибо за оперативный ответ!',tr:'Harika, hızlı bilgi için çok teşekkürler!'},
+      ]
+    },
+  ],
 };
 
 // dialogState wird weiter oben im neuen Code definiert
@@ -14164,6 +14333,11 @@ var gapFillData = [
   { level:'medium', sentence:'Ich würde gern ein Zimmer ___.', answer:'buchen', options:['buchen','kaufen','mieten','leihen'], translation:'Ich würde gern ein Zimmer buchen.' },
   { level:'medium', sentence:'Die Ergebnisse wurden ___ geprüft.', answer:'sorgfältig', options:['sorgfältig','schnell','selten','kaum'], translation:'Die Ergebnisse wurden sorgfältig geprüft.' },
   { level:'medium', sentence:'Er behauptet, er ___ nichts gewusst.', answer:'habe', options:['habe','hat','hatte','haben'], translation:'Er behauptet, er habe nichts gewusst. (Konjunktiv I)' },
+  { level:'medium', sentence:'Wenn ich Zeit ___, würde ich mehr reisen.', answer:'hätte', options:['hätte','habe','hatte','haben'], translation:'Wenn ich Zeit hätte, würde ich mehr reisen. (Konjunktiv II)' },
+  { level:'medium', sentence:'Das Paket ___ gestern geliefert.', answer:'wurde', options:['wurde','wird','war','ist'], translation:'Das Paket wurde gestern geliefert. (Passiv Vergangenheit)' },
+  { level:'medium', sentence:'___ dem Essen gehen wir spazieren.', answer:'Nach', options:['Nach','Vor','Mit','Ohne'], translation:'Nach dem Essen gehen wir spazieren.' },
+  { level:'medium', sentence:'Sie hat sich ___ die neue Stelle beworben.', answer:'um', options:['um','für','an','über'], translation:'Sie hat sich um die neue Stelle beworben.' },
+  { level:'medium', sentence:'Er freut sich ___ das Wiedersehen.', answer:'auf', options:['auf','über','an','bei'], translation:'Er freut sich auf das Wiedersehen.' },
   // Schwer
   { level:'hard', sentence:'Wenngleich die Beweise fehlen, ___ die Theorie plausibel.', answer:'bleibt', options:['bleibt','ist','scheint','wirkt'], translation:'Wenngleich die Beweise fehlen, bleibt die Theorie plausibel.' },
   { level:'hard', sentence:'Das ___ von allen kritisierte Gesetz trat in Kraft.', answer:'heftig', options:['heftig','lange','kaum','noch'], translation:'Das heftig von allen kritisierte Gesetz trat in Kraft.' },
@@ -14173,6 +14347,8 @@ var gapFillData = [
   { level:'hard', sentence:'Die Autorin ___ sich der Ironie, um Kritik zu üben.', answer:'bedient', options:['bedient','benutzt','verwendet','nutzt'], translation:'Die Autorin bedient sich der Ironie, um Kritik zu üben.' },
   { level:'hard', sentence:'Der Subtext ___ mehr als der explizite Text.', answer:'verrät', options:['verrät','zeigt','sagt','enthält'], translation:'Der Subtext verrät mehr als der explizite Text.' },
   { level:'hard', sentence:'Hätte er rechtzeitig gewarnt, ___ das Unglück verhindert worden.', answer:'wäre', options:['wäre','würde','hätte','könnte'], translation:'Hätte er rechtzeitig gewarnt, wäre das Unglück verhindert worden.' },
+  { level:'hard', sentence:'___ man auch argumentieren mag — die Fakten sprechen für sich.', answer:'Was', options:['Was','Wie','Wer','Ob'], translation:'Was man auch argumentieren mag — die Fakten sprechen für sich.' },
+  { level:'hard', sentence:'Framing beeinflusst, wie Informationen wahrgenommen und ___ werden.', answer:'bewertet', options:['bewertet','gelesen','erklärt','gesendet'], translation:'Framing beeinflusst, wie Informationen wahrgenommen und bewertet werden.' },
 ];
 
 var gapState = {
@@ -15112,8 +15288,8 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 69;
-var BUILD_VERSION = '6.5'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
+var BUILD = 70;
+var BUILD_VERSION = '7.0'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
 (function() {
@@ -15219,6 +15395,16 @@ function updateAllVersionDisplays() {
 // Bei jedem Deploy: neuen Eintrag mit aktuellem BUILD hinzufügen
 // ============================================================
 var CHANGELOG = {
+  70: {
+    emoji: '📚',
+    title: 'Große Inhaltserweiterung v7.0',
+    items: [
+      '🇩🇪 DE Niveau: C2 +1 Thema (Mehrsprachigkeit) → jetzt 31 Themen',
+      '🇬🇧 EN Niveau: A2 +2, B1 +3, C1 +1, C2 +1 → jetzt 28 Themen',
+      '💬 Dialoge DE: +2 (Bank, Telefonieren) | EN: unveränderlich 10',
+      '🧩 Lückentexte DE: 35 Aufgaben | EN: 63 Aufgaben',
+    ]
+  },
   69: {
     emoji: '☁️',
     title: 'Cloudflare Worker aktiv',
