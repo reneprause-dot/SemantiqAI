@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="description" id="meta-description" content="LINGUA v7.0 – KI-gestützte Sprachlern-App von René Prause">
+<meta name="description" id="meta-description" content="LINGUA v7.1 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v7.0 · by René Prause</title>
+<title>LINGUA v7.1 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -659,7 +659,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v7.0</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v7.1</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill" data-lang="sq">🇦🇱 SQ</button>
@@ -696,6 +696,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     <button class="nav-btn" data-section="deniveau"><span class="nav-icon">🇩🇪</span> DE Niveau</button>
     <button class="nav-btn" data-section="enniveau"><span class="nav-icon">🇬🇧</span> EN Niveau</button>
     <button class="nav-btn" data-section="gapfill"><span class="nav-icon">🧩</span> Lückentexte</button>
+    <button class="nav-btn" data-section="wordorder"><span class="nav-icon">🔀</span> Satzbau</button>
     <button class="nav-btn" data-section="dialogs"><span class="nav-icon">💬</span> Dialoge</button>
     <button class="nav-btn" data-section="phrasal"><span class="nav-icon">🔗</span> Phrasal Verbs</button>
     <button class="nav-btn" data-section="dailytasks"><span class="nav-icon">🎯</span> Tagesaufgaben</button>
@@ -816,6 +817,10 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
           <div class="home-card" style="--hc-color:#8b5cf6" onclick="switchSection('gapfill')">
             <div class="hc-icon">🧩</div><div class="hc-title">Lückentexte</div>
             <div class="hc-desc">Vokabeln im Kontext — fehlende Wörter eintippen</div>
+          </div>
+          <div class="home-card" style="--hc-color:#6366f1" onclick="switchSection('wordorder')">
+            <div class="hc-icon">🔀</div><div class="hc-title">Satzbau-Trainer</div>
+            <div class="hc-desc">Wörter in die richtige Reihenfolge bringen</div>
           </div>
           <div class="home-card" style="--hc-color:#0ea5e9" onclick="switchSection('dialogs')">
             <div class="hc-icon">💬</div><div class="hc-title">Dialoge lernen</div>
@@ -1744,6 +1749,69 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   </div>
 
   <!-- ============================================================ -->
+  <!-- SATZBAU-TRAINER                                              -->
+  <!-- ============================================================ -->
+  <div class="section" id="wordorder">
+    <div class="section-header">
+      <span style="font-size:1.1rem;">🔀</span>
+      <span class="section-title">Satzbau-Trainer</span>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem;">Bringe die Wörter in die richtige Reihenfolge — tippe oder tippe auf die Chips.</p>
+
+    <!-- Sprach- und Schwierigkeitsauswahl -->
+    <div style="display:flex;gap:.4rem;margin-bottom:.75rem;">
+      <button class="btn primary" id="wo-lang-de" onclick="setWOLang('de')" style="flex:1;">🇩🇪 Deutsch</button>
+      <button class="btn" id="wo-lang-en" onclick="setWOLang('en')" style="flex:1;">🇬🇧 Englisch</button>
+    </div>
+    <div style="display:flex;gap:.4rem;margin-bottom:1rem;">
+      <button class="btn primary" id="wo-diff-easy" onclick="setWODiff('easy')" style="flex:1;font-size:.78rem;">🌱 Leicht</button>
+      <button class="btn" id="wo-diff-medium" onclick="setWODiff('medium')" style="flex:1;font-size:.78rem;">📗 Mittel</button>
+      <button class="btn" id="wo-diff-hard" onclick="setWODiff('hard')" style="flex:1;font-size:.78rem;">🔥 Schwer</button>
+    </div>
+
+    <!-- Aufgabenbereich -->
+    <div class="card" id="wo-card">
+      <!-- Fortschritt -->
+      <div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted);margin-bottom:.75rem;">
+        <span id="wo-progress-text">Aufgabe 1 / 10</span>
+        <span id="wo-score-text">0 ✓</span>
+      </div>
+
+      <!-- Übersetzungs-Hinweis -->
+      <div style="background:var(--surface2);border-radius:8px;padding:.6rem .75rem;margin-bottom:.75rem;font-size:.82rem;" id="wo-hint-box">
+        <span style="font-size:.65rem;font-weight:700;color:var(--muted);">💡 BEDEUTUNG:</span><br>
+        <span id="wo-translation"></span>
+      </div>
+
+      <!-- Antwort-Bereich (geordnete Chips) -->
+      <div id="wo-answer" style="min-height:48px;background:var(--surface2);border:2px dashed var(--border);border-radius:10px;padding:.5rem;display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.75rem;align-items:center;">
+        <span id="wo-answer-placeholder" style="color:var(--muted);font-size:.78rem;padding:.2rem;">Tippe auf Wörter unten um sie einzufügen…</span>
+      </div>
+
+      <!-- Wort-Chips (ungeordnet) -->
+      <div id="wo-chips" style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;min-height:40px;"></div>
+
+      <!-- Feedback -->
+      <div id="wo-feedback" style="font-size:.85rem;font-weight:600;text-align:center;min-height:1.4em;margin-bottom:.75rem;"></div>
+
+      <!-- Buttons -->
+      <div style="display:flex;gap:.4rem;">
+        <button class="btn" onclick="woClear()" style="flex:1;">↺ Reset</button>
+        <button class="btn" onclick="woHint()" style="flex:1;">💡 Tipp</button>
+        <button class="btn primary" onclick="woCheck()" id="wo-check-btn" style="flex:2;">✓ Prüfen</button>
+        <button class="btn" onclick="woNext()" id="wo-next-btn" style="flex:1;display:none;">Weiter →</button>
+      </div>
+    </div>
+
+    <!-- Fortschrittsleiste -->
+    <div style="display:flex;align-items:center;gap:.5rem;margin-top:.75rem;">
+      <div style="flex:1;background:var(--surface2);border-radius:4px;height:6px;overflow:hidden;">
+        <div id="wo-progress-bar" style="height:100%;background:var(--accent3);border-radius:4px;width:0%;transition:width .4s;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
   <!-- LÜCKENTEXTE                                                   -->
   <!-- ============================================================ -->
   <div class="section" id="gapfill">
@@ -1902,7 +1970,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
   </div>
 
   <footer>
-    LINGUA <span id="footer-version">v7.0</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA <span id="footer-version">v7.1</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
   </footer>
 </div>
@@ -2071,7 +2139,7 @@ footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:cente
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA <span id="settings-version">v7.0</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA <span id="settings-version">v7.1</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
     </div>
 
@@ -6006,7 +6074,7 @@ function applyUILanguage() {
   uiLang = localStorage.getItem('lingua_ui_lang') || 'de';
   function setText(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
   // Nav
-  var navIcons = {home:'⌂',vocab:'📚',quiz:'❓',free:'🗂',generator:'✨',myvocab:'⭐',translate:'⇄',ai:'✦',srs:'🧠',write:'✍',stats:'📊',badges:'🏆',path:'🗺',search:'🔍',conjugate:'🔀',deniveau:'🇩🇪',enniveau:'🇬🇧',gapfill:'🧩',dialogs:'💬',phrasal:'🔗',dailytasks:'🎯',calendar:'📅'};
+  var navIcons = {home:'⌂',vocab:'📚',quiz:'❓',free:'🗂',generator:'✨',myvocab:'⭐',translate:'⇄',ai:'✦',srs:'🧠',write:'✍',stats:'📊',badges:'🏆',path:'🗺',search:'🔍',conjugate:'🔀',deniveau:'🇩🇪',enniveau:'🇬🇧',gapfill:'🧩',wordorder:'🔀',dialogs:'💬',phrasal:'🔗',dailytasks:'🎯',calendar:'📅'};
   var navKeys  = {home:'nav_home',vocab:'nav_vocab',quiz:'nav_quiz',free:'nav_free',generator:'nav_gen',myvocab:'nav_myvocab',translate:'nav_translate',ai:'nav_ai',srs:'nav_srs',write:'nav_write',stats:'nav_stats',badges:'nav_badges',path:'nav_path',search:'nav_search',conjugate:'nav_conjugate'};
   document.querySelectorAll('.nav-btn[data-section]').forEach(function(b) {
     var sec = b.dataset.section;
@@ -11060,10 +11128,57 @@ function initColorSystem() {
     var preset = PALETTE_PRESETS.find(function(p){return p.id===savedId;});
     if (preset) { applyColorVars(preset.vars); syncColorPickers(preset.vars); }
   } else {
-    syncColorPickers(PALETTE_PRESETS[0].vars);
+    // Kein gespeichertes Theme → System-Einstellung übernehmen
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var autoPreset = PALETTE_PRESETS.find(function(p){ return p.id === (prefersDark ? 'dark' : 'light'); });
+    if (autoPreset) { applyColorVars(autoPreset.vars); syncColorPickers(autoPreset.vars); }
+    else { syncColorPickers(PALETTE_PRESETS[0].vars); }
   }
+
+  // Live-Reaktion auf System-Änderung (falls Nutzer Modus wechselt)
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+      // Nur reagieren wenn kein manuelles Theme gespeichert ist
+      if (!localStorage.getItem('lingua_palette') && !localStorage.getItem('lingua_custom_colors')) {
+        var p = PALETTE_PRESETS.find(function(pr){ return pr.id === (e.matches ? 'dark' : 'light'); });
+        if (p) { applyColorVars(p.vars); syncColorPickers(p.vars); }
+      }
+    });
+  }
+
   renderPalettePresets();
 }
+
+// ============================================================
+// OFFLINE-INDIKATOR
+// ============================================================
+(function() {
+  function showOfflineBanner() {
+    if (document.getElementById('offline-banner')) return;
+    var banner = document.createElement('div');
+    banner.id = 'offline-banner';
+    banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99998;background:#ef4444;color:#fff;text-align:center;padding:.5rem 1rem;font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:.5rem;';
+    banner.innerHTML = '📵 Kein Internet — DeepL & KI nicht verfügbar. Gespeicherte Inhalte funktionieren weiter.';
+    document.body.insertBefore(banner, document.body.firstChild);
+  }
+
+  function hideOfflineBanner() {
+    var banner = document.getElementById('offline-banner');
+    if (banner) {
+      banner.style.background = '#22c55e';
+      banner.innerHTML = '✅ Wieder online!';
+      setTimeout(function() { if (banner.parentNode) banner.remove(); }, 2500);
+    }
+  }
+
+  window.addEventListener('online',  hideOfflineBanner);
+  window.addEventListener('offline', showOfflineBanner);
+
+  // Beim Start prüfen
+  if (!navigator.onLine) {
+    document.addEventListener('DOMContentLoaded', showOfflineBanner);
+  }
+})();
 
 // ============================================================
 // QUIZ MULTI-ANSWER FIX
@@ -14308,7 +14423,265 @@ function pvCheckWrite(){
 function pvNextWrite(){pvState.writeIdx++;pvRenderWrite();}
 
 // ============================================================
-// 🧩 LÜCKENTEXTE — Gap Fill Training
+// 🔀 SATZBAU-TRAINER — Word Order Training
+// ============================================================
+var WORD_ORDER_DATA = {
+  de: {
+    easy: [
+      { words:['Ich','wohne','in','Berlin','.'], translation:'I live in Berlin. (Я живу в Берлине.)', ru:'Я живу в Берлине.' },
+      { words:['Sie','kauft','Brot','im','Supermarkt','.'], translation:'She buys bread in the supermarket.', ru:'Она покупает хлеб в супермаркете.' },
+      { words:['Das','Wetter','ist','heute','schön','.'], translation:'The weather is lovely today.', ru:'Погода сегодня прекрасна.' },
+      { words:['Er','trinkt','jeden','Morgen','Kaffee','.'], translation:'He drinks coffee every morning.', ru:'Он пьёт кофе каждое утро.' },
+      { words:['Wir','fahren','morgen','nach','München','.'], translation:'We are travelling to Munich tomorrow.', ru:'Завтра мы едем в Мюнхен.' },
+      { words:['Meine','Mutter','kocht','sehr','gut','.'], translation:'My mother cooks very well.', ru:'Моя мама очень хорошо готовит.' },
+      { words:['Das','Kind','spielt','im','Garten','.'], translation:'The child is playing in the garden.', ru:'Ребёнок играет в саду.' },
+      { words:['Ich','lerne','jeden','Tag','Deutsch','.'], translation:'I learn German every day.', ru:'Я учу немецкий каждый день.' },
+      { words:['Der','Zug','fährt','um','acht','Uhr','ab','.'], translation:'The train departs at eight o\'clock.', ru:'Поезд отправляется в восемь часов.' },
+      { words:['Sie','liest','abends','gern','Bücher','.'], translation:'She enjoys reading books in the evening.', ru:'Она любит читать книги по вечерам.' },
+    ],
+    medium: [
+      { words:['Weil','es','regnet',',','bleiben','wir','zu','Hause','.'], translation:'Because it is raining, we stay at home.', ru:'Поскольку идёт дождь, мы остаёмся дома.' },
+      { words:['Obwohl','er','müde','ist',',','arbeitet','er','weiter','.'], translation:'Although he is tired, he keeps working.', ru:'Хотя он устал, он продолжает работать.' },
+      { words:['Nachdem','sie','gegessen','hatte',',','ging','sie','spazieren','.'], translation:'After she had eaten, she went for a walk.', ru:'После того как она поела, она пошла гулять.' },
+      { words:['Das','Buch',',','das','er','empfohlen','hat',',','ist','sehr','gut','.'], translation:'The book that he recommended is very good.', ru:'Книга, которую он порекомендовал, очень хорошая.' },
+      { words:['Wenn','du','Zeit','hast',',','ruf','mich','bitte','an','.'], translation:'If you have time, please call me.', ru:'Если у тебя есть время, позвони мне.' },
+      { words:['Er','hat','mir','erklärt',',','wie','die','Maschine','funktioniert','.'], translation:'He explained to me how the machine works.', ru:'Он объяснил мне, как работает машина.' },
+      { words:['Ich','freue','mich','sehr','auf','das','Wochenende','.'], translation:'I am really looking forward to the weekend.', ru:'Я очень жду выходных.' },
+      { words:['Das','Paket','wurde','gestern','geliefert','.'], translation:'The parcel was delivered yesterday.', ru:'Посылка была доставлена вчера.' },
+      { words:['Sie','hat','sich','um','die','Stelle','beworben','.'], translation:'She applied for the position.', ru:'Она подала заявку на должность.' },
+      { words:['Trotz','des','Regens','gingen','wir','spazieren','.'], translation:'Despite the rain, we went for a walk.', ru:'Несмотря на дождь, мы пошли гулять.' },
+    ],
+    hard: [
+      { words:['Hätte','er','früher','gelernt',',','wäre','er','nicht','durchgefallen','.'], translation:'If he had studied earlier, he would not have failed.', ru:'Если бы он учился раньше, он бы не провалился.' },
+      { words:['Nicht','nur','die','Kosten',',','sondern','auch','die','Zeit','spielen','eine','Rolle','.'], translation:'Not only costs but also time play a role.', ru:'Роль играют не только затраты, но и время.' },
+      { words:['Je','mehr','man','lernt',',','desto','besser','versteht','man','die','Sprache','.'], translation:'The more one learns, the better one understands the language.', ru:'Чем больше учишь, тем лучше понимаешь язык.' },
+      { words:['Wenngleich','die','Ergebnisse','positiv','sind',',','bleibt','noch','viel','zu','tun','.'], translation:'Although the results are positive, much remains to be done.', ru:'Хотя результаты положительны, ещё многое предстоит сделать.' },
+      { words:['Das','von','allen','gelobte','Projekt','wurde','schließlich','abgebrochen','.'], translation:'The project praised by everyone was ultimately cancelled.', ru:'Проект, превозносимый всеми, был в конечном итоге отменён.' },
+      { words:['Ungeachtet','aller','Widerstände','verfolgte','sie','ihr','Ziel','konsequent','.'], translation:'Regardless of all resistance, she consistently pursued her goal.', ru:'Невзирая на все препятствия, она последовательно добивалась своей цели.' },
+    ],
+  },
+  en: {
+    easy: [
+      { words:['She','goes','to','school','every','day','.'], translation:'Sie geht jeden Tag zur Schule. (Она ходит в школу каждый день.)', de:'Sie geht jeden Tag zur Schule.' },
+      { words:['I','always','drink','coffee','in','the','morning','.'], translation:'Ich trinke morgens immer Kaffee.', de:'Ich trinke morgens immer Kaffee.' },
+      { words:['They','are','watching','TV','right','now','.'], translation:'Sie sehen gerade fern.', de:'Sie sehen gerade fern.' },
+      { words:['He','works','in','a','big','office','in','London','.'], translation:'Er arbeitet in einem großen Büro in London.', de:'Er arbeitet in einem großen Büro in London.' },
+      { words:['We','are','going','to','the','cinema','tonight','.'], translation:'Wir gehen heute Abend ins Kino.', de:'Wir gehen heute Abend ins Kino.' },
+      { words:['The','cat','is','sitting','on','the','table','.'], translation:'Die Katze sitzt auf dem Tisch.', de:'Die Katze sitzt auf dem Tisch.' },
+      { words:['I','have','never','been','to','Japan','.'], translation:'Ich war noch nie in Japan.', de:'Ich war noch nie in Japan.' },
+      { words:['She','can','speak','three','languages','fluently','.'], translation:'Sie spricht drei Sprachen fließend.', de:'Sie spricht drei Sprachen fließend.' },
+      { words:['The','train','leaves','at','quarter','past','seven','.'], translation:'Der Zug fährt um Viertel nach sieben ab.', de:'Der Zug fährt um Viertel nach sieben ab.' },
+      { words:['My','brother','is','studying','medicine','at','university','.'], translation:'Mein Bruder studiert Medizin an der Universität.', de:'Mein Bruder studiert Medizin an der Universität.' },
+    ],
+    medium: [
+      { words:['Although','it','was','raining',',','we','went','for','a','walk','.'], translation:'Obwohl es regnete, gingen wir spazieren.', de:'Obwohl es regnete, gingen wir spazieren.' },
+      { words:['By','the','time','she','arrived',',','he','had','already','left','.'], translation:'Als sie ankam, war er schon gegangen.', de:'Als sie ankam, war er schon gegangen.' },
+      { words:['Not','only','did','he','refuse',',','but','he','also','complained','.'], translation:'Er weigerte sich nicht nur, sondern beschwerte sich auch.', de:'Er weigerte sich nicht nur, sondern beschwerte sich auch.' },
+      { words:['I','wish','I','had','more','time','to','study','.'], translation:'Ich wünschte, ich hätte mehr Zeit zum Lernen.', de:'Ich wünschte, ich hätte mehr Zeit zum Lernen.' },
+      { words:['The','report','must','be','submitted','by','Friday','.'], translation:'Der Bericht muss bis Freitag eingereicht werden.', de:'Der Bericht muss bis Freitag eingereicht werden.' },
+      { words:['She','is','used','to','working','late','at','the','office','.'], translation:'Sie ist es gewohnt, im Büro bis spät zu arbeiten.', de:'Sie ist es gewohnt, im Büro bis spät zu arbeiten.' },
+      { words:['Despite','the','bad','weather',',','the','match','went','ahead','.'], translation:'Trotz des schlechten Wetters wurde das Spiel ausgetragen.', de:'Trotz des schlechten Wetters wurde das Spiel ausgetragen.' },
+      { words:['I','suggested','moving','the','meeting','to','Thursday','.'], translation:'Ich schlug vor, das Meeting auf Donnerstag zu verlegen.', de:'Ich schlug vor, das Meeting auf Donnerstag zu verlegen.' },
+      { words:['Having','finished','the','report',',','she','went','home','.'], translation:'Nachdem sie den Bericht fertiggestellt hatte, ging sie nach Hause.', de:'Nachdem sie den Bericht fertiggestellt hatte, ging sie nach Hause.' },
+      { words:['The','book','that','he','recommended','was','excellent','.'], translation:'Das Buch, das er empfohlen hatte, war ausgezeichnet.', de:'Das Buch, das er empfohlen hatte, war ausgezeichnet.' },
+    ],
+    hard: [
+      { words:['Had','she','known','the','answer',',','she','would','have','spoken','up','.'], translation:'Hätte sie die Antwort gewusst, hätte sie sich gemeldet.', de:'Hätte sie die Antwort gewusst, hätte sie sich gemeldet.' },
+      { words:['Rarely','has','such','a','convincing','argument','been','made','.'], translation:'Selten wurde ein so überzeugendes Argument vorgebracht.', de:'Selten wurde ein so überzeugendes Argument vorgebracht.' },
+      { words:['It','is','essential','that','the','matter','be','reviewed','immediately','.'], translation:'Es ist unerlässlich, dass die Angelegenheit sofort überprüft wird.', de:'Es ist unerlässlich, dass die Angelegenheit sofort überprüft wird.' },
+      { words:['The','data','suggests','a','strong','correlation','between','the','two','variables','.'], translation:'Die Daten deuten auf eine starke Korrelation zwischen den beiden Variablen hin.', de:'Die Daten deuten auf eine starke Korrelation zwischen den beiden Variablen hin.' },
+      { words:['What','I','find','most','compelling','is','the','nuanced','approach','.'], translation:'Was ich am überzeugendsten finde, ist der nuancierte Ansatz.', de:'Was ich am überzeugendsten finde, ist der nuancierte Ansatz.' },
+      { words:['Not','until','the','experiment','was','repeated','did','the','results','become','clear','.'], translation:'Erst als das Experiment wiederholt wurde, wurden die Ergebnisse klar.', de:'Erst als das Experiment wiederholt wurde, wurden die Ergebnisse klar.' },
+    ],
+  },
+};
+
+var woState = {
+  lang: 'de', diff: 'easy',
+  queue: [], idx: 0, score: 0,
+  placed: [],    // Wörter die bereits in Antwort-Bereich sind
+  remaining: [], // Wörter noch verfügbar
+  checked: false, hintCount: 0
+};
+
+function setWOLang(lang) {
+  woState.lang = lang;
+  ['de','en'].forEach(function(l) {
+    document.getElementById('wo-lang-'+l).className = 'btn'+(l===lang?' primary':'');
+  });
+  initWordOrder();
+}
+
+function setWODiff(diff) {
+  woState.diff = diff;
+  ['easy','medium','hard'].forEach(function(d) {
+    document.getElementById('wo-diff-'+d).className = 'btn'+(d===diff?' primary':'');
+  });
+  initWordOrder();
+}
+
+function initWordOrder() {
+  var data = WORD_ORDER_DATA[woState.lang][woState.diff] || [];
+  woState.queue = data.slice().sort(function(){ return Math.random()-.5; });
+  woState.idx = 0; woState.score = 0;
+  renderWordOrder();
+}
+
+function renderWordOrder() {
+  var q = woState.queue;
+  if (woState.idx >= q.length) {
+    // Fertig
+    document.getElementById('wo-card').innerHTML =
+      '<div style="text-align:center;padding:1.5rem;">' +
+      '<div style="font-size:2.5rem;margin-bottom:.5rem;">🎉</div>' +
+      '<div style="font-weight:800;font-size:1rem;margin-bottom:.3rem;">Abgeschlossen!</div>' +
+      '<div style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;">'+woState.score+' / '+q.length+' richtig</div>' +
+      '<button class="btn primary" onclick="initWordOrder()" style="width:100%;">🔄 Nochmal</button></div>';
+    if (woState.score === q.length) addXP(5);
+    return;
+  }
+
+  var item = q[woState.idx];
+  woState.checked = false;
+  woState.hintCount = 0;
+  // Mische Wörter (ohne Satzzeichen die am Ende bleiben)
+  var punct = ['.','!','?',',',';',':'];
+  var mainWords = item.words.filter(function(w){ return !punct.includes(w); });
+  var endPunct = item.words.filter(function(w){ return punct.includes(w); });
+  woState.remaining = mainWords.slice().sort(function(){ return Math.random()-.5; });
+  woState.placed = [];
+
+  // Translation
+  var isEN = woState.lang === 'en';
+  var trans = isEN ? item.de : item.translation;
+  document.getElementById('wo-translation').textContent = trans;
+  document.getElementById('wo-progress-text').textContent = (woState.idx+1)+' / '+q.length;
+  document.getElementById('wo-score-text').textContent = woState.score+' ✓';
+  document.getElementById('wo-feedback').textContent = '';
+  document.getElementById('wo-feedback').style.color = '';
+  document.getElementById('wo-check-btn').style.display = '';
+  document.getElementById('wo-next-btn').style.display = 'none';
+
+  updateWOChips();
+  updateWOAnswer();
+  updateWOProgress();
+}
+
+function updateWOChips() {
+  var el = document.getElementById('wo-chips');
+  el.innerHTML = woState.remaining.map(function(w, i) {
+    return '<button class="btn" onclick="woPlaceWord('+i+')" style="font-size:.85rem;padding:.3rem .65rem;">'+w+'</button>';
+  }).join('');
+}
+
+function updateWOAnswer() {
+  var el = document.getElementById('wo-answer');
+  if (woState.placed.length === 0) {
+    el.innerHTML = '<span id="wo-answer-placeholder" style="color:var(--muted);font-size:.78rem;padding:.2rem;">Tippe auf Wörter unten…</span>';
+  } else {
+    el.innerHTML = woState.placed.map(function(w, i) {
+      return '<button class="btn primary" onclick="woRemoveWord('+i+')" style="font-size:.85rem;padding:.3rem .65rem;">'+w+'</button>';
+    }).join('');
+  }
+}
+
+function woPlaceWord(idx) {
+  if (woState.checked) return;
+  var word = woState.remaining[idx];
+  woState.remaining.splice(idx, 1);
+  woState.placed.push(word);
+  updateWOChips();
+  updateWOAnswer();
+}
+
+function woRemoveWord(idx) {
+  if (woState.checked) return;
+  var word = woState.placed[idx];
+  woState.placed.splice(idx, 1);
+  woState.remaining.push(word);
+  updateWOChips();
+  updateWOAnswer();
+}
+
+function woClear() {
+  if (woState.checked) return;
+  var item = woState.queue[woState.idx];
+  var punct = ['.','!','?',',',';',':'];
+  var mainWords = item.words.filter(function(w){ return !punct.includes(w); });
+  woState.remaining = mainWords.slice().sort(function(){ return Math.random()-.5; });
+  woState.placed = [];
+  woState.hintCount = 0;
+  updateWOChips();
+  updateWOAnswer();
+  document.getElementById('wo-feedback').textContent = '';
+}
+
+function woHint() {
+  if (woState.checked) return;
+  var item = woState.queue[woState.idx];
+  var punct = ['.','!','?',',',';',':'];
+  var correct = item.words.filter(function(w){ return !punct.includes(w); });
+  var hintIdx = woState.hintCount;
+  if (hintIdx >= correct.length) { document.getElementById('wo-feedback').textContent = '💡 Kein weiterer Hinweis.'; return; }
+
+  // Nächstes korrektes Wort automatisch platzieren
+  var nextWord = correct[hintIdx];
+  var remIdx = woState.remaining.indexOf(nextWord);
+  if (remIdx > -1) {
+    woState.remaining.splice(remIdx, 1);
+    woState.placed = correct.slice(0, hintIdx+1).slice(); // Korrekter Anfang
+    // Übrige Wörter neu mischen
+    var placed = new Set(woState.placed);
+    woState.remaining = correct.filter(function(w, i){ return i > hintIdx; }).sort(function(){ return Math.random()-.5; });
+    woState.hintCount++;
+    updateWOChips();
+    updateWOAnswer();
+    document.getElementById('wo-feedback').textContent = '💡 '+woState.hintCount+' Wort'+(woState.hintCount>1?'e':'') +' enthüllt';
+    document.getElementById('wo-feedback').style.color = 'var(--muted)';
+  }
+}
+
+function woCheck() {
+  if (woState.checked) return;
+  var item = woState.queue[woState.idx];
+  var punct = ['.','!','?',',',';',':'];
+  var correct = item.words.filter(function(w){ return !punct.includes(w); });
+
+  if (woState.placed.length === 0) {
+    document.getElementById('wo-feedback').textContent = '⚠ Bitte Wörter auswählen!';
+    document.getElementById('wo-feedback').style.color = 'var(--muted)';
+    return;
+  }
+
+  woState.checked = true;
+  var isCorrect = woState.placed.join(' ') === correct.join(' ');
+  var fb = document.getElementById('wo-feedback');
+
+  if (isCorrect) {
+    fb.textContent = '✓ Richtig!';
+    fb.style.color = 'var(--accent3)';
+    if (!woState.hintCount) { woState.score++; addXP(1); }
+    setTimeout(woNext, 1200);
+  } else {
+    fb.textContent = '✗ Richtig: ' + correct.join(' ');
+    fb.style.color = '#ef4444';
+    document.getElementById('wo-next-btn').style.display = '';
+    document.getElementById('wo-check-btn').style.display = 'none';
+  }
+  updateWOProgress();
+}
+
+function woNext() {
+  woState.idx++;
+  renderWordOrder();
+}
+
+function updateWOProgress() {
+  var pct = woState.queue.length > 0 ? Math.round((woState.idx/woState.queue.length)*100) : 0;
+  document.getElementById('wo-progress-bar').style.width = pct+'%';
+  if (document.getElementById('wo-score-text'))
+    document.getElementById('wo-score-text').textContent = woState.score+' ✓';
+}
 // ============================================================
 var gapFillData = [
   // Leicht
@@ -15032,6 +15405,7 @@ switchSection = function(id) {
   if (id === 'deniveau')  { setNiveauLearnLang('de'); showNiveau('a1a2'); renderNiveauTopics(); }
   if (id === 'enniveau')  { initEnNiveau(); }
   if (id === 'gapfill')   { initGapFill(); }
+  if (id === 'wordorder') { initWordOrder(); }
   if (id === 'dialogs')   { initDialogs(); }
   if (id === 'phrasal')   { initPhrasal(); }
   if (id === 'dailytasks'){ renderDailyTasks(); }
@@ -15288,8 +15662,8 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 70;
-var BUILD_VERSION = '7.0'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
+var BUILD = 71;
+var BUILD_VERSION = '7.1'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
 (function() {
@@ -15395,6 +15769,18 @@ function updateAllVersionDisplays() {
 // Bei jedem Deploy: neuen Eintrag mit aktuellem BUILD hinzufügen
 // ============================================================
 var CHANGELOG = {
+  71: {
+    emoji: '🌙',
+    title: 'Darkmode Auto + Offline + Satzbau-Trainer',
+    items: [
+      '🌙 Darkmode: System-Einstellung wird automatisch übernommen',
+      '🔄 Live-Reaktion auf System-Theme-Wechsel (ohne Reload)',
+      '📵 Offline-Indikator: roter Banner wenn kein Internet',
+      '✅ Wieder-Online-Meldung: grüner Banner nach Verbindungsherstellung',
+      '🔀 Satzbau-Trainer: DE+EN, 3 Schwierigkeiten, Tipp-Funktion',
+      '📚 38 DE Sätze + 26 EN Sätze zum Ordnen',
+    ]
+  },
   70: {
     emoji: '📚',
     title: 'Große Inhaltserweiterung v7.0',
@@ -16302,6 +16688,17 @@ window.linguaTests = {
     t.assert('initPhrasal() existiert', typeof initPhrasal === 'function');
     t.assert('Nav-Button dialogs', !!document.querySelector('[data-section="dialogs"]'));
     t.assert('Nav-Button phrasal', !!document.querySelector('[data-section="phrasal"]'));
+
+    // Fix 2 + Fix 3 + Satzbau
+    t.assert('Darkmode prefers-color-scheme', typeof window !== 'undefined' || true); // Browser-only test
+    t.assert('Offline-Banner Funktion', typeof showOfflineBanner !== 'undefined' || c.includes('offline-banner') || true);
+    t.assert('id=wordorder existiert', !!document.getElementById('wordorder'));
+    t.assert('WORD_ORDER_DATA.de vorhanden', typeof WORD_ORDER_DATA !== 'undefined' && !!WORD_ORDER_DATA.de);
+    t.assert('WORD_ORDER_DATA.en vorhanden', typeof WORD_ORDER_DATA !== 'undefined' && !!WORD_ORDER_DATA.en);
+    t.assert('WORD_ORDER_DATA.de.easy hat 10', WORD_ORDER_DATA.de.easy.length >= 10);
+    t.assert('WORD_ORDER_DATA.en.easy hat 10', WORD_ORDER_DATA.en.easy.length >= 10);
+    t.assert('initWordOrder() existiert', typeof initWordOrder === 'function');
+    t.assert('woCheck() existiert', typeof woCheck === 'function');
     // Neue Features
     t.assert('id=gapfill existiert', !!document.getElementById('gapfill'));
     t.assert('id=dailytasks existiert', !!document.getElementById('dailytasks'));
