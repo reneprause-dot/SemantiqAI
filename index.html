@@ -5,9 +5,9 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%236366f1'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>L</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
-<meta name="description" id="meta-description" content="LINGUA v6.5 – KI-gestützte Sprachlern-App von René Prause">
+<meta name="description" id="meta-description" content="LINGUA v7.5 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v6.5 · by René Prause</title>
+<title>LINGUA v7.5 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -681,7 +681,7 @@ if (window.caches) {
 <div id="app">
   <div class="topbar-sticky">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v6.5</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v7.5</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill" data-lang="sq">🇦🇱 SQ</button>
@@ -1994,7 +1994,7 @@ if (window.caches) {
   </div>
 
   <footer>
-    LINGUA <span id="footer-version">v6.5</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA <span id="footer-version">v7.5</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
   </footer>
 </div>
@@ -2163,7 +2163,7 @@ if (window.caches) {
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA <span id="settings-version">v6.5</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA <span id="settings-version">v7.5</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
     </div>
 
@@ -15719,8 +15719,8 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 75;
-var BUILD_VERSION = '6.5'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
+var BUILD = 76;
+var BUILD_VERSION = '7.5'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
 (function() {
@@ -15826,6 +15826,20 @@ function updateAllVersionDisplays() {
 // Bei jedem Deploy: neuen Eintrag mit aktuellem BUILD hinzufügen
 // ============================================================
 var CHANGELOG = {
+  76: {
+    emoji: '🚀',
+    title: 'v7.5 – Stabilisierung & Layout-Fix',
+    items: [
+      'Version auf 7.5 gesetzt – neues Build-Nummernsystem ab jetzt fortlaufend',
+      'Header kompakt: eine Zeile, Sprachpillen horizontal scrollbar',
+      'Topbar sticky: Header + Nav kleben oben beim Scrollen',
+      'Alle 23 Navigationspunkte vollstaendig verdrahtet',
+      'Flag-Emojis: sicher als Unicode-Escapes in JS, echte Emojis in HTML',
+      'checkBadges Fix: custom_vocab Badge (data/total undefiniert behoben)',
+      'Favicon inline: kein 404 mehr',
+      'ZIP-Backup System: ab jetzt bei jedem Build',
+    ]
+  },
   72: {
     emoji: '🎯',
     title: 'Tagesaufgaben fix + EN Dialoge + Wochenbericht',
