@@ -1,55 +1,36 @@
-const CACHE_NAME = 'lingua-v3';
-const ASSETS = [
-  './index.html',
-  './manifest.json',
-];
+// LINGUA Service Worker - Cache-Cleaner
+// Löscht alle alten Caches und deregistriert sich selbst
+// um Browser-Cache-Probleme zu vermeiden
 
-// Domains die immer direkt ans Netzwerk gehen (nie gecacht)
-const NETWORK_ONLY = [
-  'api.anthropic.com',
-  'api-free.deepl.com',
-  'api.deepl.com',
-  'corsproxy.io',
-  'cors-anywhere.herokuapp.com',
-  'fonts.googleapis.com',
-  'fonts.gstatic.com',
-];
+const CACHE_VERSION = 'lingua-v71';
 
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
-  );
+self.addEventListener('install', function(event) {
   self.skipWaiting();
 });
 
-self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    )
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    // Alle alten Caches löschen
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames
+          .filter(function(name) { return name !== CACHE_VERSION; })
+          .map(function(name) {
+            console.log('[SW] Lösche alten Cache:', name);
+            return caches.delete(name);
+          })
+      );
+    }).then(function() {
+      return self.clients.claim();
+    })
   );
-  self.clients.claim();
 });
 
-self.addEventListener('fetch', e => {
-  const url = e.request.url;
-
-  // Externe API-Calls: immer direkt ans Netzwerk, nie cachen
-  const isNetworkOnly = NETWORK_ONLY.some(domain => url.includes(domain));
-  if (isNetworkOnly) {
-    e.respondWith(
-      fetch(e.request).catch(err => {
-        return new Response(JSON.stringify({ error: err.message }), {
-          status: 503,
-          headers: { 'Content-Type': 'application/json' }
-        });
-      })
-    );
-    return;
-  }
-
-  // Lokale Assets: Cache first, dann Netzwerk
-  e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request))
+// Kein Caching - immer vom Netzwerk laden
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    fetch(event.request).catch(function() {
+      return caches.match(event.request);
+    })
   );
 });
