@@ -1,48 +1,55 @@
-// LINGUA Service Worker v6.5
-// Neue Cache-Version erzwingt Browser-Refresh
+const CACHE_NAME = 'lingua-v3';
+const ASSETS = [
+  './index.html',
+  './manifest.json',
+];
 
-const CACHE_VERSION = 'lingua-v65';
+// Domains die immer direkt ans Netzwerk gehen (nie gecacht)
+const NETWORK_ONLY = [
+  'api.anthropic.com',
+  'api-free.deepl.com',
+  'api.deepl.com',
+  'corsproxy.io',
+  'cors-anywhere.herokuapp.com',
+  'fonts.googleapis.com',
+  'fonts.gstatic.com',
+];
 
-self.addEventListener('install', function(event) {
-  // Sofort aktivieren ohne auf alten SW zu warten
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+  );
   self.skipWaiting();
 });
 
-self.addEventListener('activate', function(event) {
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames
-          .filter(function(name) { return name !== CACHE_VERSION; })
-          .map(function(name) {
-            console.log('[SW v65] Loesche alten Cache:', name);
-            return caches.delete(name);
-          })
-      );
-    }).then(function() {
-      // Alle offenen Tabs sofort uebernehmen
-      return self.clients.claim();
-    }).then(function() {
-      // Alle Clients zum Reload zwingen
-      return self.clients.matchAll({type: 'window'});
-    }).then(function(clients) {
-      clients.forEach(function(client) {
-        client.navigate(client.url);
-      });
-    })
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+    )
   );
+  self.clients.claim();
 });
 
-// Kein Caching - immer vom Netzwerk
-self.addEventListener('fetch', function(event) {
-  // index.html nie cachen
-  if (event.request.url.endsWith('/') || 
-      event.request.url.endsWith('index.html') ||
-      event.request.url.endsWith('.html')) {
-    event.respondWith(
-      fetch(event.request, {cache: 'no-store'})
+self.addEventListener('fetch', e => {
+  const url = e.request.url;
+
+  // Externe API-Calls: immer direkt ans Netzwerk, nie cachen
+  const isNetworkOnly = NETWORK_ONLY.some(domain => url.includes(domain));
+  if (isNetworkOnly) {
+    e.respondWith(
+      fetch(e.request).catch(err => {
+        return new Response(JSON.stringify({ error: err.message }), {
+          status: 503,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      })
     );
     return;
   }
-  event.respondWith(fetch(event.request));
+
+  // Lokale Assets: Cache first, dann Netzwerk
+  e.respondWith(
+    caches.match(e.request).then(cached => cached || fetch(e.request))
+  );
 });
