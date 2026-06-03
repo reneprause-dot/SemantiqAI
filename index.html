@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#0a0a0f">
 <meta name="description" id="meta-description" content="LINGUA v5.1 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v8.6 · by René Prause</title>
+<title>LINGUA v8.7 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -670,7 +670,7 @@ if (window.caches) { caches.keys().then(function(ns){ns.forEach(function(n){cach
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v8.6</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v8.7</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill" data-lang="sq">🇦🇱 SQ</button>
@@ -1646,7 +1646,7 @@ if (window.caches) { caches.keys().then(function(ns){ns.forEach(function(n){cach
   </div>
 
   <footer>
-    LINGUA <span id="footer-version">v8.6</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA <span id="footer-version">v8.7</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
   </footer>
 </div>
@@ -1814,7 +1814,7 @@ if (window.caches) { caches.keys().then(function(ns){ns.forEach(function(n){cach
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA <span id="settings-version">v8.6</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA <span id="settings-version">v8.7</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
     </div>
 
@@ -11838,6 +11838,81 @@ var NIVEAU_DATA = {
           {de:'Das Praktikum hat mir viel gebracht.',ru:'Практика дала мне многое.',tr:'Staj bana çok şey kattı.',en:'The internship gave me a lot.'},{de:'Ich bewerbe mich um ein Stipendium.',ru:'Я подаю заявку на стипендию.',tr:'Burs için başvuruyorum.',en:'I am applying for a scholarship.'},
         ]
       },
+      { id:'b1-gefuehle', icon:'😊', title:'Gefühle & Emotionen',
+        vocab:[
+          {de:'die Freude',ru:'радость',tr:'sevinç',en:'joy',ph:'di froyda'},
+          {de:'die Trauer',ru:'печаль',tr:'üzüntü',en:'sadness',ph:'di traoer'},
+          {de:'die Angst',ru:'страх',tr:'korku',en:'fear',ph:'di ankst'},
+          {de:'die Wut',ru:'гнев',tr:'öfke',en:'anger',ph:'di vuut'},
+          {de:'die Überraschung',ru:'удивление',tr:'şaşkınlık',en:'surprise',ph:'di yberraschung'},
+          {de:'die Enttäuschung',ru:'разочарование',tr:'hayal kırıklığı',en:'disappointment',ph:'di entoishung'},
+          {de:'die Hoffnung',ru:'надежда',tr:'umut',en:'hope',ph:'di hofnung'},
+          {de:'sich freuen',ru:'радоваться',tr:'sevinmek',en:'to be happy',ph:'zikh froyen'},
+          {de:'sich ärgern',ru:'злиться',tr:'sinirlenмek',en:'to be annoyed',ph:'zikh ergern'},
+          {de:'sich schämen',ru:'стыдиться',tr:'utanmak',en:'to be ashamed',ph:'zikh sheemen'},
+          {de:'sich sorgen',ru:'беспокоиться',tr:'endişelenmek',en:'to worry',ph:'zikh zorgen'},
+          {de:'die Eifersucht',ru:'ревность',tr:'kıskançlık',en:'jealousy',ph:'di ayfersucht'},
+        ],
+        grammar:[
+          {title:'Reflexive Verben mit Gefühlen',text:'Viele Gefühlsverben sind reflexiv:\n\nsich freuen über + Akkusativ\nsich ärgern über + Akkusativ\nsich fürchten vor + Dativ',examples:['Ich <b>freue mich über</b> das Geschenk.','Er <b>ärgert sich über</b> den Stau.']},
+        ],
+        sentences:[
+          {de:'Ich freue mich sehr auf das Wochenende.',ru:'Я очень жду выходных.',tr:'Hafta sonunu çok bekliyorum.',en:'I am really looking forward to the weekend.'},
+          {de:'Er ist enttäuscht, weil er die Prüfung nicht bestanden hat.',ru:'Он разочарован, потому что не сдал экзамен.',tr:'Sınavı geçemediği için hayal kırıklığına uğradı.',en:'He is disappointed because he did not pass the exam.'},
+          {de:'Manchmal ist es schwer, seine Gefühle auszudrücken.',ru:'Иногда трудно выражать свои чувства.',tr:'Bazen duygularını ifade etmek zor.',en:'Sometimes it is hard to express one\'s feelings.'},
+          {de:'Sie macht sich Sorgen um ihre kranke Mutter.',ru:'Она беспокоится о своей больной матери.',tr:'Hasta annesi için endişeleniyor.',en:'She is worried about her sick mother.'},
+        ]
+      },
+      { id:'b1-digital', icon:'💻', title:'Digitales Leben & Internet',
+        vocab:[
+          {de:'die App',ru:'приложение',tr:'uygulama',en:'app',ph:'di ap'},
+          {de:'das Passwort',ru:'пароль',tr:'şifre',en:'password',ph:'das pasvort'},
+          {de:'herunterladen',ru:'скачивать',tr:'indirmek',en:'to download',ph:'herunterlaadn'},
+          {de:'hochladen',ru:'загружать',tr:'yüklemek',en:'to upload',ph:'hochlaadn'},
+          {de:'die Datei',ru:'файл',tr:'dosya',en:'file',ph:'di datay'},
+          {de:'der Nutzer',ru:'пользователь',tr:'kullanıcı',en:'user',ph:'der nutzer'},
+          {de:'die Sicherheit',ru:'безопасность',tr:'güvenlik',en:'security',ph:'di zikerhait'},
+          {de:'der Akku',ru:'аккумулятор',tr:'pil',en:'battery',ph:'der aku'},
+          {de:'aktualisieren',ru:'обновлять',tr:'güncellemek',en:'to update',ph:'aktualizeern'},
+          {de:'die Cloud',ru:'облако',tr:'bulut',en:'cloud',ph:'di klaud'},
+          {de:'streamen',ru:'стримить',tr:'yayın yapmak',en:'to stream',ph:'streemen'},
+          {de:'das Netzwerk',ru:'сеть',tr:'ağ',en:'network',ph:'das netswerk'},
+        ],
+        grammar:[
+          {title:'Modalverben im Alltag',text:'Modalverben + Infinitiv am Satzende:\n\nkönnen — Fähigkeit\nmüssen — Notwendigkeit\ndürfen — Erlaubnis',examples:['Ich <b>muss</b> das Passwort ändern.','Du <b>kannst</b> die Datei herunterladen.']},
+        ],
+        sentences:[
+          {de:'Ich muss mein Passwort regelmäßig ändern.',ru:'Мне нужно регулярно менять пароль.',tr:'Şifremi düzenli olarak değiştirmeliyim.',en:'I must change my password regularly.'},
+          {de:'Kannst du mir die Datei schicken?',ru:'Можешь отправить мне файл?',tr:'Dosyayı bana gönderebilir misin?',en:'Can you send me the file?'},
+          {de:'Das Netzwerk ist nicht sicher.',ru:'Сеть небезопасна.',tr:'Ağ güvenli değil.',en:'The network is not secure.'},
+          {de:'Ich streame lieber als fernzusehen.',ru:'Я предпочитаю стримить.',tr:'Yayın izlemeyi tercih ederim.',en:'I prefer streaming to watching TV.'},
+        ]
+      },
+      { id:'b1-kochen', icon:'🍳', title:'Kochen & Ernährung',
+        vocab:[
+          {de:'die Zutat',ru:'ингредиент',tr:'malzeme',en:'ingredient',ph:'di tsutat'},
+          {de:'das Rezept',ru:'рецепт',tr:'tarif',en:'recipe',ph:'das retsept'},
+          {de:'braten',ru:'жарить',tr:'kızartmak',en:'to fry',ph:'braaten'},
+          {de:'kochen',ru:'варить',tr:'pişirmek',en:'to cook',ph:'kokhn'},
+          {de:'backen',ru:'печь',tr:'fırında pişirmek',en:'to bake',ph:'bakn'},
+          {de:'schneiden',ru:'резать',tr:'kesmek',en:'to cut',ph:'shnaydn'},
+          {de:'das Gewürz',ru:'специя',tr:'baharat',en:'spice',ph:'das gevirts'},
+          {de:'die Portion',ru:'порция',tr:'porsiyon',en:'portion',ph:'di porzion'},
+          {de:'vegetarisch',ru:'вегетарианский',tr:'vejetaryen',en:'vegetarian',ph:'vegetarisch'},
+          {de:'würzen',ru:'приправлять',tr:'baharatlamak',en:'to season',ph:'vyrtsen'},
+          {de:'die Mahlzeit',ru:'приём пищи',tr:'öğün',en:'meal',ph:'di maaltsait'},
+          {de:'das Fett',ru:'жир',tr:'yağ',en:'fat',ph:'das fet'},
+        ],
+        grammar:[
+          {title:'Imperativ — Rezepte schreiben',text:'Rezepte werden im Imperativ formuliert:\n\nDu: Schneide die Zwiebeln!\nSie: Schneiden Sie die Zwiebeln!',examples:['<b>Braten</b> Sie die Zwiebeln goldgelb.','<b>Backe</b> den Kuchen bei 180°C.']},
+        ],
+        sentences:[
+          {de:'Das Rezept ist einfach, aber der Geschmack ist fantastisch.',ru:'Рецепт простой, но вкус фантастический.',tr:'Tarif basit ama tat harika.',en:'The recipe is simple but the taste is fantastic.'},
+          {de:'Ich koche gern mit frischen Zutaten.',ru:'Я люблю готовить из свежих ингредиентов.',tr:'Taze malzemelerle pişirmeyi severim.',en:'I like cooking with fresh ingredients.'},
+          {de:'Würzen Sie die Soße nach Ihrem Geschmack.',ru:'Приправьте соус по своему вкусу.',tr:'Sosu zevkinize göre baharatlayın.',en:'Season the sauce to your taste.'},
+          {de:'Eine gesunde Ernährung ist wichtig für das Wohlbefinden.',ru:'Здоровое питание важно для самочувствия.',tr:'Sağlıklı beslenme iyilik hali için önemlidir.',en:'Healthy nutrition is important for wellbeing.'},
+        ]
+      }
     ]
   },
 
@@ -11899,6 +11974,82 @@ var NIVEAU_DATA = {
           {de:'Das Unternehmen plant, in neue Märkte zu investieren.',ru:'Компания планирует инвестировать в новые рынки.'},{de:'Der Haushalt muss ausgeglichen sein.',ru:'Бюджет должен быть сбалансированным.'},
         ]
       },
+      { id:'b2-politik', icon:'🗳️', title:'Politik & Demokratie',
+        vocab:[
+          {de:'die Demokratie',ru:'демократия',tr:'demokrasi',en:'democracy',ph:'di demokratii'},
+          {de:'die Verfassung',ru:'конституция',tr:'anayasa',en:'constitution',ph:'di ferFASung'},
+          {de:'die Partei',ru:'партия',tr:'parti',en:'party',ph:'di parTAY'},
+          {de:'die Wahl',ru:'выборы',tr:'seçim',en:'election',ph:'di vaal'},
+          {de:'wählen',ru:'голосовать',tr:'oy vermek',en:'to vote',ph:'veelen'},
+          {de:'die Meinungsfreiheit',ru:'свобода слова',tr:'ifade özgürlüğü',en:'freedom of speech',ph:'di MAYnungsfrayhait'},
+          {de:'der Bürger',ru:'гражданин',tr:'vatandaş',en:'citizen',ph:'der BYRger'},
+          {de:'regieren',ru:'управлять',tr:'yönetmek',en:'to govern',ph:'reGEERen'},
+          {de:'die Opposition',ru:'оппозиция',tr:'muhalefet',en:'opposition',ph:'di opozitSION'},
+          {de:'abstimmen',ru:'голосовать',tr:'oy kullanmak',en:'to vote on an issue',ph:'APshtimen'},
+          {de:'das Grundgesetz',ru:'основной закон',tr:'temel kanun',en:'Basic Law',ph:'das GRUNTgezets'},
+          {de:'der Bundestag',ru:'бундестаг',tr:'parlamento',en:'parliament',ph:'der BUNdestag'},
+        ],
+        grammar:[
+          {title:'Konjunktiv II — Forderungen',text:'Politische Texte: Konjunktiv II für höfliche Forderungen\n\nsollte — moralische Erwartung\nmüsste — logische Notwendigkeit\nkönnte — Möglichkeit',examples:['Die Regierung <b>sollte</b> handeln.','Das <b>müsste</b> geregelt sein.','Es <b>könnte</b> eine Lösung geben.']},
+          {title:'Passiv im politischen Diskurs',text:'Passiv betont das Geschehen:\n\nwerden + Partizip II (Vorgangspassiv)\nsein + Partizip II (Zustandspassiv)',examples:['Das Gesetz <b>wurde verabschiedet</b>.','Die Wahl <b>ist angesetzt</b>.']},
+        ],
+        sentences:[
+          {de:'In einer Demokratie entscheidet das Volk durch freie Wahlen.',ru:'В демократии народ решает через свободные выборы.',tr:'Demokraside halk özgür seçimlerle karar verir.',en:'In a democracy the people decide through free elections.'},
+          {de:'Das Grundgesetz schützt die Grundrechte aller Bürger.',ru:'Основной закон защищает основные права всех граждан.',tr:'Anayasa tüm vatandaşların temel haklarını korur.',en:'The Basic Law protects the fundamental rights of all citizens.'},
+          {de:'Meinungsfreiheit ist ein Grundpfeiler der Demokratie.',ru:'Свобода слова — краеугольный камень демократии.',tr:'İfade özgürlüğü demokrasinin temel taşıdır.',en:'Freedom of speech is a cornerstone of democracy.'},
+          {de:'Die Wahlbeteiligung war dieses Jahr besonders hoch.',ru:'В этом году явка избирателей была высокой.',tr:'Bu yıl seçmen katılımı özellikle yüksekti.',en:'Voter turnout was particularly high this year.'},
+        ]
+      },
+      { id:'b2-psychologie', icon:'🧠', title:'Psychologie & Verhalten',
+        vocab:[
+          {de:'das Verhalten',ru:'поведение',tr:'davranış',en:'behaviour',ph:'das ferHAALten'},
+          {de:'die Persönlichkeit',ru:'личность',tr:'kişilik',en:'personality',ph:'di perzoenlikhait'},
+          {de:'das Selbstbewusstsein',ru:'уверенность в себе',tr:'özgüven',en:'self-confidence',ph:'das ZELPSTbevustzayn'},
+          {de:'die Empathie',ru:'эмпатия',tr:'empati',en:'empathy',ph:'di empaTII'},
+          {de:'der Stress',ru:'стресс',tr:'stres',en:'stress',ph:'der shtres'},
+          {de:'die Motivation',ru:'мотивация',tr:'motivasyon',en:'motivation',ph:'di motivaTSION'},
+          {de:'das Trauma',ru:'травма',tr:'travma',en:'trauma',ph:'das TRAUma'},
+          {de:'verdrängen',ru:'вытеснять',tr:'bastırmak',en:'to repress',ph:'ferDRENgen'},
+          {de:'beeinflussen',ru:'влиять',tr:'etkilemek',en:'to influence',ph:'be-AYN-flusen'},
+          {de:'resilient',ru:'устойчивый',tr:'dayanıklı',en:'resilient',ph:'reZILjent'},
+          {de:'die Kognition',ru:'познание',tr:'biliş',en:'cognition',ph:'di kogniTSION'},
+          {de:'das Wohlbefinden',ru:'самочувствие',tr:'iyilik hali',en:'wellbeing',ph:'das VOLbefindn'},
+        ],
+        grammar:[
+          {title:'Nominalisierung',text:'In akademischen Texten Nomen statt Verben:\n\nanalysieren → die Analyse\nmotivieren → die Motivation\nverdrängen → die Verdrängung',examples:['<b>Die Verdrängung</b> des Traumas ist häufig.','<b>Die Motivation</b> sinkt bei Stress.']},
+        ],
+        sentences:[
+          {de:'Empathie ist die Fähigkeit, sich in andere hineinzuversetzen.',ru:'Эмпатия — способность поставить себя на место другого.',tr:'Empati, kendini başkasının yerine koyabilme becerisidir.',en:'Empathy is the ability to put oneself in another\'s position.'},
+          {de:'Chronischer Stress kann langfristig die Gesundheit schädigen.',ru:'Хронический стресс может долгосрочно навредить здоровью.',tr:'Kronik stres uzun vadede sağlığa zarar verebilir.',en:'Chronic stress can damage health in the long term.'},
+          {de:'Selbstbewusstsein lässt sich durch Übung stärken.',ru:'Уверенность в себе можно укрепить с помощью практики.',tr:'Özgüven pratikle güçlendirilebilir.',en:'Self-confidence can be strengthened through practice.'},
+          {de:'Das Verhalten wird durch viele Faktoren geprägt.',ru:'Поведение формируется многими факторами.',tr:'Davranış birçok faktör tarafından şekillenir.',en:'Behaviour is shaped by many factors.'},
+        ]
+      },
+      { id:'b2-kunst', icon:'🎨', title:'Kunst & Kreativität',
+        vocab:[
+          {de:'das Gemälde',ru:'картина',tr:'tablo',en:'painting',ph:'das geMELde'},
+          {de:'die Skulptur',ru:'скульптура',tr:'heykel',en:'sculpture',ph:'di skulpTUUR'},
+          {de:'der Künstler',ru:'художник',tr:'sanatçı',en:'artist',ph:'der KYNSTler'},
+          {de:'das Werk',ru:'произведение',tr:'eser',en:'work of art',ph:'das verk'},
+          {de:'die Ausstellung',ru:'выставка',tr:'sergi',en:'exhibition',ph:'di AUSshtelung'},
+          {de:'kreativ',ru:'творческий',tr:'yaratıcı',en:'creative',ph:'kreaTIIV'},
+          {de:'abstrakt',ru:'абстрактный',tr:'soyut',en:'abstract',ph:'APstrakt'},
+          {de:'die Inspiration',ru:'вдохновение',tr:'ilham',en:'inspiration',ph:'di inspiraTSION'},
+          {de:'entwerfen',ru:'проектировать',tr:'tasarlamak',en:'to design',ph:'entVERFen'},
+          {de:'das Museum',ru:'музей',tr:'müze',en:'museum',ph:'das muZEUM'},
+          {de:'die Galerie',ru:'галерея',tr:'galeri',en:'gallery',ph:'di galeRII'},
+          {de:'meisterhaft',ru:'мастерски',tr:'ustaca',en:'masterly',ph:'MAYSTerhaft'},
+        ],
+        grammar:[
+          {title:'Relativsätze mit Präposition',text:'Relativsätze mit Präposition:\n\nder Künstler, von dem ich erzählt habe\ndas Werk, über das wir diskutiert haben',examples:['Das Gemälde, <b>über das</b> ich gelesen habe, ist berühmt.','Der Künstler, <b>von dem</b> sie schwärmt, lebt in Berlin.']},
+        ],
+        sentences:[
+          {de:'Kreativität lässt sich nicht erzwingen, aber fördern.',ru:'Творчество нельзя принудить, но можно развивать.',tr:'Yaratıcılık zorlanamaz ama geliştirilebilir.',en:'Creativity cannot be forced but it can be nurtured.'},
+          {de:'Die Ausstellung zeigt Werke aus fünf Jahrhunderten.',ru:'Выставка представляет произведения из пяти столетий.',tr:'Sergi beş yüzyıldan eserleri sergiliyor.',en:'The exhibition shows works from five centuries.'},
+          {de:'Kunst spiegelt die Gesellschaft wider, in der sie entsteht.',ru:'Искусство отражает общество, в котором оно создаётся.',tr:'Sanat oluştuğu toplumu yansıtır.',en:'Art reflects the society in which it is created.'},
+          {de:'Ohne Inspiration entsteht kein großes Kunstwerk.',ru:'Без вдохновения не создать великого произведения искусства.',tr:'İlham olmadan büyük sanat eseri yaratılamaz.',en:'Without inspiration no great work of art is created.'},
+        ]
+      }
     ]
   },
 
@@ -11942,6 +12093,57 @@ var NIVEAU_DATA = {
           {de:'Weitere Forschung ist nötig, um die Kausalität zu belegen.',ru:'Необходимы дополнительные исследования для подтверждения причинности.'},{de:'Das Experiment wurde unter kontrollierten Bedingungen durchgeführt.',ru:'Эксперимент был проведён в контролируемых условиях.'},
         ]
       },
+      { id:'c1-manipulation', icon:'🔍', title:'Sprachkritik & Manipulation',
+        vocab:[
+          {de:'der Euphemismus',ru:'эвфемизм',tr:'örtmece',en:'euphemism',ph:'der OYFemismus'},
+          {de:'die Propaganda',ru:'пропаганда',tr:'propaganda',en:'propaganda',ph:'di propaGANda'},
+          {de:'manipulieren',ru:'манипулировать',tr:'manipüle etmek',en:'to manipulate',ph:'manipuLEEren'},
+          {de:'der Populismus',ru:'популизм',tr:'popülizm',en:'populism',ph:'der populismus'},
+          {de:'die Desinformation',ru:'дезинформация',tr:'dezenformasyon',en:'disinformation',ph:'di desinformaTSION'},
+          {de:'framen',ru:'подавать информацию',tr:'çerçevelemek',en:'to frame',ph:'freymen'},
+          {de:'der Subtext',ru:'подтекст',tr:'alt metin',en:'subtext',ph:'der ZUPtext'},
+          {de:'implizieren',ru:'подразумевать',tr:'ima etmek',en:'to imply',ph:'impliTSEEren'},
+          {de:'entlarven',ru:'разоблачать',tr:'ifşa etmek',en:'to expose',ph:'entLARfen'},
+          {de:'suggerieren',ru:'внушать',tr:'telkin etmek',en:'to suggest',ph:'sugeriiren'},
+          {de:'die Rhetorik',ru:'риторика',tr:'retorik',en:'rhetoric',ph:'di REtorik'},
+          {de:'die Filterblase',ru:'информационный пузырь',tr:'filtre baloncuğu',en:'filter bubble',ph:'di FILterblaaze'},
+        ],
+        grammar:[
+          {title:'Konjunktiv I — indirekte Rede',text:'Konjunktiv I zeigt: Aussage stammt von jemand anderem.\n\nEr sagt, er sei unschuldig.\nSie behauptet, es gebe keine Beweise.',examples:['Der Politiker sagt, die Wirtschaft <b>wachse</b>.','Laut Bericht <b>sei</b> die Lage stabil.']},
+          {title:'Konzessivsätze',text:'Räumen eine Aussage ein ohne Hauptsatz aufzugeben:\n\nobwohl / wenngleich + Nebensatz\ntrotzdem / dennoch + Hauptsatz',examples:['<b>Obwohl</b> die Fakten bekannt sind, wird weitergelogen.','Die Wahrheit ist bekannt. <b>Dennoch</b> wird sie verdreht.']},
+        ],
+        sentences:[
+          {de:'Euphemismen verschleiern die Wirklichkeit und vernebeln das Denken.',ru:'Эвфемизмы скрывают реальность и затуманивают мышление.',tr:'Örtmeceler gerçekliği gizler ve düşünceyi bulanıklaştırır.',en:'Euphemisms obscure reality and cloud thinking.'},
+          {de:'Populismus vereinfacht komplexe Sachverhalte auf gefährliche Weise.',ru:'Популизм опасно упрощает сложные явления.',tr:'Popülizm karmaşık konuları tehlikeli biçimde basitleştirir.',en:'Populism simplifies complex issues in a dangerous way.'},
+          {de:'Wer Sprache kontrolliert, kontrolliert auch das Denken.',ru:'Тот, кто контролирует язык, контролирует и мышление.',tr:'Dili kontrol eden düşünceyi de kontrol eder.',en:'Whoever controls language also controls thought.'},
+          {de:'Desinformation ist eine der größten Bedrohungen für Demokratien.',ru:'Дезинформация — одна из крупнейших угроз для демократий.',tr:'Dezenformasyon demokrasiler için en büyük tehditlerden biridir.',en:'Disinformation is one of the greatest threats to democracies.'},
+        ]
+      },
+      { id:'c1-mehrsprachig', icon:'🌐', title:'Mehrsprachigkeit & Spracherwerb',
+        vocab:[
+          {de:'die Muttersprache',ru:'родной язык',tr:'anadil',en:'mother tongue',ph:'di MUTERshprache'},
+          {de:'zweisprachig',ru:'двуязычный',tr:'iki dilli',en:'bilingual',ph:'TSVAYshprakhig'},
+          {de:'der Spracherwerb',ru:'усвоение языка',tr:'dil edinimi',en:'language acquisition',ph:'der SHPRACHerverp'},
+          {de:'der Akzent',ru:'акцент',tr:'aksan',en:'accent',ph:'der akTSENT'},
+          {de:'die Immersion',ru:'погружение в язык',tr:'dil daldırması',en:'immersion',ph:'di iMERzion'},
+          {de:'flüssig sprechen',ru:'говорить бегло',tr:'akıcı konuşmak',en:'to speak fluently',ph:'FLYsig shprekhn'},
+          {de:'der Sprachschatz',ru:'словарный запас',tr:'kelime hazinesi',en:'vocabulary',ph:'der SHPRACHshats'},
+          {de:'das Sprachgefühl',ru:'языковое чутьё',tr:'dil duygusu',en:'feel for language',ph:'das SHPRACHgefyel'},
+          {de:'die Sprachbarriere',ru:'языковой барьер',tr:'dil engeli',en:'language barrier',ph:'di SHPRACHbariire'},
+          {de:'interferieren',ru:'интерферировать',tr:'birbirine karışmak',en:'to interfere',ph:'interferiiren'},
+          {de:'übergeneralisieren',ru:'сверхгенерализировать',tr:'aşırı genelleştirmek',en:'to overgeneralise',ph:'ybergeneralizeeren'},
+          {de:'die Interferenz',ru:'интерференция',tr:'interferans',en:'interference',ph:'di interfeRETS'},
+        ],
+        grammar:[
+          {title:'Genitivattribut in Fachtexten',text:'Wissenschaftliches Deutsch:\n\ndie Theorie des Spracherwerbs\ndie Förderung der Mehrsprachigkeit\ndas Konzept der Immersion',examples:['Die <b>Theorie des Spracherwerbs</b> ist komplex.','<b>Die Förderung der Mehrsprachigkeit</b> ist wichtig.']},
+        ],
+        sentences:[
+          {de:'Mehrsprachige Kinder entwickeln oft höhere kognitive Flexibilität.',ru:'Многоязычные дети часто развивают более высокую когнитивную гибкость.',tr:'Çok dilli çocuklar daha yüksek bilişsel esneklik geliştirir.',en:'Multilingual children often develop greater cognitive flexibility.'},
+          {de:'Der Erwerb einer Fremdsprache im Erwachsenenalter erfordert Konsequenz.',ru:'Изучение иностранного языка во взрослом возрасте требует последовательности.',tr:'Yetişkinlikte yabancı dil öğrenmek tutarlılık gerektirir.',en:'Acquiring a foreign language in adulthood requires consistency.'},
+          {de:'Immersion gilt als eine der effektivsten Methoden des Sprachlernens.',ru:'Погружение считается одним из наиболее эффективных методов.',tr:'Daldırma en etkili yöntemlerden biri kabul edilir.',en:'Immersion is considered one of the most effective methods of language learning.'},
+          {de:'Sprachliche Interferenz ist ein häufiges Phänomen bei Mehrsprachigen.',ru:'Языковая интерференция — частое явление среди многоязычных.',tr:'Dil interferansı çok dilliler arasında sık görülen bir olgudur.',en:'Linguistic interference is a common phenomenon among multilinguals.'},
+        ]
+      }
     ]
   },
 
@@ -11990,6 +12192,32 @@ var NIVEAU_DATA = {
           {de:'Wenngleich ich seine Meinung nicht teile, respektiere ich sie.',ru:'Хотя я не разделяю его мнения, я его уважаю.'},{de:'Ungeachtet der Kritik blieb sie bei ihrer Entscheidung.',ru:'Невзирая на критику, она осталась при своём решении.'},
         ]
       },
+      { id:'c2-philosophie', icon:'🔮', title:'Philosophie & Ethik',
+        vocab:[
+          {de:'die Erkenntnistheorie',ru:'эпистемология',tr:'epistemoloji',en:'epistemology',ph:'di erKENTNISteorie'},
+          {de:'das Sein',ru:'бытие',tr:'varlık',en:'being',ph:'das zayn'},
+          {de:'die Moral',ru:'мораль',tr:'ahlak',en:'morality',ph:'di moRAL'},
+          {de:'das Dilemma',ru:'дилемма',tr:'ikilem',en:'dilemma',ph:'das diLEma'},
+          {de:'hinterfragen',ru:'ставить под сомнение',tr:'sorgulamak',en:'to question',ph:'HINTERfraagen'},
+          {de:'transzendent',ru:'трансцендентный',tr:'aşkın',en:'transcendent',ph:'transzenDENT'},
+          {de:'das Paradox',ru:'парадокс',tr:'paradoks',en:'paradox',ph:'das paraDOKS'},
+          {de:'die Tugend',ru:'добродетель',tr:'erdem',en:'virtue',ph:'di TUUgent'},
+          {de:'dekonstruieren',ru:'деконструировать',tr:'yapısöküme uğratmak',en:'to deconstruct',ph:'dekonstruiiren'},
+          {de:'der Imperativ',ru:'императив',tr:'buyruk',en:'imperative',ph:'der imperaTIIF'},
+          {de:'die Ontologie',ru:'онтология',tr:'ontoloji',en:'ontology',ph:'di ontoloGII'},
+          {de:'das Weltbild',ru:'мировоззрение',tr:'dünya görüşü',en:'worldview',ph:'das VELTbilt'},
+        ],
+        grammar:[
+          {title:'Partizipialkonstruktionen (C2)',text:'Ersetzen Nebensätze elegant:\n\nPartizip I (gleichzeitig): die Wahrheit suchend\nPartizip II (vorzeitig): von Zweifeln getrieben',examples:['<b>Den Widerspruch erkennend</b>, schwieg er.','<b>Von Skepsis geleitet</b>, fragte Sokrates weiter.']},
+          {title:'Irrealis der Vergangenheit',text:'Für hypothetische Vergangenheiten:\n\nHätte er gewusst, hätte er anders gehandelt.\n\nRussisch: Если бы он знал раньше...',examples:['<b>Hätte</b> Platon anders gedacht, <b>wäre</b> die Philosophie anders.','<b>Wenn</b> es den freien Willen <b>gäbe</b>, <b>würde</b> alles anders.']},
+        ],
+        sentences:[
+          {de:'Die Frage nach dem Sinn des Lebens begleitet die Menschheit seit Jahrtausenden.',ru:'Вопрос о смысле жизни сопровождает человечество тысячелетиями.',tr:'Hayatın anlamına dair soru insanlığa binlerce yıldır eşlik etmektedir.',en:'The question of the meaning of life has accompanied humanity for millennia.'},
+          {de:'Kants kategorischer Imperativ fordert universell gültiges Handeln.',ru:'Категорический императив Канта требует универсально действительного поведения.',tr:'Kategorik buyruk evrensel geçerlilikte eylem gerektirir.',en:'The categorical imperative demands universally valid action.'},
+          {de:'Das Paradox der Toleranz: Unbegrenzte Toleranz hebt sich selbst auf.',ru:'Парадокс толерантности: безграничная терпимость упраздняет себя.',tr:'Hoşgörü paradoksu: sınırsız hoşgörü kendini ortadan kaldırır.',en:'The paradox of tolerance: unlimited tolerance abolishes itself.'},
+          {de:'Ohne Hinterfragung bleibt Erkenntnis stets begrenzt.',ru:'Без сомнения в предпосылках познание остаётся ограниченным.',tr:'Sorgulamadan bilgi her zaman sınırlı kalır.',en:'Without questioning assumptions knowledge remains forever limited.'},
+        ]
+      }
     ]
   },
 };
@@ -12449,6 +12677,56 @@ var NIVEAU_DATA_EN = {
         {f:'I need a doctor\'s appointment.',t:'Ich brauche einen Arzttermin.'},{f:'Take this medicine.',t:'Nehmen Sie dieses Medikament.'},
       ]
     },
+      { id:'en-a2-weather', icon:'🌤️', title:'Weather & Seasons',
+        vocab:[
+          {de:'das Wetter',en:'weather',ph:'WEder'},
+          {de:'sonnig',en:'sunny',ph:'SAni'},
+          {de:'bewölkt',en:'cloudy',ph:'KLAUdi'},
+          {de:'regnerisch',en:'rainy',ph:'REYni'},
+          {de:'windig',en:'windy',ph:'WINdi'},
+          {de:'der Schnee',en:'snow',ph:'snou'},
+          {de:'die Temperatur',en:'temperature',ph:'TEMpracher'},
+          {de:'der Frühling',en:'spring',ph:'spring'},
+          {de:'der Sommer',en:'summer',ph:'SAmer'},
+          {de:'der Herbst',en:'autumn',ph:'Awtm'},
+          {de:'der Winter',en:'winter',ph:'WINter'},
+          {de:'frieren',en:'to freeze',ph:'tu friiz'},
+        ],
+        grammar:[
+          {title:'Present Continuous for weather',text:'Current weather: Present Continuous\nIt is raining. / It is snowing.\n\nGeneral facts: Present Simple\nIt rains a lot in autumn.',examples:['It <b>is raining</b> right now.','The sun <b>is shining</b> today.','It <b>snows</b> every January.']},
+        ],
+        sentences:[
+          {de:'Wie ist das Wetter heute?',en:'What is the weather like today?'},
+          {de:'Es regnet sehr stark.',en:'It is raining very heavily.'},
+          {de:'Im Sommer ist es oft heiß.',en:'In summer it is often hot.'},
+          {de:'Ich mag den Herbst wegen der bunten Blätter.',en:'I like autumn because of the colourful leaves.'},
+        ]
+      },
+      { id:'en-a2-hobbies', icon:'🎨', title:'Hobbies & Free Time',
+        vocab:[
+          {de:'das Hobby',en:'hobby',ph:'HObi'},
+          {de:'lesen',en:'to read',ph:'tu riid'},
+          {de:'zeichnen',en:'to draw',ph:'tu dro'},
+          {de:'reisen',en:'to travel',ph:'tu TREvl'},
+          {de:'kochen',en:'to cook',ph:'tu kuk'},
+          {de:'Musik hören',en:'to listen to music',ph:'tu LISn tu MYUzik'},
+          {de:'Sport treiben',en:'to do sport',ph:'tu du sport'},
+          {de:'wandern',en:'to hike',ph:'tu hayk'},
+          {de:'backen',en:'to bake',ph:'tu beyk'},
+          {de:'sammeln',en:'to collect',ph:'tu koLEKT'},
+          {de:'fotografieren',en:'to take photos',ph:'tu teyk FOUtos'},
+          {de:'gärtnern',en:'to garden',ph:'tu GAArdn'},
+        ],
+        grammar:[
+          {title:'like / love / enjoy + -ing',text:'After these verbs use the -ing form:\n\nI like swimming.\nShe loves painting.\nThey enjoy hiking.',examples:['I <b>enjoy reading</b> in the evenings.','He <b>loves playing</b> the guitar.','We <b>hate waiting</b> in queues.']},
+        ],
+        sentences:[
+          {de:'Was machst du gern in deiner Freizeit?',en:'What do you like doing in your free time?'},
+          {de:'Ich lese gern Bücher.',en:'I like reading books.'},
+          {de:'Am Wochenende gehe ich oft wandern.',en:'At the weekend I often go hiking.'},
+          {de:'Hast du ein besonderes Hobby?',en:'Do you have a special hobby?'},
+        ]
+      }
   ]},
   b1: { label:'B1', topics: [
     { id:'en-b1-travel', icon:'✈️', title:'Travel',
@@ -12508,6 +12786,81 @@ var NIVEAU_DATA_EN = {
         {f:'Renewable energy is the future.',t:'Erneuerbare Energie ist die Zukunft.'},{f:'We can all contribute to protecting the environment.',t:'Wir alle können zum Umweltschutz beitragen.'},
       ]
     },
+      { id:'en-b1-work', icon:'💼', title:'Work & Career',
+        vocab:[
+          {de:'der Lebenslauf',en:'CV',ph:'sii vii'},
+          {de:'das Vorstellungsgespräch',en:'job interview',ph:'dschob INtervju'},
+          {de:'die Bewerbung',en:'application',ph:'epliKEYschn'},
+          {de:'das Gehalt',en:'salary',ph:'SELeri'},
+          {de:'befördern',en:'to promote',ph:'tu preMOUT'},
+          {de:'kündigen',en:'to resign',ph:'tu riZAYN'},
+          {de:'die Überstunden',en:'overtime',ph:'OUvertaym'},
+          {de:'das Homeoffice',en:'remote work',ph:'riMOUT werk'},
+          {de:'sich bewerben',en:'to apply for',ph:'tu ePLAY for'},
+          {de:'die Fachkompetenz',en:'expertise',ph:'EKSpertiz'},
+          {de:'der Arbeitgeber',en:'employer',ph:'emPLOYer'},
+          {de:'entlassen',en:'to dismiss',ph:'tu disMIS'},
+        ],
+        grammar:[
+          {title:'Present Perfect for experience',text:'Use Present Perfect for life experience:\n\nI have worked in three countries.\nShe has never missed a deadline.\n\nWith specific time: Past Simple\nI worked there in 2018.',examples:['I <b>have applied</b> for many jobs.','He <b>has just been promoted</b>.']},
+        ],
+        sentences:[
+          {de:'Ich bewerbe mich um eine Stelle als Projektmanager.',en:'I am applying for a position as project manager.'},
+          {de:'Das Gehalt wird monatlich überwiesen.',en:'The salary is transferred monthly.'},
+          {de:'Viele Menschen arbeiten heute im Homeoffice.',en:'Many people now work remotely.'},
+          {de:'Hast du schon mal Überstunden gemacht?',en:'Have you ever worked overtime?'},
+        ]
+      },
+      { id:'en-b1-health', icon:'🏥', title:'Health & Lifestyle',
+        vocab:[
+          {de:'gesund',en:'healthy',ph:'HELthy'},
+          {de:'krank',en:'ill',ph:'il'},
+          {de:'die Symptome',en:'symptoms',ph:'SIMptmz'},
+          {de:'der Arzt',en:'doctor',ph:'DOKter'},
+          {de:'das Rezept',en:'prescription',ph:'priSKRIPschn'},
+          {de:'Sport treiben',en:'to exercise',ph:'tu EKsesayz'},
+          {de:'sich erholen',en:'to recover',ph:'tu riKOver'},
+          {de:'ausgewogen',en:'balanced',ph:'BELanst'},
+          {de:'der Schlaf',en:'sleep',ph:'sliip'},
+          {de:'erschöpft',en:'exhausted',ph:'igZOSted'},
+          {de:'die Ernährung',en:'nutrition',ph:'nyuTRISchn'},
+          {de:'die Apotheke',en:'pharmacy',ph:'FAAmesi'},
+        ],
+        grammar:[
+          {title:'should / ought to for advice',text:'For health advice:\n\nYou should drink more water.\nYou ought to see a doctor.\n\nNegative:\nYou should not eat so much sugar.',examples:['You <b>should</b> get more sleep.','You <b>should not</b> skip breakfast.']},
+        ],
+        sentences:[
+          {de:'Ein ausgewogener Lebensstil verbessert das Wohlbefinden.',en:'A balanced lifestyle improves wellbeing.'},
+          {de:'Du solltest mindestens sieben Stunden schlafen.',en:'You should sleep at least seven hours.'},
+          {de:'Ich bin total erschöpft.',en:'I am completely exhausted.'},
+          {de:'Haben Sie eine Krankenversicherung?',en:'Do you have health insurance?'},
+        ]
+      },
+      { id:'en-b1-environ', icon:'🌿', title:'Environment & Climate',
+        vocab:[
+          {de:'der Klimawandel',en:'climate change',ph:'KLAYmet tscheyndsch'},
+          {de:'erneuerbare Energie',en:'renewable energy',ph:'riNYUebl ENerdchi'},
+          {de:'recyceln',en:'to recycle',ph:'tu riSAYkl'},
+          {de:'nachhaltig',en:'sustainable',ph:'sesTEYnebl'},
+          {de:'die Dürre',en:'drought',ph:'draut'},
+          {de:'die Überschwemmung',en:'flood',ph:'flad'},
+          {de:'gefährdet',en:'endangered',ph:'enDEYndsched'},
+          {de:'verringern',en:'to reduce',ph:'tu riDYUUS'},
+          {de:'die Verschmutzung',en:'pollution',ph:'peLYUSchn'},
+          {de:'bewusst',en:'conscious',ph:'KONsches'},
+          {de:'die Emission',en:'emission',ph:'iMISchn'},
+          {de:'der Fußabdruck',en:'footprint',ph:'FUTprint'},
+        ],
+        grammar:[
+          {title:'First Conditional',text:'For real future situations:\n\nIf + Present Simple → will + infinitive\n\nIf we do not act, the planet will warm.',examples:['If we <b>recycle</b> more, we <b>will</b> reduce waste.','If temperatures <b>rise</b>, sea levels <b>will</b> increase.']},
+        ],
+        sentences:[
+          {de:'Der Klimawandel ist eine der größten Herausforderungen unserer Zeit.',en:'Climate change is one of the greatest challenges of our time.'},
+          {de:'Wir müssen unseren CO₂-Ausstoß reduzieren.',en:'We need to reduce our carbon footprint.'},
+          {de:'Erneuerbare Energien sind die Zukunft.',en:'Renewable energies are the future.'},
+          {de:'Wenn wir nicht handeln, werden die Konsequenzen schwerwiegend sein.',en:'If we do not act the consequences will be severe.'},
+        ]
+      }
   ]},
   b2: { label:'B2', topics: [
     { id:'en-b2-career', icon:'📊', title:'Career & Work',
@@ -12529,6 +12882,81 @@ var NIVEAU_DATA_EN = {
         {f:'I am applying for a project manager position.',t:'Ich bewerbe mich um eine Stelle als Projektmanager.'},{f:'Good work-life balance improves productivity.',t:'Gute Work-Life-Balance verbessert die Produktivität.'},
       ]
     },
+      { id:'en-b2-society', icon:'🏛️', title:'Society & Culture',
+        vocab:[
+          {de:'die Gesellschaft',en:'society',ph:'seSOYety'},
+          {de:'die Gleichstellung',en:'equality',ph:'iKWOLety'},
+          {de:'die Vielfalt',en:'diversity',ph:'daYVERsety'},
+          {de:'die Integration',en:'integration',ph:'integREYschn'},
+          {de:'diskriminieren',en:'to discriminate',ph:'tu diSKRImineyt'},
+          {de:'marginalisiert',en:'marginalised',ph:'MAAdschinalayzd'},
+          {de:'die Inklusion',en:'inclusion',ph:'inKLUUschn'},
+          {de:'die Menschenwürde',en:'human dignity',ph:'HYUmen DIGniti'},
+          {de:'der Wandel',en:'social change',ph:'soushl tscheyndsch'},
+          {de:'die Norm',en:'norm',ph:'noorm'},
+          {de:'vorurteilsfrei',en:'unbiased',ph:'unBAYest'},
+          {de:'das Bewusstsein',en:'awareness',ph:'eWEAnes'},
+        ],
+        grammar:[
+          {title:'Passive voice — social issues',text:'Passive is common in formal texts:\n\nPeople are discriminated against for many reasons.\nMinorities have been marginalised for centuries.',examples:['Equal rights <b>are guaranteed</b> by law.','Many groups <b>have been excluded</b>.']},
+        ],
+        sentences:[
+          {de:'Vielfalt bereichert Gesellschaften.',en:'Diversity enriches societies.'},
+          {de:'Jeder Mensch hat das Recht auf Würde.',en:'Every person has the right to dignity.'},
+          {de:'Integration erfordert Anstrengungen auf beiden Seiten.',en:'Integration requires effort on both sides.'},
+          {de:'Vorurteile entstehen oft durch mangelnde Begegnungen.',en:'Prejudices often arise from a lack of encounter.'},
+        ]
+      },
+      { id:'en-b2-media', icon:'📱', title:'Media & Technology',
+        vocab:[
+          {de:'soziale Medien',en:'social media',ph:'SOUshl MIIdia'},
+          {de:'die KI',en:'artificial intelligence',ph:'aatefISHL inTELidschns'},
+          {de:'die Desinformation',en:'misinformation',ph:'misinfoMEYschn'},
+          {de:'die Privatsphäre',en:'privacy',ph:'PRIVesi'},
+          {de:'viral gehen',en:'to go viral',ph:'tu gou VAYrel'},
+          {de:'der Algorithmus',en:'algorithm',ph:'ELgeridhm'},
+          {de:'die Filterblase',en:'echo chamber',ph:'EKou tscheymber'},
+          {de:'überwachen',en:'to monitor',ph:'tu MONiter'},
+          {de:'verschlüsseln',en:'to encrypt',ph:'tu enKRIPT'},
+          {de:'anonym',en:'anonymous',ph:'eNONimes'},
+          {de:'digitaler Fußabdruck',en:'digital footprint',ph:'DITschitl FUTprint'},
+          {de:'der Trend',en:'trend',ph:'trend'},
+        ],
+        grammar:[
+          {title:'Reported speech',text:'When reporting what someone said:\n\nShe said (that) she would post the video.\nHe claimed the data had been stolen.\n\nTense shift: is→was / will→would / have→had',examples:['The journalist <b>reported that</b> the story <b>was</b> true.','Experts <b>warned that</b> AI <b>could</b> spread misinformation.']},
+        ],
+        sentences:[
+          {de:'Soziale Medien haben die Kommunikation grundlegend verändert.',en:'Social media have fundamentally changed the way we communicate.'},
+          {de:'Algorithmen bestimmen, welche Inhalte wir sehen.',en:'Algorithms determine what content we see.'},
+          {de:'Desinformation verbreitet sich sehr schnell.',en:'Misinformation spreads very quickly.'},
+          {de:'Privatsphäre im digitalen Zeitalter zu schützen ist schwierig.',en:'Protecting privacy in the digital age is a challenge.'},
+        ]
+      },
+      { id:'en-b2-psychology', icon:'🧠', title:'Psychology & Behaviour',
+        vocab:[
+          {de:'das Verhalten',en:'behaviour',ph:'biHEYvje'},
+          {de:'die Kognition',en:'cognition',ph:'kogNISchn'},
+          {de:'das Unterbewusstsein',en:'subconscious',ph:'sabKONsches'},
+          {de:'das Selbstwertgefühl',en:'self-esteem',ph:'self eSTIIM'},
+          {de:'die Bewältigungsstrategie',en:'coping strategy',ph:'KOUping STRETedchi'},
+          {de:'unbewusst',en:'unconscious',ph:'anKONsches'},
+          {de:'resilient',en:'resilient',ph:'riZILjent'},
+          {de:'emotionale Intelligenz',en:'emotional intelligence',ph:'iMOUshnel inTELidschns'},
+          {de:'das Wohlbefinden',en:'wellbeing',ph:'WELbiing'},
+          {de:'die Konditionierung',en:'conditioning',ph:'konDISchening'},
+          {de:'das Trauma',en:'trauma',ph:'TROOme'},
+          {de:'der Reiz',en:'stimulus',ph:'STIMjules'},
+        ],
+        grammar:[
+          {title:'Second Conditional — hypothetical',text:'For unlikely or hypothetical situations:\n\nIf + Past Simple → would + infinitive\n\nIf stress were eliminated, people would be healthier.',examples:['If people <b>were</b> more resilient, they <b>would</b> recover faster.','If I <b>knew</b> the answer, I <b>would</b> tell you.']},
+        ],
+        sentences:[
+          {de:'Emotionale Intelligenz ist genauso wichtig wie IQ.',en:'Emotional intelligence is just as important as IQ.'},
+          {de:'Resilienz kann durch Übung gestärkt werden.',en:'Resilience can be strengthened through practice.'},
+          {de:'Unbewusste Vorurteile beeinflussen unser Verhalten täglich.',en:'Unconscious biases influence our behaviour every day.'},
+          {de:'Ein gesundes Selbstwertgefühl ist die Grundlage für Wohlbefinden.',en:'Healthy self-esteem is the foundation for wellbeing.'},
+        ]
+      }
   ]},
   c1: { label:'C1', topics: [
     { id:'en-c1-rhetoric', icon:'🎤', title:'Rhetoric & Argumentation',
@@ -12551,6 +12979,56 @@ var NIVEAU_DATA_EN = {
         {f:'Not only is the claim wrong, but it is misleading.',t:'Die Aussage ist nicht nur falsch, sondern auch irreführend.'},{f:'What I find most compelling is the nuanced approach.',t:'Was ich am überzeugendsten finde, ist der nuancierte Ansatz.'},
       ]
     },
+      { id:'en-c1-academic', icon:'🎓', title:'Academic Writing & Discourse',
+        vocab:[
+          {de:'die These',en:'thesis',ph:'THIIses'},
+          {de:'das Argument',en:'argument',ph:'AAgjument'},
+          {de:'belegen',en:'to substantiate',ph:'tu SABstentieyt'},
+          {de:'widerlegen',en:'to refute',ph:'tu riFYUUT'},
+          {de:'zitieren',en:'to cite',ph:'tu sayt'},
+          {de:'die Schlussfolgerung',en:'conclusion',ph:'konKLUUschn'},
+          {de:'implizieren',en:'to imply',ph:'tu imPLAY'},
+          {de:'empirisch',en:'empirical',ph:'emPIRikel'},
+          {de:'die Hypothese',en:'hypothesis',ph:'haYPOtheses'},
+          {de:'die Methodik',en:'methodology',ph:'metheDOLedchi'},
+          {de:'der Konsens',en:'consensus',ph:'konSENses'},
+          {de:'peer-reviewed',en:'peer-reviewed',ph:'pier riVYUUD'},
+        ],
+        grammar:[
+          {title:'Hedging language',text:'Academic writing avoids overstatement:\n\nIt appears / seems that...\nThe data suggests / indicates...\nThis may / might / could imply...',examples:['The results <b>suggest</b> a correlation.','It <b>appears</b> that further research is needed.']},
+        ],
+        sentences:[
+          {de:'Die Hypothese muss durch empirische Daten gestützt werden.',en:'The hypothesis must be supported by empirical data.'},
+          {de:'Es scheint, dass ein Zusammenhang besteht.',en:'It appears that there is a connection.'},
+          {de:'Die Schlussfolgerungen lassen sich nicht verallgemeinern.',en:'The conclusions cannot be generalised.'},
+          {de:'Peer-reviewed Studien gelten als verlässlichste Quellen.',en:'Peer-reviewed studies are the most reliable sources.'},
+        ]
+      },
+      { id:'en-c1-ethics', icon:'⚖️', title:'Ethics & Moral Philosophy',
+        vocab:[
+          {de:'die Ethik',en:'ethics',ph:'ETHiks'},
+          {de:'die Moral',en:'morality',ph:'moRALety'},
+          {de:'das Dilemma',en:'dilemma',ph:'diLEMe'},
+          {de:'die Gerechtigkeit',en:'justice',ph:'DSchASTes'},
+          {de:'der Utilitarismus',en:'utilitarianism',ph:'jutiLITerijenim'},
+          {de:'die Tugend',en:'virtue',ph:'VERtschu'},
+          {de:'das Gewissen',en:'conscience',ph:'KONshens'},
+          {de:'die Autonomie',en:'autonomy',ph:'oTONemi'},
+          {de:'abwägen',en:'to weigh up',ph:'tu wey ap'},
+          {de:'der Schaden',en:'harm',ph:'haam'},
+          {de:'die Pflicht',en:'duty',ph:'DYUUti'},
+          {de:'verpflichtet',en:'obligated',ph:'OBligeytid'},
+        ],
+        grammar:[
+          {title:'Complex nominalisations (C1)',text:'Formal English uses noun phrases:\n\nThe failure to act = failing to act\nHer insistence on transparency\nThe difficulty of determining right from wrong',examples:['<b>The failure to disclose</b> was unethical.','<b>Her commitment to justice</b> was admirable.']},
+        ],
+        sentences:[
+          {de:'Das ethische Dilemma lässt sich nicht einfach lösen.',en:'The ethical dilemma cannot be resolved with a simple answer.'},
+          {de:'Gerechtigkeit bedeutet nicht immer Gleichheit.',en:'Justice does not always mean equality.'},
+          {de:'Das Gewissen ist kein verlässlicher moralischer Kompass.',en:'Conscience is not a reliable moral compass.'},
+          {de:'Utilitarismus misst Handlungen an ihren Konsequenzen.',en:'Utilitarianism measures actions by their consequences for the common good.'},
+        ]
+      }
   ]},
   c2: { label:'C2', topics: [
     { id:'en-c2-idioms', icon:'💡', title:'Idioms & Expressions',
@@ -12577,6 +13055,56 @@ var NIVEAU_DATA_EN = {
         {f:'If I were you, I would reconsider that decision.',t:'An deiner Stelle würde ich diese Entscheidung überdenken.'},{f:'I recommend that this matter be reviewed immediately.',t:'Ich empfehle, dass diese Angelegenheit sofort überprüft wird.'},
       ]
     },
+      { id:'en-c2-literary', icon:'📖', title:'Literary Style & Rhetoric',
+        vocab:[
+          {de:'die Metapher',en:'metaphor',ph:'MEtefoe'},
+          {de:'die Ironie',en:'irony',ph:'AYreni'},
+          {de:'die Alliteration',en:'alliteration',ph:'eLITeREYschn'},
+          {de:'das Symbol',en:'symbol',ph:'SIMbl'},
+          {de:'der Subtext',en:'subtext',ph:'SABtekst'},
+          {de:'prägnant',en:'concise',ph:'KONsays'},
+          {de:'nuanciert',en:'nuanced',ph:'NYUUanst'},
+          {de:'rhetorisch',en:'rhetorical',ph:'riTORikel'},
+          {de:'implizit',en:'implicit',ph:'imPLISet'},
+          {de:'mehrdeutig',en:'ambiguous',ph:'emBIGjues'},
+          {de:'das Stilmittel',en:'stylistic device',ph:'staYLIStik diVAYS'},
+          {de:'die Ambiguität',en:'ambiguity',ph:'embiGYUUety'},
+        ],
+        grammar:[
+          {title:'Inversion for emphasis (C2)',text:'Inversion adds rhetorical force:\n\nNever have I seen such courage.\nRarely does a writer achieve this.\nNot only did he write well, but he also spoke eloquently.',examples:['<b>Seldom has</b> language been used so powerfully.','<b>Not until</b> the final page <b>does</b> truth emerge.']},
+        ],
+        sentences:[
+          {de:'Ironie erlaubt Kritik ohne direkte Konfrontation.',en:'Irony allows the author to criticise without directly confronting.'},
+          {de:'Die dichteste Prosa enthält mehr als sie zu sagen scheint.',en:'The densest prose contains more than it appears to say.'},
+          {de:'Selten wurde Sprache mit solcher Präzision eingesetzt.',en:'Seldom has language been used with such precision.'},
+          {de:'Ein Stilmittel wirkt nur im richtigen Kontext.',en:'A stylistic device only works in the right context.'},
+        ]
+      },
+      { id:'en-c2-philosophy', icon:'🔮', title:'Philosophy of Language',
+        vocab:[
+          {de:'die Semiotik',en:'semiotics',ph:'simiOTiks'},
+          {de:'die Bedeutung',en:'meaning',ph:'MIIning'},
+          {de:'der Kontext',en:'context',ph:'KONtekst'},
+          {de:'die Pragmatik',en:'pragmatics',ph:'pregMETiks'},
+          {de:'der Sprechakt',en:'speech act',ph:'spiitch ekt'},
+          {de:'präsupponieren',en:'to presuppose',ph:'tu priisePOUZ'},
+          {de:'dekonstruieren',en:'to deconstruct',ph:'tu diikonstrukt'},
+          {de:'das Zeichen',en:'sign',ph:'sayn'},
+          {de:'intertextuell',en:'intertextual',ph:'inteKSTshjuel'},
+          {de:'der Signifikant',en:'signifier',ph:'SIGnifayer'},
+          {de:'das Signifikat',en:'signified',ph:'SIGnifayd'},
+          {de:'die Deixis',en:'deixis',ph:'DAYKsis'},
+        ],
+        grammar:[
+          {title:'Cleft sentences for focus (C2)',text:'Cleft sentences emphasise particular information:\n\nIt is language that makes us human.\nWhat Wittgenstein argued was that meaning is use.\nIt was Saussure who introduced the idea.',examples:['<b>It is the context that</b> determines meaning.','<b>What matters is</b> not what is said but how.']},
+        ],
+        sentences:[
+          {de:'Sprache prägt das Denken, nicht nur die Kommunikation.',en:'Language shapes thought, not merely communication.'},
+          {de:'Was ein Wort bedeutet, hängt vom Kontext ab.',en:'What a word means depends on the context in which it is used.'},
+          {de:'Jeder Sprechakt vollzieht zugleich eine Handlung.',en:'Every speech act simultaneously performs an action.'},
+          {de:'Saussure trennte Signifikant und Signifikat.',en:'Saussure separated the signifier from the signified and transformed linguistics.'},
+        ]
+      }
   ]},
 };
 
@@ -13313,8 +13841,8 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 86;
-var BUILD_VERSION = '8.6'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
+var BUILD = 87;
+var BUILD_VERSION = '8.7'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
 (function() {
