@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#0a0a0f">
 <meta name="description" id="meta-description" content="LINGUA v5.1 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v8.7 · by René Prause</title>
+<title>LINGUA v8.8 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -670,7 +670,7 @@ if (window.caches) { caches.keys().then(function(ns){ns.forEach(function(n){cach
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v8.7</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v8.8</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill" data-lang="sq">🇦🇱 SQ</button>
@@ -716,6 +716,7 @@ if (window.caches) { caches.keys().then(function(ns){ns.forEach(function(n){cach
     <button class="nav-btn" data-section="ai"><span class="nav-icon">✦</span> KI-Assistent</button>
     <button class="nav-btn" data-section="gapfill"><span class="nav-icon">🧩</span> Lückentexte</button>
     <button class="nav-btn" data-section="dialogs"><span class="nav-icon">💬</span> Dialoge</button>
+    <button class="nav-btn" data-section="wordorder"><span class="nav-icon">🔀</span> Satzbau</button>
   </nav>
 
   <main>
@@ -1309,6 +1310,35 @@ if (window.caches) { caches.keys().then(function(ns){ns.forEach(function(n){cach
     </div>
   </div>
 
+
+  <!-- ════════════ SATZBAU-TRAINER ════════════ -->
+  <div class="section" id="wordorder">
+    <div class="section-header"><span style="font-size:1.1rem;">🔀</span><span class="section-title">Satzbau-Trainer</span></div>
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem;">Bringe die Wörter in die richtige Reihenfolge.</p>
+    <div style="display:flex;gap:.4rem;margin-bottom:.5rem;">
+      <button class="btn primary" id="wo-lang-de" onclick="setWOLang('de')" style="flex:1;font-size:.78rem;">🌍 Deutsch</button>
+      <button class="btn" id="wo-lang-en" onclick="setWOLang('en')" style="flex:1;font-size:.78rem;">🌐 Englisch</button>
+    </div>
+    <div style="display:flex;gap:.4rem;margin-bottom:.75rem;">
+      <button class="btn primary" id="wo-diff-easy" onclick="setWODiff('easy')" style="flex:1;font-size:.78rem;">🌱 Leicht</button>
+      <button class="btn" id="wo-diff-medium" onclick="setWODiff('medium')" style="flex:1;font-size:.78rem;">📗 Mittel</button>
+      <button class="btn" id="wo-diff-hard" onclick="setWODiff('hard')" style="flex:1;font-size:.78rem;">🔥 Schwer</button>
+    </div>
+    <div class="card" id="wo-card">
+      <div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted);margin-bottom:.75rem;"><span id="wo-progress">Aufgabe 1 / 10</span><span id="wo-score">0 ✓</span></div>
+      <div id="wo-hint" style="font-size:.72rem;color:var(--muted);text-align:center;margin-bottom:.5rem;font-style:italic;"></div>
+      <div id="wo-slots" style="display:flex;flex-wrap:wrap;gap:.4rem;min-height:44px;padding:.5rem;background:var(--surface2);border-radius:10px;margin-bottom:.75rem;align-items:center;justify-content:center;border:2px dashed var(--border);"></div>
+      <div id="wo-words" style="display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:.75rem;"></div>
+      <div id="wo-feedback" style="font-size:.85rem;font-weight:600;text-align:center;min-height:1.4em;"></div>
+      <div style="display:flex;gap:.4rem;margin-top:.5rem;">
+        <button class="btn" onclick="woClear()" style="flex:1;font-size:.8rem;">↩ Reset</button>
+        <button class="btn primary" id="wo-check-btn" onclick="woCheck()" style="flex:2;">✓ Prüfen</button>
+      </div>
+      <button class="btn" id="wo-next-btn" onclick="woNext()" style="width:100%;margin-top:.5rem;display:none;">Weiter →</button>
+    </div>
+    <div style="margin-top:.75rem;background:var(--surface2);border-radius:4px;height:6px;overflow:hidden;"><div id="wo-bar" style="height:100%;background:var(--accent3);width:0%;transition:width .4s;border-radius:4px;"></div></div>
+  </div>
+
   </main>
 
 
@@ -1646,7 +1676,7 @@ if (window.caches) { caches.keys().then(function(ns){ns.forEach(function(n){cach
   </div>
 
   <footer>
-    LINGUA <span id="footer-version">v8.7</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA <span id="footer-version">v8.8</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
   </footer>
 </div>
@@ -1814,7 +1844,7 @@ if (window.caches) { caches.keys().then(function(ns){ns.forEach(function(n){cach
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA <span id="settings-version">v8.7</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA <span id="settings-version">v8.8</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Mai 2026</span>
     </div>
 
@@ -2035,6 +2065,24 @@ const VOCAB = {
       {f:"путешествие",t:"Reisen",p:"puteshestviye"},{f:"фотография",t:"Fotografie",p:"fotografiya"},
       {f:"йога",t:"Yoga",p:"yoga"},{f:"велопрогулка",t:"Radfahren",p:"veloprogulka"},
     ],
+    "Beruf & Arbeit": [
+      {f:"работа",t:"Arbeit",p:"rabota"},{f:"офис",t:"Büro",p:"ofis"},{f:"встреча",t:"Besprechung",p:"vstrecha"},{f:"зарплата",t:"Gehalt",p:"zarplata"},{f:"коллега",t:"Kollege",p:"kollega"},{f:"начальник",t:"Vorgesetzte/r",p:"nachalnik"},{f:"проект",t:"Projekt",p:"proyekt"},{f:"клиент",t:"Kunde",p:"klient"},{f:"договор",t:"Vertrag",p:"dogovor"},{f:"повышение",t:"Beförderung",p:"povysheniye"},{f:"собеседование",t:"Vorstellungsgespräch",p:"sobesedovaniye"},{f:"резюме",t:"Lebenslauf",p:"rezyume"},{f:"сверхурочные",t:"Überstunden",p:"sverkhurochnye"},{f:"фриланс",t:"Freiberuf",p:"frilans"},{f:"отпуск",t:"Urlaub",p:"otpusk"},{f:"командировка",t:"Dienstreise",p:"komandirovka"}
+    ],
+    "Природа & Экология": [
+      {f:"лес",t:"Wald",p:"les"},{f:"гора",t:"Berg",p:"gora"},{f:"река",t:"Fluss",p:"reka"},{f:"море",t:"Meer",p:"more"},{f:"пустыня",t:"Wüste",p:"pustynya"},{f:"остров",t:"Insel",p:"ostrov"},{f:"землетрясение",t:"Erdbeben",p:"zemletryaseniye"},{f:"засуха",t:"Dürre",p:"zasukha"},{f:"наводнение",t:"Überschwemmung",p:"navodneniуe"},{f:"загрязнение",t:"Verschmutzung",p:"zagryazneniye"},{f:"переработка",t:"Recycling",p:"pererabotka"},{f:"возобновляемый",t:"erneuerbar",p:"vozobnovlyaemy"},{f:"климат",t:"Klima",p:"klimat"},{f:"заповедник",t:"Naturschutzgebiet",p:"zapovednik"},{f:"экология",t:"Ökologie",p:"ekologiya"},{f:"дикая природа",t:"Tierwelt",p:"dikaya priroda"}
+    ],
+    "Технологии": [
+      {f:"программа",t:"Software",p:"programma"},{f:"пароль",t:"Passwort",p:"parol"},{f:"скачать",t:"herunterladen",p:"skachat"},{f:"загрузить",t:"hochladen",p:"zagruzit"},{f:"алгоритм",t:"Algorithmus",p:"algoritm"},{f:"база данных",t:"Datenbank",p:"baza dannykh"},{f:"сеть",t:"Netzwerk",p:"set"},{f:"стриминг",t:"Streaming",p:"striming"},{f:"блогер",t:"Blogger",p:"bloger"},{f:"вирусный",t:"viral",p:"virusny"},{f:"хэштег",t:"Hashtag",p:"kheshteg"},{f:"шифровать",t:"verschlüsseln",p:"shifrovat"},{f:"резервная копия",t:"Backup",p:"rezervnaya kopiya"},{f:"обновление",t:"Update",p:"obnovleniye"},{f:"конфиденциальность",t:"Datenschutz",p:"konfidentsialnost"},{f:"полоса пропускания",t:"Bandbreite",p:"polosa propuskaniya"}
+    ],
+    "Путешествия": [
+      {f:"паспорт",t:"Reisepass",p:"pasport"},{f:"багаж",t:"Gepäck",p:"bagash"},{f:"посадочный талон",t:"Bordkarte",p:"posadochny talon"},{f:"таможня",t:"Zoll",p:"tamozhnya"},{f:"размещение",t:"Unterkunft",p:"razmeshcheniye"},{f:"достопримечательности",t:"Sehenswürdigkeiten",p:"dostoprimechatelnosti"},{f:"валюта",t:"Währung",p:"valyuta"},{f:"виза",t:"Visum",p:"viza"},{f:"вылет",t:"Abflug",p:"vylet"},{f:"прибытие",t:"Ankunft",p:"pribytiye"},{f:"сувенир",t:"Souvenir",p:"suvenir"},{f:"джетлаг",t:"Jetlag",p:"dzhetlag"},{f:"путеводитель",t:"Reiseführer",p:"putevoditель"},{f:"обменный курс",t:"Wechselkurs",p:"obmennyy kurs"},{f:"турист",t:"Tourist",p:"turist"},{f:"экскурсия",t:"Ausflug",p:"ekskursiya"}
+    ],
+    "Спорт": [
+      {f:"чемпионат",t:"Meisterschaft",p:"chempionat"},{f:"судья",t:"Schiedsrichter",p:"sudya"},{f:"счёт",t:"Punktestand",p:"schyot"},{f:"турнир",t:"Turnier",p:"turnir"},{f:"спортсмен",t:"Sportler",p:"sportssmen"},{f:"тренировка",t:"Training",p:"trenirovka"},{f:"тренажёрный зал",t:"Fitnessstudio",p:"trenazhorny zal"},{f:"марафон",t:"Marathon",p:"marafon"},{f:"поражение",t:"Niederlage",p:"porazheniye"},{f:"победа",t:"Sieg",p:"pobeda"},{f:"стадион",t:"Stadion",p:"stadion"},{f:"тренер",t:"Trainer",p:"trener"},{f:"штрафной",t:"Elfmeter",p:"shtrafnoy"},{f:"болельщик",t:"Fan",p:"bolelshchik"},{f:"разминка",t:"Aufwärmen",p:"raziminka"},{f:"соревнование",t:"Wettkampf",p:"sorevnovaniye"}
+    ],
+    "Чувства": [
+      {f:"привязанность",t:"Zuneigung",p:"privyazannost"},{f:"доверие",t:"Vertrauen",p:"doveriye"},{f:"ревность",t:"Eifersucht",p:"revnost"},{f:"горе",t:"Trauer",p:"gore"},{f:"облегчение",t:"Erleichterung",p:"oblegcheniye"},{f:"уверенность",t:"Selbstvertrauen",p:"uvyerennost"},{f:"одиночество",t:"Einsamkeit",p:"odinochestvo"},{f:"благодарность",t:"Dankbarkeit",p:"blagodarnost"},{f:"эмпатия",t:"Empathie",p:"empatiya"},{f:"прощение",t:"Vergebung",p:"proshcheniye"},{f:"обида",t:"Groll",p:"obida"},{f:"энтузиазм",t:"Begeisterung",p:"entuziazm"},{f:"ностальгия",t:"Nostalgie",p:"nostalgiya"},{f:"восхищение",t:"Bewunderung",p:"voskhishcheniye"},{f:"сожаление",t:"Reue",p:"sozhаleniye"},{f:"зависть",t:"Neid",p:"zavist"}
+    ],
   },
   it: {
     "Grundlagen": [
@@ -2162,6 +2210,24 @@ const VOCAB = {
       {f:"disegno",t:"Zeichnen",p:"dizeɲɲo"},{f:"lettura",t:"Lesen (Hobby)",p:"lettura"},
       {f:"viaggiare",t:"Reisen",p:"vjaddʒare"},{f:"fotografia",t:"Fotografie",p:"fotografija"},
       {f:"cucina",t:"Kochen (Hobby)",p:"kutʃina"},{f:"yoga",t:"Yoga",p:"joga"},
+    ],
+    "Lavoro": [
+      {f:"lavoro",t:"Arbeit",p:"laˈvɔro"},{f:"ufficio",t:"Büro",p:"ufˈfitʃo"},{f:"riunione",t:"Besprechung",p:"riuˈnjone"},{f:"stipendio",t:"Gehalt",p:"stipɛndjo"},{f:"collega",t:"Kollege",p:"kolˈleɡa"},{f:"capo",t:"Vorgesetzte/r",p:"ˈkapo"},{f:"progetto",t:"Projekt",p:"proˈdʒɛtto"},{f:"cliente",t:"Kunde",p:"kliˈɛnte"},{f:"contratto",t:"Vertrag",p:"konˈtratto"},{f:"promozione",t:"Beförderung",p:"promoˈtsjone"},{f:"colloquio",t:"Vorstellungsgespräch",p:"kolˈlɔkwjo"},{f:"curriculum",t:"Lebenslauf",p:"kuˈrɪkulum"},{f:"straordinario",t:"Überstunden",p:"straordiˈnarjo"},{f:"freelance",t:"Freiberuf",p:"ˈfriːlɑːns"},{f:"ferie",t:"Urlaub",p:"ˈfɛrje"},{f:"azienda",t:"Unternehmen",p:"atˈtsjɛnda"}
+    ],
+    "Salute": [
+      {f:"mal di testa",t:"Kopfschmerzen",p:"mal di ˈtɛsta"},{f:"febbre",t:"Fieber",p:"ˈfɛbbre"},{f:"tosse",t:"Husten",p:"ˈtɔsse"},{f:"ricetta",t:"Rezept",p:"riˈtʃɛtta"},{f:"operazione",t:"Operation",p:"operatˈsjone"},{f:"appuntamento",t:"Termin",p:"appuntaˈmento"},{f:"sintomo",t:"Symptom",p:"ˈsintomo"},{f:"allergia",t:"Allergie",p:"allerˈdʒia"},{f:"guarigione",t:"Genesung",p:"gwariˈdʒone"},{f:"dieta",t:"Ernährung",p:"ˈdjɛta"},{f:"vaccino",t:"Impfstoff",p:"vatˈtʃino"},{f:"assicurazione",t:"Versicherung",p:"assikuratˈsjone"},{f:"farmacia",t:"Apotheke",p:"farˈmatʃa"},{f:"pressione",t:"Blutdruck",p:"presˈsjone"},{f:"dentista",t:"Zahnarzt",p:"denˈtista"},{f:"esercizio",t:"Sport",p:"ezerˈtʃitsjo"}
+    ],
+    "Natura": [
+      {f:"foresta",t:"Wald",p:"foˈrɛsta"},{f:"montagna",t:"Berg",p:"monˈtaɲa"},{f:"fiume",t:"Fluss",p:"ˈfjume"},{f:"oceano",t:"Ozean",p:"otʃˈeano"},{f:"deserto",t:"Wüste",p:"deˈzɛrto"},{f:"isola",t:"Insel",p:"ˈizola"},{f:"terremoto",t:"Erdbeben",p:"terreˈmɔto"},{f:"siccità",t:"Dürre",p:"sitʃˈita"},{f:"alluvione",t:"Überschwemmung",p:"alluˈvjone"},{f:"inquinamento",t:"Verschmutzung",p:"inkwinaˈmento"},{f:"riciclaggio",t:"Recycling",p:"ritʃiˈkladʒo"},{f:"rinnovabile",t:"erneuerbar",p:"rinnoˈvabile"},{f:"clima",t:"Klima",p:"ˈklima"},{f:"riserva naturale",t:"Naturschutzgebiet",p:"riˈzɛrva natuˈrale"},{f:"ecologia",t:"Ökologie",p:"ekoloˈdʒia"},{f:"fauna selvatica",t:"Tierwelt",p:"ˈfauna selˈvatika"}
+    ],
+    "Tecnologia": [
+      {f:"software",t:"Software",p:"ˈsoftware"},{f:"password",t:"Passwort",p:"ˈpassword"},{f:"scaricare",t:"herunterladen",p:"skariˈkare"},{f:"caricare",t:"hochladen",p:"kariˈkare"},{f:"algoritmo",t:"Algorithmus",p:"algorˈitmo"},{f:"database",t:"Datenbank",p:"ˈdatabase"},{f:"rete",t:"Netzwerk",p:"ˈrɛte"},{f:"streaming",t:"Streaming",p:"ˈstriːmɪŋ"},{f:"influencer",t:"Influencer",p:"ˈɪnfluensər"},{f:"virale",t:"viral",p:"viˈrale"},{f:"hashtag",t:"Hashtag",p:"ˈhæʃtæg"},{f:"criptare",t:"verschlüsseln",p:"kripˈtare"},{f:"backup",t:"Datensicherung",p:"ˈbækʌp"},{f:"aggiornamento",t:"Update",p:"addʒornaˈmento"},{f:"privacy",t:"Datenschutz",p:"ˈprɪvəsi"},{f:"banda larga",t:"Breitband",p:"ˈbanda ˈlarga"}
+    ],
+    "Viaggi": [
+      {f:"passaporto",t:"Reisepass",p:"passaˈpɔrto"},{f:"bagaglio",t:"Gepäck",p:"baˈɡaʎo"},{f:"carta d imbarco",t:"Bordkarte",p:"ˈkarta dimˈbarko"},{f:"dogana",t:"Zoll",p:"doˈɡana"},{f:"alloggio",t:"Unterkunft",p:"alˈlɔddʒo"},{f:"turismo",t:"Tourismus",p:"tuˈrismo"},{f:"valuta",t:"Währung",p:"vaˈluta"},{f:"visto",t:"Visum",p:"ˈvisto"},{f:"partenza",t:"Abflug",p:"parˈtɛntsa"},{f:"arrivo",t:"Ankunft",p:"arˈrivo"},{f:"souvenir",t:"Souvenir",p:"suveˈniːr"},{f:"jet lag",t:"Jetlag",p:"dʒɛt ˈlæɡ"},{f:"zaino in spalla",t:"Rucksacktourist",p:"ˈdzaino in ˈspalla"},{f:"guida turistica",t:"Reiseführer",p:"ˈɡwida tuˈristika"},{f:"tasso di cambio",t:"Wechselkurs",p:"ˈtasso di ˈkambjo"},{f:"trappola turistica",t:"Touristenfalle",p:"ˈtrappola tuˈristika"}
+    ],
+    "Sentimenti": [
+      {f:"affetto",t:"Zuneigung",p:"afˈfɛtto"},{f:"fiducia",t:"Vertrauen",p:"fiˈdutʃa"},{f:"gelosia",t:"Eifersucht",p:"dʒeloˈzia"},{f:"dolore",t:"Trauer",p:"doˈlore"},{f:"sollievo",t:"Erleichterung",p:"solˈljɛvo"},{f:"solitudine",t:"Einsamkeit",p:"soliˈtudine"},{f:"gratitudine",t:"Dankbarkeit",p:"gratiˈtudine"},{f:"empatia",t:"Empathie",p:"emˈpatia"},{f:"perdono",t:"Vergebung",p:"perˈdono"},{f:"risentimento",t:"Groll",p:"rizentiˈmento"},{f:"entusiasmo",t:"Begeisterung",p:"entuˈziazmo"},{f:"nostalgia",t:"Nostalgie",p:"nostalˈdʒia"},{f:"ammirazione",t:"Bewunderung",p:"ammiraˈtsjone"},{f:"attaccamento",t:"Bindung",p:"attakkaˈmento"},{f:"rimpianto",t:"Reue",p:"rimˈpjanto"},{f:"invidia",t:"Neid",p:"inˈvɪdia"}
     ],
   },
   es: {
@@ -2293,6 +2359,24 @@ const VOCAB = {
       {f:"dibujo",t:"Zeichnen",p:"diβuxo"},{f:"lectura",t:"Lesen (Hobby)",p:"lektura"},
       {f:"viajar",t:"Reisen",p:"bjaxar"},{f:"fotografía",t:"Fotografie",p:"fotografja"},
       {f:"cocinar",t:"Kochen",p:"koθinar"},{f:"yoga",t:"Yoga",p:"joɣa"},
+    ],
+    "Trabajo": [
+      {f:"trabajo",t:"Arbeit",p:"traˈβaxo"},{f:"oficina",t:"Büro",p:"ofiˈθina"},{f:"reunión",t:"Besprechung",p:"reunˈjon"},{f:"salario",t:"Gehalt",p:"saˈlaɾjo"},{f:"colega",t:"Kollege",p:"koˈleɣa"},{f:"jefe",t:"Vorgesetzte/r",p:"ˈxefe"},{f:"proyecto",t:"Projekt",p:"pɾoˈjekto"},{f:"cliente",t:"Kunde",p:"kliˈente"},{f:"contrato",t:"Vertrag",p:"konˈtɾato"},{f:"ascenso",t:"Beförderung",p:"asˈθenso"},{f:"entrevista",t:"Vorstellungsgespräch",p:"entɾeˈβista"},{f:"currículum",t:"Lebenslauf",p:"kuˈɾikulum"},{f:"horas extra",t:"Überstunden",p:"ˈoɾas ˈekstɾa"},{f:"freelance",t:"Freiberuf",p:"ˈfɾilans"},{f:"vacaciones",t:"Urlaub",p:"bakaˈθjones"},{f:"empresa",t:"Unternehmen",p:"emˈpɾesa"}
+    ],
+    "Salud": [
+      {f:"dolor de cabeza",t:"Kopfschmerzen",p:"doˈloɾ ðe kaˈβeθa"},{f:"fiebre",t:"Fieber",p:"ˈfjeβɾe"},{f:"tos",t:"Husten",p:"tos"},{f:"receta",t:"Rezept",p:"ɾeˈθeta"},{f:"operación",t:"Operation",p:"opeɾaˈθjon"},{f:"cita",t:"Termin",p:"ˈθita"},{f:"síntoma",t:"Symptom",p:"ˈsintoma"},{f:"alergia",t:"Allergie",p:"aleɾˈxia"},{f:"recuperación",t:"Genesung",p:"ɾekupeɾaˈθjon"},{f:"dieta",t:"Ernährung",p:"ˈdjeta"},{f:"vacuna",t:"Impfstoff",p:"baˈkuna"},{f:"seguro médico",t:"Krankenversicherung",p:"seˈɣuɾo ˈmeðiko"},{f:"farmacia",t:"Apotheke",p:"faɾˈmaθja"},{f:"presión arterial",t:"Blutdruck",p:"pɾeˈsjon aɾteˈɾjal"},{f:"dentista",t:"Zahnarzt",p:"denˈtista"},{f:"ejercicio",t:"Sport",p:"exeɾˈθiθjo"}
+    ],
+    "Naturaleza": [
+      {f:"bosque",t:"Wald",p:"ˈboske"},{f:"montaña",t:"Berg",p:"monˈtaɲa"},{f:"río",t:"Fluss",p:"ˈrio"},{f:"océano",t:"Ozean",p:"oˈθeano"},{f:"desierto",t:"Wüste",p:"deˈsjeɾto"},{f:"isla",t:"Insel",p:"ˈizla"},{f:"terremoto",t:"Erdbeben",p:"teˈmoto"},{f:"sequía",t:"Dürre",p:"seˈkia"},{f:"inundación",t:"Überschwemmung",p:"inundaˈθjon"},{f:"contaminación",t:"Verschmutzung",p:"kontaminaˈθjon"},{f:"reciclaje",t:"Recycling",p:"ɾeθiˈklaxe"},{f:"renovable",t:"erneuerbar",p:"ɾenoˈβaβle"},{f:"clima",t:"Klima",p:"ˈklima"},{f:"reserva natural",t:"Naturschutzgebiet",p:"ɾeˈseɾβa natuˈɾal"},{f:"ecología",t:"Ökologie",p:"ekoloˈxia"},{f:"fauna silvestre",t:"Tierwelt",p:"ˈfawna silˈβestɾe"}
+    ],
+    "Tecnología": [
+      {f:"software",t:"Software",p:"ˈsoftweɾ"},{f:"contraseña",t:"Passwort",p:"kontɾaˈseɲa"},{f:"descargar",t:"herunterladen",p:"deskaɾˈɣaɾ"},{f:"subir",t:"hochladen",p:"suˈβiɾ"},{f:"algoritmo",t:"Algorithmus",p:"alɣoˈɾitmo"},{f:"base de datos",t:"Datenbank",p:"ˈbase ðe ˈdatos"},{f:"red",t:"Netzwerk",p:"red"},{f:"streaming",t:"Streaming",p:"ˈstɾiming"},{f:"influencer",t:"Influencer",p:"influˈenθeɾ"},{f:"viral",t:"viral",p:"biˈɾal"},{f:"hashtag",t:"Hashtag",p:"ˈxastak"},{f:"cifrar",t:"verschlüsseln",p:"θiˈfɾaɾ"},{f:"copia de seguridad",t:"Backup",p:"ˈkopja ðe seɣuɾiˈðað"},{f:"actualización",t:"Update",p:"aktualiˈθaθjon"},{f:"privacidad",t:"Datenschutz",p:"pɾiβaθiˈðað"},{f:"ancho de banda",t:"Bandbreite",p:"ˈantʃo ðe ˈbanda"}
+    ],
+    "Viajes": [
+      {f:"pasaporte",t:"Reisepass",p:"pasaˈpoɾte"},{f:"equipaje",t:"Gepäck",p:"ekiˈpaxe"},{f:"tarjeta de embarque",t:"Bordkarte",p:"taɾˈxeta ðe emˈbaɾke"},{f:"aduana",t:"Zoll",p:"aˈðwana"},{f:"alojamiento",t:"Unterkunft",p:"aloxaˈmjento"},{f:"turismo",t:"Tourismus",p:"tuˈɾismo"},{f:"moneda",t:"Währung",p:"moˈneða"},{f:"visado",t:"Visum",p:"biˈsaðo"},{f:"salida",t:"Abflug",p:"saˈliða"},{f:"llegada",t:"Ankunft",p:"ʎeˈɣaða"},{f:"recuerdo",t:"Souvenir",p:"ɾeˈkweɾðo"},{f:"jet lag",t:"Jetlag",p:"ˈxet laɣ"},{f:"mochilero",t:"Rucksacktourist",p:"motʃiˈleɾo"},{f:"guía turístico",t:"Reiseführer",p:"ˈɣia tuˈɾistiko"},{f:"tipo de cambio",t:"Wechselkurs",p:"ˈtipo ðe ˈkambjo"},{f:"trampa turística",t:"Touristenfalle",p:"ˈtɾampa tuˈɾistika"}
+    ],
+    "Sentimientos": [
+      {f:"cariño",t:"Zuneigung",p:"kaˈɾiɲo"},{f:"confianza",t:"Vertrauen",p:"konˈfjansa"},{f:"celos",t:"Eifersucht",p:"ˈθelos"},{f:"pena",t:"Trauer",p:"ˈpena"},{f:"alivio",t:"Erleichterung",p:"aˈliβjo"},{f:"soledad",t:"Einsamkeit",p:"soleˈðað"},{f:"gratitud",t:"Dankbarkeit",p:"ɣɾatiˈtuð"},{f:"empatía",t:"Empathie",p:"empaˈtia"},{f:"perdón",t:"Vergebung",p:"peɾˈðon"},{f:"rencor",t:"Groll",p:"ɾenˈkoɾ"},{f:"entusiasmo",t:"Begeisterung",p:"entuˈsjasmo"},{f:"nostalgia",t:"Nostalgie",p:"nosˈtalxja"},{f:"admiración",t:"Bewunderung",p:"aðmiɾaˈθjon"},{f:"apego",t:"Bindung",p:"aˈpeɣo"},{f:"arrepentimiento",t:"Reue",p:"arepentiˈmjento"},{f:"envidia",t:"Neid",p:"emˈbiðja"}
     ],
   },
   en: {
@@ -2451,6 +2535,30 @@ const VOCAB = {
       {f:"travelling",t:"Reisen",p:"ˈtrævəlɪŋ"},{f:"photography",t:"Fotografie",p:"fəˈtɒɡrəfi"},
       {f:"cooking",t:"Kochen",p:"ˈkʊkɪŋ"},{f:"yoga",t:"Yoga",p:"ˈjoʊɡə"},
       {f:"cycling",t:"Radfahren",p:"ˈsaɪklɪŋ"},{f:"hiking",t:"Wandern",p:"ˈhaɪkɪŋ"},
+    ],
+    "Beruf & Arbeit": [
+      {f:"job",t:"Stelle",p:"dʒɒb"},{f:"office",t:"Büro",p:"ˈɒfɪs"},{f:"meeting",t:"Besprechung",p:"ˈmiːtɪŋ"},{f:"deadline",t:"Frist",p:"ˈdɛdlaɪn"},{f:"salary",t:"Gehalt",p:"ˈsæləri"},{f:"colleague",t:"Kollege",p:"ˈkɒliːg"},{f:"manager",t:"Vorgesetzte/r",p:"ˈmænɪdʒər"},{f:"report",t:"Bericht",p:"rɪˈpɔːt"},{f:"project",t:"Projekt",p:"ˈprɒdʒɛkt"},{f:"client",t:"Kunde",p:"ˈklaɪənt"},{f:"contract",t:"Vertrag",p:"ˈkɒntrækt"},{f:"promotion",t:"Beförderung",p:"prəˈməʊʃən"},{f:"interview",t:"Vorstellungsgespräch",p:"ˈɪntəvjuː"},{f:"CV",t:"Lebenslauf",p:"siːˈviː"},{f:"freelance",t:"freiberuflich",p:"ˈfriːlɑːns"},{f:"overtime",t:"Überstunden",p:"ˈəʊvətaɪm"}
+    ],
+    "Gesundheit": [
+      {f:"headache",t:"Kopfschmerzen",p:"ˈhɛdeɪk"},{f:"fever",t:"Fieber",p:"ˈfiːvər"},{f:"cough",t:"Husten",p:"kɒf"},{f:"prescription",t:"Rezept",p:"prɪˈskrɪpʃən"},{f:"surgery",t:"Operation",p:"ˈsɜːdʒəri"},{f:"appointment",t:"Termin",p:"əˈpɔɪntmənt"},{f:"symptom",t:"Symptom",p:"ˈsɪmptəm"},{f:"allergy",t:"Allergie",p:"ˈælərdʒi"},{f:"recovery",t:"Genesung",p:"rɪˈkʌvəri"},{f:"diet",t:"Ernährung",p:"ˈdaɪət"},{f:"vaccine",t:"Impfstoff",p:"ˈvæksiːn"},{f:"insurance",t:"Versicherung",p:"ɪnˈʃʊərəns"},{f:"pharmacy",t:"Apotheke",p:"ˈfɑːməsi"},{f:"blood pressure",t:"Blutdruck",p:"blʌd ˈprɛʃər"},{f:"dentist",t:"Zahnarzt",p:"ˈdɛntɪst"},{f:"exercise",t:"Sport",p:"ˈɛksəsaɪz"}
+    ],
+    "Natur & Umwelt": [
+      {f:"forest",t:"Wald",p:"ˈfɒrɪst"},{f:"mountain",t:"Berg",p:"ˈmaʊntən"},{f:"river",t:"Fluss",p:"ˈrɪvər"},{f:"ocean",t:"Ozean",p:"ˈəʊʃən"},{f:"desert",t:"Wüste",p:"ˈdɛzət"},{f:"island",t:"Insel",p:"ˈaɪlənd"},{f:"earthquake",t:"Erdbeben",p:"ˈɜːθkweɪk"},{f:"drought",t:"Dürre",p:"draʊt"},{f:"flood",t:"Überschwemmung",p:"flʌd"},{f:"wildlife",t:"Tierwelt",p:"ˈwaɪldlaɪf"},{f:"endangered",t:"gefährdet",p:"ɪnˈdeɪndʒərd"},{f:"recycle",t:"recyceln",p:"riːˈsaɪkəl"},{f:"pollution",t:"Verschmutzung",p:"pəˈluːʃən"},{f:"renewable",t:"erneuerbar",p:"rɪˈnjuːəbəl"},{f:"conservation",t:"Naturschutz",p:"ˌkɒnsəˈveɪʃən"},{f:"climate",t:"Klima",p:"ˈklaɪmɪt"}
+    ],
+    "Technologie": [
+      {f:"software",t:"Software",p:"ˈsɒftweər"},{f:"password",t:"Passwort",p:"ˈpɑːswɜːd"},{f:"download",t:"herunterladen",p:"ˈdaʊnləʊd"},{f:"upload",t:"hochladen",p:"ˈʌpləʊd"},{f:"algorithm",t:"Algorithmus",p:"ˈælgərɪðəm"},{f:"database",t:"Datenbank",p:"ˈdeɪtəbeɪs"},{f:"network",t:"Netzwerk",p:"ˈnɛtwɜːk"},{f:"streaming",t:"Streaming",p:"ˈstriːmɪŋ"},{f:"influencer",t:"Influencer",p:"ˈɪnfluənsər"},{f:"viral",t:"viral",p:"ˈvaɪrəl"},{f:"hashtag",t:"Hashtag",p:"ˈhæʃtæg"},{f:"encrypt",t:"verschlüsseln",p:"ɪnˈkrɪpt"},{f:"backup",t:"Datensicherung",p:"ˈbækʌp"},{f:"update",t:"Aktualisierung",p:"ˈʌpdeɪt"},{f:"privacy",t:"Datenschutz",p:"ˈprɪvəsi"},{f:"bandwidth",t:"Bandbreite",p:"ˈbændwɪdθ"}
+    ],
+    "Reisen": [
+      {f:"passport",t:"Reisepass",p:"ˈpɑːspɔːt"},{f:"luggage",t:"Gepäck",p:"ˈlʌgɪdʒ"},{f:"boarding pass",t:"Bordkarte",p:"ˈbɔːdɪŋ pɑːs"},{f:"customs",t:"Zoll",p:"ˈkʌstəmz"},{f:"accommodation",t:"Unterkunft",p:"əˌkɒməˈdeɪʃən"},{f:"sightseeing",t:"Besichtigung",p:"ˈsaɪtsiːɪŋ"},{f:"currency",t:"Währung",p:"ˈkʌrənsi"},{f:"visa",t:"Visum",p:"ˈviːzə"},{f:"departure",t:"Abflug",p:"dɪˈpɑːtʃər"},{f:"arrival",t:"Ankunft",p:"əˈraɪvəl"},{f:"souvenir",t:"Souvenir",p:"ˌsuːvəˈnɪər"},{f:"jet lag",t:"Jetlag",p:"dʒɛt læg"},{f:"backpacker",t:"Rucksacktourist",p:"ˈbækpækər"},{f:"guidebook",t:"Reiseführer",p:"ˈgaɪdbʊk"},{f:"exchange rate",t:"Wechselkurs",p:"ɪksˈtʃeɪndʒ reɪt"},{f:"tourist trap",t:"Touristenfalle",p:"ˈtʊərɪst træp"}
+    ],
+    "Sport": [
+      {f:"championship",t:"Meisterschaft",p:"ˈtʃæmpiənʃɪp"},{f:"referee",t:"Schiedsrichter",p:"ˌrɛfəˈriː"},{f:"score",t:"Punktestand",p:"skɔːr"},{f:"tournament",t:"Turnier",p:"ˈtʊənəmənt"},{f:"athlete",t:"Athlet",p:"ˈæθliːt"},{f:"training",t:"Training",p:"ˈtreɪnɪŋ"},{f:"gym",t:"Fitnessstudio",p:"dʒɪm"},{f:"marathon",t:"Marathon",p:"ˈmærəθɒn"},{f:"defeat",t:"Niederlage",p:"dɪˈfiːt"},{f:"victory",t:"Sieg",p:"ˈvɪktəri"},{f:"stadium",t:"Stadion",p:"ˈsteɪdiəm"},{f:"coach",t:"Trainer",p:"kəʊtʃ"},{f:"penalty",t:"Elfmeter",p:"ˈpɛnəlti"},{f:"substitute",t:"Ersatzspieler",p:"ˈsʌbstɪtjuːt"},{f:"warm-up",t:"Aufwärmen",p:"wɔːm ʌp"},{f:"fan",t:"Fan",p:"fæn"}
+    ],
+    "Gefühle": [
+      {f:"affection",t:"Zuneigung",p:"əˈfɛkʃən"},{f:"trust",t:"Vertrauen",p:"trʌst"},{f:"jealousy",t:"Eifersucht",p:"ˈdʒɛləsi"},{f:"grief",t:"Trauer",p:"griːf"},{f:"relief",t:"Erleichterung",p:"rɪˈliːf"},{f:"confidence",t:"Selbstvertrauen",p:"ˈkɒnfɪdəns"},{f:"loneliness",t:"Einsamkeit",p:"ˈləʊnlɪnɪs"},{f:"gratitude",t:"Dankbarkeit",p:"ˈgrætɪtjuːd"},{f:"empathy",t:"Empathie",p:"ˈɛmpəθi"},{f:"forgiveness",t:"Vergebung",p:"fəˈgɪvnɪs"},{f:"resentment",t:"Groll",p:"rɪˈzɛntmənt"},{f:"enthusiasm",t:"Begeisterung",p:"ɪnˈθjuːziæzəm"},{f:"nostalgia",t:"Nostalgie",p:"nɒˈstældʒə"},{f:"admiration",t:"Bewunderung",p:"ˌædmɪˈreɪʃən"},{f:"attachment",t:"Bindung",p:"əˈtætʃmənt"},{f:"regret",t:"Reue",p:"rɪˈgrɛt"}
+    ],
+    "Stadtleben": [
+      {f:"neighbourhood",t:"Nachbarschaft",p:"ˈneɪbəhʊd"},{f:"rush hour",t:"Stoßzeit",p:"rʌʃ ˈaʊər"},{f:"commute",t:"Pendeln",p:"kəˈmjuːt"},{f:"rent",t:"Miete",p:"rɛnt"},{f:"landlord",t:"Vermieter",p:"ˈlændlɔːd"},{f:"utilities",t:"Nebenkosten",p:"juːˈtɪlɪtɪz"},{f:"grocery",t:"Lebensmittel",p:"ˈgrəʊsəri"},{f:"queue",t:"Warteschlange",p:"kjuː"},{f:"pedestrian",t:"Fußgänger",p:"pɪˈdɛstriən"},{f:"suburb",t:"Vorort",p:"ˈsʌbɜːb"},{f:"traffic jam",t:"Stau",p:"ˈtræfɪk dʒæm"},{f:"charity",t:"Hilfsorganisation",p:"ˈtʃærɪti"},{f:"volunteer",t:"Ehrenamtliche",p:"ˌvɒlənˈtɪər"},{f:"council",t:"Gemeinderat",p:"ˈkaʊnsəl"},{f:"bin",t:"Mülltonne",p:"bɪn"},{f:"pavement",t:"Bürgersteig",p:"ˈpeɪvmənt"}
     ],
   },
   tr: {
@@ -13841,8 +13949,8 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 87;
-var BUILD_VERSION = '8.7'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
+var BUILD = 88;
+var BUILD_VERSION = '8.8'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
 (function() {
@@ -13948,6 +14056,17 @@ function updateAllVersionDisplays() {
 // Bei jedem Deploy: neuen Eintrag mit aktuellem BUILD hinzufügen
 // ============================================================
 var CHANGELOG = {
+  88: {
+    emoji: '🚀',
+    title: 'v8.8 – Satzbau, Aussprache & Vokabular',
+    items: [
+      '🔀 Satzbau-Trainer DE+EN: 3 Schwierigkeiten, Wörter per Tipp anordnen',
+      '🎤 Aussprache-Score mit Levenshtein-Visualisierung',
+      '📚 EN+128, RU+96, ES+96, IT+96 Vokabeln',
+      '🔗 DeepL Cloudflare Worker aktiv',
+    ]
+  },
+
   86: {
     emoji: '🚀',
     title: 'v8.6 – Lückentexte, Dialoge & Fixes',
@@ -14557,6 +14676,7 @@ function getTalkPrompt() {
 // DEEPL ÜBERSETZUNGSSYSTEM
 // ============================================================
 var DEEPL_DEFAULT_KEY = 'e5b8f6d1-e5ca-4481-a83f-a1762fe3f6d9:fx';
+var DEEPL_WORKER_URL = 'https://lingua.rene-prause.workers.dev';
 var DEEPL_API_URL = 'https://api-free.deepl.com/v2/translate';
 // Mehrere CORS-Proxies als Fallback
 var DEEPL_PROXIES = [
@@ -15180,6 +15300,81 @@ function dialogPrev(){if(dlgState.idx>0){dlgState.idx--;renderDlgLines();}}
 // ════════════════════════════════════════════════════════
 // 📋  CHANGELOG — alle Einträge rückwirkend
 // ════════════════════════════════════════════════════════
+
+// ════════ SATZBAU-TRAINER JS ════════
+var WO_DATA = {
+  de: {
+    easy: [
+      {words:['Ich','heiße','Anna','.'],hint:'Wie heißt du?',solution:'Ich heiße Anna .'},
+      {words:['Das','Wetter','ist','schön','.'],hint:'Wie ist das Wetter?',solution:'Das Wetter ist schön .'},
+      {words:['Ich','trinke','Kaffee','.'],hint:'Was trinkst du?',solution:'Ich trinke Kaffee .'},
+      {words:['Er','kommt','aus','Berlin','.'],hint:'Woher kommt er?',solution:'Er kommt aus Berlin .'},
+      {words:['Wir','gehen','ins','Kino','.'],hint:'Was macht ihr?',solution:'Wir gehen ins Kino .'},
+      {words:['Sie','hat','einen','Hund','.'],hint:'Was hat sie?',solution:'Sie hat einen Hund .'},
+      {words:['Das','Buch','ist','interessant','.'],hint:'Wie ist das Buch?',solution:'Das Buch ist interessant .'},
+      {words:['Ich','lerne','Deutsch','.'],hint:'Was lernst du?',solution:'Ich lerne Deutsch .'},
+      {words:['Der','Zug','fährt','um','acht','Uhr','.'],hint:'Wann fährt der Zug?',solution:'Der Zug fährt um acht Uhr .'},
+      {words:['Heute','ist','Montag','.'],hint:'Welcher Tag ist heute?',solution:'Heute ist Montag .'},
+    ],
+    medium: [
+      {words:['Obwohl','es','regnet',',','gehen','wir','spazieren','.'],hint:'Konzessivsatz',solution:'Obwohl es regnet , gehen wir spazieren .'},
+      {words:['Ich','habe','gestern','ein','Buch','gelesen','.'],hint:'Perfekt',solution:'Ich habe gestern ein Buch gelesen .'},
+      {words:['Weil','sie','krank','ist',',','bleibt','sie','zu','Hause','.'],hint:'Kausalsatz',solution:'Weil sie krank ist , bleibt sie zu Hause .'},
+      {words:['Morgen','werde','ich','früh','aufstehen','.'],hint:'Futur I',solution:'Morgen werde ich früh aufstehen .'},
+      {words:['Er','hat','sich','für','die','Stelle','beworben','.'],hint:'Reflexivverb',solution:'Er hat sich für die Stelle beworben .'},
+      {words:['Das','Paket','wurde','gestern','geliefert','.'],hint:'Passiv Perfekt',solution:'Das Paket wurde gestern geliefert .'},
+      {words:['Wenn','du','Zeit','hast',',','ruf','mich','an','.'],hint:'Konditionalsatz',solution:'Wenn du Zeit hast , ruf mich an .'},
+      {words:['Ich','würde','gern','mehr','reisen',',','wenn','ich','Zeit','hätte','.'],hint:'Konjunktiv II',solution:'Ich würde gern mehr reisen , wenn ich Zeit hätte .'},
+    ],
+    hard: [
+      {words:['Wenngleich','die','Beweise','fehlen',',','bleibt','die','Theorie','plausibel','.'],hint:'C1 Konzessivsatz',solution:'Wenngleich die Beweise fehlen , bleibt die Theorie plausibel .'},
+      {words:['Hätte','er','rechtzeitig','gewarnt',',','wäre','das','Unglück','verhindert','worden','.'],hint:'Irrealis der Vergangenheit',solution:'Hätte er rechtzeitig gewarnt , wäre das Unglück verhindert worden .'},
+      {words:['Es','wird','behauptet',',','dass','die','Maßnahmen','wirksam','seien','.'],hint:'Konjunktiv I — indirekte Rede',solution:'Es wird behauptet , dass die Maßnahmen wirksam seien .'},
+      {words:['Die','Schlussfolgerung',',','die','sich','aus','den','Daten','ergibt',',','ist','eindeutig','.'],hint:'Erweiterter Relativsatz',solution:'Die Schlussfolgerung , die sich aus den Daten ergibt , ist eindeutig .'},
+      {words:['Ohne','dass','er','es','bemerkte',',','hatte','sich','die','Situation','verändert','.'],hint:'Ohne-dass-Satz',solution:'Ohne dass er es bemerkte , hatte sich die Situation verändert .'},
+    ],
+  },
+  en: {
+    easy: [
+      {words:['She','goes','to','school','every','day','.'],hint:'Present Simple',solution:'She goes to school every day .'},
+      {words:['I','am','learning','English','.'],hint:'Present Continuous',solution:'I am learning English .'},
+      {words:['He','has','a','dog','.'],hint:'Have got',solution:'He has a dog .'},
+      {words:['We','went','to','the','cinema','yesterday','.'],hint:'Past Simple',solution:'We went to the cinema yesterday .'},
+      {words:['The','book','is','very','interesting','.'],hint:'Adjective',solution:'The book is very interesting .'},
+      {words:['She','can','speak','three','languages','.'],hint:'Modal verb',solution:'She can speak three languages .'},
+      {words:['I','have','never','been','to','Japan','.'],hint:'Present Perfect',solution:'I have never been to Japan .'},
+      {words:['It','is','raining','outside','.'],hint:'Weather + -ing',solution:'It is raining outside .'},
+    ],
+    medium: [
+      {words:['Although','it','was','raining',',','we','went','for','a','walk','.'],hint:'Concession',solution:'Although it was raining , we went for a walk .'},
+      {words:['By','the','time','she','arrived',',','he','had','already','left','.'],hint:'Past Perfect',solution:'By the time she arrived , he had already left .'},
+      {words:['The','report','must','be','submitted','by','Friday','.'],hint:'Passive + modal',solution:'The report must be submitted by Friday .'},
+      {words:['If','we','recycle','more',',','we','will','reduce','waste','.'],hint:'First Conditional',solution:'If we recycle more , we will reduce waste .'},
+      {words:['She','said','that','she','would','finish','the','project','by','noon','.'],hint:'Reported speech',solution:'She said that she would finish the project by noon .'},
+    ],
+    hard: [
+      {words:['Rarely','has','such','a','convincing','argument','been','made','.'],hint:'Inversion',solution:'Rarely has such a convincing argument been made .'},
+      {words:['It','is','the','context','that','determines','the','meaning','of','a','word','.'],hint:'Cleft sentence',solution:'It is the context that determines the meaning of a word .'},
+      {words:['It','is','essential','that','the','matter','be','reviewed','immediately','.'],hint:'Subjunctive',solution:'It is essential that the matter be reviewed immediately .'},
+    ],
+  }
+};
+var woState = {lang:'de',diff:'easy',queue:[],idx:0,score:0,slots:[],remaining:[]};
+function setWOLang(l){woState.lang=l;['de','en'].forEach(function(x){var b=document.getElementById('wo-lang-'+x);if(b)b.className='btn'+(x===l?' primary':'');});initWordOrder();}
+function setWODiff(d){woState.diff=d;['easy','medium','hard'].forEach(function(x){var b=document.getElementById('wo-diff-'+x);if(b)b.className='btn'+(x===d?' primary':'');});initWordOrder();}
+function initWordOrder(){var data=((WO_DATA[woState.lang]||{})[woState.diff]||[]).slice().sort(function(){return Math.random()-.5;});woState.queue=data;woState.idx=0;woState.score=0;renderWO();}
+function renderWO(){var q=woState.queue;var card=document.getElementById('wo-card');if(!card)return;if(woState.idx>=q.length){card.innerHTML='<div style="text-align:center;padding:1.5rem;"><div style="font-size:2.5rem;">🎉</div><div style="font-weight:800;margin:.5rem 0;">'+woState.score+' / '+q.length+' richtig!</div><button class="btn primary" onclick="initWordOrder()" style="width:100%;margin-top:.75rem;">🔄 Nochmal</button></div>';return;}var item=q[woState.idx];woState.slots=[];woState.remaining=item.words.slice().sort(function(){return Math.random()-.5;});var el=function(id){return document.getElementById(id);};if(el('wo-progress'))el('wo-progress').textContent='Aufgabe '+(woState.idx+1)+' / '+q.length;if(el('wo-score'))el('wo-score').textContent=woState.score+' ✓';if(el('wo-hint'))el('wo-hint').textContent=item.hint;if(el('wo-feedback')){el('wo-feedback').textContent='';el('wo-feedback').style.color='';}if(el('wo-next-btn'))el('wo-next-btn').style.display='none';if(el('wo-check-btn'))el('wo-check-btn').style.display='block';if(el('wo-bar'))el('wo-bar').style.width=(woState.idx/q.length*100)+'%';renderWOWords();}
+function renderWOWords(){var slots=document.getElementById('wo-slots');var words=document.getElementById('wo-words');if(!slots||!words)return;slots.innerHTML=woState.slots.map(function(w,i){return '<button class="btn" onclick="woRemoveSlot('+i+')" style="font-size:.85rem;padding:.3rem .6rem;background:var(--accent);color:#fff;">'+w+'</button>';}).join(' ');if(woState.slots.length===0)slots.innerHTML='<span style="color:var(--muted);font-size:.75rem;">Tippe auf Wörter um sie einzufügen</span>';words.innerHTML=woState.remaining.map(function(w,i){return '<button class="btn" onclick="woAddWord('+i+')" style="font-size:.85rem;padding:.3rem .6rem;">'+w+'</button>';}).join(' ');}
+function woAddWord(i){woState.slots.push(woState.remaining[i]);woState.remaining.splice(i,1);renderWOWords();}
+function woRemoveSlot(i){woState.remaining.push(woState.slots[i]);woState.slots.splice(i,1);renderWOWords();}
+function woClear(){var item=woState.queue[woState.idx];woState.remaining=item.words.slice().sort(function(){return Math.random()-.5;});woState.slots=[];var fb=document.getElementById('wo-feedback');if(fb){fb.textContent='';fb.style.color='';}var nb=document.getElementById('wo-next-btn');if(nb)nb.style.display='none';var cb=document.getElementById('wo-check-btn');if(cb)cb.style.display='block';renderWOWords();}
+function woCheck(){var item=woState.queue[woState.idx];var given=woState.slots.join(' ');var correct=item.solution;var ok=given===correct;var fb=document.getElementById('wo-feedback');var nb=document.getElementById('wo-next-btn');var cb=document.getElementById('wo-check-btn');if(ok){if(fb){fb.textContent='✓ Richtig!';fb.style.color='var(--accent3)';}woState.score++;if(typeof addXP==='function')addXP(2);setTimeout(woNext,900);}else{if(fb){fb.textContent='✗ Richtig: '+correct;fb.style.color='#ef4444';}if(nb)nb.style.display='block';if(cb)cb.style.display='none';}}
+function woNext(){woState.idx++;renderWO();}
+
+// ════════ AUSSPRACHE-FEEDBACK (verbessert) ════════
+function calcPronScore(spoken,target){if(!spoken||!target)return 0;spoken=spoken.toLowerCase().trim();target=target.toLowerCase().trim();if(spoken===target)return 100;var s=spoken.split(''),t=target.split('');var dp=Array.from({length:s.length+1},function(_,i){return Array.from({length:t.length+1},function(_,j){return i===0?j:j===0?i:0;});});for(var i=1;i<=s.length;i++)for(var j=1;j<=t.length;j++)dp[i][j]=s[i-1]===t[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);return Math.round(Math.max(0,100*(1-dp[s.length][t.length]/Math.max(s.length,t.length))));}
+function showPronScore(score,spoken,target){var old=document.getElementById('pron-score-box');if(old)old.remove();var color=score>=80?'var(--accent3)':score>=50?'#f59e0b':'#ef4444';var emoji=score>=80?'🎉':score>=50?'👍':'💪';var msg=score>=80?'Ausgezeichnet!':score>=50?'Fast! Weiter üben.':'Nochmal versuchen.';var box=document.createElement('div');box.id='pron-score-box';box.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--surface);border:2px solid '+color+';border-radius:16px;padding:.75rem 1.25rem;text-align:center;z-index:999;min-width:220px;box-shadow:0 4px 20px rgba(0,0,0,.3);animation:fadeIn .3s ease;';box.innerHTML='<div style="font-size:1.5rem;">'+emoji+'</div><div style="font-weight:800;font-size:1.4rem;color:'+color+';">'+score+'%</div><div style="font-size:.75rem;color:var(--muted);">'+msg+'</div><div style="font-size:.72rem;margin-top:.3rem;"><span style="color:var(--muted);">Gesagt: </span><span style="color:'+color+';">'+spoken+'</span></div><div style="font-size:.72rem;"><span style="color:var(--muted);">Ziel: </span>'+target+'</div><button onclick="this.parentNode.remove()" style="margin-top:.5rem;background:none;border:none;color:var(--muted);font-size:.75rem;cursor:pointer;">✕</button>';document.body.appendChild(box);setTimeout(function(){var b=document.getElementById('pron-score-box');if(b)b.remove();},5000);}
+
 checkAndShowChangelog();
 </script>
 </body>
