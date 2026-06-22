@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#0a0a0f">
 <meta name="description" id="meta-description" content="LINGUA v5.1 – KI-gestützte Sprachlern-App von René Prause">
 <meta name="author" content="René Prause">
-<title>LINGUA v9.4 · by René Prause</title>
+<title>LINGUA v9.5 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -670,17 +670,12 @@ nav{touch-action:pan-x;}
 .psb-new { background:rgba(108,99,255,.2); color:var(--accent); }
 </style>
 
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then(function(regs) { regs.forEach(function(r){r.unregister();}); });
-}
-if (window.caches) { caches.keys().then(function(ns){ns.forEach(function(n){caches.delete(n);});}); }
-</script>
+<!-- SW verwaltet Cache selbst via activate-Handler -->
 </head>
 <body>
 <div id="app">
   <header>
-    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v9.4</span></div>
+    <div class="logo">LIN<span>GUA</span> <span style="font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.05em;" id="logo-version">v9.5</span></div>
     <div class="header-right">
       <div class="lang-pills">
         <button class="lang-pill" data-lang="sq">🇦🇱 SQ</button>
@@ -1710,7 +1705,7 @@ if (window.caches) { caches.keys().then(function(ns){ns.forEach(function(n){cach
   </div>
 
   <footer>
-    LINGUA <span id="footer-version">v9.4</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
+    LINGUA <span id="footer-version">v9.5</span> · KI-Sprachlern-App · <span id="footer-text">Dein Fortschritt wird lokal gespeichert</span>
     <span style="display:block;margin-top:.3rem;opacity:.6;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Juni 2026</span>
   </footer>
 </div>
@@ -1878,7 +1873,7 @@ if (window.caches) { caches.keys().then(function(ns){ns.forEach(function(n){cach
     </div>
 
     <div style="font-size:.7rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:.5rem;">
-      LINGUA <span id="settings-version">v9.4</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
+      LINGUA <span id="settings-version">v9.5</span> · <span id="set-local-note">Alle Daten werden lokal gespeichert</span><br>
       <span style="opacity:.7;">Entwickelt von <strong style="color:var(--accent);">René Prause</strong> · Juni 2026</span>
     </div>
 
@@ -14022,8 +14017,8 @@ function showOnboardingNow() {
 // BUILD_VERSION = die Version die für diesen BUILD gilt.
 // Bei jedem Deployment: BUILD +1, BUILD_VERSION +0.1
 // ============================================================
-var BUILD = 94; // Juni 2026; // Juni 2026; // Juni 2026; // Juni 2026; // Juni 2026;
-var BUILD_VERSION = '9.4'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
+var BUILD = 95; // Juni 2026; // Juni 2026; // Juni 2026; // Juni 2026; // Juni 2026; // Juni 2026;
+var BUILD_VERSION = '9.5'; // ← Beide Zeilen bei jedem Deploy anpassen (+1 / +0.1)
 
 // Version aus localStorage laden oder auf BUILD_VERSION setzen
 (function() {
@@ -14129,6 +14124,16 @@ function updateAllVersionDisplays() {
 // Bei jedem Deploy: neuen Eintrag mit aktuellem BUILD hinzufügen
 // ============================================================
 var CHANGELOG = {
+  95: {
+    emoji: '🔧',
+    title: 'v9.5 - Offline Fix: 404 behoben',
+    items: [
+      'SW-Cache-Cleaner im head entfernt (Ursache des 404)',
+      'SW Network-First (immer aktuelle Version laden)',
+      'sw.js: Cache lingua-v94, alle alten Caches werden geloescht',
+    ]
+  },
+
   94: {
     emoji: '🔄',
     title: 'v9.4 - Uebersetzer: Claude primaer, kein CORS',
