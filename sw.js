@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lingua-v94';
+const CACHE_NAME = 'lingua-v95';
 
 // Domains die immer direkt ans Netzwerk gehen (nie gecacht)
 const NETWORK_ONLY = [
