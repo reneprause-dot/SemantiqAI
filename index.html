@@ -763,10 +763,43 @@ nav::-webkit-scrollbar { display: none; }
   animation: spin .6s linear infinite; display: inline-block;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+.niveau-lesson-btn{display:flex;align-items:center;gap:.6rem;width:100%;padding:.75rem .9rem;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-m);margin-bottom:.4rem;cursor:pointer;text-align:left;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:all var(--t);}
+.niveau-lesson-btn:active{background:var(--surface2);}
+.niveau-lesson-btn .lesson-icon{font-size:1.3rem;flex-shrink:0;}
+.niveau-lesson-btn .lesson-info{flex:1;}
+.niveau-lesson-btn .lesson-title{font-weight:800;font-size:.88rem;display:block;}
+.niveau-lesson-btn .lesson-meta{font-size:.68rem;color:var(--muted);margin-top:2px;display:block;}
+.niveau-lesson-btn .lesson-arr{color:var(--muted);font-size:.85rem;}
+.niveau-lesson-view{animation:fadeUp .22s ease;}
+.lesson-section{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-l);padding:1rem;margin-bottom:.75rem;}
+.lesson-section-title{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:.75rem;}
+.grammar-block{border-left:3px solid var(--accent);padding-left:.85rem;margin-bottom:.85rem;}
+.grammar-block:last-child{margin-bottom:0;}
+.grammar-title{font-weight:800;font-size:.9rem;margin-bottom:.35rem;}
+.grammar-text{font-size:.83rem;line-height:1.65;color:var(--text2);}
+.grammar-examples{margin-top:.5rem;display:flex;flex-direction:column;gap:.25rem;}
+.grammar-example{background:var(--surface2);border-radius:var(--r-s);padding:.35rem .6rem;font-size:.78rem;}
+.sentence-row{padding:.55rem 0;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:.15rem;}
+.sentence-row:last-child{border-bottom:none;}
+.sentence-de{font-weight:700;font-size:.88rem;}
+.sentence-tr{font-size:.78rem;color:var(--muted);}
+.vocab-lesson-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;}
+.vocab-lesson-item{background:var(--surface2);border-radius:var(--r-s);padding:.5rem .65rem;cursor:pointer;touch-action:manipulation;transition:background var(--t);}
+.vocab-lesson-item:active{background:var(--surface3);}
+.vocab-lesson-f{font-weight:800;font-size:.85rem;}
+.vocab-lesson-t{font-size:.72rem;color:var(--muted);margin-top:1px;}
+.vocab-lesson-ph{font-size:.65rem;color:var(--accent);font-style:italic;}
+.niveau-quiz-card{background:var(--surface2);border-radius:var(--r-l);padding:1.25rem;text-align:center;margin-bottom:.75rem;}
+.niveau-quiz-word{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:700;margin-bottom:1rem;color:var(--text);}
+.niveau-quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;}
+.niveau-quiz-opt{padding:.55rem .4rem;border-radius:var(--r-m);font-size:.82rem;font-weight:700;cursor:pointer;background:var(--surface);border:1.5px solid var(--border);touch-action:manipulation;transition:all var(--t);-webkit-tap-highlight-color:transparent;}
+.niveau-quiz-opt:active{transform:scale(.96);}
+.niveau-quiz-opt.correct{background:rgba(132,204,22,.15);border-color:var(--lime);}
+.niveau-quiz-opt.wrong{background:rgba(244,63,94,.1);border-color:var(--rose);}
 </style>
 </head>
 <body>
-
 <!-- ══════════════ ONBOARDING ══════════════ -->
 <div id="onboarding" class="hidden">
   <div class="onboarding-step active" id="ob-step-1">
@@ -1233,7 +1266,7 @@ nav::-webkit-scrollbar { display: none; }
     </div>
     <div class="card">
       <div class="chat-messages" id="ai-messages">
-        <div class="chat-msg ai" id="ai-welcome">Hallo! Ich helfe dir beim Sprachenlernen. Stell mir eine Frage oder üben wir gemeinsam!</div>
+        <div class="chat-msg ai" id="ai-welcome">Hallo! Ich bin der SemantiqAI-Assistent. Stell mir eine Frage oder üben wir gemeinsam!</div>
       </div>
       <div class="chat-input-row">
         <input class="input" type="text" id="ai-input" placeholder="Nachricht schreiben..." onkeydown="if(event.key==='Enter')sendAIMsg()">
@@ -1371,15 +1404,7 @@ nav::-webkit-scrollbar { display: none; }
 
     <div class="settings-row">
       <div class="settings-label">
-        <strong>Lernsprache</strong>
-        <span>Welche Sprache lernst du?</span>
-      </div>
-      <select class="lang-select" id="settings-lang-select" onchange="setLang(this.value)" style="width:auto"></select>
-    </div>
-    <div class="settings-row">
-      <div class="settings-label">
         <strong>UI-Sprache</strong>
-        <span>Sprache der Benutzeroberfläche</span>
       </div>
       <select class="lang-select" id="ui-lang-select" onchange="setUILang(this.value)" style="width:auto"></select>
     </div>
@@ -1409,8 +1434,8 @@ nav::-webkit-scrollbar { display: none; }
   <button class="btn btn-sm btn-ghost mt-sm w-full" onclick="document.getElementById('pron-score-popup').classList.add('hidden')">Schließen</button>
 </div>
 
-
 <script>
+
 // ════ DATEN ════════════════════════════════════════════════
 const VOCAB = {
   ru: {
@@ -1619,6 +1644,59 @@ const VOCAB = {
     ],
     "Чувства": [
       {f:"привязанность",t:"Zuneigung",p:"privyazannost"},{f:"доверие",t:"Vertrauen",p:"doveriye"},{f:"ревность",t:"Eifersucht",p:"revnost"},{f:"горе",t:"Trauer",p:"gore"},{f:"облегчение",t:"Erleichterung",p:"oblegcheniye"},{f:"уверенность",t:"Selbstvertrauen",p:"uvyerennost"},{f:"одиночество",t:"Einsamkeit",p:"odinochestvo"},{f:"благодарность",t:"Dankbarkeit",p:"blagodarnost"},{f:"эмпатия",t:"Empathie",p:"empatiya"},{f:"прощение",t:"Vergebung",p:"proshcheniye"},{f:"обида",t:"Groll",p:"obida"},{f:"энтузиазм",t:"Begeisterung",p:"entuziazm"},{f:"ностальгия",t:"Nostalgie",p:"nostalgiya"},{f:"восхищение",t:"Bewunderung",p:"voskhishcheniye"},{f:"сожаление",t:"Reue",p:"sozhаleniye"},{f:"зависть",t:"Neid",p:"zavist"}
+    ],
+    "Kleidung": [
+      {f:"рубашка",t:"Hemd",p:"rubashka"},{f:"брюки",t:"Hose",p:"bryuki"},
+      {f:"платье",t:"Kleid",p:"platye"},{f:"юбка",t:"Rock",p:"yubka"},
+      {f:"пальто",t:"Mantel",p:"palto"},{f:"куртка",t:"Jacke",p:"kurtka"},
+      {f:"обувь",t:"Schuhe",p:"obuv"},{f:"носки",t:"Socken",p:"noski"},
+      {f:"шапка",t:"Mütze",p:"shapka"},{f:"шарф",t:"Schal",p:"sharf"},
+      {f:"перчатки",t:"Handschuhe",p:"perchatki"},{f:"свитер",t:"Pullover",p:"sviter"},
+      {f:"джинсы",t:"Jeans",p:"dzhynsy"},{f:"пиджак",t:"Blazer",p:"pidzhak"},
+      {f:"платок",t:"Tuch",p:"platok"},{f:"кепка",t:"Kappe",p:"kepka"},
+      {f:"галстук",t:"Krawatte",p:"galstuk"},{f:"белье",t:"Unterwäsche",p:"belyo"},
+    ],
+    "Restaurant & Café": [
+      {f:"меню",t:"Menü/Speisekarte",p:"menyu"},{f:"официант",t:"Kellner",p:"ofitsiánt"},
+      {f:"счёт",t:"Rechnung",p:"shchot"},{f:"чаевые",t:"Trinkgeld",p:"chaevye"},
+      {f:"заказать",t:"bestellen",p:"zakazat"},{f:"бронировать",t:"reservieren",p:"bronirovat"},
+      {f:"столик",t:"Tisch",p:"stolik"},{f:"порция",t:"Portion",p:"portsiya"},
+      {f:"закуска",t:"Vorspeise",p:"zakuska"},{f:"гарнир",t:"Beilage",p:"garnir"},
+      {f:"десерт",t:"Dessert",p:"desert"},{f:"напиток",t:"Getränk",p:"napitok"},
+      {f:"вегетарианский",t:"vegetarisch",p:"vegetarianskiy"},{f:"острый",t:"scharf",p:"ostryy"},
+      {f:"сладкий",t:"süß",p:"sladkiy"},{f:"кислый",t:"sauer",p:"kislyy"},
+      {f:"солёный",t:"salzig",p:"solyonyy"},{f:"горький",t:"bitter",p:"gorkiy"},
+    ],
+    "Bank & Finanzen": [
+      {f:"банк",t:"Bank",p:"bank"},{f:"счёт",t:"Konto",p:"shchot"},
+      {f:"перевод",t:"Überweisung",p:"perevod"},{f:"наличные",t:"Bargeld",p:"nalichnye"},
+      {f:"кредитная карта",t:"Kreditkarte",p:"kreditnaya karta"},
+      {f:"процент",t:"Zinsen",p:"protsent"},{f:"обменный курс",t:"Wechselkurs",p:"obmenny kurs"},
+      {f:"снять деньги",t:"Geld abheben",p:"snyat dengi"},
+      {f:"вклад",t:"Einlage/Spareinlage",p:"vklad"},{f:"кредит",t:"Kredit",p:"kredit"},
+      {f:"долг",t:"Schulden",p:"dolg"},{f:"бюджет",t:"Budget",p:"byudzhet"},
+      {f:"расход",t:"Ausgabe",p:"raskhod"},{f:"доход",t:"Einnahme",p:"dokhod"},
+      {f:"инвестиция",t:"Investition",p:"investitsiya"},{f:"страхование",t:"Versicherung",p:"strakhovanie"},
+    ],
+    "Wohnung suchen": [
+      {f:"квартира",t:"Wohnung",p:"kvartira"},{f:"аренда",t:"Miete",p:"arenda"},
+      {f:"арендодатель",t:"Vermieter",p:"arendodatel"},{f:"арендатор",t:"Mieter",p:"arendator"},
+      {f:"договор",t:"Vertrag",p:"dogovor"},{f:"залог",t:"Kaution",p:"zalog"},
+      {f:"площадь",t:"Fläche",p:"ploshchad"},{f:"этаж",t:"Stockwerk",p:"etazh"},
+      {f:"лифт",t:"Aufzug",p:"lift"},{f:"балкон",t:"Balkon",p:"balkon"},
+      {f:"парковка",t:"Parkplatz",p:"parkovka"},{f:"коммунальные услуги",t:"Nebenkosten",p:"kommunalnyye uslugi"},
+      {f:"ремонт",t:"Renovierung",p:"remont"},{f:"мебелированный",t:"möbliert",p:"mebelirovanny"},
+      {f:"свободен с",t:"frei ab",p:"svoboden s"},{f:"просмотр",t:"Besichtigung",p:"prosmotr"},
+    ],
+    "Медицина": [
+      {f:"рецепт",t:"Rezept",p:"retsept"},{f:"аптека",t:"Apotheke",p:"apteka"},
+      {f:"врач",t:"Arzt",p:"vrach"},{f:"медсестра",t:"Krankenschwester",p:"medsestra"},
+      {f:"операция",t:"Operation",p:"operatsiya"},{f:"диагноз",t:"Diagnose",p:"diagnoz"},
+      {f:"симптом",t:"Symptom",p:"simptom"},{f:"температура",t:"Fieber",p:"temperatura"},
+      {f:"давление",t:"Blutdruck",p:"davleniye"},{f:"аллергия",t:"Allergie",p:"allergiya"},
+      {f:"прививка",t:"Impfung",p:"privivka"},{f:"скорая помощь",t:"Notaufnahme",p:"skoraya pomoshch"},
+      {f:"страховой полис",t:"Krankenkarte",p:"strakhovoy polis"},{f:"анализ крови",t:"Bluttest",p:"analiz krovi"},
+      {f:"рентген",t:"Röntgen",p:"rentgen"},{f:"выписка",t:"Entlassung",p:"vypiska"},
     ],
   },
   it: {
@@ -2096,6 +2174,58 @@ const VOCAB = {
     ],
     "Stadtleben": [
       {f:"neighbourhood",t:"Nachbarschaft",p:"ˈneɪbəhʊd"},{f:"rush hour",t:"Stoßzeit",p:"rʌʃ ˈaʊər"},{f:"commute",t:"Pendeln",p:"kəˈmjuːt"},{f:"rent",t:"Miete",p:"rɛnt"},{f:"landlord",t:"Vermieter",p:"ˈlændlɔːd"},{f:"utilities",t:"Nebenkosten",p:"juːˈtɪlɪtɪz"},{f:"grocery",t:"Lebensmittel",p:"ˈgrəʊsəri"},{f:"queue",t:"Warteschlange",p:"kjuː"},{f:"pedestrian",t:"Fußgänger",p:"pɪˈdɛstriən"},{f:"suburb",t:"Vorort",p:"ˈsʌbɜːb"},{f:"traffic jam",t:"Stau",p:"ˈtræfɪk dʒæm"},{f:"charity",t:"Hilfsorganisation",p:"ˈtʃærɪti"},{f:"volunteer",t:"Ehrenamtliche",p:"ˌvɒlənˈtɪər"},{f:"council",t:"Gemeinderat",p:"ˈkaʊnsəl"},{f:"bin",t:"Mülltonne",p:"bɪn"},{f:"pavement",t:"Bürgersteig",p:"ˈpeɪvmənt"}
+    ],
+    "Clothing": [
+      {f:"shirt",t:"Hemd",p:"ʃɜːrt"},{f:"trousers",t:"Hose",p:"ˈtraʊzəz"},
+      {f:"dress",t:"Kleid",p:"drɛs"},{f:"skirt",t:"Rock",p:"skɜːrt"},
+      {f:"coat",t:"Mantel",p:"koʊt"},{f:"jacket",t:"Jacke",p:"ˈdʒækɪt"},
+      {f:"shoes",t:"Schuhe",p:"ʃuːz"},{f:"socks",t:"Socken",p:"sɒks"},
+      {f:"hat",t:"Hut/Mütze",p:"hæt"},{f:"scarf",t:"Schal",p:"skɑːrf"},
+      {f:"gloves",t:"Handschuhe",p:"ɡlʌvz"},{f:"sweater",t:"Pullover",p:"ˈswɛtər"},
+      {f:"jeans",t:"Jeans",p:"dʒiːnz"},{f:"suit",t:"Anzug",p:"suːt"},
+      {f:"tie",t:"Krawatte",p:"taɪ"},{f:"underwear",t:"Unterwäsche",p:"ˈʌndərwɛr"},
+      {f:"boots",t:"Stiefel",p:"buːts"},{f:"belt",t:"Gürtel",p:"bɛlt"},
+    ],
+    "Restaurant & Café": [
+      {f:"menu",t:"Speisekarte",p:"ˈmɛnjuː"},{f:"waiter",t:"Kellner",p:"ˈweɪtər"},
+      {f:"bill",t:"Rechnung",p:"bɪl"},{f:"tip",t:"Trinkgeld",p:"tɪp"},
+      {f:"to order",t:"bestellen",p:"tuː ˈɔːrdər"},{f:"reservation",t:"Reservierung",p:"ˌrɛzərˈveɪʃən"},
+      {f:"starter",t:"Vorspeise",p:"ˈstɑːrtər"},{f:"main course",t:"Hauptgericht",p:"meɪn kɔːrs"},
+      {f:"dessert",t:"Dessert",p:"dɪˈzɜːrt"},{f:"vegetarian",t:"vegetarisch",p:"ˌvɛdʒɪˈtɛriən"},
+      {f:"spicy",t:"scharf",p:"ˈspaɪsi"},{f:"sweet",t:"süß",p:"swiːt"},
+      {f:"salty",t:"salzig",p:"ˈsɔːlti"},{f:"bitter",t:"bitter",p:"ˈbɪtər"},
+      {f:"portion",t:"Portion",p:"ˈpɔːrʃən"},{f:"side dish",t:"Beilage",p:"saɪd dɪʃ"},
+      {f:"soft drink",t:"Erfrischungsgetränk",p:"sɒft drɪŋk"},{f:"tap water",t:"Leitungswasser",p:"tæp ˈwɔːtər"},
+    ],
+    "Banking & Finance": [
+      {f:"bank account",t:"Bankkonto",p:"bæŋk əˈkaʊnt"},{f:"transfer",t:"Überweisung",p:"trænsˈfɜːr"},
+      {f:"cash",t:"Bargeld",p:"kæʃ"},{f:"credit card",t:"Kreditkarte",p:"ˈkrɛdɪt kɑːrd"},
+      {f:"interest rate",t:"Zinssatz",p:"ˈɪntrəst reɪt"},{f:"exchange rate",t:"Wechselkurs",p:"ɪksˈtʃeɪndʒ reɪt"},
+      {f:"to withdraw",t:"abheben",p:"tuː wɪðˈdrɔː"},{f:"savings",t:"Ersparnisse",p:"ˈseɪvɪŋz"},
+      {f:"loan",t:"Kredit",p:"loʊn"},{f:"debt",t:"Schulden",p:"dɛt"},
+      {f:"budget",t:"Budget",p:"ˈbʌdʒɪt"},{f:"expense",t:"Ausgabe",p:"ɪkˈspɛns"},
+      {f:"income",t:"Einkommen",p:"ˈɪnkʌm"},{f:"investment",t:"Investition",p:"ɪnˈvɛstmənt"},
+      {f:"insurance",t:"Versicherung",p:"ɪnˈʃʊərəns"},{f:"mortgage",t:"Hypothek",p:"ˈmɔːrɡɪdʒ"},
+    ],
+    "Renting a Flat": [
+      {f:"apartment",t:"Wohnung",p:"əˈpɑːrtmənt"},{f:"rent",t:"Miete",p:"rɛnt"},
+      {f:"landlord",t:"Vermieter",p:"ˈlændlɔːrd"},{f:"tenant",t:"Mieter",p:"ˈtɛnənt"},
+      {f:"lease",t:"Mietvertrag",p:"liːs"},{f:"deposit",t:"Kaution",p:"dɪˈpɒzɪt"},
+      {f:"floor plan",t:"Grundriss",p:"flɔːr plæn"},{f:"storey",t:"Stockwerk",p:"ˈstɔːri"},
+      {f:"lift",t:"Aufzug",p:"lɪft"},{f:"balcony",t:"Balkon",p:"ˈbælkəni"},
+      {f:"utilities",t:"Nebenkosten",p:"juːˈtɪlɪtiz"},{f:"furnished",t:"möbliert",p:"ˈfɜːrnɪʃt"},
+      {f:"available from",t:"frei ab",p:"əˈveɪləbəl frɒm"},{f:"viewing",t:"Besichtigung",p:"ˈvjuːɪŋ"},
+      {f:"notice period",t:"Kündigungsfrist",p:"ˈnoʊtɪs ˈpɪəriəd"},{f:"parking space",t:"Parkplatz",p:"ˈpɑːrkɪŋ speɪs"},
+    ],
+    "Medical": [
+      {f:"prescription",t:"Rezept",p:"prɪˈskrɪpʃən"},{f:"pharmacy",t:"Apotheke",p:"ˈfɑːrməsi"},
+      {f:"doctor",t:"Arzt",p:"ˈdɒktər"},{f:"nurse",t:"Krankenschwester",p:"nɜːrs"},
+      {f:"surgery",t:"Operation",p:"ˈsɜːrdʒəri"},{f:"diagnosis",t:"Diagnose",p:"ˌdaɪəɡˈnoʊsɪs"},
+      {f:"symptom",t:"Symptom",p:"ˈsɪmptəm"},{f:"fever",t:"Fieber",p:"ˈfiːvər"},
+      {f:"blood pressure",t:"Blutdruck",p:"blʌd ˈprɛʃər"},{f:"allergy",t:"Allergie",p:"ˈælərdʒi"},
+      {f:"vaccination",t:"Impfung",p:"ˌvæksɪˈneɪʃən"},{f:"emergency room",t:"Notaufnahme",p:"ɪˈmɜːrdʒənsi ruːm"},
+      {f:"blood test",t:"Bluttest",p:"blʌd tɛst"},{f:"X-ray",t:"Röntgen",p:"ˈɛks reɪ"},
+      {f:"painkiller",t:"Schmerzmittel",p:"ˈpeɪnkɪlər"},{f:"dosage",t:"Dosierung",p:"ˈdoʊsɪdʒ"},
     ],
   },
   tr: {
@@ -2945,6 +3075,56 @@ var NIVEAU_DATA = {
         sentences:[
           {de:'Ich möchte bitte einen Tee.',ru:'Я бы хотел чай, пожалуйста.',tr:'Bir çay istiyorum lütfen.',en:'I would like a tea, please.'},{de:'Das Brot ist frisch und lecker.',ru:'Хлеб свежий и вкусный.',tr:'Ekmek taze ve lezzetli.',en:'The bread is fresh and delicious.'},
           {de:'Haben Sie Hunger?',ru:'Вы голодны?',tr:'Acıktınız mı?',en:'Are you hungry?'},{de:'Was kostet das Mittagessen?',ru:'Сколько стоит обед?',tr:'Öğle yemeği ne kadar?',en:'How much does lunch cost?'},
+        ]
+      },
+
+      { id:'a1-zahlenII', icon:'#', title:'Zahlen & Mengen II',
+        vocab:[
+          {de:'zwanzig',ru:'двадцать',en:'twenty',ph:'tsvansikh'},
+          {de:'dreißig',ru:'тридцать',en:'thirty',ph:'draysikh'},
+          {de:'vierzig',ru:'сорок',en:'forty',ph:'fertsikh'},
+          {de:'fünfzig',ru:'пятьдесят',en:'fifty',ph:'fynftsikh'},
+          {de:'hundert',ru:'сто',en:'one hundred',ph:'hundert'},
+          {de:'tausend',ru:'тысяча',en:'one thousand',ph:'tausend'},
+          {de:'die Hälfte',ru:'половина',en:'half',ph:'halfte'},
+          {de:'doppelt',ru:'вдвое',en:'double',ph:'dopelt'},
+          {de:'zählen',ru:'считать',en:'to count',ph:'tseylen'},
+          {de:'plus',ru:'плюс',en:'plus',ph:'plus'},
+          {de:'minus',ru:'минус',en:'minus',ph:'menus'},
+        ],
+        grammar:[{title:'Kardinalzahlen',text:'20 zwanzig · 30 dreißig · 100 hundert · 1000 tausend',examples:['Ich bin <b>zwanzig</b> Jahre alt.','Das kostet <b>fünfzig</b> Euro.']}],
+        sentences:[
+          {de:'Ich bin dreiundzwanzig Jahre alt.',ru:'Мне двадцать три года.',en:'I am twenty-three years old.'},
+          {de:'Wir haben drei Kinder.',ru:'У нас трое детей.',en:'We have three children.'},
+        ]
+      },
+      { id:'a1-wochentage', icon:'Kal', title:'Wochentage & Monate',
+        vocab:[
+          {de:'Montag',ru:'понедельник',en:'Monday',ph:'montaak'},
+          {de:'Dienstag',ru:'вторник',en:'Tuesday',ph:'deenstag'},
+          {de:'Mittwoch',ru:'среда',en:'Wednesday',ph:'mitvokh'},
+          {de:'Donnerstag',ru:'четверг',en:'Thursday',ph:'donerstag'},
+          {de:'Freitag',ru:'пятница',en:'Friday',ph:'fraytag'},
+          {de:'Samstag',ru:'суббота',en:'Saturday',ph:'zamstag'},
+          {de:'Sonntag',ru:'воскресенье',en:'Sunday',ph:'zontag'},
+          {de:'Januar',ru:'январь',en:'January',ph:'yanuaar'},
+          {de:'Februar',ru:'февраль',en:'February',ph:'februaar'},
+          {de:'März',ru:'март',en:'March',ph:'merts'},
+          {de:'April',ru:'апрель',en:'April',ph:'april'},
+          {de:'Mai',ru:'май',en:'May',ph:'may'},
+          {de:'Juni',ru:'июнь',en:'June',ph:'yooni'},
+          {de:'Juli',ru:'июль',en:'July',ph:'yooli'},
+          {de:'August',ru:'август',en:'August',ph:'august'},
+          {de:'September',ru:'сентябрь',en:'September',ph:'september'},
+          {de:'Oktober',ru:'октябрь',en:'October',ph:'oktober'},
+          {de:'November',ru:'ноябрь',en:'November',ph:'november'},
+          {de:'Dezember',ru:'декабрь',en:'December',ph:'detsember'},
+        ],
+        grammar:[{title:'Präpositionen am/im',text:'<b>am</b> Montag, <b>am</b> Freitag · <b>im</b> Januar, <b>im</b> August',examples:['<b>Am</b> Montag arbeite ich.','<b>Im</b> Juli fahren wir in Urlaub.']}],
+        sentences:[
+          {de:'Heute ist Mittwoch.',ru:'Сегодня среда.',en:'Today is Wednesday.'},
+          {de:'Am Freitag gehe ich ins Kino.',ru:'В пятницу я иду в кино.',en:'On Friday I go to the cinema.'},
+          {de:'Im Dezember ist Weihnachten.',ru:'В декабре Рождество.',en:'Christmas is in December.'},
         ]
       },
     ]
@@ -5447,78 +5627,287 @@ function dlgBack(){
 
 // ── DE NIVEAU ─────────────────────────────────────────────────────
 function initDeNiveau(){
-  var el=document.getElementById('deniveau-content'); if(!el||el.children.length) return;
+  var el=document.getElementById('deniveau-content'); if(!el) return;
+  el.innerHTML='';
   renderNiveauContent(el, NIVEAU_DATA);
 }
 function initEnNiveau(){
-  var el=document.getElementById('enniveau-content'); if(!el||el.children.length) return;
+  var el=document.getElementById('enniveau-content'); if(!el) return;
+  el.innerHTML='';
   renderNiveauContent(el, NIVEAU_DATA_EN);
 }
 function renderNiveauContent(el, data){
-  // Unterstuetzt Array [{id,vocab,...}] und Objekt {a1:{label,topics:[...]}}
   var levels={};
+  var colors={'A1':'var(--cat-anf)','A2':'var(--cat-anf)','B1':'var(--cat-fort)','B2':'var(--cat-fort)','C1':'var(--cat-exp)','C2':'var(--cat-exp)'};
   if(Array.isArray(data)){
     data.forEach(function(t){ var l=t.id.split('-')[0].toUpperCase(); if(!levels[l]) levels[l]=[]; levels[l].push(t); });
   } else {
-    // Objekt-Struktur: {a1:{label,topics:[{de,ru,tr,en,ph,grammar,examples}]}}
     Object.entries(data).forEach(function(ent){
-      var lvlKey=ent[0].toUpperCase();
-      var lvlData=ent[1];
-      levels[lvlKey]=(lvlData.topics||[]);
+      levels[ent[0].toUpperCase()] = ent[1].topics||[];
     });
   }
-  var colors={'A1':'var(--cat-anf)','A2':'var(--cat-anf)','B1':'var(--cat-fort)','B2':'var(--cat-fort)','C1':'var(--cat-exp)','C2':'var(--cat-exp)'};
   Object.entries(levels).forEach(function(e){
-    var lvl=e[0],topics=e[1];
-    var hdr=document.createElement('div'); hdr.className='niveau-level-header';
-    hdr.innerHTML='<span class="niveau-badge" style="background:'+colors[lvl]+'">'+lvl+'</span><span>'+topics.length+' Themen</span><span style="margin-left:auto">▸</span>';
-    var topicsEl=document.createElement('div'); topicsEl.style.display='none';
+    var lvl=e[0], topics=e[1];
+    // Level-Header (aufklappbar)
+    var hdr=document.createElement('button');
+    hdr.type='button'; hdr.className='niveau-level-header';
+    hdr.innerHTML='<span class="niveau-badge" style="background:'+colors[lvl]+'">'+lvl+'</span>'
+      +'<span style="flex:1">'+topics.length+' Lektionen</span>'
+      +'<span class="toggle-arrow" style="font-size:.75rem;transition:transform .2s">▸</span>';
+    var topicsEl=document.createElement('div');
+    topicsEl.style.display='none'; topicsEl.style.paddingBottom='.4rem';
     hdr.addEventListener('click',function(){
       var open=topicsEl.style.display!=='none';
       topicsEl.style.display=open?'none':'';
-      hdr.querySelector('span:last-child').textContent=open?'▸':'▾';
+      hdr.querySelector('.toggle-arrow').style.transform=open?'':'rotate(90deg)';
     });
-    topics.forEach(function(t){
-      var card=document.createElement('div'); card.className='niveau-topic';
-      var thead=document.createElement('div'); thead.className='niveau-topic-header';
-      thead.innerHTML='<span class="niveau-topic-title">'+t.title+'</span><span>▸</span>';
-      var tbody=document.createElement('div'); tbody.className='niveau-topic-body';
-      // Grammar
-      if(t.grammar&&t.grammar.length){
-        var grEl=document.createElement('div'); grEl.className='card mt-sm';
-        grEl.innerHTML='<div class="card-title">GRAMMATIK</div>'+t.grammar.map(function(g){
-          return '<div class="mb-sm"><div style="font-weight:800;font-size:.85rem">'+g.rule+'</div><div class="text-xs text-muted">'+g.explanation+'</div></div>';
-        }).join('');
-        tbody.appendChild(grEl);
-      }
-      // Vocab
-      if(t.vocab&&t.vocab.length){
-        var vgrid=document.createElement('div'); vgrid.className='niveau-vocab-grid mt-sm';
-        t.vocab.forEach(function(w){
-          var item=document.createElement('div'); item.className='niveau-vocab-item';
-          var wf=w.f||w.de||''; var wt=w.t||w.ru||w.en||''; var wp=w.p||w.ph||'';
-          item.innerHTML='<div class="nv-f">'+wf+'</div><div class="nv-t">'+wt+(wp?' <small style="opacity:.5">['+wp+']</small>':'')+'</div>';
-          vgrid.appendChild(item);
-        });
-        tbody.appendChild(vgrid);
-      }
-      // Examples
-      if(t.examples&&t.examples.length){
-        var exEl=document.createElement('div'); exEl.className='mt-sm';
-        t.examples.forEach(function(ex){
-          var d=document.createElement('div'); d.style.cssText='font-size:.8rem;padding:.4rem 0;border-bottom:1px solid var(--border)';
-          d.innerHTML='<div style="font-weight:700">'+ex.de+'</div><div class="text-muted text-xs">'+ex.ru+'</div>';
-          exEl.appendChild(d);
-        });
-        tbody.appendChild(exEl);
-      }
-      thead.addEventListener('click',function(){ card.classList.toggle('open'); thead.querySelector('span:last-child').textContent=card.classList.contains('open')?'▾':'▸'; });
-      card.appendChild(thead); card.appendChild(tbody);
-      topicsEl.appendChild(card);
+    // Lektions-Buttons
+    topics.forEach(function(t,idx){
+      var vocabCount=(t.vocab||[]).length;
+      var gramCount=(t.grammar||[]).length;
+      var sentCount=(t.sentences||[]).length;
+      var btn=document.createElement('button');
+      btn.type='button'; btn.className='niveau-lesson-btn';
+      btn.innerHTML='<span class="lesson-icon">'+(t.icon||'\uD83D\uDCDA')+'</span>'
+        +'<span class="lesson-info">'
+          +'<span class="lesson-title">'+t.title+'</span>'
+          +'<span class="lesson-meta">'+vocabCount+' Vokabeln \u00B7 '+gramCount+' Grammatik \u00B7 '+sentCount+' S\u00e4tze</span>'
+        +'</span>'
+        +'<span class="lesson-arr">\u203A</span>';
+      btn.addEventListener('click',function(){ openNiveauLesson(el, data, t, lvl, colors[lvl]); });
+      topicsEl.appendChild(btn);
     });
     el.appendChild(hdr); el.appendChild(topicsEl);
   });
 }
+
+// ── Lektion öffnen ────────────────────────────────────────────────────────
+var _niveauLessonState = {};
+
+function openNiveauLesson(containerEl, allData, topic, lvl, color){
+  // Container leeren und Lektion anzeigen
+  containerEl.innerHTML='';
+  var view = document.createElement('div');
+  view.className = 'niveau-lesson-view';
+
+  // Zurück-Button
+  var backBtn = document.createElement('button');
+  backBtn.type='button';
+  backBtn.className='btn btn-ghost mb-md';
+  backBtn.innerHTML='← Zurück zur Übersicht';
+  backBtn.addEventListener('click', function(){
+    containerEl.innerHTML='';
+    renderNiveauContent(containerEl, allData);
+    // Level wieder aufklappen
+    var hdrs = containerEl.querySelectorAll('.niveau-level-header');
+    hdrs.forEach(function(h){
+      if(h.querySelector('.niveau-badge').textContent===lvl){
+        h.click();
+      }
+    });
+  });
+  view.appendChild(backBtn);
+
+  // Lektion-Header
+  var lhdr = document.createElement('div');
+  lhdr.className = 'section-head mb-md';
+  lhdr.innerHTML = '<div class="section-icon" style="background:rgba(0,0,0,.06);font-size:1.4rem">'+(topic.icon||'\uD83D\uDCDA')+'</div>'
+    +'<div><h2>'+topic.title+'</h2>'
+    +'<div class="section-sub"><span style="background:'+color+';color:#fff;padding:2px 8px;border-radius:99px;font-size:.65rem;font-weight:800">'+lvl+'</span></div></div>';
+  view.appendChild(lhdr);
+
+  // ── Tab-Navigation: Lernen / Vokabeln / Quiz ─────────────────────────
+  var tabs = ['lernen','vokabeln','quiz'];
+  var tabLabels = ['\uD83D\uDCDA Lektion','\uD83D\uDD24 Vokabeln','\u2753 Mini-Quiz'];
+  _niveauLessonState = {topic:topic, tab:'lernen', quizIdx:0, quizScore:0, quizQueue:[]};
+
+  var tabBar = document.createElement('div');
+  tabBar.className='btn-row mb-md'; tabBar.id='niveau-tabs';
+  tabs.forEach(function(tab, i){
+    var b=document.createElement('button'); b.type='button';
+    b.className='btn btn-sm'+(tab==='lernen'?' btn-primary':'');
+    b.textContent=tabLabels[i]; b.dataset.tab=tab;
+    b.addEventListener('click',function(){
+      document.querySelectorAll('#niveau-tabs .btn').forEach(function(x){ x.className='btn btn-sm'; });
+      b.className='btn btn-sm btn-primary';
+      _niveauLessonState.tab=tab;
+      renderNiveauTab(tabContent, topic, tab);
+    });
+    tabBar.appendChild(b);
+  });
+  view.appendChild(tabBar);
+
+  // Tab-Content
+  var tabContent = document.createElement('div');
+  tabContent.id = 'niveau-tab-content';
+  view.appendChild(tabContent);
+  containerEl.appendChild(view);
+
+  // Ersten Tab rendern
+  renderNiveauTab(tabContent, topic, 'lernen');
+}
+
+function renderNiveauTab(el, topic, tab){
+  el.innerHTML='';
+  if(tab==='lernen')    renderNiveauLernen(el, topic);
+  if(tab==='vokabeln')  renderNiveauVokabeln(el, topic);
+  if(tab==='quiz')      renderNiveauQuiz(el, topic);
+}
+
+// ── Tab: Lektion (Grammatik + Sätze) ─────────────────────────────────────
+function renderNiveauLernen(el, topic){
+  // Grammatik
+  if(topic.grammar && topic.grammar.length){
+    var sec=document.createElement('div'); sec.className='lesson-section';
+    var t=document.createElement('div'); t.className='lesson-section-title';
+    t.innerHTML='\uD83D\uDCD6 GRAMMATIK';
+    sec.appendChild(t);
+    topic.grammar.forEach(function(g){
+      var block=document.createElement('div'); block.className='grammar-block';
+      var title=document.createElement('div'); title.className='grammar-title';
+      title.innerHTML=g.title||g.rule||'';
+      var text=document.createElement('div'); text.className='grammar-text';
+      text.innerHTML=(g.text||g.explanation||'').replace(/\n/g,'<br>');
+      block.appendChild(title);
+      block.appendChild(text);
+      // Grammatik-Beispiele
+      if(g.examples&&g.examples.length){
+        var exWrap=document.createElement('div'); exWrap.className='grammar-examples';
+        g.examples.forEach(function(ex){
+          var d=document.createElement('div'); d.className='grammar-example';
+          d.innerHTML=ex; exWrap.appendChild(d);
+        });
+        block.appendChild(exWrap);
+      }
+      sec.appendChild(block);
+    });
+    el.appendChild(sec);
+  }
+
+  // Sätze
+  if(topic.sentences && topic.sentences.length){
+    var sec2=document.createElement('div'); sec2.className='lesson-section';
+    var t2=document.createElement('div'); t2.className='lesson-section-title';
+    t2.innerHTML='\uD83D\uDCAC BEISPIELS\u00C4TZE';
+    sec2.appendChild(t2);
+    topic.sentences.forEach(function(s){
+      var row=document.createElement('div'); row.className='sentence-row';
+      var de=document.createElement('div'); de.className='sentence-de';
+      de.textContent=s.de||'';
+      var tr=document.createElement('div'); tr.className='sentence-tr';
+      // Zeige Übersetzung in Lernsprache
+      tr.textContent=s.ru||s.en||s.tr||'';
+      row.appendChild(de); row.appendChild(tr);
+      // TTS Button
+      var ttsBtn=document.createElement('button');
+      ttsBtn.type='button'; ttsBtn.className='btn btn-sm btn-ghost mt-sm';
+      ttsBtn.style.cssText='padding:.2rem .5rem;font-size:.7rem;align-self:flex-start';
+      ttsBtn.innerHTML='\uD83D\uDD0A H\u00f6ren';
+      (function(sentence){ ttsBtn.addEventListener('click',function(){ speak(sentence,'de'); }); })(s.de||'');
+      row.appendChild(ttsBtn);
+      sec2.appendChild(row);
+    });
+    el.appendChild(sec2);
+  }
+
+  if(!topic.grammar?.length && !topic.sentences?.length){
+    el.innerHTML='<div class="text-muted text-sm text-center mt-md">Keine Lektionsinhalte vorhanden</div>';
+  }
+}
+
+// ── Tab: Vokabeln ─────────────────────────────────────────────────────────
+function renderNiveauVokabeln(el, topic){
+  if(!topic.vocab||!topic.vocab.length){
+    el.innerHTML='<div class="text-muted text-sm text-center mt-md">Keine Vokabeln</div>'; return;
+  }
+  var grid=document.createElement('div'); grid.className='vocab-lesson-grid';
+  topic.vocab.forEach(function(w){
+    var word=w.de||w.f||''; var trans=w.ru||w.en||w.t||''; var ph=w.ph||w.p||'';
+    var item=document.createElement('div'); item.className='vocab-lesson-item';
+    item.innerHTML='<div class="vocab-lesson-f">'+word+'</div>'
+      +'<div class="vocab-lesson-t">'+trans+'</div>'
+      +(ph?'<div class="vocab-lesson-ph">['+ph+']</div>':'');
+    item.addEventListener('click',function(){ speak(word,'de'); });
+    grid.appendChild(item);
+  });
+  var sec=document.createElement('div'); sec.className='lesson-section';
+  var t=document.createElement('div'); t.className='lesson-section-title';
+  t.innerHTML='\uD83D\uDD24 VOKABELN — '+(topic.vocab.length)+' W\u00d6RTER';
+  sec.appendChild(t); sec.appendChild(grid);
+  el.appendChild(sec);
+}
+
+// ── Tab: Mini-Quiz ────────────────────────────────────────────────────────
+function renderNiveauQuiz(el, topic){
+  if(!topic.vocab||topic.vocab.length<4){
+    el.innerHTML='<div class="text-muted text-sm text-center mt-md">Mind. 4 Vokabeln f\u00fcr Quiz n\u00f6tig</div>'; return;
+  }
+  if(_niveauLessonState.quizIdx===0||_niveauLessonState.quizQueue.length===0){
+    _niveauLessonState.quizQueue=topic.vocab.slice().sort(function(){return Math.random()-.5;}).slice(0,8);
+    _niveauLessonState.quizScore=0;
+    _niveauLessonState.quizIdx=0;
+  }
+  renderNiveauQuizCard(el, topic);
+}
+
+function renderNiveauQuizCard(el, topic){
+  el.innerHTML='';
+  var state=_niveauLessonState;
+  if(state.quizIdx>=state.quizQueue.length){
+    el.innerHTML='<div class="card text-center" style="padding:1.5rem">'
+      +'<div style="font-size:2.5rem">\uD83C\uDF89</div>'
+      +'<div style="font-family:Fraunces,serif;font-size:1.6rem;font-weight:900;margin:.5rem 0">'+state.quizScore+'/'+state.quizQueue.length+'</div>'
+      +'<div class="text-muted text-sm">richtig</div>'
+      +'<button type="button" class="btn btn-primary btn-full mt-md" onclick="(_niveauLessonState.quizIdx=0,_niveauLessonState.quizScore=0,_niveauLessonState.quizQueue=[],renderNiveauTab(document.getElementById(\'niveau-tab-content\'),_niveauLessonState.topic,\'quiz\'))">Nochmal</button>'
+      +'</div>';
+    return;
+  }
+  var item=state.quizQueue[state.quizIdx];
+  var word=item.de||item.f||'';
+  var correct=item.ru||item.en||item.t||'';
+  // 3 falsche Antworten aus anderen Vokabeln
+  var others=topic.vocab.filter(function(w){ return (w.de||w.f)!==word; })
+    .sort(function(){return Math.random()-.5;}).slice(0,3)
+    .map(function(w){ return w.ru||w.en||w.t||''; });
+  var opts=[correct].concat(others).sort(function(){return Math.random()-.5;});
+
+  var prog=document.createElement('div');
+  prog.className='flex justify-between text-xs text-muted mb-md';
+  prog.innerHTML='<span>Frage '+(state.quizIdx+1)+'/'+state.quizQueue.length+'</span>'
+    +'<span>'+state.quizScore+' \u2713</span>';
+
+  var card=document.createElement('div'); card.className='niveau-quiz-card';
+  var qword=document.createElement('div'); qword.className='niveau-quiz-word'; qword.textContent=word;
+  var hint=document.createElement('div'); hint.className='text-xs text-muted mb-md'; hint.textContent='Wie hei\u00dft das auf '+LANG_NAMES[state.lang||'ru']+'?';
+  var optGrid=document.createElement('div'); optGrid.className='niveau-quiz-options';
+  opts.forEach(function(o){
+    var b=document.createElement('button'); b.type='button'; b.className='niveau-quiz-opt';
+    b.textContent=o;
+    b.addEventListener('click',function(){
+      var ok=o===correct;
+      document.querySelectorAll('.niveau-quiz-opt').forEach(function(x){
+        if(x.textContent===correct) x.classList.add('correct');
+        else if(x.textContent===o&&!ok) x.classList.add('wrong');
+        x.disabled=true;
+      });
+      if(ok){ _niveauLessonState.quizScore++; addXP(2); showToast('+2 XP \u2713'); }
+      else   { showToast('\u2717 '+correct); }
+      setTimeout(function(){
+        _niveauLessonState.quizIdx++;
+        renderNiveauQuizCard(el, topic);
+      }, 900);
+    });
+    optGrid.appendChild(b);
+  });
+  card.appendChild(qword); card.appendChild(hint); card.appendChild(optGrid);
+  el.appendChild(prog); el.appendChild(card);
+
+  var bar=document.createElement('div'); bar.className='progress-track';
+  var fill=document.createElement('div'); fill.className='progress-fill';
+  fill.style.width=Math.round(state.quizIdx/state.quizQueue.length*100)+'%';
+  bar.appendChild(fill); el.appendChild(bar);
+}
+
 
 // ── SRS ───────────────────────────────────────────────────────────
 var srsQueue=[], srsIdx=0;
@@ -5872,6 +6261,7 @@ function init(){
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
 
 </script>
 </body>
