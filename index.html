@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>SemantiqAI v10.0 · by René Prause</title>
+<title>SemantiqAI v10.1 · by René Prause</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23f97316'/%3E%3Ctext y='.9em' font-size='72' x='12' fill='white'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -884,26 +884,26 @@ nav::-webkit-scrollbar { display: none; }
     <div class="section-head">
       <div class="section-icon neu">🏠</div>
       <div>
-        <h2 id="home-greeting">Guten Tag!</h2>
+        <h2 id="home-greeting"><span data-i18n="greeting">Guten Tag!</span></h2>
         <div class="section-sub" id="home-date"></div>
       </div>
     </div>
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-val" id="home-xp">0</div>
-        <div class="stat-label">XP GESAMT</div>
+        <div class="stat-label"><span data-i18n="lbl_xp_total">XP GESAMT</span></div>
       </div>
       <div class="stat-card">
         <div class="stat-val" id="home-streak">0</div>
-        <div class="stat-label">TAGE STREAK</div>
+        <div class="stat-label"><span data-i18n="lbl_streak">TAGE STREAK</span></div>
       </div>
       <div class="stat-card">
         <div class="stat-val" id="home-words">0</div>
-        <div class="stat-label">VOKABELN</div>
+        <div class="stat-label"><span data-i18n="lbl_words">VOKABELN</span></div>
       </div>
       <div class="stat-card">
         <div class="stat-val" id="home-quiz">0</div>
-        <div class="stat-label">QUIZ RICHTIG</div>
+        <div class="stat-label"><span data-i18n="lbl_quiz_correct">QUIZ RICHTIG</span></div>
       </div>
     </div>
     <!-- Tagesziel -->
@@ -918,7 +918,7 @@ nav::-webkit-scrollbar { display: none; }
       </div>
     </div>
     <!-- Quick Actions -->
-    <div class="card-title mt-md mb-sm">SCHNELLSTART</div>
+    <div class="card-title mt-md mb-sm"><span data-i18n="lbl_quickstart">SCHNELLSTART</span></div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
       <button class="btn btn-primary btn-full" onclick="switchSection('vocab')">📚 Vokabeln</button>
       <button class="btn btn-cyan btn-full" onclick="switchSection('srs')">🧠 SRS</button>
@@ -927,7 +927,7 @@ nav::-webkit-scrollbar { display: none; }
     </div>
     <!-- Wöchentlicher Bericht -->
     <div class="card mt-md">
-      <div class="card-title">📈 DIESE WOCHE</div>
+      <div class="card-title"><span data-i18n="lbl_this_week">📈 DIESE WOCHE</span></div>
       <div class="week-chart" id="home-week-chart"></div>
       <div style="display:flex;gap:4px;margin-top:.3rem" id="home-week-labels"></div>
     </div>
@@ -937,7 +937,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="search">
     <div class="section-head">
       <div class="section-icon anf">🔍</div>
-      <div><h2>Suche</h2><div class="section-sub">Alle Sprachen durchsuchen</div></div>
+      <div><h2>Suche</h2><div class="section-sub"><span data-i18n="sub_search">Alle Sprachen durchsuchen</span></div></div>
     </div>
     <input class="input mb-md" type="search" id="search-input" placeholder="Wort suchen..." oninput="doSearch(this.value)">
     <div id="search-filters" class="mb-md" style="display:flex;flex-wrap:wrap;gap:.35rem"></div>
@@ -948,7 +948,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="vocab">
     <div class="section-head">
       <div class="section-icon anf">📚</div>
-      <div><h2>Vokabeltraining</h2><div class="section-sub" id="vocab-sub"></div></div>
+      <div><h2><span data-i18n="h_vocab">Vokabeltraining</span></h2><div class="section-sub" id="vocab-sub"></div></div>
     </div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
       <div class="text-sm text-muted" id="vocab-progress">Karte 1 / 20</div>
@@ -968,7 +968,7 @@ nav::-webkit-scrollbar { display: none; }
       </div>
     </div>
     <div class="vocab-card-actions mt-md">
-      <button class="btn btn-full" style="color:var(--rose)" onclick="vocabAnswer(false)">✗ Nochmal</button>
+      <button class="btn btn-full" style="color:var(--rose)" onclick="vocabAnswer(false)"><span data-i18n="srs_again">✗ Nochmal</span></button>
       <button class="btn btn-full btn-lime" onclick="vocabAnswer(true)">✓ Gewusst</button>
     </div>
     <div class="mt-md">
@@ -978,7 +978,7 @@ nav::-webkit-scrollbar { display: none; }
     </div>
     <!-- Topic-Auswahl -->
     <div class="card mt-md">
-      <div class="card-title">THEMA WÄHLEN</div>
+      <div class="card-title"><span data-i18n="lbl_choose_topic">THEMA WÄHLEN</span></div>
       <div id="vocab-topic-grid" style="display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.4rem"></div>
     </div>
   </div>
@@ -987,7 +987,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="dialogs">
     <div class="section-head">
       <div class="section-icon anf">💬</div>
-      <div><h2>Dialoge</h2><div class="section-sub">Alltagsgespräche üben</div></div>
+      <div><h2><span data-i18n="h_dialoge">Dialoge</span></h2><div class="section-sub"><span data-i18n="sub_dialoge">Alltagsgespräche üben</span></div></div>
     </div>
     <div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.75rem" id="dialog-cats"></div>
     <div id="dialog-list"></div>
@@ -1008,7 +1008,11 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="deniveau">
     <div class="section-head">
       <div class="section-icon anf">🇩🇪</div>
-      <div><h2>Deutsch Niveau</h2><div class="section-sub">A1 bis C2</div></div>
+      <div><h2>Deutsch Niveau</h2><div class="section-sub" id="deniveau-sub">Deutsch lernen (A1–C2)</div></div>
+    </div>
+    <div class="btn-row mb-sm">
+      <button type="button" class="btn btn-sm btn-primary" id="ndir-de" onclick="setNiveauDir('de')">&#127465;&#127466; Deutsch lernen</button>
+      <button type="button" class="btn btn-sm" id="ndir-ru" onclick="setNiveauDir('ru')">&#127479;&#127482; Russisch lernen</button>
     </div>
     <div id="deniveau-content"></div>
   </div>
@@ -1026,7 +1030,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="badges">
     <div class="section-head">
       <div class="section-icon anf">🏆</div>
-      <div><h2>Abzeichen</h2><div class="section-sub" id="badges-sub">0 von 0 freigeschaltet</div></div>
+      <div><h2><span data-i18n="h_badges">Abzeichen</span></h2><div class="section-sub" id="badges-sub">0 von 0 freigeschaltet</div></div>
     </div>
     <div class="badge-grid" id="badge-grid"></div>
   </div>
@@ -1035,11 +1039,11 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="stats">
     <div class="section-head">
       <div class="section-icon anf">📊</div>
-      <div><h2>Statistiken</h2><div class="section-sub">Dein Lernfortschritt</div></div>
+      <div><h2><span data-i18n="h_stats">Statistiken</span></h2><div class="section-sub"><span data-i18n="sub_stats">Dein Lernfortschritt</span></div></div>
     </div>
     <!-- Wöchentlicher Bericht -->
     <div class="card mb-md">
-      <div class="card-title">📈 WÖCHENTLICHER BERICHT</div>
+      <div class="card-title"><span data-i18n="lbl_weekly_report">📈 WÖCHENTLICHER BERICHT</span></div>
       <div class="week-chart mt-sm" id="stats-week-chart"></div>
       <div style="display:flex;gap:4px;margin-top:.3rem" id="stats-week-labels"></div>
       <div style="display:flex;gap:.75rem;margin-top:.75rem;flex-wrap:wrap">
@@ -1070,7 +1074,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="dailytasks">
     <div class="section-head">
       <div class="section-icon fort">📋</div>
-      <div><h2>Tagesaufgaben</h2><div class="section-sub" id="dt-date"></div></div>
+      <div><h2><span data-i18n="h_dailytasks">Tagesaufgaben</span></h2><div class="section-sub" id="dt-date"></div></div>
     </div>
     <div class="card mb-md">
       <div class="progress-track mb-sm">
@@ -1089,7 +1093,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="gapfill">
     <div class="section-head">
       <div class="section-icon fort">🧩</div>
-      <div><h2>Lückentexte</h2><div class="section-sub">Wörter im Kontext</div></div>
+      <div><h2><span data-i18n="h_gapfill">Lückentexte</span></h2><div class="section-sub"><span data-i18n="sub_gapfill">Wörter im Kontext</span></div></div>
     </div>
     <div class="btn-row mb-md">
       <button class="btn btn-sm btn-primary" id="gf-lang-de" onclick="setGFLang('de')">🇩🇪 DE</button>
@@ -1118,7 +1122,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="wordorder">
     <div class="section-head">
       <div class="section-icon fort">🔀</div>
-      <div><h2>Satzbau-Trainer</h2><div class="section-sub">Wörter richtig anordnen</div></div>
+      <div><h2><span data-i18n="h_wordorder">Satzbau-Trainer</span></h2><div class="section-sub"><span data-i18n="sub_wordorder">Wörter richtig anordnen</span></div></div>
     </div>
     <div class="btn-row mb-sm">
       <button class="btn btn-sm btn-primary" id="wo-lang-de" onclick="setWOLang('de')">🇩🇪 DE</button>
@@ -1153,7 +1157,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="quiz">
     <div class="section-head">
       <div class="section-icon fort">❓</div>
-      <div><h2>Quiz</h2><div class="section-sub">4 Antworten, eine richtig</div></div>
+      <div><h2>Quiz</h2><div class="section-sub"><span data-i18n="sub_quiz">4 Antworten, eine richtig</span></div></div>
     </div>
     <div class="card" id="quiz-card">
       <div class="flex justify-between mb-md">
@@ -1172,7 +1176,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="write">
     <div class="section-head">
       <div class="section-icon fort">✍️</div>
-      <div><h2>Schreiben</h2><div class="section-sub">Übersetzung eintippen</div></div>
+      <div><h2><span data-i18n="h_write">Schreiben</span></h2><div class="section-sub"><span data-i18n="sub_write">Übersetzung eintippen</span></div></div>
     </div>
     <div class="card" id="write-card">
       <div class="flex justify-between mb-md">
@@ -1198,24 +1202,24 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="srs">
     <div class="section-head">
       <div class="section-icon fort">🧠</div>
-      <div><h2>Spaced Repetition</h2><div class="section-sub" id="srs-due-count">0 fällig</div></div>
+      <div><h2><span data-i18n="h_srs">Spaced Repetition</span></h2><div class="section-sub" id="srs-due-count">0 fällig</div></div>
     </div>
     <div class="srs-card" id="srs-card">
       <div class="srs-word" id="srs-word">–</div>
       <div class="text-xs text-muted" id="srs-pron"></div>
-      <button class="btn btn-sm btn-ghost mt-sm" id="srs-show-btn" onclick="showSrsAnswer()">Antwort zeigen</button>
+      <button class="btn btn-sm btn-ghost mt-sm" id="srs-show-btn" onclick="showSrsAnswer()"><span data-i18n="btn_show_answer">Antwort zeigen</span></button>
       <div id="srs-answer" style="display:none">
         <div style="font-size:1.3rem;font-weight:800;color:var(--accent);margin:.5rem 0" id="srs-trans">–</div>
         <div class="srs-buttons">
           <button class="btn" style="color:var(--rose)" onclick="rateSRS(1)">✗ Nochmal</button>
-          <button class="btn" onclick="rateSRS(2)">△ Schwer</button>
-          <button class="btn btn-lime" onclick="rateSRS(4)">✓ Gut</button>
-          <button class="btn btn-cyan" onclick="rateSRS(5)">★ Perfekt</button>
+          <button class="btn" onclick="rateSRS(2)"><span data-i18n="srs_hard">△ Schwer</span></button>
+          <button class="btn btn-lime" onclick="rateSRS(4)"><span data-i18n="srs_good">✓ Gut</span></button>
+          <button class="btn btn-cyan" onclick="rateSRS(5)"><span data-i18n="srs_perfect">★ Perfekt</span></button>
         </div>
       </div>
     </div>
     <div class="card mt-md">
-      <div class="card-title">FORTSCHRITT</div>
+      <div class="card-title"><span data-i18n="lbl_progress">FORTSCHRITT</span></div>
       <div class="flex gap-sm mt-sm" style="justify-content:space-around;text-align:center">
         <div><div style="font-size:1.3rem;font-weight:800" id="srs-new">0</div><div class="text-xs text-muted">Neu</div></div>
         <div><div style="font-size:1.3rem;font-weight:800;color:var(--rose)" id="srs-learn">0</div><div class="text-xs text-muted">Lernen</div></div>
@@ -1228,14 +1232,14 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="myvocab">
     <div class="section-head">
       <div class="section-icon fort">⭐</div>
-      <div><h2>Meine Vokabeln</h2><div class="section-sub">Eigene Wörter hinzufügen</div></div>
+      <div><h2><span data-i18n="h_myvocab">Meine Vokabeln</span></h2><div class="section-sub"><span data-i18n="sub_myvocab">Eigene Wörter hinzufügen</span></div></div>
     </div>
     <div class="card mb-md">
       <div style="display:flex;flex-direction:column;gap:.4rem">
         <input class="input" type="text" id="mv-word" placeholder="Fremdwort (z.B. привет)">
         <input class="input" type="text" id="mv-trans" placeholder="Übersetzung (z.B. Hallo)">
         <input class="input" type="text" id="mv-pron" placeholder="Aussprache (optional)">
-        <button class="btn btn-primary" onclick="addMyVocab()">+ Hinzufügen</button>
+        <button class="btn btn-primary" onclick="addMyVocab()"><span data-i18n="btn_add">+ Hinzufügen</span></button>
       </div>
     </div>
     <div id="mv-list"></div>
@@ -1245,7 +1249,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="conjugate">
     <div class="section-head">
       <div class="section-icon fort">🔗</div>
-      <div><h2>Konjugation</h2><div class="section-sub">Verbformen trainieren</div></div>
+      <div><h2><span data-i18n="h_conjugate">Konjugation</span></h2><div class="section-sub"><span data-i18n="sub_conjugate">Verbformen trainieren</span></div></div>
     </div>
     <div class="flex gap-sm mb-md">
       <input class="input flex-1" type="text" id="conj-input" placeholder="Verb eingeben...">
@@ -1253,7 +1257,7 @@ nav::-webkit-scrollbar { display: none; }
     </div>
     <div id="conj-result"></div>
     <div class="card mt-md">
-      <div class="card-title">GESPEICHERTE VERBEN</div>
+      <div class="card-title"><span data-i18n="lbl_saved_verbs">GESPEICHERTE VERBEN</span></div>
       <div id="conj-saved" class="mt-sm"></div>
     </div>
   </div>
@@ -1262,7 +1266,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="ai">
     <div class="section-head">
       <div class="section-icon exp">✦</div>
-      <div><h2>KI-Assistent</h2><div class="section-sub">Freie Konversation</div></div>
+      <div><h2><span data-i18n="h_ai">KI-Assistent</span></h2><div class="section-sub"><span data-i18n="sub_ai">Freie Konversation</span></div></div>
     </div>
     <div class="card">
       <div class="chat-messages" id="ai-messages">
@@ -1279,7 +1283,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="generator">
     <div class="section-head">
       <div class="section-icon exp">✨</div>
-      <div><h2>KI-Generator</h2><div class="section-sub">Vokabeln generieren lassen</div></div>
+      <div><h2><span data-i18n="h_generator">KI-Generator</span></h2><div class="section-sub"><span data-i18n="sub_generator">Vokabeln generieren lassen</span></div></div>
     </div>
     <div class="card mb-md">
       <input class="input mb-sm" type="text" id="gen-topic" placeholder="Thema (z.B. Technologie, Kochen...)">
@@ -1307,7 +1311,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="translate">
     <div class="section-head">
       <div class="section-icon exp">⇄</div>
-      <div><h2>Übersetzer</h2><div class="section-sub">Claude AI · DeepL Fallback</div></div>
+      <div><h2>Übersetzer</h2><div class="section-sub"><span data-i18n="sub_translate">Claude AI · DeepL Fallback</span></div></div>
     </div>
     <div class="translator-box">
       <div class="translator-area">
@@ -1318,7 +1322,7 @@ nav::-webkit-scrollbar { display: none; }
       </div>
       <div class="translator-controls">
         <button class="btn btn-sm btn-ghost" onclick="swapTranslator()">⇄</button>
-        <button class="btn btn-primary flex-1" onclick="doTranslate()">Übersetzen</button>
+        <button class="btn btn-primary flex-1" onclick="doTranslate()"><span data-i18n="btn_translate">Übersetzen</span></button>
         <div class="spinner hidden" id="trans-spinner"></div>
       </div>
       <div class="translator-area">
@@ -1329,7 +1333,7 @@ nav::-webkit-scrollbar { display: none; }
       </div>
     </div>
     <div class="flex gap-sm mt-md">
-      <button class="btn btn-sm btn-ghost" onclick="copyTranslation()">📋 Kopieren</button>
+      <button class="btn btn-sm btn-ghost" onclick="copyTranslation()"><span data-i18n="btn_copy">📋 Kopieren</span></button>
       <button class="btn btn-sm btn-ghost" onclick="speak(document.getElementById('trans-output').value, document.getElementById('trans-to').value)">🔊</button>
     </div>
   </div>
@@ -1338,7 +1342,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="free">
     <div class="section-head">
       <div class="section-icon exp">🗂️</div>
-      <div><h2>Freies Lernen</h2><div class="section-sub">Dein eigenes Tempo</div></div>
+      <div><h2><span data-i18n="h_free">Freies Lernen</span></h2><div class="section-sub"><span data-i18n="sub_free">Dein eigenes Tempo</span></div></div>
     </div>
     <div id="free-content"></div>
   </div>
@@ -1347,7 +1351,7 @@ nav::-webkit-scrollbar { display: none; }
   <div class="section" id="path">
     <div class="section-head">
       <div class="section-icon exp">🗺️</div>
-      <div><h2>Lernpfad</h2><div class="section-sub">Strukturiert zum Ziel</div></div>
+      <div><h2><span data-i18n="h_path">Lernpfad</span></h2><div class="section-sub"><span data-i18n="sub_path">Strukturiert zum Ziel</span></div></div>
     </div>
     <div id="path-content"></div>
   </div>
@@ -1362,12 +1366,12 @@ nav::-webkit-scrollbar { display: none; }
 <div id="settings-modal" class="modal-backdrop hidden" onclick="if(event.target===this)closeSettings()">
   <div class="modal-sheet">
     <div class="modal-drag"></div>
-    <div class="modal-title">Einstellungen</div>
+    <div class="modal-title"><span data-i18n="settings_title">Einstellungen</span></div>
 
     <div class="settings-row">
       <div class="settings-label">
-        <strong>Anthropic API-Key</strong>
-        <span>Für KI-Assistent und Übersetzer</span>
+        <strong><span data-i18n="settings_api">Anthropic API-Key</span></strong>
+        <span><span data-i18n="settings_api_sub">Für KI-Assistent und Übersetzer</span></span>
       </div>
       <div class="api-dot" id="settings-api-dot"></div>
     </div>
@@ -1378,50 +1382,66 @@ nav::-webkit-scrollbar { display: none; }
 
     <div class="settings-row">
       <div class="settings-label">
-        <strong>DeepL API-Key</strong>
-        <span>Optional — für zusätzliche Übersetzungen</span>
+        <strong><span data-i18n="settings_deepl">DeepL API-Key</span></strong>
+        <span><span data-i18n="settings_deepl_sub">Optional — für zusätzliche Übersetzungen</span></span>
       </div>
+      <div id="deepl-status-dot" class="api-dot"></div>
     </div>
-    <div class="key-input-row mb-md">
+    <div class="key-input-row">
       <input class="input" type="password" id="settings-deepl-key" placeholder="xxx:fx">
       <button class="btn" onclick="saveDeeplKey()">Speichern</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:.5rem;margin:.35rem 0 .6rem">
+      <span class="text-xs text-muted" id="deepl-status-msg">Nicht getestet</span>
+      <button class="btn btn-sm btn-ghost" onclick="testDeeplKey()" style="padding:.2rem .5rem;font-size:.7rem">Testen</button>
     </div>
 
     <div class="settings-row">
       <div class="settings-label">
-        <strong>Automatische Aussprache</strong>
-        <span>Wort wird beim Umdrehen vorgelesen</span>
+        <strong><span data-i18n="settings_autospeak">Automatische Aussprache</span></strong>
+        <span><span data-i18n="settings_autospeak_sub">Wort wird beim Umdrehen vorgelesen</span></span>
       </div>
       <button class="btn btn-sm" id="autospeak-btn" onclick="toggleAutoSpeak()">AUS</button>
     </div>
 
     <div class="settings-row">
       <div class="settings-label">
-        <strong>Sprechgeschwindigkeit</strong>
+        <strong><span data-i18n="settings_speed">Sprechgeschwindigkeit</span></strong>
       </div>
       <input type="range" min="0.5" max="1.5" step="0.1" value="1" id="speed-slider" oninput="updateSpeed(this.value)">
     </div>
 
     <div class="settings-row">
       <div class="settings-label">
-        <strong>UI-Sprache</strong>
+        <strong><span data-i18n="settings_uilang">UI-Sprache</span></strong>
       </div>
       <select class="lang-select" id="ui-lang-select" onchange="setUILang(this.value)" style="width:auto"></select>
     </div>
 
     <div class="settings-row">
       <div class="settings-label">
-        <strong>Version</strong>
-        <span id="settings-version">v10.0</span>
+        <strong><span data-i18n="settings_version">Version</span></strong>
+        <span id="settings-version">v10.1</span>
       </div>
       <div class="text-xs text-muted build-date"></div>
     </div>
 
-    <div class="btn-row mt-md">
-      <button class="btn btn-ghost flex-1" onclick="exportProgress()">📤 Export</button>
-      <button class="btn btn-ghost flex-1" style="color:var(--rose)" onclick="if(confirm('Fortschritt zurücksetzen?'))resetProgress()">🗑️ Reset</button>
+    <div class="settings-row">
+      <div class="settings-label"><strong><span data-i18n="settings_update">Auf Update prüfen</span></strong><span id="update-status-msg" style="font-size:.7rem;color:var(--muted)"></span></div>
+      <button class="btn btn-sm btn-ghost" id="update-check-btn" onclick="checkForUpdate()">Prüfen</button>
     </div>
-    <button class="btn btn-full mt-sm" onclick="closeSettings()">Schließen</button>
+    <div class="settings-row" style="cursor:pointer" onclick="toggleChangelog()">
+      <div class="settings-label"><strong><span data-i18n="settings_changelog">Changelog</span></strong><span><span data-i18n="settings_changelog_sub">Was ist neu?</span></span></div>
+      <span id="changelog-arrow" style="font-size:.8rem;display:inline-block;transition:transform .2s">&#9658;</span>
+    </div>
+    <div id="changelog-box" style="display:none;margin-bottom:.5rem">
+      <div class="card" style="padding:.5rem .8rem;max-height:200px;overflow-y:auto"><div id="changelog-content" style="font-size:.76rem"></div></div>
+    </div>
+    <div class="btn-row mt-md">
+      <button class="btn btn-ghost flex-1" onclick="exportProgress()"><span data-i18n="btn_export">📤 Export</span></button>
+      <button class="btn btn-ghost flex-1" style="color:var(--rose)" onclick="if(confirm('Fortschritt zurücksetzen?'))resetProgress()"><span data-i18n="btn_reset">🗑️ Reset</span></button>
+    </div>
+    <button class="btn btn-full mt-sm" onclick="closeSettings()"><span data-i18n="btn_close">Schließen</span></button>
   </div>
 </div>
 
@@ -4408,8 +4428,6 @@ function woNext(){woState.idx++;renderWO();}
 
 // ════════ AUSSPRACHE-FEEDBACK (verbessert) ════════
 function calcPronScore(spoken,target){if(!spoken||!target)return 0;spoken=spoken.toLowerCase().trim();target=target.toLowerCase().trim();if(spoken===target)return 100;var s=spoken.split(''),t=target.split('');var dp=Array.from({length:s.length+1},function(_,i){return Array.from({length:t.length+1},function(_,j){return i===0?j:j===0?i:0;});});for(var i=1;i<=s.length;i++)for(var j=1;j<=t.length;j++)dp[i][j]=s[i-1]===t[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);return Math.round(Math.max(0,100*(1-dp[s.length][t.length]/Math.max(s.length,t.length))));}
-function showPronScore(score,spoken,target){var old=document.getElementById('pron-score-box');if(old)old.remove();var color=score>=80?'var(--accent3)':score>=50?'#f59e0b':'#ef4444';var emoji=score>=80?'🎉':score>=50?'👍':'💪';var msg=score>=80?'Ausgezeichnet!':score>=50?'Fast! Weiter üben.':'Nochmal versuchen.';var box=document.createElement('div');box.id='pron-score-box';box.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--surface);border:2px solid '+color+';border-radius:16px;padding:.75rem 1.25rem;text-align:center;z-index:999;min-width:220px;box-shadow:0 4px 20px rgba(0,0,0,.3);animation:fadeIn .3s ease;';box.innerHTML='<div style="font-size:1.5rem;">'+emoji+'</div><div style="font-weight:800;font-size:1.4rem;color:'+color+';">'+score+'%</div><div style="font-size:.75rem;color:var(--muted);">'+msg+'</div><div style="font-size:.72rem;margin-top:.3rem;"><span style="color:var(--muted);">Gesagt: </span><span style="color:'+color+';">'+spoken+'</span></div><div style="font-size:.72rem;"><span style="color:var(--muted);">Ziel: </span>'+target+'</div><button onclick="this.parentNode.remove()" style="margin-top:.5rem;background:none;border:none;color:var(--muted);font-size:.75rem;cursor:pointer;">✕</button>';document.body.appendChild(box);setTimeout(function(){var b=document.getElementById('pron-score-box');if(b)b.remove();},5000);}
-
 
 // ── ANDROID TOUCH FIX: Global Event Delegation ──────────────────
 (function() {
@@ -4524,8 +4542,7 @@ var BADGES_DEF = [
   {id:'perfect_quiz',  icon:'💯', name:'Perfektes Quiz',    desc:'Quiz ohne Fehler abgeschlossen', check:function(s){return (s.perfectQuizzes||0)>=1;}},
   {id:'five_langs',    icon:'🌍', name:'Weltenbürger',      desc:'5 Sprachen ausprobiert',      check:function(s){return Object.keys(s.learned||{}).length>=5;}},
   {id:'custom_vocab',  icon:'✏️', name:'Eigener Forscher',  desc:'10 eigene Vokabeln hinzugefügt', check:function(){
-    Object.keys(LANG_NAMES).forEach(function(l) { data.myVocab[l] = getMyVocab(l); });
-    return total >= 10;
+    var total=0; Object.keys(LANG_NAMES).forEach(function(l){ total+=(getMyVocab(l)||[]).length; }); return total>=10;
   }},
 ];
 function getUnlockedBadges() { return JSON.parse(localStorage.getItem('lingua_badges') || '[]'); }
@@ -4647,8 +4664,226 @@ var sessionStartTime = null;
 // BUILD 100 / Juni 2026 / René Prause
 // ════════════════════════════════════════════════════════════════════
 
-var BUILD = 100;
-var BUILD_VERSION = '10.0';
+// ════ UI STRINGS (i18n) ═══════════════════════════════════════════
+var UI_STRINGS = {
+  de: {
+    // Nav categories
+    __anf:'Anfänger', __fort:'Fortgeschritten', __exp:'Experte',
+    // Nav items
+    __home:'Start', __search:'Suche', __vocab:'Vokabeln', __dialoge:'Dialoge',
+    __tasks:'Aufgaben', __gaps:'Lücken', __wordorder:'Satzbau',
+    __quiz:'Quiz', __write:'Schreiben', __srs:'SRS', __myvocab:'Eigene',
+    __conjugate:'Konjug.', __aichat:'KI-Chat', __generator:'Generator',
+    __translate:'Übersetzer', __free:'Frei', __path:'Pfad',
+    // Greetings & home
+    greeting:'Guten Tag!',
+    lbl_xp_total:'XP GESAMT', lbl_streak:'TAGE STREAK',
+    lbl_words:'VOKABELN', lbl_quiz_correct:'QUIZ RICHTIG',
+    lbl_quickstart:'SCHNELLSTART',
+    lbl_correct:'richtig', lbl_round_done:'Runde beendet!', lbl_this_week:'📈 DIESE WOCHE',
+    lbl_weekly_report:'📈 WÖCHENTLICHER BERICHT',
+    lbl_choose_topic:'THEMA WÄHLEN', lbl_progress:'FORTSCHRITT',
+    lbl_saved_verbs:'GESPEICHERTE VERBEN',
+    // Section subtitles
+    sub_search:'Alle Sprachen durchsuchen',
+    sub_dialoge:'Alltagsgespräche üben',
+    sub_gapfill:'Wörter im Kontext',
+    sub_wordorder:'Wörter richtig anordnen',
+    sub_quiz:'4 Antworten, eine richtig',
+    sub_write:'Übersetzung eintippen',
+    sub_srs:'0 fällig',
+    sub_myvocab:'Eigene Wörter hinzufügen',
+    sub_conjugate:'Verbformen trainieren',
+    sub_ai:'Freie Konversation',
+    sub_generator:'Vokabeln generieren lassen',
+    sub_translate:'Claude AI · DeepL Fallback',
+    sub_free:'Dein eigenes Tempo',
+    sub_path:'Strukturiert zum Ziel',
+    sub_stats:'Dein Lernfortschritt',
+    sub_deniveau:'Deutsch lernen (A1–C2)',
+    sub_enniveau:'A1 to C2',
+    sub_badges:'Abzeichen',
+    // Section headings
+    h_vocab:'Vokabeltraining', h_dialoge:'Dialoge', h_badges:'Abzeichen',
+    h_stats:'Statistiken', h_dailytasks:'Tagesaufgaben', h_gapfill:'Lückentexte',
+    h_wordorder:'Satzbau-Trainer', h_write:'Schreiben', h_srs:'Spaced Repetition',
+    h_myvocab:'Meine Vokabeln', h_conjugate:'Konjugation', h_ai:'KI-Assistent',
+    h_generator:'KI-Generator', h_free:'Freies Lernen', h_path:'Lernpfad',
+    // Buttons
+    btn_show_answer:'Antwort zeigen',
+    btn_translate:'Übersetzen', btn_copy:'📋 Kopieren',
+    btn_add:'+ Hinzufügen', btn_close:'Schließen',
+    btn_export:'📤 Export', btn_reset:'🗑️ Reset',
+    srs_again:'✗ Nochmal', srs_hard:'△ Schwer',
+    srs_good:'✓ Gut', srs_perfect:'★ Perfekt',
+    // Settings
+    settings_title:'Einstellungen',
+    settings_api:'Anthropic API-Key',
+    settings_api_sub:'Für KI-Assistent und Übersetzer',
+    settings_deepl:'DeepL API-Key',
+    settings_deepl_sub:'Optional — für zusätzliche Übersetzungen',
+    settings_autospeak:'Automatische Aussprache',
+    settings_autospeak_sub:'Wort wird beim Umdrehen vorgelesen',
+    settings_speed:'Sprechgeschwindigkeit',
+    settings_uilang:'UI-Sprache',
+    settings_version:'Version',
+    settings_update:'Auf Update prüfen',
+    settings_changelog:'Changelog',
+    settings_changelog_sub:'Was ist neu?',
+  },
+  en: {
+    __anf:'Beginner', __fort:'Intermediate', __exp:'Expert',
+    __home:'Home', __search:'Search', __vocab:'Vocab', __dialoge:'Dialogues',
+    __tasks:'Tasks', __gaps:'Fill Gaps', __wordorder:'Word Order',
+    __quiz:'Quiz', __write:'Writing', __srs:'SRS', __myvocab:'My Words',
+    __conjugate:'Conjugate', __aichat:'AI Chat', __generator:'Generator',
+    __translate:'Translator', __free:'Free', __path:'Path',
+    greeting:'Good day!',
+    lbl_xp_total:'TOTAL XP', lbl_streak:'DAY STREAK',
+    lbl_words:'VOCABULARY', lbl_quiz_correct:'QUIZ CORRECT',
+    lbl_quickstart:'QUICK START',
+    lbl_correct:'correct', lbl_round_done:'Round complete!', lbl_this_week:'📈 THIS WEEK',
+    lbl_weekly_report:'📈 WEEKLY REPORT',
+    lbl_choose_topic:'CHOOSE TOPIC', lbl_progress:'PROGRESS',
+    lbl_saved_verbs:'SAVED VERBS',
+    sub_search:'Search all languages',
+    sub_dialoge:'Practice everyday conversations',
+    sub_gapfill:'Words in context',
+    sub_wordorder:'Arrange words correctly',
+    sub_quiz:'4 options, one correct',
+    sub_write:'Type the translation',
+    sub_srs:'0 due',
+    sub_myvocab:'Add your own words',
+    sub_conjugate:'Train verb forms',
+    sub_ai:'Free conversation',
+    sub_generator:'Generate vocabulary',
+    sub_translate:'Claude AI · DeepL Fallback',
+    sub_free:'At your own pace',
+    sub_path:'Structured to your goal',
+    sub_stats:'Your learning progress',
+    sub_deniveau:'Learn German (A1–C2)',
+    sub_enniveau:'A1 to C2',
+    sub_badges:'Achievements',
+    h_vocab:'Vocabulary', h_dialoge:'Dialogues', h_badges:'Badges',
+    h_stats:'Statistics', h_dailytasks:'Daily Tasks', h_gapfill:'Fill Gaps',
+    h_wordorder:'Word Order', h_write:'Writing', h_srs:'Spaced Repetition',
+    h_myvocab:'My Vocabulary', h_conjugate:'Conjugation', h_ai:'AI Assistant',
+    h_generator:'AI Generator', h_free:'Free Learning', h_path:'Learning Path',
+    btn_show_answer:'Show Answer',
+    btn_translate:'Translate', btn_copy:'📋 Copy',
+    btn_add:'+ Add', btn_close:'Close',
+    btn_export:'📤 Export', btn_reset:'🗑️ Reset',
+    srs_again:'✗ Again', srs_hard:'△ Hard',
+    srs_good:'✓ Good', srs_perfect:'★ Perfect',
+    settings_title:'Settings',
+    settings_api:'Anthropic API Key',
+    settings_api_sub:'For AI Assistant and Translator',
+    settings_deepl:'DeepL API Key',
+    settings_deepl_sub:'Optional — for additional translations',
+    settings_autospeak:'Auto Speak',
+    settings_autospeak_sub:'Word is read aloud when flipped',
+    settings_speed:'Speech Speed',
+    settings_uilang:'UI Language',
+    settings_version:'Version',
+    settings_update:'Check for Update',
+    settings_changelog:'Changelog',
+    settings_changelog_sub:"What's new?",
+  },
+  ru: {
+    __anf:'\u041D\u0430\u0447\u0438\u043D\u0430\u044E\u0449\u0438\u0439', __fort:'\u0421\u0440\u0435\u0434\u043D\u0438\u0439', __exp:'\u042D\u043A\u0441\u043F\u0435\u0440\u0442',
+    __home:'\u0413\u043B\u0430\u0432\u043D\u0430\u044F', __search:'\u041F\u043E\u0438\u0441\u043A', __vocab:'\u0421\u043B\u043E\u0432\u0430', __dialoge:'\u0414\u0438\u0430\u043B\u043E\u0433\u0438',
+    __tasks:'\u0417\u0430\u0434\u0430\u043D\u0438\u044F', __gaps:'\u041F\u0440\u043E\u0431\u0435\u043B\u044B', __wordorder:'\u041F\u043E\u0440\u044F\u0434\u043E\u043A',
+    __quiz:'\u0412\u0438\u043A\u0442\u043E\u0440\u0438\u043D\u0430', __write:'\u041F\u0438\u0441\u044C\u043C\u043E', __srs:'SRS', __myvocab:'\u041C\u043E\u0438',
+    __conjugate:'\u0413\u043B\u0430\u0433\u043E\u043B\u044B', __aichat:'\u0418\u0418-\u0447\u0430\u0442', __generator:'\u0413\u0435\u043D\u0435\u0440\u0430\u0442\u043E\u0440',
+    __translate:'\u041F\u0435\u0440\u0435\u0432\u043E\u0434', __free:'\u0421\u0432\u043E\u0431\u043E\u0434\u043D\u043E', __path:'\u041F\u0443\u0442\u044C',
+    greeting:'\u0414\u043E\u0431\u0440\u044B\u0439 \u0434\u0435\u043D\u044C!',
+    lbl_xp_total:'\u041E\u0447\u043A\u0438 XP', lbl_streak:'\u0414\u041D\u0418 \u041F\u041E\u0414\u0420\u042F\u0414',
+    lbl_words:'\u0421\u041B\u041E\u0412\u0410', lbl_quiz_correct:'\u0412\u0418\u041A\u0422\u041E\u0420\u0418\u041D\u0410',
+    lbl_quickstart:'\u0411\u042B\u0421\u0422\u0420\u042B\u0419 \u0421\u0422\u0410\u0420\u0422', lbl_this_week:'\u041D\u0410 \u042D\u0422\u041E\u0419 \u041D\u0415\u0414\u0415\u041B\u0415',
+    lbl_weekly_report:'\u041D\u0415\u0414\u0415\u041B\u042C\u041D\u042B\u0419 \u041E\u0422\u0427\u0415\u0422',
+    lbl_choose_topic:'\u0412\u042B\u0411\u0420\u0410\u0422\u042C \u0422\u0415\u041C\u0423', lbl_progress:'\u041F\u0420\u041E\u0413\u0420\u0415\u0421\u0421',
+    lbl_saved_verbs:'\u0421\u041E\u0425\u0420\u0410\u041D\u0401\u041D\u041D\u042B\u0415 \u0413\u041B\u0410\u0413\u041E\u041B\u042B',
+    sub_search:'\u041F\u043E\u0438\u0441\u043A \u043F\u043E \u0432\u0441\u0435\u043C \u044F\u0437\u044B\u043A\u0430\u043C',
+    sub_dialoge:'\u041F\u0440\u0430\u043A\u0442\u0438\u043A\u0430 \u0434\u0438\u0430\u043B\u043E\u0433\u043E\u0432',
+    sub_gapfill:'\u0421\u043B\u043E\u0432\u0430 \u0432 \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u0435',
+    sub_wordorder:'\u0420\u0430\u0441\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u0441\u043B\u043E\u0432\u0430',
+    sub_quiz:'4 \u0432\u0430\u0440\u0438\u0430\u043D\u0442\u0430, \u043E\u0434\u0438\u043D \u0432\u0435\u0440\u043D\u044B\u0439',
+    sub_write:'\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043F\u0435\u0440\u0435\u0432\u043E\u0434',
+    sub_srs:'0 \u043A \u043F\u043E\u0432\u0442\u043E\u0440\u0435\u043D\u0438\u044E',
+    sub_myvocab:'\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u0441\u0432\u043E\u0438 \u0441\u043B\u043E\u0432\u0430',
+    sub_conjugate:'\u0422\u0440\u0435\u043D\u0438\u0440\u043E\u0432\u043A\u0430 \u0433\u043B\u0430\u0433\u043E\u043B\u043E\u0432',
+    sub_ai:'\u0421\u0432\u043E\u0431\u043E\u0434\u043D\u044B\u0439 \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440',
+    sub_generator:'\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F \u0441\u043B\u043E\u0432\u0430\u0440\u044F',
+    sub_translate:'Claude AI · DeepL',
+    sub_free:'\u0412 \u0441\u0432\u043E\u0451\u043C \u0442\u0435\u043C\u043F\u0435',
+    sub_path:'\u0421\u0442\u0440\u0443\u043A\u0442\u0443\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E',
+    sub_stats:'\u0412\u0430\u0448 \u043F\u0440\u043E\u0433\u0440\u0435\u0441\u0441',
+    sub_deniveau:'\u041D\u0435\u043C\u0435\u0446\u043A\u0438\u0439 (A1\u2013C2)',
+    sub_enniveau:'A1 to C2',
+    sub_badges:'\u0414\u043E\u0441\u0442\u0438\u0436\u0435\u043D\u0438\u044F',
+    h_vocab:'\u0421\u043B\u043E\u0432\u0430\u0440\u043D\u044B\u0439 \u0442\u0440\u0435\u043D\u0438\u043D\u0433', h_dialoge:'\u0414\u0438\u0430\u043B\u043E\u0433\u0438',
+    h_badges:'\u0417\u043D\u0430\u0447\u043A\u0438', h_stats:'\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0430',
+    h_dailytasks:'\u0415\u0436\u0435\u0434\u043D\u0435\u0432\u043D\u044B\u0435 \u0437\u0430\u0434\u0430\u0447\u0438', h_gapfill:'\u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u044C \u043F\u0440\u043E\u0431\u0435\u043B\u044B',
+    h_wordorder:'\u041F\u043E\u0440\u044F\u0434\u043E\u043A \u0441\u043B\u043E\u0432', h_write:'\u041F\u0438\u0441\u044C\u043C\u043E',
+    h_srs:'\u0418\u043D\u0442\u0435\u0440\u0432\u0430\u043B\u044C\u043D\u044B\u0435 \u043F\u043E\u0432\u0442\u043E\u0440\u0435\u043D\u0438\u044F',
+    h_myvocab:'\u041C\u043E\u0438 \u0441\u043B\u043E\u0432\u0430', h_conjugate:'\u0421\u043F\u0440\u044F\u0436\u0435\u043D\u0438\u0435',
+    h_ai:'\u0418\u0418-\u0430\u0441\u0441\u0438\u0441\u0442\u0435\u043D\u0442', h_generator:'\u0418\u0418-\u0433\u0435\u043D\u0435\u0440\u0430\u0442\u043E\u0440',
+    h_free:'\u0421\u0432\u043E\u0431\u043E\u0434\u043D\u043E\u0435 \u043E\u0431\u0443\u0447\u0435\u043D\u0438\u0435', h_path:'\u041F\u0443\u0442\u044C \u043E\u0431\u0443\u0447\u0435\u043D\u0438\u044F',
+    btn_show_answer:'\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043E\u0442\u0432\u0435\u0442',
+    btn_translate:'\u041F\u0435\u0440\u0435\u0432\u0435\u0441\u0442\u0438', btn_copy:'\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C',
+    btn_add:'+ \u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C', btn_close:'\u0417\u0430\u043A\u0440\u044B\u0442\u044C',
+    btn_export:'\u042D\u043A\u0441\u043F\u043E\u0440\u0442', btn_reset:'\u0421\u0431\u0440\u043E\u0441',
+    srs_again:'\u2717 \u0415\u0449\u0451 \u0440\u0430\u0437', srs_hard:'\u0422\u0440\u0443\u0434\u043D\u043E',
+    srs_good:'\u2713 \u0425\u043E\u0440\u043E\u0448\u043E', srs_perfect:'\u2605 \u041E\u0442\u043B\u0438\u0447\u043D\u043E',
+    settings_title:'\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438',
+    settings_api:'Anthropic API-\u043A\u043B\u044E\u0447',
+    settings_api_sub:'\u0414\u043B\u044F \u0418\u0418-\u0430\u0441\u0441\u0438\u0441\u0442\u0435\u043D\u0442\u0430 \u0438 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0447\u0438\u043A\u0430',
+    settings_deepl:'DeepL API-\u043A\u043B\u044E\u0447',
+    settings_deepl_sub:'\u041D\u0435\u043E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E \u2014 \u0434\u043E\u043F. \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u044B',
+    settings_autospeak:'\u0410\u0432\u0442\u043E\u0432\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435',
+    settings_autospeak_sub:'\u0421\u043B\u043E\u0432\u043E \u0447\u0438\u0442\u0430\u0435\u0442\u0441\u044F \u043F\u0440\u0438 \u043F\u0435\u0440\u0435\u0432\u043E\u0440\u0430\u0447\u0438\u0432\u0430\u043D\u0438\u0438',
+    settings_speed:'\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C \u0440\u0435\u0447\u0438',
+    settings_uilang:'\u042F\u0437\u044B\u043A \u0438\u043D\u0442\u0435\u0440\u0444\u0435\u0439\u0441\u0430',
+    settings_version:'\u0412\u0435\u0440\u0441\u0438\u044F',
+    settings_update:'\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F',
+    settings_changelog:'\u0416\u0443\u0440\u043D\u0430\u043B \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0439',
+    settings_changelog_sub:'\u0427\u0442\u043E \u043D\u043E\u0432\u043E\u0433\u043E?',
+  },
+};
+
+function t(key){
+  var lang=state.uiLang||'de';
+  var s=UI_STRINGS[lang]||UI_STRINGS['de'];
+  return s[key]!==undefined?s[key]:(UI_STRINGS['de'][key]||key);
+}
+
+function applyUILang(){
+  var lang=state.uiLang||'de';
+  // 1. Alle data-i18n Elemente
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key=el.getAttribute('data-i18n');
+    el.textContent=t(key);
+  });
+  // 2. Nav neu rendern mit übersetzten Labels
+  buildNav();
+  // 3. html lang attr
+  document.documentElement.lang=lang.substring(0,2);
+  // 4. UI-Sprache Select: nur DE/EN/RU anzeigen
+  var sel=document.getElementById('ui-lang-select');
+  if(sel){
+    sel.innerHTML='';
+    [{v:'de',l:'Deutsch'},{v:'en',l:'English'},{v:'ru',l:'\u0420\u0443\u0441\u0441\u043A\u0438\u0439'}].forEach(function(o){
+      var opt=document.createElement('option');
+      opt.value=o.v; opt.textContent=o.l;
+      if(o.v===lang) opt.selected=true;
+      sel.appendChild(opt);
+    });
+  }
+}
+
+
+var BUILD = 101;
+var BUILD_VERSION = '10.1';
 
 // ── Auto-Datum ────────────────────────────────────────────────────
 (function(){
@@ -4771,6 +5006,7 @@ function isAutoSpeak(){ return localStorage.getItem('lingua_autospeak')==='1'; }
 
 // ── Settings ──────────────────────────────────────────────────────
 function openSettings(){
+  initDeeplStatusDot();
   var m = document.getElementById('settings-modal');
   if(m) m.classList.remove('hidden');
   var inp = document.getElementById('settings-api-key');
@@ -4797,11 +5033,113 @@ function openSettings(){
   }
   updateApiDot();
 }
+
+// -- DeepL testen ---------------------------------------------------
+async function testDeeplKey(){
+  var dot=document.getElementById('deepl-status-dot');
+  var msg=document.getElementById('deepl-status-msg');
+  var key=getDeeplKey();
+  if(!key){if(msg){msg.textContent='Kein Key gespeichert';msg.style.color='';}return;}
+  if(msg)msg.textContent='Teste...';
+  if(dot){dot.className='api-dot';dot.style.background='var(--muted)';}
+  try{
+    var r=await fetch('https://api-free.deepl.com/v2/translate',{method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'DeepL-Auth-Key '+key},
+      body:JSON.stringify({text:['Hallo'],target_lang:'EN'})});
+    var d=await r.json().catch(function(){return{};});
+    if(r.ok&&d.translations&&d.translations[0]){
+      if(dot){dot.className='api-dot active';dot.style.background='';}
+      if(msg){msg.textContent='✓ Aktiv — Test: "'+d.translations[0].text+'"';msg.style.color='var(--lime)';}
+      localStorage.setItem('lingua_deepl_ok','1');
+    }else{throw new Error(d.message||('HTTP '+r.status));}
+  }catch(e){
+    if(dot){dot.className='api-dot';dot.style.background='var(--rose)';}
+    if(msg){msg.textContent='✗ '+e.message;msg.style.color='var(--rose)';}
+    localStorage.removeItem('lingua_deepl_ok');
+  }
+}
+function initDeeplStatusDot(){
+  var dot=document.getElementById('deepl-status-dot');
+  var msg=document.getElementById('deepl-status-msg');
+  var key=getDeeplKey();
+  if(!key){
+    if(dot){dot.className='api-dot';dot.style.background='var(--muted)';}
+    if(msg){msg.textContent='Kein Key';msg.style.color='';}
+    return;
+  }
+  var ok=localStorage.getItem('lingua_deepl_ok')==='1';
+  if(dot){dot.className='api-dot'+(ok?' active':'');dot.style.background=ok?'':' var(--orange)';}
+  if(msg){msg.textContent=ok?'✓ Zuletzt OK':'⚠ Noch nicht getestet';msg.style.color=ok?'var(--lime)':'var(--accent)';}
+}
+// -- Update-Check ---------------------------------------------------
+async function checkForUpdate(){
+  var btn=document.getElementById('update-check-btn');
+  var msg=document.getElementById('update-status-msg');
+  if(btn)btn.textContent='...';
+  if(msg){msg.textContent='';msg.style.color='';}
+  try{
+    var r=await fetch('https://raw.githubusercontent.com/reneprause/reneprause.github.io/main/index.html',{cache:'no-store'});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    var text=await r.text();
+    var m=text.match(/var BUILD\s*=\s*(\d+)/);
+    var remote=m?parseInt(m[1]):null;
+    if(!remote)throw new Error('Build nicht gefunden');
+    if(remote>BUILD){
+      if(msg){msg.textContent='✨ BUILD '+remote+' verfügbar';msg.style.color='var(--accent)';}
+      if(btn)btn.textContent='↓ Update';
+      showToast('✨ BUILD '+remote+' verfügbar!');
+    }else{
+      if(msg){msg.textContent='✓ Neueste Version';msg.style.color='var(--lime)';}
+      if(btn)btn.textContent='✓ Aktuell';
+    }
+  }catch(e){
+    if(msg){msg.textContent='⚠ '+e.message;msg.style.color='var(--rose)';}
+    if(btn)btn.textContent='Prüfen';
+  }
+}
+// -- Changelog --------------------------------------------------
+var CHANGELOG=[
+  {build:101,version:'10.1',date:'Juni 2026',notes:['Bugfix: custom_vocab Badge','Bugfix: Progress-Fill','Bugfix: showPronScore doppelt','DeepL-Test in Settings','Update-Check','Changelog','Niveau: Russisch-Modus']},
+  {build:100,version:'10.0',date:'Juni 2026',notes:['Neuaufbau SemantiqAI','Design-System neu','buildNav fix','Toggle-Bug behoben','Network-First SW']},
+  {build:97,version:'9.7',date:'Juni 2026',notes:['initNavLevels Stack-Bug']},
+  {build:95,version:'9.5',date:'Juni 2026',notes:['SW Cache-Cleaner entfernt']},
+  {build:91,version:'9.1',date:'Juni 2026',notes:['Tagesaufgaben, EN Dialoge']},
+  {build:90,version:'9.0',date:'Juni 2026',notes:['3-Ebenen-Navigation']},
+  {build:86,version:'8.9',date:'Juni 2026',notes:['Lückentexte, Aussprache-Score']},
+  {build:76,version:'8.0',date:'Juni 2026',notes:['Dialoge DE+EN']},
+  {build:67,version:'7.0',date:'Juni 2026',notes:['Flag-Emoji Fix']},
+  {build:61,version:'6.5',date:'Mai 2026',notes:['Satzbau, Lückentexte, Tagesaufgaben']},
+  {build:56,version:'6.0',date:'Mai 2026',notes:['Dänisch, Schwedisch, Cloudflare']},
+  {build:36,version:'4.5',date:'Mai 2026',notes:['DE+EN Niveau A1-C2']},
+  {build:26,version:'3.5',date:'Mai 2026',notes:['Badges, XP, Konjugation']},
+  {build:21,version:'3.0',date:'Mai 2026',notes:['DeepL, Streak']},
+  {build:11,version:'2.0',date:'Mai 2026',notes:['Rumänisch, SRS, Polnisch']},
+  {build:1,version:'1.0',date:'Mai 2026',notes:['Erste LINGUA PWA']}
+];
+function toggleChangelog(){
+  var box=document.getElementById('changelog-box');
+  var arrow=document.getElementById('changelog-arrow');
+  if(!box)return;
+  var open=box.style.display!=='none';
+  box.style.display=open?'none':'block';
+  if(arrow)arrow.style.transform=open?'':'rotate(90deg)';
+  if(!open)renderChangelog();
+}
+function renderChangelog(){
+  var el=document.getElementById('changelog-content');if(!el)return;
+  el.innerHTML=CHANGELOG.map(function(e){
+    return '<div style="margin-bottom:.5rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)">'
+      +'<div style="display:flex;justify-content:space-between"><strong>v'+e.version+'</strong>'
+      +'<span style="color:var(--muted);font-size:.65rem">BUILD '+e.build+' · '+e.date+'</span></div>'
+      +'<ul style="margin:.15rem 0 0 .8rem;padding:0">'+e.notes.map(function(n){return '<li>'+n+'</li>';}).join('')+'</ul></div>';
+  }).join('');
+}
+
 function closeSettings(){
   var m = document.getElementById('settings-modal');
   if(m) m.classList.add('hidden');
 }
-function setUILang(lang){ state.uiLang=lang; saveState(); }
+function setUILang(lang){ state.uiLang=lang; saveState(); applyUILang(); }
 
 // ── Sprache wechseln ──────────────────────────────────────────────
 function setLang(lang){
@@ -4825,12 +5163,12 @@ function buildNav(){
 
   var cats = [
     {
-      id: 'anf', label: 'Anfänger', cls: 'cat-anf', always: true,
+      id: 'anf', label: '__anf', cls: 'cat-anf', always: true,
       items: [
         {id:'home',      icon:'\u2302',      label:'Start'},
-        {id:'search',    icon:'\uD83D\uDD0D', label:'Suche'},
-        {id:'vocab',     icon:'\uD83D\uDCDA', label:'Vokabeln'},
-        {id:'dialogs',   icon:'\uD83D\uDCAC', label:'Dialoge'},
+        {id:'search',    icon:'\uD83D\uDD0D', label:'__search'},
+        {id:'vocab',     icon:'\uD83D\uDCDA', label:'__vocab'},
+        {id:'dialogs',   icon:'\uD83D\uDCAC', label:'__dialoge'},
         {id:'deniveau',  icon:'DE',           label:'DE A1-C2'},
         {id:'enniveau',  icon:'EN',           label:'EN A1-C2'},
         {id:'badges',    icon:'\uD83C\uDFC6', label:'Abzeichen'},
@@ -4838,26 +5176,26 @@ function buildNav(){
       ]
     },
     {
-      id: 'fort', label: 'Fortgeschritten', cls: 'cat-fort', always: false,
+      id: 'fort', label: '__fort', cls: 'cat-fort', always: false,
       items: [
-        {id:'dailytasks',icon:'\uD83D\uDCCB', label:'Aufgaben'},
-        {id:'gapfill',   icon:'\uD83E\uDDE9', label:'Lücken'},
-        {id:'wordorder', icon:'\uD83D\uDD00', label:'Satzbau'},
-        {id:'quiz',      icon:'\u2753',       label:'Quiz'},
-        {id:'write',     icon:'\u270D\uFE0F', label:'Schreiben'},
-        {id:'srs',       icon:'\uD83E\uDDE0', label:'SRS'},
-        {id:'myvocab',   icon:'\u2B50',       label:'Eigene'},
-        {id:'conjugate', icon:'\uD83D\uDD17', label:'Konjug.'},
+        {id:'dailytasks',icon:'\uD83D\uDCCB', label:'__tasks'},
+        {id:'gapfill',   icon:'\uD83E\uDDE9', label:'__gaps'},
+        {id:'wordorder', icon:'\uD83D\uDD00', label:'__wordorder'},
+        {id:'quiz',      icon:'\u2753',       label:'__quiz'},
+        {id:'write',     icon:'\u270D\uFE0F', label:'__write'},
+        {id:'srs',       icon:'\uD83E\uDDE0', label:'__srs'},
+        {id:'myvocab',   icon:'\u2B50',       label:'__myvocab'},
+        {id:'conjugate', icon:'\uD83D\uDD17', label:'__conjugate'},
       ]
     },
     {
-      id: 'exp', label: 'Experte', cls: 'cat-exp', always: false,
+      id: 'exp', label: '__exp', cls: 'cat-exp', always: false,
       items: [
-        {id:'ai',        icon:'\u2726',       label:'KI-Chat'},
-        {id:'generator', icon:'\u2728',       label:'Generator'},
+        {id:'ai',        icon:'\u2726',       label:'__aichat'},
+        {id:'generator', icon:'\u2728',       label:'__generator'},
         {id:'translate', icon:'\u21C4',       label:'\u00DCbersetzer'},
-        {id:'free',      icon:'\uD83D\uDDC2\uFE0F', label:'Frei'},
-        {id:'path',      icon:'\uD83D\uDDFA\uFE0F', label:'Pfad'},
+        {id:'free',      icon:'\uD83D\uDDC2\uFE0F', label:'__free'},
+        {id:'path',      icon:'\uD83D\uDDFA\uFE0F', label:'__path'},
       ]
     }
   ];
@@ -4871,7 +5209,7 @@ function buildNav(){
       label.type = 'button';
       label.className = 'nav-category-label ' + cat.cls + (navCatState[cat.id] ? ' open' : '');
       label.id = 'nav-cat-' + cat.id;
-      label.innerHTML = '<span class="toggle-arrow">\u25B8</span>' + cat.label;
+      label.innerHTML = '<span class="toggle-arrow">\u25B8</span>' + (cat.label.startsWith('__') ? t(cat.label) : cat.label);
       label.addEventListener('click', function(e){
         e.stopPropagation();
         navCatState[cat.id] = !navCatState[cat.id];
@@ -4892,7 +5230,7 @@ function buildNav(){
       btn.id = 'nav-' + item.id;
       btn.dataset.section = item.id;
       btn.dataset.cat = cat.id;
-      btn.innerHTML = '<span class="nav-icon">' + item.icon + '</span><span>' + item.label + '</span>';
+      btn.innerHTML = '<span class="nav-icon">' + item.icon + '</span><span>' + (item.label.startsWith('__') ? t(item.label) : item.label) + '</span>';
       if(!cat.always){
         btn.style.display = navCatState[cat.id] ? '' : 'none';
       }
@@ -5304,18 +5642,58 @@ function loadVocabQueue(){
   vocabIdx=0; vocabCorrect=0;
   showVocabCard();
 }
+// ── Vokabel-Richtungslogik ────────────────────────────────────────
+// Vorne = Lernsprache (f), Hinten = UI-Sprache (Muttersprache)
+// Wenn uiLang=de → w.t direkt. Sonst: w.t (DE) per Cache/API nach uiLang.
+var _transCache = {}; // key: "word||de||ru" → übersetzter Text
+
+function getVocabFront(w){
+  // Vorne = immer das Fremdwort (Lernsprache)
+  return w.f;
+}
+function getVocabBack(w, callback){
+  var uiL = state.uiLang || 'de';
+  // DE ist immer in w.t vorhanden
+  if(uiL === 'de'){ callback(w.t); return; }
+  // Cache prüfen
+  var key = w.f + '||de||' + uiL;
+  if(_transCache[key]){ callback(_transCache[key]); return; }
+  // Falls kein API-Key: DE-Übersetzung als Fallback
+  if(!getApiKey()){ callback(w.t + ' (DE)'); return; }
+  // Async: Claude übersetzen
+  callClaude({
+    model:'claude-haiku-4-5-20251001', max_tokens:60,
+    system:'Translate this German word/phrase to ' + (uiL==='ru'?'Russian':'English') + '. Return ONLY the translation, nothing else.',
+    messages:[{role:'user',content:w.t}]
+  }).then(function(res){
+    var tr = (res||'').trim();
+    _transCache[key] = tr;
+    callback(tr);
+  }).catch(function(){ callback(w.t); });
+}
+
 function showVocabCard(){
   var outer=document.getElementById('vocab-card-outer');
   if(outer) outer.classList.remove('flipped');
   if(vocabIdx>=vocabQueue.length){
     var front=document.getElementById('vocab-front');
-    if(front) front.innerHTML='<div class="vocab-card-word">\uD83C\uDF89</div><div class="vocab-card-pron">'+vocabCorrect+'/'+vocabQueue.length+' richtig</div><div class="text-xs text-muted mt-sm">Runde beendet!</div>';
+    if(front) front.innerHTML='<div class="vocab-card-word">&#127881;</div><div class="vocab-card-pron">'+vocabCorrect+'/'+vocabQueue.length+' '+t('lbl_correct')+'</div><div class="text-xs text-muted mt-sm">'+t('lbl_round_done')+'</div>';
     return;
   }
   currentVocabWord=vocabQueue[vocabIdx];
-  document.getElementById('vocab-word').textContent=currentVocabWord.f;
+  // Vorne: Lernsprache
+  document.getElementById('vocab-word').textContent=getVocabFront(currentVocabWord);
   document.getElementById('vocab-pron').textContent=currentVocabWord.p||'';
-  document.getElementById('vocab-trans').textContent=currentVocabWord.t;
+  // Hinten: UI-Sprache (async)
+  var transEl=document.getElementById('vocab-trans');
+  var pronTransEl=document.getElementById('vocab-trans-pron');
+  if(transEl) transEl.textContent='...';
+  if(pronTransEl) pronTransEl.textContent='';
+  getVocabBack(currentVocabWord, function(tr){
+    if(transEl) transEl.textContent=tr;
+    // DE-Phonetik nur wenn UI=DE
+    if(pronTransEl && (state.uiLang||'de')==='de') pronTransEl.textContent='';
+  });
   var prog=document.getElementById('vocab-progress');
   if(prog) prog.textContent='Karte '+(vocabIdx+1)+' / '+vocabQueue.length;
   var bar=document.getElementById('vocab-bar');
@@ -5397,6 +5775,9 @@ function showWriteCard(){
   }
   var w=writeQueue[writeIndex];
   document.getElementById('write-word').textContent=w.f;
+  // Placeholder passt zur UI-Sprache
+  var inp2=document.getElementById('write-input');
+  if(inp2) inp2.placeholder=(state.uiLang==='ru')?'Перевод (на немецком)...':(state.uiLang==='en')?'Translation (in German)...':'Deutsche Übersetzung...';
   document.getElementById('write-pron').textContent=w.p||'';
   var inp=document.getElementById('write-input');
   if(inp){ inp.value=''; inp.className='input mb-sm'; inp.placeholder='Deutsche Übersetzung...'; }
@@ -5626,6 +6007,14 @@ function dlgBack(){
 }
 
 // ── DE NIVEAU ─────────────────────────────────────────────────────
+var niveauDir='de';
+function setNiveauDir(dir){
+  niveauDir=dir;
+  var bd=document.getElementById('ndir-de'); if(bd) bd.className='btn btn-sm'+(dir==='de'?' btn-primary':'');
+  var br=document.getElementById('ndir-ru'); if(br) br.className='btn btn-sm'+(dir==='ru'?' btn-primary':'');
+  var sub=document.getElementById('deniveau-sub'); if(sub) sub.textContent=dir==='ru'?'Русский (A1-C2)':'Deutsch lernen (A1-C2)';
+  initDeNiveau();
+}
 function initDeNiveau(){
   var el=document.getElementById('deniveau-content'); if(!el) return;
   el.innerHTML='';
@@ -5795,15 +6184,16 @@ function renderNiveauLernen(el, topic){
       var de=document.createElement('div'); de.className='sentence-de';
       de.textContent=s.de||'';
       var tr=document.createElement('div'); tr.className='sentence-tr';
-      // Zeige Übersetzung in Lernsprache
-      tr.textContent=s.ru||s.en||s.tr||'';
+       var _d=(typeof niveauDir!=='undefined')?niveauDir:'de';
+      de.textContent=_d==='ru'?(s.ru||''):(s.de||'');
+      tr.textContent=_d==='ru'?(s.de||''):(s.ru||s.en||s.tr||'');
       row.appendChild(de); row.appendChild(tr);
-      // TTS Button
       var ttsBtn=document.createElement('button');
       ttsBtn.type='button'; ttsBtn.className='btn btn-sm btn-ghost mt-sm';
       ttsBtn.style.cssText='padding:.2rem .5rem;font-size:.7rem;align-self:flex-start';
-      ttsBtn.innerHTML='\uD83D\uDD0A H\u00f6ren';
-      (function(sentence){ ttsBtn.addEventListener('click',function(){ speak(sentence,'de'); }); })(s.de||'');
+      ttsBtn.innerHTML='&#128266; Hören';
+      (function(t,l){ttsBtn.addEventListener('click',function(){speak(t,l);});})
+        (_d==='ru'?(s.ru||''):(s.de||''),_d==='ru'?'ru':'de');
       row.appendChild(ttsBtn);
       sec2.appendChild(row);
     });
@@ -5820,23 +6210,25 @@ function renderNiveauVokabeln(el, topic){
   if(!topic.vocab||!topic.vocab.length){
     el.innerHTML='<div class="text-muted text-sm text-center mt-md">Keine Vokabeln</div>'; return;
   }
+  var dir=(typeof niveauDir!=='undefined')?niveauDir:'de';
   var grid=document.createElement('div'); grid.className='vocab-lesson-grid';
   topic.vocab.forEach(function(w){
-    var word=w.de||w.f||''; var trans=w.ru||w.en||w.t||''; var ph=w.ph||w.p||'';
+    var front=dir==='ru'?(w.ru||''):(w.de||w.f||'');
+    var back=dir==='ru'?(w.de||w.f||''):(w.ru||w.en||w.t||'');
+    var ph=dir==='ru'?'':(w.ph||w.p||'');
+    var spkL=dir==='ru'?'ru':'de';
     var item=document.createElement('div'); item.className='vocab-lesson-item';
-    item.innerHTML='<div class="vocab-lesson-f">'+word+'</div>'
-      +'<div class="vocab-lesson-t">'+trans+'</div>'
-      +(ph?'<div class="vocab-lesson-ph">['+ph+']</div>':'');
-    item.addEventListener('click',function(){ speak(word,'de'); });
+    item.innerHTML='<div class="vocab-lesson-f">'+front+'</div>'+'<div class="vocab-lesson-t">'+back+'</div>'+(ph?'<div class="vocab-lesson-ph">['+ph+']</div>':''  );
+    item.addEventListener('click',(function(t,l){return function(){speak(t,l);};})(front,spkL));
     grid.appendChild(item);
   });
+  var lbl=dir==='ru'?'СЛОВА':'VOKABELN';
   var sec=document.createElement('div'); sec.className='lesson-section';
   var t=document.createElement('div'); t.className='lesson-section-title';
-  t.innerHTML='\uD83D\uDD24 VOKABELN — '+(topic.vocab.length)+' W\u00d6RTER';
+  t.innerHTML='&#128292; '+lbl+' — '+(topic.vocab.length)+' WÖRTER';
   sec.appendChild(t); sec.appendChild(grid);
   el.appendChild(sec);
 }
-
 // ── Tab: Mini-Quiz ────────────────────────────────────────────────────────
 function renderNiveauQuiz(el, topic){
   if(!topic.vocab||topic.vocab.length<4){
@@ -5863,12 +6255,13 @@ function renderNiveauQuizCard(el, topic){
     return;
   }
   var item=state.quizQueue[state.quizIdx];
-  var word=item.de||item.f||'';
-  var correct=item.ru||item.en||item.t||'';
-  // 3 falsche Antworten aus anderen Vokabeln
-  var others=topic.vocab.filter(function(w){ return (w.de||w.f)!==word; })
+  var _qd=(typeof niveauDir!=='undefined')?niveauDir:'de';
+  var word=_qd==='ru'?(item.ru||''):(item.de||item.f||'');
+  var correct=_qd==='ru'?(item.de||item.f||''):(item.ru||item.en||item.t||'');
+  var others=topic.vocab
+    .filter(function(w){return (w.de||w.f)!==item.de;})
     .sort(function(){return Math.random()-.5;}).slice(0,3)
-    .map(function(w){ return w.ru||w.en||w.t||''; });
+    .map(function(w){return _qd==='ru'?(w.de||w.f||''):(w.ru||w.en||w.t||'');});
   var opts=[correct].concat(others).sort(function(){return Math.random()-.5;});
 
   var prog=document.createElement('div');
@@ -5878,7 +6271,7 @@ function renderNiveauQuizCard(el, topic){
 
   var card=document.createElement('div'); card.className='niveau-quiz-card';
   var qword=document.createElement('div'); qword.className='niveau-quiz-word'; qword.textContent=word;
-  var hint=document.createElement('div'); hint.className='text-xs text-muted mb-md'; hint.textContent='Wie hei\u00dft das auf '+LANG_NAMES[state.lang||'ru']+'?';
+  var hint=document.createElement('div'); hint.className='text-xs text-muted mb-md'; hint.textContent=(typeof niveauDir!=='undefined'&&niveauDir==='ru')?'Wie hei\u00dft das auf Deutsch?':'Wie hei\u00dft das auf Russisch?';
   var optGrid=document.createElement('div'); optGrid.className='niveau-quiz-options';
   opts.forEach(function(o){
     var b=document.createElement('button'); b.type='button'; b.className='niveau-quiz-opt';
